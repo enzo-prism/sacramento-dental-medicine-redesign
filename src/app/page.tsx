@@ -211,7 +211,10 @@ export default function Home() {
               <span className="block text-[10px] font-semibold tracking-[0.18em] text-white/64 lg:text-sm lg:tracking-[0.14em]">
                 ANTELOPE, CA
               </span>
-              <span className="block max-w-[190px] truncate text-sm font-semibold lg:max-w-none lg:text-base">
+              <span className="block text-sm font-semibold sm:hidden">
+                Sacramento Dental
+              </span>
+              <span className="hidden text-sm font-semibold sm:block lg:text-base">
                 Sacramento Dental Medicine
               </span>
             </span>

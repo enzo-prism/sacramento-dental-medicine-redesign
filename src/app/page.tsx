@@ -27,9 +27,9 @@ const mapsHref =
 
 const images = {
   logo: "https://optimasites.cloudfrontend.net/img/upload/sacramentodentalmed_practice_logo_icon.png",
-  team: "https://sacramentodentalmedicine.com/img/upload/sacramento_dental_medicine_antelope.jpg",
-  family: "https://sacramentodentalmedicine.com/img/upload/000image_super_img55.jpg",
-  smile: "https://sacramentodentalmedicine.com/img/upload/000image_super_img58.big.jpg",
+  hero: "/images/abstract-hero.webp",
+  care: "/images/abstract-care.webp",
+  visit: "/images/abstract-visit.webp",
   narodovich:
     "https://sacramentodentalmedicine.com/img/upload/michael_narodovich_dmd.jpg",
   sheppard:
@@ -139,7 +139,7 @@ const structuredData = {
   "@context": "https://schema.org",
   "@type": "Dentist",
   name: "Sacramento Dental Medicine",
-  image: images.team,
+  image: images.hero,
   url: "https://sacramentodentalmedicine.com",
   telephone: "+1-916-727-6453",
   address: {
@@ -284,13 +284,12 @@ export default function Home() {
         className="hero-shell relative flex min-h-[88svh] items-end overflow-hidden pt-24 text-white md:min-h-[78svh] md:pt-28"
       >
         <Image
-          src={images.team}
-          alt="Sacramento Dental Medicine team"
+          src={images.hero}
+          alt="Soft abstract painting in navy, teal, ivory, and gold"
           fill
           priority
-          unoptimized
           sizes="100vw"
-          className="object-cover object-[58%_center] md:object-center"
+          className="object-cover object-[67%_center] md:object-center"
         />
         <div className="hero-overlay absolute inset-0" />
         <div className="hero-thread hero-thread-top" aria-hidden="true" />
@@ -390,11 +389,10 @@ export default function Home() {
             variant="slide-right"
           >
             <Image
-              src={images.smile}
-              alt="Patient smiling after dental care"
+              src={images.care}
+              alt="Soft abstract painting inspired by calm modern care"
               fill
               loading="eager"
-              unoptimized
               sizes="(min-width: 1024px) 45vw, 100vw"
               className="object-cover"
             />
@@ -689,11 +687,10 @@ export default function Home() {
             variant="slide-left"
           >
             <Image
-              src={images.family}
-              alt="Family smiling outdoors"
+              src={images.visit}
+              alt="Soft abstract painting with a welcoming path of warm light"
               fill
               loading="eager"
-              unoptimized
               sizes="(min-width: 1024px) 45vw, 100vw"
               className="object-cover"
             />

@@ -57,13 +57,15 @@ summary::-webkit-details-marker {
 
 .hero-overlay {
   background:
-    linear-gradient(180deg, rgba(10, 22, 39, 0.62) 0%, rgba(10, 22, 39, 0.72) 46%, rgba(10, 22, 39, 0.9) 100%),
-    linear-gradient(90deg, rgba(10, 22, 39, 0.76), rgba(10, 22, 39, 0.25) 62%, rgba(10, 22, 39, 0.08));
+    linear-gradient(180deg, rgba(10, 22, 39, 0.28) 0%, rgba(10, 22, 39, 0.46) 48%, rgba(10, 22, 39, 0.84) 100%),
+    linear-gradient(90deg, rgba(10, 22, 39, 0.68), rgba(10, 22, 39, 0.26) 62%, rgba(10, 22, 39, 0.04));
 }
 
 @media (min-width: 768px) {
   .hero-overlay {
-    background: linear-gradient(90deg, rgba(10, 22, 39, 0.86), rgba(10, 22, 39, 0.56) 48%, rgba(10, 22, 39, 0.18));
+    background:
+      linear-gradient(180deg, rgba(10, 22, 39, 0.28), rgba(10, 22, 39, 0.62)),
+      linear-gradient(90deg, rgba(10, 22, 39, 0.82), rgba(10, 22, 39, 0.46) 50%, rgba(10, 22, 39, 0.08));
   }
 }
 

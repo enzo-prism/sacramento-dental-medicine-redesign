@@ -1,5 +1,6 @@
 import Image from "next/image";
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
+import { ScrollReveal } from "@/components/ScrollReveal";
 import {
   ArrowRight,
   CalendarDays,
@@ -192,25 +193,25 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
-      <main className="min-h-screen bg-[#fbfaf7] text-[#182433]">
-      <header className="fixed inset-x-0 top-0 z-50 border-b border-white/20 bg-[#102039]/85 text-white backdrop-blur-xl">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-3 lg:px-8">
+      <main className="min-h-screen bg-[#fbfaf7] pb-24 text-[#182433] lg:pb-0">
+      <header className="fixed inset-x-0 top-0 z-50 border-b border-white/15 bg-[#102039]/88 text-white shadow-[0_14px_45px_rgba(16,32,57,0.12)] backdrop-blur-xl">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 lg:px-8">
           <a href="#top" className="flex items-center gap-3" aria-label="Home">
-            <span className="grid size-10 place-items-center rounded-lg bg-white">
+            <span className="grid size-9 place-items-center rounded-lg bg-white shadow-sm lg:size-10">
               <Image
                 src={images.logo}
                 alt=""
                 width={30}
                 height={24}
                 unoptimized
-                className="h-7 w-auto"
+                className="h-6 w-auto lg:h-7"
               />
             </span>
             <span className="leading-tight">
-              <span className="block text-sm font-semibold tracking-[0.14em] text-white/70">
+              <span className="block text-[10px] font-semibold tracking-[0.18em] text-white/64 lg:text-sm lg:tracking-[0.14em]">
                 ANTELOPE, CA
               </span>
-              <span className="block text-base font-semibold">
+              <span className="block max-w-[190px] truncate text-sm font-semibold lg:max-w-none lg:text-base">
                 Sacramento Dental Medicine
               </span>
             </span>
@@ -218,7 +219,11 @@ export default function Home() {
 
           <nav className="hidden items-center gap-7 text-sm font-medium text-white/80 lg:flex">
             {navItems.map((item) => (
-              <a key={item.href} href={item.href} className="hover:text-white">
+              <a
+                key={item.href}
+                href={item.href}
+                className="rounded-lg px-1 py-2 transition hover:text-white"
+              >
                 {item.label}
               </a>
             ))}
@@ -227,14 +232,14 @@ export default function Home() {
           <div className="hidden items-center gap-3 lg:flex">
             <a
               href={phoneHref}
-              className="inline-flex h-10 items-center gap-2 rounded-lg border border-white/20 px-4 text-sm font-semibold text-white transition hover:border-white/40 hover:bg-white/10"
+              className="interactive-button inline-flex h-10 items-center gap-2 rounded-lg border border-white/20 px-4 text-sm font-semibold text-white transition hover:border-white/40 hover:bg-white/10"
             >
               <Phone className="size-4" />
               (916) 727-6453
             </a>
             <a
               href={bookingHref}
-              className="inline-flex h-10 items-center gap-2 rounded-lg bg-[#f2c36b] px-4 text-sm font-bold text-[#142033] transition hover:bg-[#ffd27c]"
+              className="interactive-button inline-flex h-10 items-center gap-2 rounded-lg bg-[#f2c36b] px-4 text-sm font-bold text-[#142033] transition hover:bg-[#ffd27c]"
             >
               Book online
               <ArrowRight className="size-4" />
@@ -243,12 +248,12 @@ export default function Home() {
 
           <details className="relative lg:hidden">
             <summary
-              className="grid size-10 cursor-pointer list-none place-items-center rounded-lg border border-white/20"
+              className="interactive-button grid size-10 cursor-pointer list-none place-items-center rounded-lg border border-white/20 bg-white/6"
               aria-label="Open navigation"
             >
               <Menu className="size-5" />
             </summary>
-            <div className="absolute right-0 mt-3 w-64 rounded-lg border border-white/10 bg-[#102039] p-3 shadow-2xl">
+            <div className="mobile-menu-panel absolute right-0 mt-3 w-72 rounded-lg border border-white/10 bg-[#102039] p-3 shadow-2xl">
               {navItems.map((item) => (
                 <a
                   key={item.href}
@@ -261,7 +266,7 @@ export default function Home() {
               ))}
               <a
                 href={bookingHref}
-                className="mt-2 flex items-center justify-center gap-2 rounded-lg bg-[#f2c36b] px-3 py-3 text-sm font-bold text-[#142033]"
+                className="interactive-button mt-2 flex items-center justify-center gap-2 rounded-lg bg-[#f2c36b] px-3 py-3 text-sm font-bold text-[#142033]"
               >
                 Book online
                 <ArrowRight className="size-4" />
@@ -273,7 +278,7 @@ export default function Home() {
 
       <section
         id="top"
-        className="relative flex min-h-[78svh] items-end overflow-hidden pt-28 text-white"
+        className="hero-shell relative flex min-h-[88svh] items-end overflow-hidden pt-24 text-white md:min-h-[78svh] md:pt-28"
       >
         <Image
           src={images.team}
@@ -282,82 +287,105 @@ export default function Home() {
           priority
           unoptimized
           sizes="100vw"
-          className="object-cover object-center"
+          className="object-cover object-[58%_center] md:object-center"
         />
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(10,22,39,0.86),rgba(10,22,39,0.56)_48%,rgba(10,22,39,0.18))]" />
-        <div className="relative mx-auto grid w-full max-w-7xl gap-10 px-5 pb-12 lg:grid-cols-[1fr_360px] lg:px-8">
-          <div className="max-w-3xl">
-            <div className="mb-6 inline-flex items-center gap-2 rounded-lg border border-white/25 bg-white/10 px-3 py-2 text-sm font-semibold text-white/90 backdrop-blur">
+        <div className="hero-overlay absolute inset-0" />
+        <div className="hero-thread hero-thread-top" aria-hidden="true" />
+        <div className="hero-thread hero-thread-bottom" aria-hidden="true" />
+        <div className="relative mx-auto grid w-full max-w-7xl gap-5 px-4 pb-8 sm:pb-12 lg:grid-cols-[1fr_360px] lg:gap-10 lg:px-8">
+          <ScrollReveal className="max-w-3xl" variant="slide-right">
+            <div className="mb-5 inline-flex items-center gap-2 rounded-lg border border-white/24 bg-white/12 px-3 py-2 text-xs font-semibold text-white/90 shadow-[0_18px_50px_rgba(0,0,0,0.18)] backdrop-blur md:text-sm">
               <MapPin className="size-4 text-[#f2c36b]" />
-              4320 Elverta Rd #3, Antelope, CA 95843
+              <span className="hidden sm:inline">
+                4320 Elverta Rd #3, Antelope, CA 95843
+              </span>
+              <span className="sm:hidden">Antelope, CA</span>
             </div>
-            <h1 className="text-balance text-5xl font-semibold leading-[0.96] tracking-normal text-white md:text-7xl lg:text-8xl">
+            <h1 className="text-balance text-[3rem] font-semibold leading-[0.94] tracking-normal text-white sm:text-6xl md:text-7xl lg:text-8xl">
               Sacramento Dental Medicine
             </h1>
-            <p className="mt-6 max-w-2xl text-balance text-lg leading-8 text-white/86 md:text-xl">
+            <p className="mt-5 max-w-2xl text-balance text-base leading-7 text-white/86 md:text-xl md:leading-8">
               Modern family, cosmetic, restorative, and emergency dental care
               for Antelope and Greater Sacramento, led by a team that keeps
               comfort and clarity at the center of every visit.
             </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <div className="mt-7 flex flex-col gap-3 sm:flex-row">
               <a
                 href={bookingHref}
-                className="inline-flex h-12 items-center justify-center gap-2 rounded-lg bg-[#f2c36b] px-5 text-base font-bold text-[#142033] transition hover:bg-[#ffd27c]"
+                className="interactive-button inline-flex h-12 items-center justify-center gap-2 rounded-lg bg-[#f2c36b] px-5 text-base font-bold text-[#142033] shadow-[0_16px_34px_rgba(242,195,107,0.22)] transition hover:bg-[#ffd27c]"
               >
                 Schedule today
                 <CalendarDays className="size-5" />
               </a>
               <a
                 href={phoneHref}
-                className="inline-flex h-12 items-center justify-center gap-2 rounded-lg border border-white/30 bg-white/10 px-5 text-base font-bold text-white backdrop-blur transition hover:bg-white/18"
+                className="interactive-button inline-flex h-12 items-center justify-center gap-2 rounded-lg border border-white/28 bg-white/10 px-5 text-base font-bold text-white shadow-[0_16px_34px_rgba(0,0,0,0.16)] backdrop-blur transition hover:bg-white/18"
               >
                 Call the office
                 <Phone className="size-5" />
               </a>
             </div>
-          </div>
+          </ScrollReveal>
 
-          <div className="self-end rounded-lg border border-white/18 bg-white/12 p-4 backdrop-blur-md">
-            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-[#f2c36b]">
+          <ScrollReveal
+            delay={140}
+            className="float-soft self-end rounded-lg border border-white/18 bg-white/12 p-4 shadow-[0_22px_60px_rgba(0,0,0,0.22)] backdrop-blur-md"
+            variant="scale"
+          >
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#f2c36b] md:text-sm">
               Why patients choose us
             </p>
             <div className="mt-4 space-y-3">
               {trustPoints.map((point) => (
                 <div key={point} className="flex items-start gap-3 text-sm">
-                  <span className="mt-0.5 grid size-6 shrink-0 place-items-center rounded-lg bg-white text-[#1d6f65]">
+                  <span className="icon-breathe mt-0.5 grid size-6 shrink-0 place-items-center rounded-lg bg-white text-[#1d6f65]">
                     <Check className="size-4" />
                   </span>
                   <span className="leading-6 text-white/88">{point}</span>
                 </div>
               ))}
             </div>
-          </div>
+          </ScrollReveal>
         </div>
       </section>
 
       <section className="border-b border-[#e5ddd1] bg-white">
-        <div className="mx-auto grid max-w-7xl gap-4 px-5 py-5 md:grid-cols-3 lg:px-8">
-          <QuickFact
-            icon={<CalendarDays className="size-5" />}
-            label="New patients"
-            value="Currently accepting appointments"
-          />
-          <QuickFact
-            icon={<HeartPulse className="size-5" />}
-            label="Dental emergencies"
-            value="Call for same-day availability"
-          />
-          <QuickFact
-            icon={<Clock3 className="size-5" />}
-            label="Extended days"
-            value="Open until 7 PM Wednesday and Thursday"
-          />
+        <div className="quick-facts mx-auto flex max-w-7xl snap-x gap-3 overflow-x-auto px-4 py-5 md:grid md:grid-cols-3 md:gap-4 md:overflow-visible lg:px-8">
+          {[
+            {
+              icon: <CalendarDays className="size-5" />,
+              label: "New patients",
+              value: "Currently accepting appointments",
+            },
+            {
+              icon: <HeartPulse className="size-5" />,
+              label: "Dental emergencies",
+              value: "Call for same-day availability",
+            },
+            {
+              icon: <Clock3 className="size-5" />,
+              label: "Extended days",
+              value: "Open until 7 PM Wednesday and Thursday",
+            },
+          ].map((fact, index) => (
+            <ScrollReveal
+              key={fact.label}
+              delay={index * 80}
+              className="min-w-[82%] snap-start md:min-w-0"
+              variant="scale"
+            >
+              <QuickFact {...fact} />
+            </ScrollReveal>
+          ))}
         </div>
       </section>
 
-      <section className="bg-[#fbfaf7] px-5 py-20 lg:px-8">
-        <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-          <div className="relative min-h-[420px] overflow-hidden rounded-lg">
+      <section className="section-shell bg-[#fbfaf7] px-4 py-16 md:py-20 lg:px-8">
+        <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:gap-12">
+          <ScrollReveal
+            className="image-panel relative min-h-[310px] overflow-hidden rounded-lg sm:min-h-[380px] lg:min-h-[420px]"
+            variant="slide-right"
+          >
             <Image
               src={images.smile}
               alt="Patient smiling after dental care"
@@ -367,21 +395,21 @@ export default function Home() {
               sizes="(min-width: 1024px) 45vw, 100vw"
               className="object-cover"
             />
-          </div>
-          <div>
-            <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#1d6f65]">
+          </ScrollReveal>
+          <ScrollReveal delay={120}>
+            <p className="eyebrow text-sm font-bold uppercase tracking-[0.18em] text-[#1d6f65]">
               Simple from the first step
             </p>
-            <h2 className="mt-4 text-balance text-4xl font-semibold tracking-normal text-[#102039] md:text-6xl">
+            <h2 className="mt-4 text-balance text-3xl font-semibold tracking-normal text-[#102039] sm:text-4xl md:text-6xl">
               Clear answers before you sit in the chair.
             </h2>
-            <p className="mt-5 max-w-2xl text-lg leading-8 text-[#52606f]">
+            <p className="mt-5 max-w-2xl text-base leading-7 text-[#52606f] md:text-lg md:leading-8">
               From the first call to the follow-up plan, the practice keeps the
               details easy to understand: what care is offered, who patients
               will meet, how appointments work, and what technology supports
               the visit.
             </p>
-            <div className="mt-8 grid gap-3 sm:grid-cols-2">
+            <div className="mt-7 grid gap-3 sm:grid-cols-2">
               {[
                 "Book online or call the Antelope office",
                 "Explore preventive, cosmetic, restorative, and surgical care",
@@ -390,70 +418,80 @@ export default function Home() {
               ].map((item) => (
                 <div
                   key={item}
-                  className="flex gap-3 rounded-lg border border-[#e5ddd1] bg-white p-4"
+                  className="interactive-card flex gap-3 rounded-lg border border-[#e5ddd1] bg-white p-4 shadow-[0_12px_30px_rgba(16,32,57,0.04)]"
                 >
                   <Check className="mt-1 size-5 shrink-0 text-[#1d6f65]" />
                   <p className="text-sm leading-6 text-[#334155]">{item}</p>
                 </div>
               ))}
             </div>
-          </div>
+          </ScrollReveal>
         </div>
       </section>
 
-      <section id="services" className="bg-white px-5 py-20 lg:px-8">
+      <section id="services" className="section-shell bg-white px-4 py-16 md:py-20 lg:px-8">
         <div className="mx-auto max-w-7xl">
-          <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
+          <ScrollReveal className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
             <div>
-              <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#b65f43]">
+              <p className="eyebrow text-sm font-bold uppercase tracking-[0.18em] text-[#b65f43]">
                 Dental services
               </p>
-              <h2 className="mt-4 max-w-3xl text-balance text-4xl font-semibold tracking-normal text-[#102039] md:text-6xl">
+              <h2 className="mt-4 max-w-3xl text-balance text-3xl font-semibold tracking-normal text-[#102039] sm:text-4xl md:text-6xl">
                 Full-scope care for healthy, confident smiles.
               </h2>
             </div>
             <a
               href={bookingHref}
-              className="inline-flex h-12 items-center justify-center gap-2 rounded-lg bg-[#102039] px-5 text-base font-bold text-white transition hover:bg-[#1c3459]"
+              className="interactive-button inline-flex h-12 items-center justify-center gap-2 rounded-lg bg-[#102039] px-5 text-base font-bold text-white transition hover:bg-[#1c3459]"
             >
               Schedule a consultation
               <ArrowRight className="size-5" />
             </a>
-          </div>
+          </ScrollReveal>
 
-          <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-            {services.map((service) => (
-              <article
+          <div className="mt-9 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+            {services.map((service, index) => (
+              <ScrollReveal
                 key={service.title}
-                className="rounded-lg border border-[#e5ddd1] bg-[#fbfaf7] p-6"
+                delay={index * 90}
+                variant="scale"
               >
-                <div
-                  className={`mb-8 grid size-12 place-items-center rounded-lg ${service.color}`}
+                <article
+                  className="interactive-card h-full rounded-lg border border-[#e5ddd1] bg-[#fbfaf7] p-5 shadow-[0_18px_44px_rgba(16,32,57,0.04)] md:p-6"
                 >
-                  <service.icon className="size-6" />
-                </div>
-                <h3 className="text-2xl font-semibold text-[#102039]">
-                  {service.title}
-                </h3>
-                <p className="mt-4 text-sm leading-7 text-[#52606f]">
-                  {service.description}
-                </p>
-              </article>
+                  <div
+                    className={`icon-breathe mb-7 grid size-12 place-items-center rounded-lg ${service.color}`}
+                  >
+                    <service.icon className="size-6" />
+                  </div>
+                  <h3 className="text-xl font-semibold text-[#102039] md:text-2xl">
+                    {service.title}
+                  </h3>
+                  <p className="mt-4 text-sm leading-7 text-[#52606f]">
+                    {service.description}
+                  </p>
+                </article>
+              </ScrollReveal>
             ))}
           </div>
         </div>
       </section>
 
-      <section id="technology" className="bg-[#102039] px-5 py-20 text-white lg:px-8">
-        <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
-          <div>
-            <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#f2c36b]">
+      <section id="technology" className="tech-section relative overflow-hidden bg-[#102039] px-4 py-16 text-white md:py-20 lg:px-8">
+        <div className="care-signal" aria-hidden="true">
+          <span />
+          <span />
+          <span />
+        </div>
+        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center lg:gap-12">
+          <ScrollReveal>
+            <p className="eyebrow text-sm font-bold uppercase tracking-[0.18em] text-[#f2c36b]">
               Technology and comfort
             </p>
-            <h2 className="mt-4 text-balance text-4xl font-semibold tracking-normal md:text-6xl">
+            <h2 className="mt-4 text-balance text-3xl font-semibold tracking-normal sm:text-4xl md:text-6xl">
               Modern tools, calmer appointments.
             </h2>
-            <p className="mt-5 text-lg leading-8 text-white/76">
+            <p className="mt-5 text-base leading-7 text-white/76 md:text-lg md:leading-8">
               Sacramento Dental Medicine highlights digital X-rays, CBCT 3D
               imaging, The Wand injection system, soft tissue laser care, and a
               sterilization approach designed for safety and patient confidence.
@@ -468,127 +506,145 @@ export default function Home() {
                 </span>
               ))}
             </div>
-          </div>
+          </ScrollReveal>
           <div className="grid gap-4 sm:grid-cols-2">
-            <TechCard
-              icon={<Syringe className="size-6" />}
-              title="Comfort-first injections"
-              body="The Wand STA system helps make injections gentler and less intimidating than traditional syringes."
-            />
-            <TechCard
-              icon={<SmilePlus className="size-6" />}
-              title="Precise treatment planning"
-              body="CBCT 3D imaging gives the team a more complete view for surgical and implant-related planning."
-            />
-            <TechCard
-              icon={<Waves className="size-6" />}
-              title="Cleaner water systems"
-              body="Modern sterilization and distilled water systems support a sanitary care environment."
-            />
-            <TechCard
-              icon={<HeartPulse className="size-6" />}
-              title="Preventive screening"
-              body="Oral cancer screenings and digital diagnostics help patients make informed decisions earlier."
-            />
-          </div>
-        </div>
-      </section>
-
-      <section id="doctors" className="bg-[#eef3ed] px-5 py-20 lg:px-8">
-        <div className="mx-auto max-w-7xl">
-          <div className="max-w-3xl">
-            <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#1d6f65]">
-              Meet the doctors
-            </p>
-            <h2 className="mt-4 text-balance text-4xl font-semibold tracking-normal text-[#102039] md:text-6xl">
-              Experienced care with a human voice.
-            </h2>
-          </div>
-          <div className="mt-10 grid gap-5 lg:grid-cols-2">
-            {doctors.map((doctor) => (
-              <article
-                key={doctor.name}
-                className="grid overflow-hidden rounded-lg border border-[#d7dfd2] bg-white md:grid-cols-[220px_1fr]"
-              >
-                <div className="relative min-h-[300px] md:min-h-full">
-                  <Image
-                    src={doctor.image}
-                    alt={`${doctor.name}, ${doctor.title}`}
-                    fill
-                    loading="eager"
-                    unoptimized
-                    sizes="(min-width: 1024px) 220px, 100vw"
-                    className="object-cover"
-                  />
-                </div>
-                <div className="p-6 md:p-8">
-                  <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#b65f43]">
-                    {doctor.title}
-                  </p>
-                  <h3 className="mt-3 text-3xl font-semibold text-[#102039]">
-                    {doctor.name}
-                  </h3>
-                  <p className="mt-5 text-base leading-8 text-[#52606f]">
-                    {doctor.description}
-                  </p>
-                </div>
-              </article>
+            {[
+              {
+                icon: <Syringe className="size-6" />,
+                title: "Comfort-first injections",
+                body: "The Wand STA system helps make injections gentler and less intimidating than traditional syringes.",
+              },
+              {
+                icon: <SmilePlus className="size-6" />,
+                title: "Precise treatment planning",
+                body: "CBCT 3D imaging gives the team a more complete view for surgical and implant-related planning.",
+              },
+              {
+                icon: <Waves className="size-6" />,
+                title: "Cleaner water systems",
+                body: "Modern sterilization and distilled water systems support a sanitary care environment.",
+              },
+              {
+                icon: <HeartPulse className="size-6" />,
+                title: "Preventive screening",
+                body: "Oral cancer screenings and digital diagnostics help patients make informed decisions earlier.",
+              },
+            ].map((card, index) => (
+              <ScrollReveal key={card.title} delay={index * 90} variant="scale">
+                <TechCard {...card} />
+              </ScrollReveal>
             ))}
           </div>
         </div>
       </section>
 
-      <section id="reviews" className="bg-white px-5 py-20 lg:px-8">
+      <section id="doctors" className="section-shell bg-[#eef3ed] px-4 py-16 md:py-20 lg:px-8">
         <div className="mx-auto max-w-7xl">
-          <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
+          <ScrollReveal className="max-w-3xl">
+            <p className="eyebrow text-sm font-bold uppercase tracking-[0.18em] text-[#1d6f65]">
+              Meet the doctors
+            </p>
+            <h2 className="mt-4 text-balance text-3xl font-semibold tracking-normal text-[#102039] sm:text-4xl md:text-6xl">
+              Experienced care with a human voice.
+            </h2>
+          </ScrollReveal>
+          <div className="mt-9 grid gap-5 lg:grid-cols-2">
+            {doctors.map((doctor, index) => (
+              <ScrollReveal
+                key={doctor.name}
+                delay={index * 120}
+                variant={index % 2 === 0 ? "slide-right" : "slide-left"}
+              >
+                <article className="doctor-card interactive-card grid overflow-hidden rounded-lg border border-[#d7dfd2] bg-white shadow-[0_20px_50px_rgba(16,32,57,0.07)] md:grid-cols-[220px_1fr]">
+                  <div className="relative min-h-[260px] md:min-h-full">
+                    <Image
+                      src={doctor.image}
+                      alt={`${doctor.name}, ${doctor.title}`}
+                      fill
+                      loading="eager"
+                      unoptimized
+                      sizes="(min-width: 1024px) 220px, 100vw"
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="p-5 md:p-8">
+                    <p className="eyebrow text-xs font-bold uppercase tracking-[0.18em] text-[#b65f43] md:text-sm">
+                      {doctor.title}
+                    </p>
+                    <h3 className="mt-3 text-2xl font-semibold text-[#102039] md:text-3xl">
+                      {doctor.name}
+                    </h3>
+                    <p className="mt-4 text-sm leading-7 text-[#52606f] md:text-base md:leading-8">
+                      {doctor.description}
+                    </p>
+                  </div>
+                </article>
+              </ScrollReveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="reviews" className="section-shell bg-white px-4 py-16 md:py-20 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <ScrollReveal className="grid gap-6 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
             <div>
-              <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#315f9d]">
+              <p className="eyebrow text-sm font-bold uppercase tracking-[0.18em] text-[#315f9d]">
                 Patient reviews
               </p>
-              <h2 className="mt-4 text-balance text-4xl font-semibold tracking-normal text-[#102039] md:text-6xl">
+              <h2 className="mt-4 text-balance text-3xl font-semibold tracking-normal text-[#102039] sm:text-4xl md:text-6xl">
                 Warm care patients remember.
               </h2>
             </div>
-            <p className="max-w-2xl text-lg leading-8 text-[#52606f]">
+            <p className="max-w-2xl text-base leading-7 text-[#52606f] md:text-lg md:leading-8">
               Patients repeatedly point to friendly staff, a family feeling,
               and a comfortable experience. Those details matter when choosing
               care for yourself or your family.
             </p>
-          </div>
+          </ScrollReveal>
 
-          <div className="mt-10 grid gap-4 lg:grid-cols-3">
-            {reviews.map((review) => (
-              <article
+          <div className="mt-9 grid gap-4 lg:grid-cols-3">
+            {reviews.map((review, index) => (
+              <ScrollReveal
                 key={review.name}
-                className="rounded-lg border border-[#e5ddd1] bg-[#fbfaf7] p-6"
+                delay={index * 90}
+                variant="scale"
               >
-                <div className="mb-5 flex text-[#d8a34d]" aria-hidden="true">
-                  {Array.from({ length: 5 }).map((_, index) => (
-                    <Star key={index} className="size-5 fill-current" />
-                  ))}
-                </div>
-                <p className="text-lg leading-8 text-[#263547]">
-                  &ldquo;{review.quote}&rdquo;
-                </p>
-                <p className="mt-6 text-sm font-bold uppercase tracking-[0.16em] text-[#52606f]">
-                  {review.name}
-                </p>
-              </article>
+                <article className="interactive-card h-full rounded-lg border border-[#e5ddd1] bg-[#fbfaf7] p-5 shadow-[0_18px_44px_rgba(16,32,57,0.04)] md:p-6">
+                  <div className="mb-5 flex text-[#d8a34d]" aria-hidden="true">
+                    {Array.from({ length: 5 }).map((_, starIndex) => (
+                      <Star
+                        key={starIndex}
+                        className="star-soft size-5 fill-current"
+                        style={
+                          { "--star-delay": `${starIndex * 90}ms` } as CSSProperties
+                        }
+                      />
+                    ))}
+                  </div>
+                  <p className="text-base leading-7 text-[#263547] md:text-lg md:leading-8">
+                    &ldquo;{review.quote}&rdquo;
+                  </p>
+                  <p className="mt-6 text-xs font-bold uppercase tracking-[0.16em] text-[#52606f] md:text-sm">
+                    {review.name}
+                  </p>
+                </article>
+              </ScrollReveal>
             ))}
           </div>
         </div>
       </section>
 
-      <section id="visit" className="bg-[#fbfaf7] px-5 py-20 lg:px-8">
-        <div className="mx-auto grid max-w-7xl gap-6 lg:grid-cols-[1.05fr_0.95fr]">
-          <div className="rounded-lg border border-[#e5ddd1] bg-white p-6 md:p-8">
-            <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#1d6f65]">
+      <section id="visit" className="section-shell bg-[#fbfaf7] px-4 py-16 md:py-20 lg:px-8">
+        <div className="mx-auto grid max-w-7xl gap-5 lg:grid-cols-[1.05fr_0.95fr] lg:gap-6">
+          <ScrollReveal className="rounded-lg border border-[#e5ddd1] bg-white p-5 shadow-[0_20px_60px_rgba(16,32,57,0.06)] md:p-8">
+            <p className="eyebrow text-sm font-bold uppercase tracking-[0.18em] text-[#1d6f65]">
               Visit the practice
             </p>
-            <h2 className="mt-4 text-balance text-4xl font-semibold tracking-normal text-[#102039] md:text-6xl">
+            <h2 className="mt-4 text-balance text-3xl font-semibold tracking-normal text-[#102039] sm:text-4xl md:text-6xl">
               Book online, call, or get directions.
             </h2>
-            <div className="mt-8 grid gap-4 md:grid-cols-3">
+            <div className="mt-7 grid gap-3 md:grid-cols-3 md:gap-4">
               <VisitAction
                 icon={<CalendarDays className="size-5" />}
                 title="Book"
@@ -611,7 +667,7 @@ export default function Home() {
                 label="Open map"
               />
             </div>
-            <div className="mt-8 overflow-hidden rounded-lg border border-[#e5ddd1]">
+            <div className="mt-7 overflow-hidden rounded-lg border border-[#e5ddd1]">
               {hours.map(([day, time]) => (
                 <div
                   key={day}
@@ -622,9 +678,13 @@ export default function Home() {
                 </div>
               ))}
             </div>
-          </div>
+          </ScrollReveal>
 
-          <div className="relative min-h-[560px] overflow-hidden rounded-lg">
+          <ScrollReveal
+            delay={120}
+            className="image-panel relative min-h-[390px] overflow-hidden rounded-lg sm:min-h-[500px] lg:min-h-[560px]"
+            variant="slide-left"
+          >
             <Image
               src={images.family}
               alt="Family smiling outdoors"
@@ -634,16 +694,16 @@ export default function Home() {
               sizes="(min-width: 1024px) 45vw, 100vw"
               className="object-cover"
             />
-            <div className="absolute inset-x-5 bottom-5 rounded-lg bg-white p-5 shadow-2xl">
-              <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#b65f43]">
+            <div className="absolute inset-x-4 bottom-4 rounded-lg bg-white p-4 shadow-2xl md:inset-x-5 md:bottom-5 md:p-5">
+              <p className="eyebrow text-xs font-bold uppercase tracking-[0.18em] text-[#b65f43] md:text-sm">
                 Sacramento Dental Medicine
               </p>
-              <p className="mt-2 text-2xl font-semibold text-[#102039]">
+              <p className="mt-2 text-xl font-semibold text-[#102039] md:text-2xl">
                 4320 Elverta Rd #3
               </p>
               <p className="mt-1 text-[#52606f]">Antelope, CA 95843</p>
             </div>
-          </div>
+          </ScrollReveal>
         </div>
       </section>
 
@@ -670,14 +730,14 @@ export default function Home() {
           <div className="flex flex-col gap-3 sm:flex-row">
             <a
               href={phoneHref}
-              className="inline-flex h-11 items-center justify-center gap-2 rounded-lg border border-white/18 px-4 text-sm font-bold text-white hover:bg-white/10"
+              className="interactive-button inline-flex h-11 items-center justify-center gap-2 rounded-lg border border-white/18 px-4 text-sm font-bold text-white hover:bg-white/10"
             >
               <Phone className="size-4" />
               (916) 727-6453
             </a>
             <a
               href={bookingHref}
-              className="inline-flex h-11 items-center justify-center gap-2 rounded-lg bg-[#f2c36b] px-4 text-sm font-bold text-[#142033] hover:bg-[#ffd27c]"
+              className="interactive-button inline-flex h-11 items-center justify-center gap-2 rounded-lg bg-[#f2c36b] px-4 text-sm font-bold text-[#142033] hover:bg-[#ffd27c]"
             >
               Book online
               <ArrowRight className="size-4" />
@@ -685,6 +745,16 @@ export default function Home() {
           </div>
         </div>
       </footer>
+      <div className="mobile-cta lg:hidden">
+        <a href={phoneHref} className="interactive-button mobile-cta-secondary">
+          <Phone className="size-4" />
+          Call
+        </a>
+        <a href={bookingHref} className="interactive-button mobile-cta-primary">
+          Book online
+          <CalendarDays className="size-4" />
+        </a>
+      </div>
       </main>
     </>
   );
@@ -700,8 +770,8 @@ function QuickFact({
   value: string;
 }) {
   return (
-    <div className="flex gap-4 rounded-lg border border-[#e5ddd1] bg-[#fbfaf7] p-4">
-      <span className="grid size-11 shrink-0 place-items-center rounded-lg bg-[#e3f0ec] text-[#1d6f65]">
+    <div className="interactive-card flex h-full gap-4 rounded-lg border border-[#e5ddd1] bg-[#fbfaf7] p-4 shadow-[0_14px_34px_rgba(16,32,57,0.04)]">
+      <span className="icon-breathe grid size-11 shrink-0 place-items-center rounded-lg bg-[#e3f0ec] text-[#1d6f65]">
         {icon}
       </span>
       <div>
@@ -724,11 +794,11 @@ function TechCard({
   body: string;
 }) {
   return (
-    <article className="rounded-lg border border-white/12 bg-white/8 p-6">
-      <span className="grid size-12 place-items-center rounded-lg bg-[#f2c36b] text-[#102039]">
+    <article className="interactive-card h-full rounded-lg border border-white/12 bg-white/8 p-5 shadow-[0_18px_50px_rgba(0,0,0,0.08)] md:p-6">
+      <span className="icon-breathe grid size-12 place-items-center rounded-lg bg-[#f2c36b] text-[#102039]">
         {icon}
       </span>
-      <h3 className="mt-6 text-2xl font-semibold">{title}</h3>
+      <h3 className="mt-5 text-xl font-semibold md:mt-6 md:text-2xl">{title}</h3>
       <p className="mt-3 text-sm leading-7 text-white/68">{body}</p>
     </article>
   );
@@ -750,9 +820,9 @@ function VisitAction({
   return (
     <a
       href={href}
-      className="group rounded-lg border border-[#e5ddd1] bg-[#fbfaf7] p-4 transition hover:border-[#1d6f65]/40 hover:bg-[#f5f8f2]"
+      className="interactive-card group rounded-lg border border-[#e5ddd1] bg-[#fbfaf7] p-4 transition hover:border-[#1d6f65]/40 hover:bg-[#f5f8f2]"
     >
-      <span className="grid size-11 place-items-center rounded-lg bg-[#e3f0ec] text-[#1d6f65]">
+      <span className="icon-breathe grid size-11 place-items-center rounded-lg bg-[#e3f0ec] text-[#1d6f65]">
         {icon}
       </span>
       <h3 className="mt-5 text-xl font-semibold text-[#102039]">{title}</h3>

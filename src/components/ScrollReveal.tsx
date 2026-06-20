@@ -2,6 +2,7 @@
 
 import {
   type CSSProperties,
+  type ElementType,
   type ReactNode,
   useEffect,
   useRef,
@@ -13,6 +14,8 @@ type ScrollRevealProps = {
   className?: string;
   delay?: number;
   variant?: "fade-up" | "fade" | "scale" | "slide-left" | "slide-right";
+  as?: "div" | "li" | "section" | "article" | "header";
+  once?: boolean;
 };
 
 export function ScrollReveal({
@@ -20,17 +23,16 @@ export function ScrollReveal({
   className = "",
   delay = 0,
   variant = "fade-up",
+  as = "div",
+  once = true,
 }: ScrollRevealProps) {
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLElement>(null);
   const [isReady, setIsReady] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const node = ref.current;
-
-    if (!node) {
-      return;
-    }
+    if (!node) return;
 
     setIsReady(true);
 
@@ -38,22 +40,25 @@ export function ScrollReveal({
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
-          observer.unobserve(entry.target);
+          if (once) observer.unobserve(entry.target);
+        } else if (!once) {
+          setIsVisible(false);
         }
       },
       {
-        rootMargin: "0px 0px -12% 0px",
-        threshold: 0.16,
+        rootMargin: "0px 0px -10% 0px",
+        threshold: 0.14,
       },
     );
 
     observer.observe(node);
-
     return () => observer.disconnect();
-  }, []);
+  }, [once]);
+
+  const Tag = as as ElementType;
 
   return (
-    <div
+    <Tag
       ref={ref}
       data-ready={isReady}
       data-visible={isVisible}
@@ -62,6 +67,6 @@ export function ScrollReveal({
       style={{ "--reveal-delay": `${delay}ms` } as CSSProperties}
     >
       {children}
-    </div>
+    </Tag>
   );
 }

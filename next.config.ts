@@ -1,20 +1,7 @@
 import type { NextConfig } from "next";
 
-const nextConfig: NextConfig = {
-  images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "sacramentodentalmedicine.com",
-        pathname: "/img/upload/**",
-      },
-      {
-        protocol: "https",
-        hostname: "optimasites.cloudfrontend.net",
-        pathname: "/img/upload/**",
-      },
-    ],
-  },
-};
+// All images are self-hosted under /public, so no remote image patterns are
+// needed. Re-add `images.remotePatterns` here if a remote source is introduced.
+const nextConfig: NextConfig = {};
 
 export default nextConfig;

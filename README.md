@@ -46,8 +46,9 @@ src/
 ├── components/
 │   ├── Scheduler.tsx     # multi-step scheduling wizard ('use client')
 │   ├── Header.tsx, MobileCTA.tsx, Marquee.tsx, SectionLabel.tsx, ScrollReveal.tsx
-│   └── sections/         # Hero, TrustBand, Emergency, Intro, Services,
-│                          # Technology, Doctors, Reviews, NewPatients, Visit, Footer
+│   └── sections/         # page order: Hero, TrustBand, Emergency, Intro,
+│                          # Services, Technology, Doctors, Reviews,
+│                          # NewPatients, Visit (+ nested FAQ), Footer
 ├── data/site.ts          # single source of truth: copy, hours, services,
 │                          # visit types, reviews, schema.org data
 └── lib/appointment.ts    # shared form state types (kept out of the server file)
@@ -75,7 +76,8 @@ The scheduler posts to the `requestAppointment` Server Action
 seam. To deliver leads in production, set **`LEAD_WEBHOOK_URL`** (Vercel →
 Project → Environment Variables) to a webhook that receives the JSON payload, or
 swap in an email send (e.g. Resend). Until configured, leads are logged
-server-side so none are lost.
+server-side so none are lost. See [`.env.example`](.env.example) for the
+variable.
 
 ## Local development
 
@@ -84,6 +86,7 @@ npm install
 npm run dev      # http://localhost:3000
 npm run lint
 npm run build
+npm run start    # serve the production build
 ```
 
 ## Deployment

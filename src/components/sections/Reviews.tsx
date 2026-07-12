@@ -1,4 +1,4 @@
-import { ArrowUpRight, Quote, Star } from "lucide-react";
+import { ArrowUpRight, MessageCircle, Quote } from "lucide-react";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { SectionLabel } from "@/components/SectionLabel";
 import { reviews, socialProof } from "@/data/site";
@@ -12,7 +12,7 @@ export function Reviews() {
             eyebrow="Patient reviews"
             accent="gold"
             title="Warm care patients remember."
-            intro="Patients come for the dentistry and stay for the people. These are real reviews — read them yourself on Google."
+            intro="Patients come for the dentistry and stay for the people. Read experiences published by the practice."
           />
           <ScrollReveal delay={120} variant="fade">
             <a
@@ -21,14 +21,10 @@ export function Reviews() {
               rel="noopener noreferrer"
               className="group flex items-center gap-3 rounded-2xl border border-rule bg-white px-5 py-4 transition hover:border-gold/50"
             >
-              <div className="flex text-[var(--gold)]">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <Star key={i} className="size-5 fill-current" />
-                ))}
-              </div>
+              <MessageCircle className="size-6 text-[var(--gold)]" />
               <div>
                 <p className="font-display text-lg font-medium text-ink">
-                  {socialProof.rating} on {socialProof.platform}
+                  Patient experiences
                 </p>
                 <p className="inline-flex items-center gap-1 text-xs font-medium text-ink-faint">
                   {socialProof.label}
@@ -64,11 +60,6 @@ export function Reviews() {
                     </p>
                     <p className="text-xs text-ink-faint">{review.context}</p>
                   </figcaption>
-                  <div className="flex text-[var(--gold)]" aria-hidden="true">
-                    {Array.from({ length: 5 }).map((_, i) => (
-                      <Star key={i} className="size-4 fill-current" />
-                    ))}
-                  </div>
                 </div>
               </figure>
             </ScrollReveal>
@@ -82,7 +73,7 @@ export function Reviews() {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 font-display text-lg font-medium text-ink underline decoration-[var(--gold)] decoration-2 underline-offset-8 hover:text-teal"
           >
-            Read more reviews on {socialProof.platform}
+            Read more patient reviews
             <ArrowUpRight className="size-4" />
           </a>
         </ScrollReveal>

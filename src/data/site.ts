@@ -34,7 +34,6 @@ export const contact = {
   // The bare domain lands on a generic portal; the on-site appointment form
   // (src/app/actions.ts) is the native fallback that captures leads directly.
   bookingHref: "https://bookit.dentrixascend.com",
-  email: "frontdesk@sacramentodentalmedicine.com", // TODO: confirm the office inbox
   addressLine1: "4320 Elverta Rd #3",
   addressLine2: "Antelope, CA 95843",
   mapsHref:
@@ -65,47 +64,41 @@ export const navItems = [
 
 // Marquee / trust strip ------------------------------------------------------
 export const trustStrip = [
-  "Same-day emergencies",
+  "Emergency care available",
   "Accepting new patients",
   "The Wand STA injections",
   "CBCT 3D imaging",
   "Soft tissue laser",
-  "Most insurance accepted",
-  "CareCredit financing",
+  "Call to confirm insurance",
+  "Ask about payment options",
   "Comfort-first care",
 ];
 
 // Hero proof points ----------------------------------------------------------
 export const proofPoints = [
   "Accepting new patients across Greater Sacramento",
-  "Same-day emergency appointments when possible",
+  "Call for prompt emergency dental care",
   "Modern imaging & comfort-first technology",
 ];
 
 // Compact, single-line trust signals shown under the hero CTAs ----------------
 export const heroTrust = [
   "Accepting new patients",
-  "Same-day emergencies",
-  "Most insurance accepted",
+  "Same-day emergency care when possible",
+  "Call to confirm insurance coverage",
 ];
 
 // Emergency pathway (high-intent, time-sensitive) ----------------------------
 export const emergency = {
   eyebrow: "Dental emergency?",
   headline: "In pain or had an accident? Call us now.",
-  body: "We hold same-day appointments open for emergencies whenever possible — chipped or knocked-out teeth, severe pain, swelling, or a lost filling or crown.",
+  body: "We’ll do everything we can to see emergency patients the same day — including chipped or knocked-out teeth, severe pain, swelling, or a lost filling or crown.",
 };
 
 // Social proof — keep this verifiable -----------------------------------------
-// IMPORTANT: link patients straight to the live Google Business Profile so the
-// rating is checkable rather than an unsourced claim. Replace `reviewsUrl` with
-// the practice's real "write/see reviews" link and confirm `rating`/`count`
-// against the live profile before launch.
 export const socialProof = {
-  rating: "5.0", // TODO: confirm against the live Google Business Profile
-  platform: "Google",
-  reviewsUrl: contact.mapsHref, // TODO: replace with the direct Google reviews URL
-  label: "Verified Google reviews",
+  reviewsUrl: `${siteUrl}/patient-reviews/`,
+  label: "Read patient reviews",
 };
 
 // Quick facts (sub-hero band) ------------------------------------------------
@@ -118,7 +111,7 @@ export const quickFacts: { icon: LucideIcon; label: string; value: string }[] = 
   {
     icon: HeartPulse,
     label: "Emergencies",
-    value: "Same-day availability — just call",
+    value: "Same-day care when possible — call now",
   },
   {
     icon: Sparkles,
@@ -289,21 +282,21 @@ export const reviews: Review[] = [
       "Dr. Narodovich has given me the smile I have always wanted. The staff are friendly, professional, and make you feel like family.",
     name: "Kourtney W.",
     context: "Cosmetic patient",
-    source: "Google",
+    source: "Practice website",
   },
   {
     quote:
       "Love this place. They took such great care of us on our visits. The experience overall was amazing.",
     name: "Tracy R.",
     context: "Family patient",
-    source: "Google",
+    source: "Practice website",
   },
   {
     quote:
       "To me, Sacramento Dental Medicine is the best dental office in Sacramento. Dr. Narodovich and his staff are amazing.",
     name: "Catherine C.",
     context: "Long-time patient",
-    source: "Google",
+    source: "Practice website",
   },
 ];
 
@@ -364,7 +357,7 @@ export const visitTypes: VisitType[] = [
   {
     id: "emergency",
     label: "Pain or emergency",
-    blurb: "Same-day help when possible",
+    blurb: "Call for the earliest available visit",
     icon: Siren,
     urgent: true,
   },
@@ -376,26 +369,24 @@ export const visitTypes: VisitType[] = [
   },
 ];
 
-// New patients — practical, high-intent info (insurance, financing, first visit)
+// New patients — practical, high-intent info (coverage, payment, first visit)
 export const newPatient = {
   eyebrow: "New patients",
   title: "Everything you need for an easy first visit.",
   intro:
     "No surprises. Here's how billing works, what to bring, and what your first appointment looks like.",
-  // Truthful, source-backed statements (see FAQ + practice highlights).
-  // TODO: list specific accepted carriers once confirmed with the front desk.
   billing: [
     {
-      title: "Most insurance accepted",
-      body: "We accept most major PPO dental insurance plans and handle the paperwork for you.",
+      title: "Confirm your coverage",
+      body: "Call the office before your visit to confirm whether your dental plan is accepted.",
     },
     {
-      title: "CareCredit financing",
-      body: "Flexible CareCredit financing is available for larger treatment plans.",
+      title: "Ask about payment options",
+      body: "The team can explain the payment options currently available for your care.",
     },
     {
-      title: "Upfront pricing",
-      body: "You'll get clear costs and coverage before any treatment begins — never a surprise bill.",
+      title: "New patients welcome",
+      body: "The practice is currently accepting new patients from Antelope and Greater Sacramento.",
     },
   ],
   bring: [
@@ -405,7 +396,7 @@ export const newPatient = {
     "Any questions or goals for your smile",
   ],
   firstVisit:
-    "Your first visit usually includes a comprehensive exam, any necessary digital X-rays, a conversation about your goals, and a gentle cleaning when appropriate — followed by a clear plan and upfront pricing.",
+    "Your first visit usually includes a comprehensive exam, any necessary digital X-rays, a conversation about your goals, and a gentle cleaning when appropriate — followed by a clear care plan.",
 };
 
 // FAQ ------------------------------------------------------------------------
@@ -416,15 +407,15 @@ export const faqs: { q: string; a: string }[] = [
   },
   {
     q: "What should I expect at my first visit?",
-    a: "Your first visit typically includes a comprehensive exam, any necessary digital X-rays or imaging, a conversation about your goals, and a gentle cleaning when appropriate. You'll get a clear plan and upfront pricing before any treatment begins.",
+    a: "Your first visit typically includes a comprehensive exam, any necessary digital X-rays or imaging, a conversation about your goals, and a gentle cleaning when appropriate. The team will explain the recommended care plan and answer your questions.",
   },
   {
     q: "Do you handle dental emergencies?",
-    a: "Yes. The office reserves same-day slots for emergencies whenever possible. If you're in pain or have had a dental accident, call (916) 727-6453 right away and the team will work to see you quickly.",
+    a: "Yes. If you're in pain or have had a dental accident, call (916) 727-6453 right away. The team will give you instructions and do everything possible to see you promptly.",
   },
   {
     q: "Do you offer financing or payment plans?",
-    a: "Most major insurance plans are accepted, and CareCredit financing is available for treatment plans. The front desk will walk you through costs and coverage before you commit to anything.",
+    a: "Please call the office to confirm insurance coverage and ask which payment options are currently available.",
   },
 ];
 
@@ -435,7 +426,7 @@ export const philosophy = {
     {
       icon: Compass,
       title: "Clear from the first call",
-      body: "Honest answers, upfront pricing, and a plan you actually understand — before any treatment begins.",
+      body: "Clear answers and a care plan you understand before treatment begins.",
     },
     {
       icon: HeartPulse,

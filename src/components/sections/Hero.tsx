@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { CalendarDays, Check, MapPin, Phone, Star } from "lucide-react";
+import { CalendarDays, Check, MapPin, MessageCircle, Phone } from "lucide-react";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { contact, heroTrust, imagery, socialProof } from "@/data/site";
 
@@ -33,14 +33,8 @@ export function Hero() {
             <MapPin className="size-4 text-[var(--gold-bright)]" />
             <span>Antelope, CA</span>
             <span className="h-3 w-px bg-white/25" />
-            <span className="flex text-[var(--gold-bright)]">
-              {Array.from({ length: 5 }).map((_, i) => (
-                <Star key={i} className="size-3.5 fill-current" />
-              ))}
-            </span>
-            <span>
-              {socialProof.rating} on {socialProof.platform}
-            </span>
+            <MessageCircle className="size-3.5 text-[var(--gold-bright)]" />
+            <span>{socialProof.label}</span>
           </a>
 
           <h1 className="mt-6 font-display text-[clamp(2.8rem,7.2vw,5.4rem)] font-medium leading-[0.97] tracking-[-0.025em] text-balance">

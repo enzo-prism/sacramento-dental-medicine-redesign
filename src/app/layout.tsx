@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     template: "%s · Sacramento Dental Medicine",
   },
   description:
-    "Modern family, cosmetic, restorative, and emergency dental care in Antelope, CA. Same-day emergencies, comfort-first technology, and a team that puts clarity first. Book online or call (916) 727-6453.",
+    "Modern family, cosmetic, restorative, and emergency dental care in Antelope, CA. Same-day emergency care when possible, comfort-first technology, and a team that puts clarity first. Book online or call (916) 727-6453.",
   alternates: {
     canonical: "/",
   },

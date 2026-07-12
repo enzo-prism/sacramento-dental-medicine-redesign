@@ -10,12 +10,12 @@ patients to book.
   details) that generates real time slots from the practice's office hours.
 - **Native lead capture** — submissions flow through a Server Action with
   validation and a spam honeypot; a delivery seam is ready for email/CRM.
-- **Verifiable social proof** — Google rating + per-review attribution that
-  links to the live profile, instead of unsourced claims.
+- **Source-backed social proof** — patient review excerpts published by the
+  practice, without displaying an unverified rating.
 - **Dedicated emergency path** — a distinct "in pain? call now" band for
   high-intent visitors.
-- **New-patient info** — insurance, financing, what to bring, and first-visit
-  expectations, all in one place.
+- **New-patient info** — coverage questions, payment options, what to bring,
+  and first-visit expectations, all in one place.
 - **SEO & a11y** — `Dentist` + `FAQPage` JSON-LD (XSS-sanitized), `sitemap.ts`,
   `robots.ts`, canonical URL, reduced-motion support, and keyboard-accessible
   controls.
@@ -57,16 +57,35 @@ src/
 All site copy and configuration live in **`src/data/site.ts`** — edit content
 there without touching components.
 
+## Verified practice information
+
+The public-facing facts were checked against the practice's current website on
+July 12, 2026:
+
+- Phone: **(916) 727-6453**
+- Address: **4320 Elverta Rd #3, Antelope, CA 95843**
+- Hours: Monday 9–6, Tuesday 8–5, Wednesday 10–7, Thursday 11–7,
+  Friday 8–2, Saturday–Sunday closed
+- Doctors: **Michael Narodovich, DMD** and **Lucas L. Sheppard, DMD**
+- The practice is accepting new patients and offers emergency dental care;
+  same-day emergency visits are offered when possible, not guaranteed
+
+Primary sources: the practice's [contact page](https://sacramentodentalmedicine.com/contact-us/),
+[services page](https://sacramentodentalmedicine.com/our-services/),
+[appointments page](https://sacramentodentalmedicine.com/appointments/), and
+[emergency guidance](https://sacramentodentalmedicine.com/dental-emergencies/).
+
+The current public website does not confirm a front-desk email, accepted
+insurance plans, CareCredit, or an exact Google rating. Do not add those claims
+without written confirmation from the practice or a direct authoritative source.
+
 ## Configuration
 
-A few values in `src/data/site.ts` should be confirmed before launch (marked
-with `TODO`):
+A few production values still need configuration:
 
 | What | Where | Notes |
 | --- | --- | --- |
 | Booking URL | `contact.bookingHref` | Replace the bare Dentrix domain with the practice-specific deep link. |
-| Google reviews | `socialProof.reviewsUrl` / `rating` | Point at the live Google Business Profile and confirm the rating. |
-| Office inbox | `contact.email` | Confirm the front-desk email. |
 | Office hours | `officeHours` | Drives the scheduler's available slots (24h minutes, `0`=Sunday). |
 
 ### Scheduler backend

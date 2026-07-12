@@ -106,7 +106,7 @@ type Lead = {
 
 /**
  * Delivery seam — wire one of these for production:
- *   • Email: `await resend.emails.send({ to: contact.email, ... })`
+ *   • Email: connect an approved office inbox through your email provider
  *   • Webhook: `await fetch(process.env.LEAD_WEBHOOK_URL, { method: "POST", ... })`
  * Set the relevant env var in Vercel and replace the log below.
  */

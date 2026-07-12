@@ -118,7 +118,8 @@ export function Scheduler() {
 
   // Date list depends on "today" — compute on the client to avoid SSR mismatch.
   useEffect(() => {
-    setDays(buildDays(10));
+    const frame = window.requestAnimationFrame(() => setDays(buildDays(10)));
+    return () => window.cancelAnimationFrame(frame);
   }, []);
 
   // Move focus to the step heading when advancing (skip initial mount).
@@ -290,8 +291,8 @@ export function Scheduler() {
             {selectedVisit?.urgent ? (
               <div className="mt-4 flex flex-col gap-3 rounded-2xl border border-coral/30 bg-coral-soft p-4 sm:flex-row sm:items-center sm:justify-between">
                 <p className="text-sm font-medium text-coral">
-                  In pain or had an accident? Calling is fastest — we hold
-                  same-day slots open.
+                  In pain or had an accident? Calling is fastest — we’ll do
+                  everything possible to see you promptly.
                 </p>
                 <div className="flex shrink-0 gap-2">
                   <a

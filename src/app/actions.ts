@@ -15,7 +15,8 @@ function field(formData: FormData, key: string): string {
  *
  * This validates the lead and is the single place to wire real delivery
  * (email via Resend, a Dentrix webhook, or a CRM). Until that's connected it
- * logs the lead server-side so submissions are never silently lost.
+ * logs the lead for development visibility. Logs are not durable delivery and
+ * must not be treated as an office inbox.
  *
  * NOTE: Server Functions are reachable via direct POST, so all input is treated
  * as untrusted and validated here. Add rate limiting / CAPTCHA before launch.

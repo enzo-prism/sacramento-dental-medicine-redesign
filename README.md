@@ -66,7 +66,8 @@ July 12, 2026:
 - Address: **4320 Elverta Rd #3, Antelope, CA 95843**
 - Hours: Monday 9–6, Tuesday 8–5, Wednesday 10–7, Thursday 11–7,
   Friday 8–2, Saturday–Sunday closed
-- Doctors: **Michael Narodovich, DMD** and **Lucas L. Sheppard, DMD**
+- The public website profiles **Michael Narodovich, DMD** and
+  **Lucas L. Sheppard, DMD**
 - The practice is accepting new patients and offers emergency dental care;
   same-day emergency visits are offered when possible, not guaranteed
 
@@ -78,15 +79,17 @@ Primary sources: the practice's [contact page](https://sacramentodentalmedicine.
 The current public website does not confirm a front-desk email, accepted
 insurance plans, CareCredit, or an exact Google rating. Do not add those claims
 without written confirmation from the practice or a direct authoritative source.
+Confirm the active provider roster and Saturday appointment policy directly
+with the practice before the final domain cutover.
 
 ## Configuration
 
-A few production values still need configuration:
+A few production values still need configuration or final confirmation:
 
 | What | Where | Notes |
 | --- | --- | --- |
 | Booking URL | `contact.bookingHref` | Replace the bare Dentrix domain with the practice-specific deep link. |
-| Office hours | `officeHours` | Drives the scheduler's available slots (24h minutes, `0`=Sunday). |
+| Saturday availability | `officeHours` | The contact page says closed; confirm whether advance appointments are offered. |
 
 ### Scheduler backend
 
@@ -94,9 +97,10 @@ The scheduler posts to the `requestAppointment` Server Action
 (`src/app/actions.ts`), which validates the request and then calls a delivery
 seam. To deliver leads in production, set **`LEAD_WEBHOOK_URL`** (Vercel →
 Project → Environment Variables) to a webhook that receives the JSON payload, or
-swap in an email send (e.g. Resend). Until configured, leads are logged
-server-side so none are lost. See [`.env.example`](.env.example) for the
-variable.
+swap in an email send (e.g. Resend). Until configured, submissions are only
+logged server-side and are **not** reliably delivered to the practice. See
+[`.env.example`](.env.example) for the variable. Do not publicly launch the form
+until a controlled test submission is received successfully by the front desk.
 
 ## Local development
 
@@ -110,10 +114,17 @@ npm run start    # serve the production build
 
 ## Deployment
 
-The project is linked to Vercel and deploys automatically:
+The GitHub repository is connected to Vercel and deploys automatically:
 
 - **Push to `main`** → production deploy.
 - Pull requests → preview deploys.
+
+Vercel production currently runs at
+[sacramento-dental-medicine-redesign.vercel.app](https://sacramento-dental-medicine-redesign.vercel.app).
+The custom domain `sacramentodentalmedicine.com` is not yet attached to this
+Vercel project, so a successful production deployment does not replace the
+current public website. Attach and verify the custom domain, DNS, and HTTPS only
+after the booking link and lead delivery are ready.
 
 ## Assets still needed
 

@@ -20,7 +20,7 @@ export function Visit() {
           className="mx-auto flex max-w-3xl flex-col items-center gap-5 text-center"
         >
           <span className="eyebrow text-brand">Schedule a visit</span>
-          <h2 className="font-display text-balance text-[2rem] font-medium leading-[1.04] tracking-[-0.02em] text-white sm:text-4xl md:text-[2.9rem]">
+          <h2 className="font-display text-balance text-[clamp(2rem,4.2vw,3.1rem)] font-semibold leading-[1.06] tracking-[-0.02em] text-white">
             Book your visit in about a minute.
           </h2>
           <p className="max-w-2xl text-balance text-base leading-7 text-white/70 md:text-lg md:leading-8">

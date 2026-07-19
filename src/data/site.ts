@@ -1,11 +1,8 @@
 import {
   Activity,
-  BadgeCheck,
   Boxes,
   CalendarClock,
-  Compass,
   Droplets,
-  Gem,
   HeartPulse,
   type LucideIcon,
   MessageCircle,
@@ -30,10 +27,11 @@ export const contact = {
   tagline: "Modern family, cosmetic & restorative dentistry in Antelope, CA",
   phoneDisplay: "(916) 727-6453",
   phoneHref: "tel:+19167276453",
-  // TODO: replace with the practice-specific Dentrix Ascend deep link.
-  // The bare domain lands on a generic portal; the on-site appointment form
-  // (src/app/actions.ts) is the native fallback that captures leads directly.
-  bookingHref: "https://bookit.dentrixascend.com",
+  // All "Book online" CTAs route to the on-site scheduler (#visit), which
+  // captures leads natively. When the practice provides its Dentrix Ascend
+  // deep link, point this at it instead — the bare bookit.dentrixascend.com
+  // domain lands on a generic portal that doesn't identify the practice.
+  bookingHref: "#visit",
   addressLine1: "4320 Elverta Rd #3",
   addressLine2: "Antelope, CA 95843",
   mapsHref:
@@ -49,7 +47,6 @@ export const imagery = {
   logoFull: "/images/logo-full.png",
   hero: "/images/abstract-hero.webp",
   care: "/images/abstract-care.webp",
-  visit: "/images/abstract-visit.webp",
   narodovich: "/images/dr-narodovich.jpg",
   sheppard: "/images/dr-sheppard.webp",
 };
@@ -73,13 +70,6 @@ export const trustStrip = [
   "Call to confirm insurance",
   "Ask about payment options",
   "Comfort-first care",
-];
-
-// Hero proof points ----------------------------------------------------------
-export const proofPoints = [
-  "Accepting new patients across Greater Sacramento",
-  "Call for prompt emergency dental care",
-  "Modern imaging & comfort-first technology",
 ];
 
 // Compact, single-line trust signals shown under the hero CTAs ----------------
@@ -302,7 +292,7 @@ export const reviews: Review[] = [
 ];
 
 // Office hours ---------------------------------------------------------------
-export const hours: { day: string; time: string; isToday?: boolean }[] = [
+export const hours: { day: string; time: string }[] = [
   { day: "Monday", time: "9:00 AM – 6:00 PM" },
   { day: "Tuesday", time: "8:00 AM – 5:00 PM" },
   { day: "Wednesday", time: "10:00 AM – 7:00 PM" },
@@ -420,22 +410,18 @@ export const faqs: { q: string; a: string }[] = [
   },
 ];
 
-// Distillation icons (used in philosophy band) ------------------------------
+// Philosophy points (numbered editorial rows in the Intro section) -----------
 export const philosophy = {
-  icon: Gem,
   points: [
     {
-      icon: Compass,
       title: "Clear from the first call",
       body: "Clear answers and a care plan you understand before treatment begins.",
     },
     {
-      icon: HeartPulse,
       title: "Comfort is the standard",
       body: "From The Wand STA to a calm, unhurried pace, every detail is designed for anxious and first-time patients.",
     },
     {
-      icon: BadgeCheck,
       title: "Built on modern diagnostics",
       body: "CBCT 3D imaging and digital workflows mean fewer surprises and more predictable outcomes.",
     },

@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     siteName: "Sacramento Dental Medicine",
     images: [
       {
-        url: "/images/abstract-hero.webp",
+        url: "/images/og.jpg",
         width: 1200,
         height: 630,
         alt: "Sacramento Dental Medicine — modern dental care in Antelope, CA",
@@ -58,10 +58,11 @@ export const metadata: Metadata = {
     title: "Sacramento Dental Medicine",
     description:
       "Modern family, cosmetic, restorative, and emergency dental care in Antelope, CA.",
-    images: ["/images/abstract-hero.webp"],
+    images: ["/images/og.jpg"],
   },
   icons: {
     icon: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
   },
 };
 

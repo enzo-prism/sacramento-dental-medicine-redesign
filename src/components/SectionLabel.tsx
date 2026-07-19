@@ -3,7 +3,7 @@ import { ScrollReveal } from "@/components/ScrollReveal";
 
 type SectionLabelProps = {
   eyebrow: string;
-  accent?: "teal" | "coral" | "gold" | "sage" | "ink";
+  accent?: "brand" | "slate" | "ember" | "ink";
   title: ReactNode;
   intro?: ReactNode;
   align?: "left" | "center";
@@ -12,16 +12,15 @@ type SectionLabelProps = {
 };
 
 const accentMap: Record<NonNullable<SectionLabelProps["accent"]>, string> = {
-  teal: "accent-teal",
-  coral: "accent-coral",
-  gold: "accent-gold",
-  sage: "accent-sage",
-  ink: "text-ink",
+  brand: "accent-brand",
+  slate: "accent-slate",
+  ember: "accent-ember",
+  ink: "accent-ink",
 };
 
 export function SectionLabel({
   eyebrow,
-  accent = "teal",
+  accent = "brand",
   title,
   intro,
   align = "left",
@@ -38,7 +37,7 @@ export function SectionLabel({
       variant="fade"
     >
       <span className={`eyebrow ${accentMap[accent]}`}>{eyebrow}</span>
-      <h2 className="font-display text-balance text-[2rem] font-medium leading-[1.04] tracking-[-0.02em] text-ink sm:text-4xl md:text-[2.9rem]">
+      <h2 className="font-display text-balance text-[clamp(2rem,4.2vw,3.1rem)] font-semibold leading-[1.06] tracking-[-0.02em] text-ink">
         {title}
       </h2>
       {intro ? (

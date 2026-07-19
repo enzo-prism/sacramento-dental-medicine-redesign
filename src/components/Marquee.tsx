@@ -10,8 +10,8 @@ export function Marquee({ items, className = "", tone = "dark" }: MarqueeProps) 
   const sequence = [...items, ...items];
   const palette =
     tone === "dark"
-      ? "text-white/70 [&_span]:text-white/30"
-      : "text-ink-soft [&_span]:text-ink-faint/40";
+      ? "text-white/70 [&_svg]:text-white/30"
+      : "text-ink-soft [&_svg]:text-ink-faint/50";
 
   return (
     <div className={`marquee ${palette} ${className}`} aria-hidden="true">

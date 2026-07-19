@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Fraunces, Geist } from "next/font/google";
+import { Bricolage_Grotesque, Geist } from "next/font/google";
 import { siteUrl } from "@/data/site";
 import "./globals.css";
 
@@ -9,8 +9,8 @@ const geistSans = Geist({
   display: "swap",
 });
 
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
+const bricolage = Bricolage_Grotesque({
+  variable: "--font-bricolage",
   subsets: ["latin"],
   display: "swap",
 });
@@ -73,9 +73,17 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${fraunces.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${bricolage.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-white focus:px-5 focus:py-3 focus:text-sm focus:font-semibold focus:text-ink focus:shadow-lg"
+        >
+          Skip to content
+        </a>
+        {children}
+      </body>
     </html>
   );
 }

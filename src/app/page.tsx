@@ -30,7 +30,7 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: jsonLd(faqStructuredData) }}
       />
       <Header />
-      <main className="flex-1">
+      <main id="main" className="flex-1">
         <Hero />
         <TrustBand />
         <Emergency />

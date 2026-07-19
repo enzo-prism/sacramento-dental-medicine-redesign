@@ -156,14 +156,14 @@ export function Scheduler() {
   if (state.ok) {
     return (
       <div className="surface-card mx-auto flex max-w-2xl flex-col items-center gap-5 p-8 text-center md:p-12">
-        <span className="grid size-16 place-items-center rounded-2xl orb-teal">
+        <span className="grid size-16 place-items-center rounded-full orb-brand">
           <CircleCheck className="size-8" />
         </span>
         <h3 className="font-display text-3xl font-medium text-ink">
           Request received
         </h3>
         {selectedVisit && selectedDay && timeMin != null ? (
-          <div className="surface-tinted w-full max-w-md rounded-2xl p-5 text-left">
+          <div className="surface-wash w-full max-w-md p-5 text-left">
             <SummaryRow icon={selectedVisit.icon} label={selectedVisit.label} />
             <div className="my-3 hairline" />
             <SummaryRow icon={CalendarDays} label={dayLabel(selectedDay)} />
@@ -183,36 +183,41 @@ export function Scheduler() {
   }
 
   return (
-    <div className="surface-card mx-auto max-w-3xl overflow-hidden">
+    <div className="surface-card mx-auto w-full min-w-0 max-w-3xl overflow-hidden">
       {/* Progress header */}
-      <div className="border-b border-rule bg-paper-2/50 px-5 py-4 md:px-7">
+      <div className="border-b border-line bg-white px-5 py-4 md:px-7">
         <p className="sr-only" aria-live="polite">
           Step {step + 1} of {STEPS.length}: {STEPS[step]}
         </p>
         <ol className="flex items-center gap-2" aria-hidden="true">
           {STEPS.map((label, i) => (
-            <li key={label} className="flex flex-1 items-center gap-2">
+            <li
+              key={label}
+              className={`flex items-center gap-2 ${
+                i < STEPS.length - 1 ? "flex-1" : ""
+              }`}
+            >
               <span
-                className={`grid size-6 shrink-0 place-items-center rounded-full text-[11px] font-bold transition ${
+                className={`inline-flex h-8 shrink-0 items-center gap-1.5 rounded-full px-3 text-xs font-semibold transition ${
                   i < step
-                    ? "bg-teal text-white"
+                    ? "bg-brand-tint text-brand-ink"
                     : i === step
-                      ? "bg-ink text-white"
-                      : "bg-paper-2 text-ink-faint ring-1 ring-rule"
+                      ? "bg-brand-deep text-white"
+                      : "bg-brand-tint/50 text-brand-ink"
                 }`}
               >
-                {i < step ? <Check className="size-3.5" /> : i + 1}
-              </span>
-              <span
-                className={`hidden text-xs font-semibold tracking-wide sm:block ${
-                  i === step ? "text-ink" : "text-ink-faint"
-                }`}
-              >
-                {label}
+                {i < step ? (
+                  <Check className="size-3.5" />
+                ) : (
+                  <span className="text-[11px] font-bold">{i + 1}</span>
+                )}
+                <span className="hidden sm:inline">{label}</span>
               </span>
               {i < STEPS.length - 1 ? (
                 <span
-                  className={`mx-1 h-px flex-1 ${i < step ? "bg-teal" : "bg-rule"}`}
+                  className={`mx-1 h-px flex-1 ${
+                    i < step ? "bg-brand-deep" : "bg-line"
+                  }`}
                 />
               ) : null}
             </li>
@@ -246,7 +251,7 @@ export function Scheduler() {
             </p>
 
             <div
-              role="radiogroup"
+              role="group"
               aria-label="Visit type"
               className="mt-6 grid gap-3 sm:grid-cols-2"
             >
@@ -256,18 +261,17 @@ export function Scheduler() {
                   <button
                     key={v.id}
                     type="button"
-                    role="radio"
-                    aria-checked={active}
+                    aria-pressed={active}
                     onClick={() => chooseVisit(v.id, v.urgent)}
                     className={`option-tile flex items-center gap-4 rounded-2xl border p-4 text-left ${
                       active
-                        ? "border-teal bg-mist/60 ring-1 ring-teal"
-                        : "border-rule bg-white hover:border-teal/40"
+                        ? "border-brand-deep bg-wash ring-1 ring-brand-deep"
+                        : "border-line bg-white hover:border-brand/60"
                     }`}
                   >
                     <span
                       className={`grid size-11 shrink-0 place-items-center rounded-xl ${
-                        v.urgent ? "orb-coral" : "orb-teal"
+                        v.urgent ? "orb-ember" : "orb-brand"
                       }`}
                     >
                       <v.icon className="size-5" />
@@ -281,7 +285,7 @@ export function Scheduler() {
                       </span>
                     </span>
                     {active ? (
-                      <Check className="size-5 shrink-0 text-teal" />
+                      <Check className="size-5 shrink-0 text-brand-deep" />
                     ) : null}
                   </button>
                 );
@@ -289,15 +293,15 @@ export function Scheduler() {
             </div>
 
             {selectedVisit?.urgent ? (
-              <div className="mt-4 flex flex-col gap-3 rounded-2xl border border-coral/30 bg-coral-soft p-4 sm:flex-row sm:items-center sm:justify-between">
-                <p className="text-sm font-medium text-coral">
+              <div className="mt-4 flex flex-col gap-3 rounded-2xl border border-ember/30 bg-ember-tint p-4 sm:flex-row sm:items-center sm:justify-between">
+                <p className="text-sm font-medium text-ember-deep">
                   In pain or had an accident? Calling is fastest — we’ll do
                   everything possible to see you promptly.
                 </p>
-                <div className="flex shrink-0 gap-2">
+                <div className="flex shrink-0 flex-wrap gap-2">
                   <a
                     href={contact.phoneHref}
-                    className="inline-flex items-center justify-center gap-2 rounded-xl bg-[var(--coral)] px-4 py-2.5 text-sm font-semibold text-white"
+                    className="btn btn-ember text-sm"
                   >
                     <Phone className="size-4" />
                     Call now
@@ -305,7 +309,7 @@ export function Scheduler() {
                   <button
                     type="button"
                     onClick={() => setStep(1)}
-                    className="inline-flex items-center gap-1 rounded-xl border border-coral/40 px-4 py-2.5 text-sm font-semibold text-coral"
+                    className="inline-flex min-h-11 items-center gap-1 rounded-full border border-ember/40 px-4 py-2.5 text-sm font-semibold text-ember-deep transition hover:bg-white/60"
                   >
                     Schedule online
                     <ArrowRight className="size-4" />
@@ -335,7 +339,7 @@ export function Scheduler() {
               <button
                 type="button"
                 onClick={pickEarliest}
-                className="mt-5 inline-flex items-center gap-2 rounded-full border border-teal/30 bg-mist/60 px-4 py-2 text-sm font-semibold text-teal-deep transition hover:bg-mist"
+                className="mt-5 inline-flex min-h-11 items-center gap-2 rounded-full border border-brand/40 bg-wash px-4 py-2 text-sm font-semibold text-brand-deep transition hover:bg-wash-2"
               >
                 <Zap className="size-4" />
                 Earliest: {earliestDay.relative || earliestDay.weekday}{" "}
@@ -362,13 +366,13 @@ export function Scheduler() {
                         aria-pressed={active}
                         className={`option-tile flex w-16 shrink-0 snap-start flex-col items-center gap-0.5 rounded-2xl border px-2 py-3 ${
                           active
-                            ? "border-teal bg-ink text-white"
-                            : "border-rule bg-white text-ink hover:border-teal/40"
+                            ? "border-brand-deep bg-brand-deep text-white"
+                            : "border-line bg-white text-ink hover:border-brand/60"
                         }`}
                       >
                         <span
                           className={`text-[10px] font-bold uppercase tracking-wide ${
-                            active ? "text-white/70" : "text-ink-faint"
+                            active ? "text-white/90" : "text-ink-faint"
                           }`}
                         >
                           {d.relative || d.weekday}
@@ -378,7 +382,7 @@ export function Scheduler() {
                         </span>
                         <span
                           className={`text-[10px] font-semibold ${
-                            active ? "text-white/70" : "text-ink-faint"
+                            active ? "text-white/90" : "text-ink-faint"
                           }`}
                         >
                           {d.month}
@@ -393,7 +397,7 @@ export function Scheduler() {
             {/* Time slots */}
             <div className="mt-6 min-h-[7rem]">
               {!selectedDay ? (
-                <div className="flex items-center gap-2 rounded-2xl border border-dashed border-rule px-4 py-8 text-sm text-ink-faint">
+                <div className="flex items-center gap-2 rounded-2xl border border-dashed border-line px-4 py-8 text-sm text-ink-faint">
                   <CalendarDays className="size-4" />
                   Pick a day to see available times.
                 </div>
@@ -405,7 +409,7 @@ export function Scheduler() {
                         <group.icon className="size-3.5" />
                         {group.label}
                       </p>
-                      <div className="mt-2.5 flex flex-wrap gap-2">
+                      <div className="no-scrollbar -mx-1 mt-2.5 flex snap-x gap-2 overflow-x-auto px-1 pb-1">
                         {group.slots.map((min) => {
                           const active = timeMin === min;
                           return (
@@ -414,10 +418,10 @@ export function Scheduler() {
                               type="button"
                               onClick={() => setTimeMin(min)}
                               aria-pressed={active}
-                              className={`option-tile h-11 rounded-xl border px-4 text-sm font-semibold ${
+                              className={`option-tile h-11 shrink-0 snap-start rounded-xl border px-4 text-sm font-semibold ${
                                 active
-                                  ? "border-teal bg-teal text-white"
-                                  : "border-rule bg-white text-ink hover:border-teal/40"
+                                  ? "border-brand-deep bg-brand-deep text-white"
+                                  : "border-line bg-white text-ink hover:border-brand/60"
                               }`}
                             >
                               {formatTime(min)}
@@ -470,6 +474,7 @@ export function Scheduler() {
                   name="name"
                   type="text"
                   autoComplete="name"
+                  required
                   value={name}
                   onChange={setName}
                   error={state.errors.name}
@@ -479,6 +484,7 @@ export function Scheduler() {
                   name="phone"
                   type="tel"
                   autoComplete="tel"
+                  required
                   value={phone}
                   onChange={setPhone}
                   error={state.errors.phone}
@@ -505,7 +511,7 @@ export function Scheduler() {
                   value={notes}
                   onChange={(e) => setNotes(e.target.value)}
                   placeholder="A specific tooth, insurance questions, dental anxiety…"
-                  className="resize-none rounded-xl border border-rule bg-paper px-3.5 py-3 text-sm leading-6 text-ink outline-none transition placeholder:text-ink-faint focus:border-teal"
+                  className="resize-none rounded-xl border border-line bg-white px-3.5 py-3 text-sm leading-6 text-ink outline-none transition placeholder:text-ink-faint focus:border-brand-deep"
                 />
               </label>
             </div>
@@ -518,30 +524,32 @@ export function Scheduler() {
               </label>
             </div>
 
-            {state.message && !state.ok ? (
-              <p
-                aria-live="polite"
-                className="mt-4 rounded-xl border border-coral/30 bg-coral-soft px-4 py-3 text-sm font-medium text-coral"
-              >
-                {state.message}
-              </p>
-            ) : null}
           </div>
         ) : null}
 
+        {/* Submission errors — container stays mounted so screen readers
+            announce content swapped into it */}
+        <div aria-live="polite">
+          {step === 2 && state.message && !state.ok ? (
+            <p className="mt-4 rounded-xl border border-ember/40 bg-ember-tint px-4 py-3 text-sm font-medium text-ember-deep">
+              {state.message}
+            </p>
+          ) : null}
+        </div>
+
         {/* Footer nav */}
-        <div className="mt-7 flex items-center justify-between gap-3 border-t border-rule pt-5">
+        <div className="mt-7 flex items-center gap-3 border-t border-line pt-5">
           {step > 0 ? (
             <button
               type="button"
               onClick={() => setStep((s) => s - 1)}
-              className="btn btn-outline h-11 px-4"
+              className="btn btn-outline shrink-0"
             >
               <ArrowLeft className="size-4" />
               Back
             </button>
           ) : (
-            <span className="text-xs text-ink-faint">
+            <span className="shrink-0 text-xs text-ink-faint">
               Takes about a minute
             </span>
           )}
@@ -551,7 +559,7 @@ export function Scheduler() {
               type="button"
               disabled={!visitId}
               onClick={() => setStep(1)}
-              className="btn btn-ink h-11 px-5 disabled:cursor-not-allowed disabled:opacity-40"
+              className="btn btn-primary flex-1 disabled:cursor-not-allowed disabled:opacity-40"
             >
               Continue
               <ArrowRight className="size-4" />
@@ -563,7 +571,7 @@ export function Scheduler() {
               type="button"
               disabled={!dateIso || timeMin == null}
               onClick={() => setStep(2)}
-              className="btn btn-ink h-11 px-5 disabled:cursor-not-allowed disabled:opacity-40"
+              className="btn btn-primary flex-1 disabled:cursor-not-allowed disabled:opacity-40"
             >
               Continue
               <ArrowRight className="size-4" />
@@ -574,7 +582,7 @@ export function Scheduler() {
             <button
               type="submit"
               disabled={!canSubmit}
-              className="btn btn-primary h-11 px-5 disabled:cursor-not-allowed disabled:opacity-50"
+              className="btn btn-primary flex-1 disabled:cursor-not-allowed disabled:opacity-50"
             >
               {pending ? (
                 <>
@@ -598,7 +606,7 @@ export function Scheduler() {
 function SummaryRow({ icon: Icon, label }: { icon: LucideIcon; label: string }) {
   return (
     <div className="flex items-center gap-3">
-      <Icon className="size-4 shrink-0 text-teal" />
+      <Icon className="size-4 shrink-0 text-brand-deep" />
       <span className="font-medium text-ink">{label}</span>
     </div>
   );
@@ -609,10 +617,10 @@ function SummaryChip({ label, onEdit }: { label: string; onEdit: () => void }) {
     <button
       type="button"
       onClick={onEdit}
-      className="inline-flex items-center gap-2 rounded-full border border-rule bg-white py-1.5 pl-3.5 pr-2.5 text-sm font-medium text-ink transition hover:border-teal/40"
+      className="inline-flex items-center gap-2 rounded-full border border-line bg-white py-1.5 pl-3.5 pr-2.5 text-sm font-medium text-ink transition hover:border-brand/60"
     >
       {label}
-      <span className="grid size-5 place-items-center rounded-full bg-paper-2 text-ink-faint">
+      <span className="grid size-5 place-items-center rounded-full bg-wash text-ink-faint">
         <Pencil className="size-3" />
       </span>
     </button>
@@ -627,6 +635,7 @@ type TextFieldProps = {
   onChange: (value: string) => void;
   autoComplete?: string;
   optional?: boolean;
+  required?: boolean;
   error?: string;
 };
 
@@ -638,9 +647,10 @@ function TextField({
   onChange,
   autoComplete,
   optional,
+  required,
   error,
 }: TextFieldProps) {
-  const errorId = error ? `${name}-error` : undefined;
+  const errorId = `${name}-error`;
   return (
     <label className="flex flex-col gap-1.5">
       <span className="text-sm font-semibold text-ink">
@@ -655,17 +665,24 @@ function TextField({
         autoComplete={autoComplete}
         value={value}
         onChange={(e) => onChange(e.target.value)}
+        aria-required={required ? true : undefined}
         aria-invalid={error ? true : undefined}
-        aria-describedby={errorId}
-        className={`h-12 rounded-xl border bg-paper px-3.5 text-sm text-ink outline-none transition placeholder:text-ink-faint focus:border-teal ${
-          error ? "border-coral" : "border-rule"
+        aria-describedby={error ? errorId : undefined}
+        className={`h-12 rounded-xl border bg-white px-3.5 text-sm text-ink outline-none transition placeholder:text-ink-faint focus:border-brand-deep ${
+          error ? "border-ember" : "border-line"
         }`}
       />
-      {error ? (
-        <span id={errorId} className="text-xs font-medium text-coral">
-          {error}
-        </span>
-      ) : null}
+      {/* Always-mounted live region — error text is swapped in */}
+      <span aria-live="polite">
+        {error ? (
+          <span
+            id={errorId}
+            className="text-xs font-medium text-ember-deep"
+          >
+            {error}
+          </span>
+        ) : null}
+      </span>
     </label>
   );
 }

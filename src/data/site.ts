@@ -46,6 +46,7 @@ export const contact = {
 // dependency on the old site's CDN (which was hot-linked before).
 export const imagery = {
   logo: "/images/logo.png",
+  logoFull: "/images/logo-full.png",
   hero: "/images/abstract-hero.webp",
   care: "/images/abstract-care.webp",
   visit: "/images/abstract-visit.webp",
@@ -127,7 +128,7 @@ export type Service = {
   blurb: string;
   details: string[];
   icon: LucideIcon;
-  accent: "teal" | "coral" | "sage" | "ink";
+  accent: "brand" | "slate" | "ember" | "ink";
 };
 
 export const services: Service[] = [
@@ -143,7 +144,7 @@ export const services: Service[] = [
       "Bruxism & night guards",
     ],
     icon: ShieldCheck,
-    accent: "teal",
+    accent: "brand",
   },
   {
     index: "02",
@@ -157,7 +158,7 @@ export const services: Service[] = [
       "Smile design & planning",
     ],
     icon: Sparkles,
-    accent: "coral",
+    accent: "slate",
   },
   {
     index: "03",
@@ -185,7 +186,7 @@ export const services: Service[] = [
       "Specialist coordination",
     ],
     icon: Stethoscope,
-    accent: "sage",
+    accent: "brand",
   },
 ];
 

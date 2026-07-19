@@ -10,8 +10,8 @@ export function Doctors() {
       <div className="container-x">
         <SectionLabel
           eyebrow="Meet the doctors"
-          title="Experienced care with a human voice."
-          intro="You'll meet the same faces at every visit. The doctors at Sacramento Dental Medicine pair deep clinical experience with the kind of unhurried, plain-spoken communication that puts anxious patients at ease."
+          title="Two doctors who will actually know you."
+          intro="No rotating cast of strangers — the same two doctors, and both would rather explain too much than too little."
         />
 
         <div className="mt-12 flex flex-col gap-5 md:gap-6">
@@ -80,7 +80,7 @@ export function Doctors() {
         >
           <p className="max-w-md text-sm leading-6 text-ink-soft">
             Not sure who to book with? Call the office and the front desk will
-            match you with the right doctor for your needs.
+            match you with the right doctor.
           </p>
           <a href={contact.bookingHref} className="btn btn-primary px-6">
             Book your visit

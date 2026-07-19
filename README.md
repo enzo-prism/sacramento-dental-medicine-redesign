@@ -90,7 +90,7 @@ A few production values still need configuration or final confirmation:
 | --- | --- | --- |
 | Booking URL | `contact.bookingHref` | Currently `#visit` (the on-site scheduler). Swap in the practice-specific Dentrix Ascend deep link when provided — the bare portal domain doesn't identify the practice. |
 | Saturday availability | `officeHours` | The contact page says closed; confirm whether advance appointments are offered. |
-| Reviews link | `socialProof.reviewsUrl` | Points to the current site's `/patient-reviews/` page, which will 404 after the domain cutover — replace with the practice's Google Business profile link (or keep the page) before switching DNS. |
+| Reviews links | `socialProof` | The hero chip scrolls to `#reviews`; "see more" links point to the practice's Google Maps listing. Swap in the practice's canonical Google Business review link if they have one. |
 
 ### Scheduler backend
 

@@ -11,14 +11,16 @@ export function Intro() {
           <ScrollReveal>
             <span className="eyebrow accent-brand">Why this practice</span>
             <h2 className="mt-6 max-w-xl font-display text-balance text-[clamp(2.1rem,4.4vw,3.3rem)] font-semibold leading-[1.05] tracking-[-0.02em] text-ink">
-              Dentistry that feels less like a transaction,{" "}
-              <span className="text-brand-deep">more like care.</span>
+              Made for people{" "}
+              <span className="text-brand-deep">
+                who&apos;ve been putting this off.
+              </span>
             </h2>
             <p className="mt-6 max-w-xl text-pretty text-base leading-7 text-ink-soft md:text-lg md:leading-8">
-              We built Sacramento Dental Medicine around a simple idea: people
-              deserve clear answers, gentle hands, and modern tools — without the
-              rush. From the first call to the follow-up plan, the details stay
-              easy to understand.
+              Sacramento Dental Medicine runs on a simple idea: clear answers,
+              gentle hands, and enough time to do things right. You&apos;ll
+              always know what we found and what happens next, before any
+              treatment begins.
             </p>
           </ScrollReveal>
 

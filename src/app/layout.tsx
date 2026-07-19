@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     template: "%s · Sacramento Dental Medicine",
   },
   description:
-    "Modern family, cosmetic, restorative, and emergency dental care in Antelope, CA. Same-day emergency care when possible, comfort-first technology, and a team that puts clarity first. Book online or call (916) 727-6453.",
+    "Family, cosmetic, restorative, and emergency dentistry in Antelope, CA from Dr. Narodovich and Dr. Sheppard. Gentle, plain-spoken care with same-day emergency visits when possible. Book online or call (916) 727-6453.",
   alternates: {
     canonical: "/",
   },

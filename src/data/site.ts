@@ -62,33 +62,36 @@ export const navItems = [
 
 // Marquee / trust strip ------------------------------------------------------
 export const trustStrip = [
-  "Emergency care available",
   "Accepting new patients",
-  "The Wand STA injections",
+  "Same-day emergency care when possible",
+  "The Wand STA anesthesia",
   "CBCT 3D imaging",
-  "Soft tissue laser",
-  "Call to confirm insurance",
-  "Ask about payment options",
-  "Comfort-first care",
+  "Soft-tissue laser",
+  "Open until 7 PM Wed & Thu",
+  "Family · Cosmetic · Restorative",
+  "Serving Greater Sacramento",
 ];
 
 // Compact, single-line trust signals shown under the hero CTAs ----------------
 export const heroTrust = [
   "Accepting new patients",
   "Same-day emergency care when possible",
-  "Call to confirm insurance coverage",
+  "Open until 7 PM Wed & Thu",
 ];
 
 // Emergency pathway (high-intent, time-sensitive) ----------------------------
 export const emergency = {
   eyebrow: "Dental emergency?",
-  headline: "In pain or had an accident? Call us now.",
-  body: "We’ll do everything we can to see emergency patients the same day — including chipped or knocked-out teeth, severe pain, swelling, or a lost filling or crown.",
+  headline: "In pain right now? Call us first.",
+  body: "A chipped or knocked-out tooth, swelling, a lost filling or crown, pain that kept you up last night. Call now and we'll do everything we can to see you today.",
 };
 
 // Social proof — keep this verifiable -----------------------------------------
+// The quoted reviews live on this page (#reviews); more patient reviews are
+// visible on the practice's Google Maps listing.
 export const socialProof = {
-  reviewsUrl: `${siteUrl}/patient-reviews/`,
+  reviewsUrl: "#reviews",
+  moreReviewsUrl: contact.mapsHref,
   label: "Read patient reviews",
 };
 
@@ -97,17 +100,17 @@ export const quickFacts: { icon: LucideIcon; label: string; value: string }[] = 
   {
     icon: CalendarClock,
     label: "Booking",
-    value: "Currently accepting new patients",
+    value: "Accepting new patients of all ages",
   },
   {
     icon: HeartPulse,
     label: "Emergencies",
-    value: "Same-day care when possible — call now",
+    value: "Same-day visits when possible. Call first.",
   },
   {
     icon: Sparkles,
     label: "Extended hours",
-    value: "Open until 7 PM Wed & Thu",
+    value: "Open until 7 PM Wednesday & Thursday",
   },
 ];
 
@@ -126,7 +129,7 @@ export const services: Service[] = [
     index: "01",
     title: "Preventive care",
     blurb:
-      "Routine exams, cleanings, and gum care that keep small problems from becoming big ones.",
+      "Exams, cleanings, and gum care that catch small problems while they're still small.",
     details: [
       "Comprehensive exams & cleanings",
       "Periodontal (gum) therapy",
@@ -140,7 +143,7 @@ export const services: Service[] = [
     index: "02",
     title: "Cosmetic dentistry",
     blurb:
-      "Whitening, veneers, and Invisalign planned around your features for a natural, confident smile.",
+      "Whitening, veneers, and Invisalign planned around your face, not a one-size template.",
     details: [
       "Professional whitening",
       "Porcelain veneers",
@@ -154,7 +157,7 @@ export const services: Service[] = [
     index: "03",
     title: "Restorative dentistry",
     blurb:
-      "Crowns, implants, dentures, and root canals focused on longevity, comfort, and a natural look.",
+      "Crowns, implants, dentures, and root canals built to last and to feel like your own teeth.",
     details: [
       "Crowns & bridges",
       "Dental implants",
@@ -168,7 +171,7 @@ export const services: Service[] = [
     index: "04",
     title: "Oral surgery",
     blurb:
-      "Extractions, wisdom teeth, and coordinated specialty care delivered gently and precisely.",
+      "Extractions and wisdom teeth handled gently in-house, with specialists brought in when a case calls for one.",
     details: [
       "Tooth extractions",
       "Wisdom teeth removal",
@@ -189,32 +192,32 @@ export const technology: {
   {
     icon: Boxes,
     title: "CBCT 3D imaging",
-    body: "Cone-beam scans give the team a complete view for surgical, implant, and diagnostic planning.",
+    body: "A full 3D view of teeth, roots, and bone, so implants and surgery are planned on the whole picture.",
   },
   {
     icon: Syringe,
     title: "The Wand STA",
-    body: "Computer-controlled anesthesia makes injections gentler and far less intimidating.",
+    body: "Computer-controlled numbing that trades the dreaded syringe for a slow, precise, barely-there flow.",
   },
   {
     icon: Waves,
     title: "Soft tissue laser",
-    body: "Laser care supports cleaner, more comfortable treatment of gum tissue with less downtime.",
+    body: "Treats gum tissue with less bleeding, less soreness, and faster healing than traditional tools.",
   },
   {
     icon: Microscope,
     title: "Digital X-rays",
-    body: "Lower-radiation digital imaging produces clearer diagnostics in seconds, not minutes.",
+    body: "Sharper images at a fraction of the radiation, on screen in seconds.",
   },
   {
     icon: Activity,
     title: "Oral cancer screening",
-    body: "Routine screenings help catch concerns early, when they are most treatable.",
+    body: "Part of every routine exam, because with oral cancer, early is everything.",
   },
   {
     icon: Droplets,
     title: "Modern sterilization",
-    body: "Distilled-water systems and strict protocols keep every operatory sanitary and safe.",
+    body: "Distilled-water lines and strict protocols in every treatment room, every day.",
   },
 ];
 
@@ -245,8 +248,8 @@ export const doctors: Doctor[] = [
     focus: "Family & cosmetic dentistry",
     image: imagery.narodovich,
     description:
-      "Known to patients as Dr. Mike, he pairs modern technique with a calm chairside manner — especially for anxious patients who haven't been to the dentist in years.",
-    credentials: ["Doctor of Dental Medicine", "Comfort-first focus", "Anxious-patient care"],
+      "Patients call him Dr. Mike. He's who people ask for after years away from the chair: modern technique, steady hands, and zero judgment about how long it's been.",
+    credentials: ["Doctor of Dental Medicine", "Gentle by default", "Anxious-patient care"],
   },
   {
     name: "Dr. Lucas L. Sheppard",
@@ -254,7 +257,7 @@ export const doctors: Doctor[] = [
     focus: "Endodontics",
     image: imagery.sheppard,
     description:
-      "An endodontic specialist and former Air Force dentist, Dr. Sheppard brings careful diagnosis, clear communication, and empathetic care to every root canal and complex case.",
+      "A root canal specialist and U.S. Air Force veteran, Dr. Sheppard takes on the complex cases. He diagnoses carefully and explains each step, which is how the words \"root canal\" stop being scary.",
     credentials: ["Endodontic specialist", "U.S. Air Force veteran", "Precise diagnostics"],
   },
 ];
@@ -263,31 +266,29 @@ export const doctors: Doctor[] = [
 export type Review = {
   quote: string;
   name: string;
-  context: string;
   source: string;
 };
 
+// Quotes are verbatim from the practice's current website — do not edit their
+// wording or punctuation; truncate only at a sentence boundary.
 export const reviews: Review[] = [
   {
     quote:
-      "Dr. Narodovich has given me the smile I have always wanted. The staff are friendly, professional, and make you feel like family.",
+      "Dr. Narodovich has given me the smile I've always wanted! The staff are very friendly, professional, and make you feel like family when you walk through the door.",
     name: "Kourtney W.",
-    context: "Cosmetic patient",
-    source: "Practice website",
+    source: "the practice's website",
   },
   {
     quote:
-      "Love this place. They took such great care of us on our visits. The experience overall was amazing.",
+      "Love this place! They took such great care of us on our visits. The experience overall was amazing.",
     name: "Tracy R.",
-    context: "Family patient",
-    source: "Practice website",
+    source: "the practice's website",
   },
   {
     quote:
-      "To me, Sacramento Dental Medicine is the best dental office in Sacramento. Dr. Narodovich and his staff are amazing.",
+      "To me, Sacramento Dental Medicine is the best dental office in Sacramento! Dr. Narodovich and his staff are amazing!",
     name: "Catherine C.",
-    context: "Long-time patient",
-    source: "Practice website",
+    source: "the practice's website",
   },
 ];
 
@@ -363,50 +364,50 @@ export const visitTypes: VisitType[] = [
 // New patients — practical, high-intent info (coverage, payment, first visit)
 export const newPatient = {
   eyebrow: "New patients",
-  title: "Everything you need for an easy first visit.",
+  title: "Your first visit, without the unknowns.",
   intro:
-    "No surprises. Here's how billing works, what to bring, and what your first appointment looks like.",
+    "Here's how coverage works, what to bring, and what actually happens in the chair.",
   billing: [
     {
       title: "Confirm your coverage",
-      body: "Call the office before your visit to confirm whether your dental plan is accepted.",
+      body: "One quick call to the front desk confirms whether your dental plan is accepted, before you ever sit down.",
     },
     {
       title: "Ask about payment options",
-      body: "The team can explain the payment options currently available for your care.",
+      body: "Paying without insurance? Call, and the front desk will walk you through your options.",
     },
     {
       title: "New patients welcome",
-      body: "The practice is currently accepting new patients from Antelope and Greater Sacramento.",
+      body: "Now accepting new patients of all ages, from Antelope and across Greater Sacramento.",
     },
   ],
   bring: [
     "Photo ID",
     "Dental insurance card (if you have one)",
     "A list of current medications",
-    "Any questions or goals for your smile",
+    "Your questions, and what you'd change about your smile",
   ],
   firstVisit:
-    "Your first visit usually includes a comprehensive exam, any necessary digital X-rays, a conversation about your goals, and a gentle cleaning when appropriate — followed by a clear care plan.",
+    "Expect a comprehensive exam, digital X-rays if you need them, an unhurried conversation about your goals, and usually a gentle cleaning. You'll leave knowing exactly what we found and what we'd recommend next.",
 };
 
 // FAQ ------------------------------------------------------------------------
 export const faqs: { q: string; a: string }[] = [
   {
     q: "Are you accepting new patients?",
-    a: "Yes. Sacramento Dental Medicine is currently welcoming new patients of all ages across Antelope and Greater Sacramento. Book online or call the office to claim your first appointment.",
+    a: "Yes. Sacramento Dental Medicine is welcoming new patients of all ages across Antelope and Greater Sacramento. Book online or call the office, and we'll find a first appointment that fits your schedule.",
   },
   {
     q: "What should I expect at my first visit?",
-    a: "Your first visit typically includes a comprehensive exam, any necessary digital X-rays or imaging, a conversation about your goals, and a gentle cleaning when appropriate. The team will explain the recommended care plan and answer your questions.",
+    a: "Plan on a comprehensive exam, digital X-rays if needed, and a real conversation about your goals, usually followed by a gentle cleaning. Before you leave, we'll walk you through what we found and what we recommend.",
   },
   {
     q: "Do you handle dental emergencies?",
-    a: "Yes. If you're in pain or have had a dental accident, call (916) 727-6453 right away. The team will give you instructions and do everything possible to see you promptly.",
+    a: "Yes. If you're in pain or have had a dental accident, call (916) 727-6453 right away. We'll tell you what to do immediately and do everything possible to see you the same day.",
   },
   {
     q: "Do you offer financing or payment plans?",
-    a: "Please call the office to confirm insurance coverage and ask which payment options are currently available.",
+    a: "Coverage and payment options change, so the most reliable answer comes from a quick call to the front desk. We'll confirm whether your plan is accepted and explain the payment options currently available.",
   },
 ];
 
@@ -414,16 +415,16 @@ export const faqs: { q: string; a: string }[] = [
 export const philosophy = {
   points: [
     {
-      title: "Clear from the first call",
-      body: "Clear answers and a care plan you understand before treatment begins.",
+      title: "Straight answers first",
+      body: "No upsell, no scare tactics. An honest read on your teeth, and a plan you understand before you commit to anything.",
     },
     {
-      title: "Comfort is the standard",
-      body: "From The Wand STA to a calm, unhurried pace, every detail is designed for anxious and first-time patients.",
+      title: "Comfort, by design",
+      body: "Computer-guided anesthesia, an unhurried pace, and a team that treats dental nerves as normal, because they are.",
     },
     {
-      title: "Built on modern diagnostics",
-      body: "CBCT 3D imaging and digital workflows mean fewer surprises and more predictable outcomes.",
+      title: "Diagnosed, not guessed",
+      body: "CBCT 3D imaging and digital X-rays show the full picture before we recommend anything.",
     },
   ],
 };

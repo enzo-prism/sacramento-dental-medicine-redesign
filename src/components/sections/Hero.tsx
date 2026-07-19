@@ -22,8 +22,6 @@ export function Hero() {
         <ScrollReveal className="max-w-3xl">
           <a
             href={socialProof.reviewsUrl}
-            target="_blank"
-            rel="noopener noreferrer"
             className="inline-flex items-center gap-2.5 rounded-full border border-line bg-white/80 px-3.5 py-1.5 text-xs font-semibold tracking-wide text-ink-soft backdrop-blur-md transition hover:border-brand-deep hover:text-brand-deep"
           >
             <MapPin className="size-4 text-brand-deep" />
@@ -34,13 +32,14 @@ export function Hero() {
           </a>
 
           <h1 className="mt-6 font-display text-[clamp(1.85rem,8vw,3.4rem)] font-semibold leading-[1.02] tracking-[-0.03em] text-ink text-balance lg:text-[clamp(2.6rem,4.4vw,3.6rem)]">
-            Calm, modern dentistry
-            <span className="block text-brand-deep">for the whole family.</span>
+            A dentist visit
+            <span className="block text-brand-deep">you won&apos;t dread.</span>
           </h1>
 
           <p className="mt-6 max-w-xl text-pretty text-base leading-7 text-ink-soft md:text-lg md:leading-8">
-            {contact.tagline}. Comfort-first technology, honest answers, and a
-            team that treats anxious patients like old friends.
+            {contact.tagline}. The team works gently, explains everything in
+            plain English, and takes special care of people who haven&apos;t
+            seen a dentist in years.
           </p>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">

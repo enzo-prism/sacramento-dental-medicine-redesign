@@ -13,15 +13,15 @@ export function Technology() {
               Modern tools, calmer appointments.
             </h2>
             <p className="mt-5 max-w-xl text-pretty text-base leading-7 text-white/70 md:text-lg md:leading-8">
-              Every piece of technology at Sacramento Dental Medicine is chosen
-              for one reason: to make your visit more precise, more comfortable,
-              and more predictable — never just for show.
+              Nothing in these rooms is for show. Every tool earned its place
+              by making visits measurably better: clearer diagnosis, gentler
+              treatment, fewer surprises.
             </p>
           </ScrollReveal>
 
           <ScrollReveal delay={140} variant="fade" className="shrink-0">
             <a href={contact.bookingHref} className="btn btn-ghost-light px-5">
-              Experience the difference
+              Book a calmer visit
               <ArrowRight className="size-4" />
             </a>
           </ScrollReveal>

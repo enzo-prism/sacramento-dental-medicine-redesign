@@ -247,7 +247,7 @@ export function Scheduler() {
               What brings you in?
             </h3>
             <p className="mt-1.5 text-sm text-ink-soft">
-              Pick the option that fits best — you can add details later.
+              Pick the closest fit. You can add details later.
             </p>
 
             <div
@@ -295,8 +295,8 @@ export function Scheduler() {
             {selectedVisit?.urgent ? (
               <div className="mt-4 flex flex-col gap-3 rounded-2xl border border-ember/30 bg-ember-tint p-4 sm:flex-row sm:items-center sm:justify-between">
                 <p className="text-sm font-medium text-ember-deep">
-                  In pain or had an accident? Calling is fastest — we’ll do
-                  everything possible to see you promptly.
+                  Calling is the fastest way in. We&apos;ll do everything we
+                  can to see you today.
                 </p>
                 <div className="flex shrink-0 flex-wrap gap-2">
                   <a
@@ -331,8 +331,8 @@ export function Scheduler() {
               Choose a day & time
             </h3>
             <p className="mt-1.5 text-sm text-ink-soft">
-              Real openings based on our office hours. We&apos;ll confirm before
-              your visit.
+              Pick a time inside our office hours. The front desk will call to
+              confirm it&apos;s open.
             </p>
 
             {earliestDay && earliestSlot != null ? (
@@ -342,7 +342,7 @@ export function Scheduler() {
                 className="mt-5 inline-flex min-h-11 items-center gap-2 rounded-full border border-brand/40 bg-wash px-4 py-2 text-sm font-semibold text-brand-deep transition hover:bg-wash-2"
               >
                 <Zap className="size-4" />
-                Earliest: {earliestDay.relative || earliestDay.weekday}{" "}
+                Soonest to request: {earliestDay.relative || earliestDay.weekday}{" "}
                 {formatTime(earliestSlot)}
               </button>
             ) : null}

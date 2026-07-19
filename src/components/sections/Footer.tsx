@@ -23,7 +23,8 @@ export function Footer() {
               />
             </a>
             <p className="mt-6 max-w-xs text-sm leading-7 text-white/70">
-              {contact.tagline}. Comfort-first, clarity-first, always.
+              {contact.tagline}. The same doctors, the same careful pace,
+              every visit.
             </p>
             <div className="mt-6 flex flex-col gap-2.5 sm:flex-row">
               <a href={contact.bookingHref} className="btn btn-primary">
@@ -97,7 +98,7 @@ export function Footer() {
           <p className="flex flex-wrap items-center gap-x-4 gap-y-1">
             <span>Serving {contact.serviceArea.slice(0, 4).join(" · ")}</span>
             <span className="hidden sm:inline">·</span>
-            <span>Designed with care in Antelope, CA</span>
+            <span>Made for Antelope, CA</span>
           </p>
         </div>
       </div>

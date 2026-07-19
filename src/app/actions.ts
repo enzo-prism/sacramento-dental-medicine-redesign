@@ -88,7 +88,7 @@ export async function requestAppointment(
   return {
     ok: true,
     message:
-      "Thanks — your request is in. A team member will call you back shortly to confirm a time.",
+      "Thanks, your request is in. The front desk will call or text during office hours to confirm your time.",
     errors: {},
   };
 }

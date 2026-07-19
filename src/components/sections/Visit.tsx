@@ -24,9 +24,10 @@ export function Visit() {
             Book your visit in about a minute.
           </h2>
           <p className="max-w-2xl text-balance text-base leading-7 text-white/70 md:text-lg md:leading-8">
-            Choose what you need, pick a time that works, and we&apos;ll
-            confirm. Prefer to talk? Call or stop by — the office is an easy
-            drive from Sacramento, Roseville, and Citrus Heights.
+            Pick what you need and a time that works, and the front desk will
+            call or text to confirm. Prefer a human? Call, or just stop by.
+            The office is an easy drive from Sacramento, Roseville, North
+            Highlands, and Citrus Heights.
           </p>
         </ScrollReveal>
 
@@ -96,7 +97,7 @@ export function Visit() {
                   {contact.phoneDisplay}
                 </a>
                 <p className="mt-1 text-sm leading-6 text-white/65">
-                  Call the office
+                  Answered during office hours
                 </p>
               </div>
             </div>
@@ -123,8 +124,8 @@ export function Visit() {
                   Common questions, answered.
                 </h3>
                 <p className="mt-4 max-w-md text-sm leading-7 text-ink-soft">
-                  New patient? Start here. If your question isn&apos;t covered,
-                  the front desk is happy to help.
+                  The things new patients actually ask. For anything else, call
+                  the front desk.
                 </p>
                 <div className="mt-8 lg:mt-auto lg:pt-8">
                   <a

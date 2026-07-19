@@ -18,8 +18,8 @@ export function Services() {
           <SectionLabel
             eyebrow="Full-scope care"
             accent="brand"
-            title="Every stage of your smile, under one calm roof."
-            intro="Preventive, cosmetic, restorative, and surgical care — coordinated by one team that knows your history, your goals, and your comfort level."
+            title="From first cleanings to full restorations."
+            intro="Preventive, cosmetic, restorative, and surgical care in one place, from a team that knows your history, your goals, and exactly how you feel about dental chairs."
           />
           <ScrollReveal delay={120} variant="fade">
             <a href={contact.bookingHref} className="btn btn-primary px-5">

@@ -13,12 +13,12 @@ export function Reviews() {
         <div className="flex flex-col justify-between gap-8 lg:flex-row lg:items-end">
           <SectionLabel
             eyebrow="Patient reviews"
-            title="Warm care patients remember."
-            intro="Patients come for the dentistry and stay for the people. Read experiences published by the practice."
+            title="Take their word for it."
+            intro="Their words, exactly as they wrote them. We'd rather show you those than grade ourselves."
           />
           <ScrollReveal delay={120} variant="fade">
             <a
-              href={socialProof.reviewsUrl}
+              href={socialProof.moreReviewsUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="group surface-card lift flex items-center gap-4 px-5 py-4"
@@ -31,7 +31,7 @@ export function Reviews() {
                   Patient experiences
                 </span>
                 <span className="inline-flex items-center gap-1 text-xs font-medium text-ink-faint">
-                  {socialProof.label}
+                  See more on Google Maps
                   <ArrowUpRight
                     className="size-3.5 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
                     aria-hidden
@@ -65,7 +65,7 @@ export function Reviews() {
                     {review.name}
                   </p>
                   <p className="mt-0.5 text-xs text-ink-faint">
-                    {review.context} · via {review.source}
+                    Published on {review.source}
                   </p>
                 </figcaption>
               </figure>
@@ -75,12 +75,12 @@ export function Reviews() {
 
         <ScrollReveal delay={120} variant="fade" className="mt-10 text-center">
           <a
-            href={socialProof.reviewsUrl}
+            href={socialProof.moreReviewsUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 font-display text-lg font-medium text-brand-deep underline decoration-brand/50 decoration-2 underline-offset-8 transition hover:text-brand-ink hover:decoration-brand"
           >
-            Read more patient reviews
+            See more reviews on Google Maps
             <ArrowUpRight className="size-4" aria-hidden />
           </a>
         </ScrollReveal>

@@ -22,7 +22,6 @@ import { initialAppointmentState } from "@/lib/appointment";
 import {
   contact,
   officeHours,
-  slotIntervalMinutes,
   visitTypes,
 } from "@/data/site";
 
@@ -43,7 +42,12 @@ type DayOption = {
   relative: string;
 };
 
-type SlotGroup = { label: string; icon: LucideIcon; slots: number[] };
+type DayPart = {
+  id: "morning" | "afternoon" | "evening";
+  label: string;
+  rangeLabel: string;
+  icon: LucideIcon;
+};
 
 function pad(n: number) {
   return String(n).padStart(2, "0");
@@ -77,20 +81,39 @@ function buildDays(count: number): DayOption[] {
   return out;
 }
 
-// Generate real time slots from the office hours, grouped by part of day.
-function buildSlots(wd: number): SlotGroup[] {
+function buildParts(wd: number): DayPart[] {
   const h = officeHours[wd];
   if (!h) return [];
-  const all: number[] = [];
-  for (let t = h.open; t + slotIntervalMinutes <= h.close; t += slotIntervalMinutes) {
-    all.push(t);
+  const parts: DayPart[] = [];
+  const morningEnd = Math.min(h.close, 12 * 60);
+  if (h.open < 12 * 60 && morningEnd > h.open) {
+    parts.push({
+      id: "morning",
+      label: "Morning",
+      rangeLabel: `${formatTime(h.open)} – ${formatTime(morningEnd)}`,
+      icon: Sunrise,
+    });
   }
-  const groups: SlotGroup[] = [
-    { label: "Morning", icon: Sunrise, slots: all.filter((t) => t < 12 * 60) },
-    { label: "Afternoon", icon: Sun, slots: all.filter((t) => t >= 12 * 60 && t < 17 * 60) },
-    { label: "Evening", icon: Sunset, slots: all.filter((t) => t >= 17 * 60) },
-  ];
-  return groups.filter((g) => g.slots.length > 0);
+  const afternoonStart = Math.max(h.open, 12 * 60);
+  const afternoonEnd = Math.min(h.close, 17 * 60);
+  if (afternoonEnd > afternoonStart) {
+    parts.push({
+      id: "afternoon",
+      label: "Afternoon",
+      rangeLabel: `${formatTime(afternoonStart)} – ${formatTime(afternoonEnd)}`,
+      icon: Sun,
+    });
+  }
+  const eveningStart = Math.max(h.open, 17 * 60);
+  if (h.close > eveningStart) {
+    parts.push({
+      id: "evening",
+      label: "Evening",
+      rangeLabel: `${formatTime(eveningStart)} – ${formatTime(h.close)}`,
+      icon: Sunset,
+    });
+  }
+  return parts;
 }
 
 function dayLabel(day: DayOption) {
@@ -107,7 +130,7 @@ export function Scheduler() {
   const [visitId, setVisitId] = useState<string | null>(null);
   const [days, setDays] = useState<DayOption[]>([]);
   const [dateIso, setDateIso] = useState<string | null>(null);
-  const [timeMin, setTimeMin] = useState<number | null>(null);
+  const [partId, setPartId] = useState<DayPart["id"] | null>(null);
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
@@ -133,10 +156,11 @@ export function Scheduler() {
 
   const selectedVisit = visitTypes.find((v) => v.id === visitId) ?? null;
   const selectedDay = days.find((d) => d.iso === dateIso) ?? null;
-  const slotGroups = selectedDay ? buildSlots(selectedDay.wd) : [];
+  const parts = selectedDay ? buildParts(selectedDay.wd) : [];
+  const selectedPart = parts.find((p) => p.id === partId) ?? null;
 
   const earliestDay = days[0] ?? null;
-  const earliestSlot = earliestDay ? buildSlots(earliestDay.wd)[0]?.slots[0] ?? null : null;
+  const earliestPart = earliestDay ? buildParts(earliestDay.wd)[0] ?? null : null;
 
   const phoneDigits = phone.replace(/\D/g, "").length;
   const canSubmit = name.trim().length > 1 && phoneDigits >= 10 && !pending;
@@ -147,9 +171,9 @@ export function Scheduler() {
   }
 
   function pickEarliest() {
-    if (!earliestDay || earliestSlot == null) return;
+    if (!earliestDay || !earliestPart) return;
     setDateIso(earliestDay.iso);
-    setTimeMin(earliestSlot);
+    setPartId(earliestPart.id);
   }
 
   // ---- Success ----
@@ -162,13 +186,16 @@ export function Scheduler() {
         <h3 className="font-display text-3xl font-medium text-ink">
           Request received
         </h3>
-        {selectedVisit && selectedDay && timeMin != null ? (
+        {selectedVisit && selectedDay && selectedPart ? (
           <div className="surface-wash w-full max-w-md p-5 text-left">
             <SummaryRow icon={selectedVisit.icon} label={selectedVisit.label} />
             <div className="my-3 hairline" />
             <SummaryRow icon={CalendarDays} label={dayLabel(selectedDay)} />
             <div className="my-3 hairline" />
-            <SummaryRow icon={Clock} label={formatTime(timeMin)} />
+            <SummaryRow
+              icon={Clock}
+              label={`${selectedPart.label} · ${selectedPart.rangeLabel}`}
+            />
           </div>
         ) : null}
         <p className="max-w-md text-pretty text-sm leading-7 text-ink-soft md:text-base">
@@ -234,7 +261,15 @@ export function Scheduler() {
           name="dateLabel"
           value={selectedDay ? dayLabel(selectedDay) : ""}
         />
-        <input type="hidden" name="time" value={timeMin != null ? formatTime(timeMin) : ""} />
+        <input
+          type="hidden"
+          name="time"
+          value={
+            selectedPart
+              ? `${selectedPart.label} (${selectedPart.rangeLabel})`
+              : ""
+          }
+        />
 
         {/* STEP 0 — visit type */}
         {step === 0 ? (
@@ -331,19 +366,19 @@ export function Scheduler() {
               Choose a day & time
             </h3>
             <p className="mt-1.5 text-sm text-ink-soft">
-              Pick a time inside our office hours. The front desk will call to
-              confirm it&apos;s open.
+              Choose a window inside our office hours. We&apos;ll confirm a
+              specific time when we call.
             </p>
 
-            {earliestDay && earliestSlot != null ? (
+            {earliestDay && earliestPart ? (
               <button
                 type="button"
                 onClick={pickEarliest}
-                className="mt-5 inline-flex min-h-11 items-center gap-2 rounded-full border border-brand/40 bg-wash px-4 py-2 text-sm font-semibold text-brand-deep transition hover:bg-wash-2"
+                className="mt-5 inline-flex min-h-11 items-center gap-2 rounded-full border border-brand/40 bg-wash px-4 py-2 text-sm font-semibold text-brand-ink transition hover:bg-wash-2"
               >
                 <Zap className="size-4" />
                 Soonest to request: {earliestDay.relative || earliestDay.weekday}{" "}
-                {formatTime(earliestSlot)}
+                {earliestPart.label.toLowerCase()}
               </button>
             ) : null}
 
@@ -361,7 +396,7 @@ export function Scheduler() {
                         type="button"
                         onClick={() => {
                           setDateIso(d.iso);
-                          setTimeMin(null);
+                          setPartId(null);
                         }}
                         aria-pressed={active}
                         className={`option-tile flex w-16 shrink-0 snap-start flex-col items-center gap-0.5 rounded-2xl border px-2 py-3 ${
@@ -399,38 +434,38 @@ export function Scheduler() {
               {!selectedDay ? (
                 <div className="flex items-center gap-2 rounded-2xl border border-dashed border-line px-4 py-8 text-sm text-ink-faint">
                   <CalendarDays className="size-4" />
-                  Pick a day to see available times.
+                  Pick a day to see morning, afternoon, or evening.
                 </div>
               ) : (
-                <div className="flex flex-col gap-5">
-                  {slotGroups.map((group) => (
-                    <div key={group.label}>
-                      <p className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-[0.18em] text-ink-faint">
-                        <group.icon className="size-3.5" />
-                        {group.label}
-                      </p>
-                      <div className="no-scrollbar -mx-1 mt-2.5 flex snap-x gap-2 overflow-x-auto px-1 pb-1">
-                        {group.slots.map((min) => {
-                          const active = timeMin === min;
-                          return (
-                            <button
-                              key={min}
-                              type="button"
-                              onClick={() => setTimeMin(min)}
-                              aria-pressed={active}
-                              className={`option-tile h-11 shrink-0 snap-start rounded-xl border px-4 text-sm font-semibold ${
-                                active
-                                  ? "border-brand-deep bg-brand-deep text-white"
-                                  : "border-line bg-white text-ink hover:border-brand/60"
-                              }`}
-                            >
-                              {formatTime(min)}
-                            </button>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  ))}
+                <div
+                  role="group"
+                  aria-label="Time of day"
+                  className="grid gap-3 sm:grid-cols-3"
+                >
+                  {parts.map((part) => {
+                    const active = partId === part.id;
+                    return (
+                      <button
+                        key={part.id}
+                        type="button"
+                        onClick={() => setPartId(part.id)}
+                        aria-pressed={active}
+                        className={`option-tile flex flex-col items-start gap-2 rounded-2xl border p-4 text-left ${
+                          active
+                            ? "border-brand-deep bg-wash ring-1 ring-brand-deep"
+                            : "border-line bg-white hover:border-brand/60"
+                        }`}
+                      >
+                        <part.icon className="size-5 text-brand-ink" />
+                        <span className="font-display text-base font-medium text-ink">
+                          {part.label}
+                        </span>
+                        <span className="text-xs text-ink-soft">
+                          {part.rangeLabel}
+                        </span>
+                      </button>
+                    );
+                  })}
                 </div>
               )}
             </div>
@@ -459,8 +494,8 @@ export function Scheduler() {
               />
               <SummaryChip
                 label={
-                  selectedDay && timeMin != null
-                    ? `${dayLabel(selectedDay)} · ${formatTime(timeMin)}`
+                  selectedDay && selectedPart
+                    ? `${dayLabel(selectedDay)} · ${selectedPart.label}`
                     : "Date & time"
                 }
                 onEdit={() => setStep(1)}
@@ -569,7 +604,7 @@ export function Scheduler() {
           {step === 1 ? (
             <button
               type="button"
-              disabled={!dateIso || timeMin == null}
+              disabled={!dateIso || !partId}
               onClick={() => setStep(2)}
               className="btn btn-primary flex-1 disabled:cursor-not-allowed disabled:opacity-40"
             >

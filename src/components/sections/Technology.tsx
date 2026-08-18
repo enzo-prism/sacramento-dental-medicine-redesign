@@ -1,69 +1,58 @@
-import { ArrowRight } from "lucide-react";
+import Image from "next/image";
 import { ScrollReveal } from "@/components/ScrollReveal";
-import { contact, technology, technologyTags } from "@/data/site";
+import { imagery, technology } from "@/data/site";
 
 export function Technology() {
   return (
-    <section id="technology" className="night-band section relative overflow-hidden">
-      <div className="container-x relative">
-        <div className="flex flex-col justify-between gap-8 lg:flex-row lg:items-end lg:gap-12">
+    <section id="technology" className="section relative bg-canvas">
+      <div className="container-x">
+        <div className="grid items-end gap-10 lg:grid-cols-[1fr_0.9fr] lg:gap-16">
           <ScrollReveal className="max-w-2xl">
-            <span className="eyebrow text-brand">Technology &amp; comfort</span>
-            <h2 className="mt-5 font-display text-balance text-[clamp(2rem,4.2vw,3.1rem)] font-semibold leading-[1.06] tracking-[-0.02em] text-white">
+            <span className="eyebrow accent-brand">Technology &amp; comfort</span>
+            <h2 className="mt-5 font-display text-balance text-[clamp(2rem,4.2vw,3.1rem)] font-semibold leading-[1.06] tracking-[-0.02em] text-ink">
               Modern tools, calmer appointments.
             </h2>
-            <p className="mt-5 max-w-xl text-pretty text-base leading-7 text-white/70 md:text-lg md:leading-8">
+            <p className="mt-5 max-w-xl text-pretty text-base leading-7 text-ink-soft md:text-lg md:leading-8">
               Nothing in these rooms is for show. Every tool earned its place
               by making visits measurably better: clearer diagnosis, gentler
               treatment, fewer surprises.
             </p>
           </ScrollReveal>
 
-          <ScrollReveal delay={140} variant="fade" className="shrink-0">
-            <a href={contact.bookingHref} className="btn btn-ghost-light px-5">
-              Book a calmer visit
-              <ArrowRight className="size-4" />
-            </a>
+          <ScrollReveal variant="fade" className="relative hidden aspect-[4/3] overflow-hidden rounded-2xl border border-line lg:block">
+            <Image
+              src={imagery.hero}
+              alt="Bright treatment room with a dental chair in soft morning light — atmospheric photography"
+              fill
+              sizes="(min-width: 1024px) 40vw, 100vw"
+              className="object-cover object-[20%_center]"
+            />
           </ScrollReveal>
         </div>
 
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:mt-14 lg:grid-cols-3">
+        <ol className="mt-12 grid gap-0 border-t border-line md:mt-16 md:grid-cols-2 md:gap-x-12">
           {technology.map((item, index) => (
-            <ScrollReveal
+            <li
               key={item.title}
-              delay={(index % 3) * 90}
-              variant="fade-up"
-              className="h-full"
+              className="flex items-baseline gap-5 border-b border-line py-7"
             >
-              <article className="surface-night-card lift flex h-full flex-col p-6">
-                <span className="icon-orb orb-night size-11">
-                  <item.icon className="size-5" />
-                </span>
-                <h3 className="mt-5 font-display text-lg font-semibold tracking-[-0.01em] text-white">
+              <span
+                aria-hidden="true"
+                className="font-display text-sm font-semibold tracking-[0.08em] text-brand-ink"
+              >
+                0{index + 1}
+              </span>
+              <div>
+                <h3 className="font-display text-lg font-semibold tracking-[-0.01em] text-ink">
                   {item.title}
                 </h3>
-                <p className="mt-2 text-pretty text-sm leading-6 text-white/70">
+                <p className="mt-2 max-w-md text-pretty text-sm leading-6 text-ink-soft">
                   {item.body}
                 </p>
-              </article>
-            </ScrollReveal>
+              </div>
+            </li>
           ))}
-        </div>
-
-        <ScrollReveal
-          delay={120}
-          variant="fade"
-          className="mt-10 flex flex-wrap gap-2.5 lg:mt-12"
-        >
-          {technologyTags.map((tag) => (
-            <span
-              key={tag}
-              className="rounded-full border border-white/12 bg-white/5 px-3.5 py-1.5 text-xs font-medium tracking-wide text-white/72"
-            >
-              {tag}
-            </span>
-          ))}
-        </ScrollReveal>
+        </ol>
       </div>
     </section>
   );

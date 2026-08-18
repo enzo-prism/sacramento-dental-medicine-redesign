@@ -1,21 +1,17 @@
-import { Marquee } from "@/components/Marquee";
 import { ScrollReveal } from "@/components/ScrollReveal";
-import { quickFacts, trustStrip } from "@/data/site";
+import { quickFacts } from "@/data/site";
 
 export function TrustBand() {
   return (
     <section aria-label="Practice highlights" className="relative bg-wash">
       <div className="hairline" />
-      <Marquee items={trustStrip} tone="light" className="py-4" />
-      <div className="hairline" />
 
       <div className="container-x grid gap-4 py-8 sm:grid-cols-3 md:py-10">
-        {quickFacts.map((fact, index) => (
+        {quickFacts.map((fact) => (
           <ScrollReveal
             key={fact.label}
-            delay={index * 80}
             variant="fade"
-            className="group flex items-start gap-4 rounded-2xl border border-line bg-card p-5 transition hover:border-brand/55"
+            className="flex items-start gap-4 rounded-2xl border border-line bg-card p-5"
           >
             <span className="icon-orb orb-brand size-12 shrink-0">
               <fact.icon className="size-5" />

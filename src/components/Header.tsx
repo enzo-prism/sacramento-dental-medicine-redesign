@@ -59,22 +59,24 @@ export function Header() {
           className="group flex items-center gap-3"
           aria-label={`${contact.practiceName} home`}
         >
-          <span className="grid size-10 place-items-center rounded-xl bg-night shadow-[0_10px_24px_-12px_rgba(10,20,36,0.5)] transition group-hover:shadow-[0_14px_30px_-12px_rgba(10,20,36,0.6)] lg:size-11">
+          <span className="grid size-10 place-items-center rounded-xl bg-brand-tint lg:size-11">
             <Image
               src={imagery.logo}
               alt=""
-              width={30}
-              height={24}
-              unoptimized
-              className="h-6 w-auto lg:h-7"
+              width={40}
+              height={40}
+              className="h-8 w-8 lg:h-9 lg:w-9"
             />
           </span>
           <span className="leading-tight">
             <span className="block text-[10px] font-semibold tracking-[0.22em] text-ink-faint lg:text-[11px]">
               ANTELOPE · CA
             </span>
-            <span className="block font-display text-base font-semibold tracking-tight text-ink sm:text-lg">
+            <span className="hidden font-display text-base font-semibold tracking-tight text-ink sm:block sm:text-lg">
               Sacramento Dental Medicine
+            </span>
+            <span className="block font-display text-base font-semibold tracking-tight text-ink sm:hidden">
+              {contact.shortName}
             </span>
           </span>
         </a>

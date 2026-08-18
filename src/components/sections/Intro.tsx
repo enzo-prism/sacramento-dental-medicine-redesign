@@ -1,7 +1,6 @@
 import Image from "next/image";
-import { ArrowRight } from "lucide-react";
-import { ScrollReveal } from "@/components/ScrollReveal";
 import { contact, imagery, philosophy } from "@/data/site";
+import { ScrollReveal } from "@/components/ScrollReveal";
 
 export function Intro() {
   return (
@@ -25,36 +24,24 @@ export function Intro() {
           </ScrollReveal>
 
           <ScrollReveal
-            delay={120}
-            variant="slide-right"
-            className="relative mt-10 hidden aspect-[16/7] max-w-xl overflow-hidden rounded-2xl border border-line lg:block"
+            delay={80}
+            variant="fade"
+            className="relative mt-10 hidden aspect-[4/3] max-w-xl overflow-hidden rounded-2xl border border-line lg:block"
           >
             <Image
               src={imagery.care}
-              alt="Soft abstract art in the practice's periwinkle and powder blues"
+              alt="Quiet waiting lounge in morning light — atmospheric photography, not the Elverta Road office"
               fill
               sizes="(min-width: 1024px) 36rem, 100vw"
-              className="object-cover object-top"
-            />
-            <span
-              aria-hidden="true"
-              className="pointer-events-none absolute inset-0 rounded-2xl bg-[linear-gradient(180deg,rgba(106,142,206,0.18),transparent)]"
-            />
-            <span
-              aria-hidden="true"
-              className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-line ring-inset"
+              className="object-cover object-center"
             />
           </ScrollReveal>
 
-          <ScrollReveal delay={160} className="mt-10 flex flex-wrap items-center gap-5">
-            <a href={contact.bookingHref} className="btn btn-primary px-5">
+          <ScrollReveal delay={120} className="mt-10 flex flex-wrap items-center gap-6">
+            <a href={contact.bookingHref} className="btn-text">
               Become a patient
-              <ArrowRight className="size-4" />
             </a>
-            <a
-              href="#doctors"
-              className="text-sm font-semibold text-brand-deep underline-offset-4 hover:underline"
-            >
+            <a href="#doctors" className="btn-text">
               Meet the doctors
             </a>
           </ScrollReveal>
@@ -62,10 +49,8 @@ export function Intro() {
 
         <div className="flex flex-col justify-center">
           {philosophy.points.map((point, index) => (
-            <ScrollReveal
+            <div
               key={point.title}
-              delay={index * 110}
-              variant="fade"
               className={index > 0 ? "border-t border-line" : ""}
             >
               <div
@@ -75,7 +60,7 @@ export function Intro() {
               >
                 <span
                   aria-hidden="true"
-                  className="font-display text-sm font-semibold tracking-[0.08em] text-brand-deep"
+                  className="font-display text-sm font-semibold tracking-[0.08em] text-brand-ink"
                 >
                   0{index + 1}
                 </span>
@@ -88,7 +73,7 @@ export function Intro() {
                   </p>
                 </div>
               </div>
-            </ScrollReveal>
+            </div>
           ))}
         </div>
       </div>

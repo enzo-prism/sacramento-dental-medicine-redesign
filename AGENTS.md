@@ -35,8 +35,10 @@ Optional: `LEAD_WEBHOOK_URL` in `.env.local` / Vercel / Cloud Agent secrets. Unt
 ## Cursor Cloud specific instructions
 
 - Install is `npm ci`. Dev server is already started in the `dev` terminal on port 3000.
-- After UI or content changes, run `npm run lint` and `npm run build`. Open http://localhost:3000 and click through Home, the scheduler (`#visit`), Emergency, Doctors, and New Patients.
+- After UI or content changes, run `npm run lint` and `npm run build`. Open http://localhost:3000 and click through Home, the scheduler (`#visit`), Emergency, Doctors, and New Patients (FAQ lives there).
 - Do **not** treat a successful form submit as practice delivery unless `LEAD_WEBHOOK_URL` is configured and the user asked for a controlled test.
 - Do not attach or cut over `sacramentodentalmedicine.com`. Preview URL only until the practice signs off.
 - Positioning: grow new-patient volume via search, phone, and simple lead capture. Keep booking friction low.
+- Design: tokens in `src/app/globals.css` only. Periwinkle is atmosphere; navy is action. Ember is emergencies. Keep a single night band (Visit). Primary Book pills: header, hero, Visit, footer, mobile bar.
+- Hero / waiting / still-life images are atmospheric stand-ins, not the Elverta office. Do not write alt text or copy that claims they are the practice's rooms.
 - If `LEAD_WEBHOOK_URL` is missing, the site still runs. Add it only as a Cloud Agents **runtime secret**, never in git.

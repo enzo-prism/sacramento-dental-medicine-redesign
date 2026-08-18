@@ -1,12 +1,7 @@
-import { ArrowRight, Clock3, MapPin, Navigation, Phone } from "lucide-react";
+import { Clock3, MapPin, Navigation, Phone } from "lucide-react";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { Scheduler } from "@/components/Scheduler";
-import { FAQ } from "@/components/sections/FAQ";
 import { contact, hours } from "@/data/site";
-
-const mapEmbedSrc = `https://www.google.com/maps?q=${encodeURIComponent(
-  `${contact.addressLine1}, ${contact.addressLine2}`,
-)}&output=embed`;
 
 export function Visit() {
   return (
@@ -24,28 +19,22 @@ export function Visit() {
             Book your visit in about a minute.
           </h2>
           <p className="max-w-2xl text-balance text-base leading-7 text-white/70 md:text-lg md:leading-8">
-            Pick what you need and a time that works, and the front desk will
-            call or text to confirm. Prefer a human? Call, or just stop by.
-            The office is an easy drive from Sacramento, Roseville, North
-            Highlands, and Citrus Heights.
+            Pick what you need and a time of day that works. The front desk will
+            call or text to confirm a specific appointment. Prefer a human?
+            Call, or just stop by.
           </p>
         </ScrollReveal>
 
-        <div className="mt-12 grid gap-10 md:mt-16 lg:grid-cols-[0.9fr_1.1fr] lg:items-start lg:gap-12">
-          {/* Scheduler — the conversion moment, white card on the dark band */}
+        <div className="mt-12 grid gap-10 md:mt-16 lg:grid-cols-[0.85fr_1.15fr] lg:items-start lg:gap-12">
           <ScrollReveal
-            delay={60}
-            variant="slide-left"
+            delay={40}
+            variant="fade"
             className="min-w-0 lg:order-2"
           >
             <Scheduler />
           </ScrollReveal>
 
-          {/* Hours, address, phone, and a real map */}
-          <ScrollReveal
-            variant="slide-right"
-            className="flex min-w-0 flex-col gap-9 lg:order-1"
-          >
+          <div className="flex min-w-0 flex-col gap-9 lg:order-1">
             <div>
               <p className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.2em] text-white/60">
                 <Clock3 className="size-4 text-brand" />
@@ -64,83 +53,40 @@ export function Visit() {
               </ul>
             </div>
 
-            <div className="grid gap-8 sm:grid-cols-2">
-              <div>
-                <p className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.2em] text-white/60">
-                  <MapPin className="size-4 text-brand" />
-                  Address
-                </p>
-                <address className="mt-3 not-italic text-sm leading-6 text-white/80">
-                  {contact.addressLine1}
-                  <br />
-                  {contact.addressLine2}
-                </address>
-                <a
-                  href={contact.mapsHref}
-                  className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-brand transition hover:text-white"
-                >
-                  <Navigation className="size-4" />
-                  Open in Maps
-                  <ArrowRight className="size-3.5" />
-                </a>
-              </div>
-
-              <div>
-                <p className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.2em] text-white/60">
-                  <Phone className="size-4 text-brand" />
-                  Call
-                </p>
-                <a
-                  href={contact.phoneHref}
-                  className="mt-3 inline-block font-display text-xl font-medium text-white transition hover:text-brand"
-                >
-                  {contact.phoneDisplay}
-                </a>
-                <p className="mt-1 text-sm leading-6 text-white/65">
-                  Answered during office hours
-                </p>
-              </div>
-            </div>
-
-            <div className="map-frame h-[360px] lg:h-[420px]">
-              <iframe
-                src={mapEmbedSrc}
-                title={`Map to ${contact.practiceName}, ${contact.addressLine1}, ${contact.addressLine2}`}
-                className="h-[360px] w-full lg:h-full"
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              />
-            </div>
-          </ScrollReveal>
-        </div>
-
-        {/* FAQ — nested in the section, lifted onto a light surface */}
-        <ScrollReveal delay={80} variant="fade" className="mt-14 md:mt-20">
-          <div className="surface-card p-6 md:p-10">
-            <div className="grid gap-10 lg:grid-cols-[0.65fr_1.35fr] lg:gap-16">
-              <div className="flex flex-col">
-                <span className="eyebrow accent-brand">Good to know</span>
-                <h3 className="mt-5 font-display text-balance text-[clamp(1.6rem,3vw,2.2rem)] font-medium leading-tight text-ink">
-                  Common questions, answered.
-                </h3>
-                <p className="mt-4 max-w-md text-sm leading-7 text-ink-soft">
-                  The things new patients actually ask. For anything else, call
-                  the front desk.
-                </p>
-                <div className="mt-8 lg:mt-auto lg:pt-8">
-                  <a
-                    href={contact.phoneHref}
-                    className="inline-flex min-h-11 items-center gap-2 rounded-full border border-line bg-white px-4 py-2.5 text-sm font-semibold text-brand-deep transition hover:border-brand/60"
-                  >
-                    <Phone className="size-4" />
-                    Front desk: {contact.phoneDisplay}
-                  </a>
-                </div>
-              </div>
-              <FAQ />
+            <div className="place-card p-6">
+              <p className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.2em] text-white/60">
+                <MapPin className="size-4 text-brand" />
+                The office
+              </p>
+              <address className="mt-4 not-italic font-display text-xl font-medium leading-snug text-white">
+                {contact.addressLine1}
+                <br />
+                {contact.addressLine2}
+              </address>
+              <p className="mt-3 max-w-sm text-sm leading-6 text-white/65">
+                An easy drive from Sacramento, Roseville, North Highlands, and
+                Citrus Heights.
+              </p>
+              <a
+                href={contact.phoneHref}
+                className="mt-5 inline-block font-display text-lg font-medium text-white transition hover:text-brand"
+              >
+                <Phone className="mr-2 inline size-4" />
+                {contact.phoneDisplay}
+              </a>
+              <p className="mt-1 text-sm text-white/55">
+                Answered during office hours
+              </p>
+              <a
+                href={contact.mapsHref}
+                className="btn-text-light mt-5"
+              >
+                <Navigation className="size-4" />
+                Open in Maps
+              </a>
             </div>
           </div>
-        </ScrollReveal>
+        </div>
       </div>
     </section>
   );

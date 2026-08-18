@@ -6,8 +6,10 @@ patients to book.
 
 ## Highlights
 
-- **Multi-step scheduler** — a mobile-first wizard (visit type → date & time →
-  details) that generates real time slots from the practice's office hours.
+- **Multi-step scheduler** — a mobile-first wizard (visit type → day & time of
+  day → details). Windows are morning / afternoon / evening inside office hours,
+  not 30-minute slots that look like live inventory. The front desk confirms a
+  specific time.
 - **Native lead capture** — submissions flow through a Server Action with
   validation and a spam honeypot; a delivery seam is ready for email/CRM.
 - **Source-backed social proof** — patient review excerpts published by the
@@ -15,7 +17,7 @@ patients to book.
 - **Dedicated emergency path** — a distinct "in pain? call now" band for
   high-intent visitors.
 - **New-patient info** — coverage questions, payment options, what to bring,
-  and first-visit expectations, all in one place.
+  first-visit expectations, and the FAQ, all in one chapter.
 - **SEO & a11y** — `Dentist` + `FAQPage` JSON-LD (XSS-sanitized), `sitemap.ts`,
   `robots.ts`, canonical URL, reduced-motion support, and keyboard-accessible
   controls.
@@ -45,10 +47,10 @@ src/
 │   └── globals.css        # design system (tokens, components, motion)
 ├── components/
 │   ├── Scheduler.tsx     # multi-step scheduling wizard ('use client')
-│   ├── Header.tsx, MobileCTA.tsx, Marquee.tsx, SectionLabel.tsx, ScrollReveal.tsx
+│   ├── Header.tsx, MobileCTA.tsx, SectionLabel.tsx, ScrollReveal.tsx
 │   └── sections/         # page order: Hero, TrustBand, Emergency, Intro,
 │                          # Services, Technology, Doctors, Reviews,
-│                          # NewPatients, Visit (+ nested FAQ), Footer
+│                          # NewPatients (+ FAQ), Visit, Footer
 ├── data/site.ts          # single source of truth: copy, hours, services,
 │                          # visit types, reviews, schema.org data
 └── lib/appointment.ts    # shared form state types (kept out of the server file)
@@ -90,7 +92,7 @@ A few production values still need configuration or final confirmation:
 | --- | --- | --- |
 | Booking URL | `contact.bookingHref` | Currently `#visit` (the on-site scheduler). Swap in the practice-specific Dentrix Ascend deep link when provided — the bare portal domain doesn't identify the practice. |
 | Saturday availability | `officeHours` | The contact page says closed; confirm whether advance appointments are offered. |
-| Reviews links | `socialProof` | The hero chip scrolls to `#reviews`; "see more" links point to the practice's Google Maps listing. Swap in the practice's canonical Google Business review link if they have one. |
+| Reviews links | `socialProof` | "More reviews" points to the practice's Google Maps listing. Swap in the practice's canonical Google Business review link if they have one. |
 
 ### Scheduler backend
 
@@ -127,9 +129,20 @@ Vercel project, so a successful production deployment does not replace the
 current public website. Attach and verify the custom domain, DNS, and HTTPS only
 after the booking link and lead delivery are ready.
 
+## Design
+
+Visual system lives in `src/app/globals.css`. Do not invent a second palette.
+
+- **Brand as atmosphere, navy as action.** Mid periwinkle (`--brand` `#6a8ece`) is for tints and dark-band accents. It fails WCAG AA on white — body type and pills use `--brand-deep` / `--brand-ink`. Ember is reserved for the emergency path.
+- **One night band.** Only the Visit / scheduler chapter uses `--night`. Technology stays on the light canvas.
+- **Primary Book pills** live in the header, hero, Visit scheduler, footer, and mobile CTA bar. Other sections use text links.
+- **Scheduler honesty.** Patients pick a day and a morning / afternoon / evening window. Copy says the front desk will confirm a specific time.
+
 ## Assets still needed
 
-The hero/care images are abstract placeholders. For maximum trust, replace them
-with real photography (team, office, patients) and add a before/after smile
-gallery — the doctor portraits are already real and self-hosted under
-`public/images/`.
+Hero, waiting-lounge, and still-life frames are atmospheric stand-ins — they are
+**not** photographs of 4320 Elverta Rd. Alt text says so. For maximum trust,
+replace them with a practice shoot (operatory, waiting room, team, The Wand /
+CBCT) and keep the doctor portraits, which are already the practice's own photos
+under `public/images/`. The header mark is a knockout of the practice logo
+(navy + periwinkle on a tint tile); the footer uses the full lockup on dark.

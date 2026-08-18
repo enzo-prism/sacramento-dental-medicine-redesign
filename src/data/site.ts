@@ -40,15 +40,18 @@ export const contact = {
 };
 
 // Imagery --------------------------------------------------------------------
-// All assets are self-hosted under /public/images to remove the fragile
-// dependency on the old site's CDN (which was hot-linked before).
+// All assets are self-hosted under /public/images.
+// Hero, waiting, and still-life frames are atmospheric stand-ins — they are
+// not photographs of the Elverta Road office. Replace with a practice shoot
+// when one exists. Doctor portraits are the practice's own photos, matted.
 export const imagery = {
-  logo: "/images/logo.png",
-  logoFull: "/images/logo-full.png",
-  hero: "/images/abstract-hero.webp",
-  care: "/images/abstract-care.webp",
-  narodovich: "/images/dr-narodovich.jpg",
-  sheppard: "/images/dr-sheppard.webp",
+  logo: "/images/logo-mark.png",
+  logoFull: "/images/logo-full-on-dark.png",
+  hero: "/images/hero.webp",
+  care: "/images/waiting.webp",
+  stillLife: "/images/still-life.webp",
+  narodovich: "/images/dr-narodovich.webp",
+  sheppard: "/images/dr-sheppard-portrait.webp",
 };
 
 // Primary navigation ---------------------------------------------------------
@@ -58,25 +61,6 @@ export const navItems = [
   { label: "Doctors", href: "#doctors" },
   { label: "Reviews", href: "#reviews" },
   { label: "Visit", href: "#visit" },
-];
-
-// Marquee / trust strip ------------------------------------------------------
-export const trustStrip = [
-  "Accepting new patients",
-  "Same-day emergency care when possible",
-  "The Wand STA anesthesia",
-  "CBCT 3D imaging",
-  "Soft-tissue laser",
-  "Open until 7 PM Wed & Thu",
-  "Family · Cosmetic · Restorative",
-  "Serving Greater Sacramento",
-];
-
-// Compact, single-line trust signals shown under the hero CTAs ----------------
-export const heroTrust = [
-  "Accepting new patients",
-  "Same-day emergency care when possible",
-  "Open until 7 PM Wed & Thu",
 ];
 
 // Emergency pathway (high-intent, time-sensitive) ----------------------------
@@ -221,15 +205,6 @@ export const technology: {
   },
 ];
 
-export const technologyTags = [
-  "CBCT 3D imaging",
-  "The Wand STA",
-  "Digital X-rays",
-  "Soft tissue laser",
-  "Oral cancer screening",
-  "Modern sterilization",
-  "Perio Protect",
-];
 
 // Doctors --------------------------------------------------------------------
 export type Doctor = {
@@ -238,7 +213,7 @@ export type Doctor = {
   focus: string;
   image: string;
   description: string;
-  credentials: string[];
+  highlights: string;
 };
 
 export const doctors: Doctor[] = [
@@ -249,7 +224,7 @@ export const doctors: Doctor[] = [
     image: imagery.narodovich,
     description:
       "Patients call him Dr. Mike. He's who people ask for after years away from the chair: modern technique, steady hands, and zero judgment about how long it's been.",
-    credentials: ["Doctor of Dental Medicine", "Gentle by default", "Anxious-patient care"],
+    highlights: "Gentle by default · Anxious-patient care",
   },
   {
     name: "Dr. Lucas L. Sheppard",
@@ -258,7 +233,7 @@ export const doctors: Doctor[] = [
     image: imagery.sheppard,
     description:
       "A root canal specialist and U.S. Air Force veteran, Dr. Sheppard takes on the complex cases. He diagnoses carefully and explains each step, which is how the words \"root canal\" stop being scary.",
-    credentials: ["Endodontic specialist", "U.S. Air Force veteran", "Precise diagnostics"],
+    highlights: "Endodontic specialist · U.S. Air Force veteran",
   },
 ];
 
@@ -304,8 +279,8 @@ export const hours: { day: string; time: string }[] = [
 
 // Scheduling -----------------------------------------------------------------
 // Machine-readable hours (minutes from midnight) keyed by JS weekday (0=Sun).
-// The scheduler generates real, bookable-looking time slots from these so the
-// UX is honest about availability even before a booking backend is wired up.
+// The scheduler offers morning / afternoon / evening windows from these hours
+// rather than 30-minute slots that look like live inventory.
 export const officeHours: Record<number, { open: number; close: number } | null> = {
   0: null, // Sunday — closed
   1: { open: 9 * 60, close: 18 * 60 }, // Mon 9:00–6:00
@@ -316,8 +291,8 @@ export const officeHours: Record<number, { open: number; close: number } | null>
   6: null, // Saturday — closed
 };
 
-// Minutes between selectable appointment start times.
-export const slotIntervalMinutes = 30;
+// Scheduler offers morning / afternoon / evening windows inside office hours
+// rather than 30-minute slots that look like live inventory.
 
 export type VisitType = {
   id: string;
@@ -434,7 +409,7 @@ export const structuredData = {
   "@context": "https://schema.org",
   "@type": "Dentist",
   name: contact.practiceName,
-  image: imagery.hero,
+  image: `${siteUrl}${imagery.hero}`,
   url: "https://sacramentodentalmedicine.com",
   telephone: "+1-916-727-6453",
   address: {

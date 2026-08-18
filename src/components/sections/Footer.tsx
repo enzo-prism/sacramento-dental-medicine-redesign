@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ArrowRight, CalendarDays, MapPin, Phone } from "lucide-react";
+import { CalendarDays, MapPin, Phone } from "lucide-react";
 import { contact, hours, imagery, navItems } from "@/data/site";
 
 export function Footer() {
@@ -18,7 +18,6 @@ export function Footer() {
                 alt="Sacramento Dental Medicine"
                 width={278}
                 height={209}
-                unoptimized
                 className="h-auto w-[132px]"
               />
             </a>
@@ -67,11 +66,10 @@ export function Footer() {
             </address>
             <a
               href={contact.mapsHref}
-              className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-brand transition hover:text-white"
+              className="mt-3 inline-flex items-center gap-1.5 py-2 text-sm font-semibold text-brand transition hover:text-white"
             >
               <MapPin className="size-4" />
               Get directions
-              <ArrowRight className="size-3.5" />
             </a>
           </div>
 
@@ -95,22 +93,8 @@ export function Footer() {
             © {new Date().getFullYear()} {contact.practiceName}. All rights
             reserved.
           </p>
-          <p className="flex flex-wrap items-center gap-x-4 gap-y-1">
-            <span>Serving {contact.serviceArea.slice(0, 4).join(" · ")}</span>
-            <span className="hidden sm:inline">·</span>
-            <span>Made for Antelope, CA</span>
-          </p>
+          <p>Serving {contact.serviceArea.slice(0, 4).join(" · ")}</p>
         </div>
-      </div>
-
-      {/* Watermark — quiet display-type signature at the very bottom */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none relative select-none"
-      >
-        <p className="translate-y-[18%] whitespace-nowrap text-center font-display text-[11vw] font-semibold leading-[0.82] tracking-[-0.04em] text-white/[0.04]">
-          Sacramento Dental
-        </p>
       </div>
     </footer>
   );

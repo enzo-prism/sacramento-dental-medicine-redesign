@@ -1,37 +1,30 @@
 import Image from "next/image";
-import { CalendarDays, Check, MapPin, MessageCircle, Phone } from "lucide-react";
+import { CalendarDays, MapPin, Phone } from "lucide-react";
 import { ScrollReveal } from "@/components/ScrollReveal";
-import { contact, heroTrust, imagery, socialProof } from "@/data/site";
+import { contact, imagery } from "@/data/site";
 
 export function Hero() {
   return (
     <section id="top" className="relative overflow-hidden pt-32 lg:pt-40">
-      {/* Mobile-only: the abstract art as a quiet backdrop band fading into canvas */}
-      <div aria-hidden="true" className="absolute inset-x-0 top-0 h-80 lg:hidden">
+      <div aria-hidden="true" className="absolute inset-x-0 top-0 h-72 lg:hidden">
         <Image
           src={imagery.hero}
           alt=""
           fill
           sizes="100vw"
-          className="object-cover object-[70%_center] opacity-25"
+          className="object-cover object-center opacity-30"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-canvas/30 via-canvas/75 to-canvas" />
+        <div className="absolute inset-0 bg-gradient-to-b from-canvas/20 via-canvas/80 to-canvas" />
       </div>
 
-      <div className="container-x relative grid items-center gap-12 pb-16 sm:pb-20 lg:grid-cols-[1.05fr_0.85fr] lg:gap-16 lg:pb-24">
+      <div className="container-x relative grid items-center gap-12 pb-16 sm:pb-20 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14 lg:pb-24">
         <ScrollReveal className="max-w-3xl">
-          <a
-            href={socialProof.reviewsUrl}
-            className="inline-flex items-center gap-2.5 rounded-full border border-line bg-white/80 px-3.5 py-1.5 text-xs font-semibold tracking-wide text-ink-soft backdrop-blur-md transition hover:border-brand-deep hover:text-brand-deep"
-          >
+          <p className="inline-flex items-center gap-2 text-sm font-medium text-ink-faint">
             <MapPin className="size-4 text-brand-deep" />
-            <span>Antelope, CA</span>
-            <span className="h-3 w-px bg-line" aria-hidden="true" />
-            <MessageCircle className="size-3.5 text-brand-deep" />
-            <span>{socialProof.label}</span>
-          </a>
+            Antelope, CA
+          </p>
 
-          <h1 className="mt-6 font-display text-[clamp(1.85rem,8vw,3.4rem)] font-semibold leading-[1.02] tracking-[-0.03em] text-ink text-balance lg:text-[clamp(2.6rem,4.4vw,3.6rem)]">
+          <h1 className="mt-5 font-display text-[clamp(1.85rem,8vw,3.4rem)] font-semibold leading-[1.02] tracking-[-0.03em] text-ink text-balance lg:text-[clamp(2.6rem,4.4vw,3.6rem)]">
             A dentist visit
             <span className="block text-brand-deep">you won&apos;t dread.</span>
           </h1>
@@ -55,38 +48,25 @@ export function Hero() {
               {contact.phoneDisplay}
             </a>
           </div>
-
-          <ul className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2.5">
-            {heroTrust.map((item) => (
-              <li
-                key={item}
-                className="inline-flex items-center gap-2 text-sm font-medium text-ink-soft"
-              >
-                <Check className="size-4 shrink-0 text-brand-deep" />
-                {item}
-              </li>
-            ))}
-          </ul>
         </ScrollReveal>
 
-        {/* Desktop: the art as a soft rounded panel — white gallery, morning light */}
         <ScrollReveal
-          variant="slide-left"
-          delay={140}
+          variant="fade"
+          delay={80}
           className="relative hidden lg:block"
         >
           <div
             aria-hidden="true"
-            className="absolute -inset-6 rounded-[32px] bg-brand-tint/40 blur-2xl"
+            className="absolute -inset-6 rounded-[32px] bg-brand-tint/50 blur-2xl"
           />
-          <div className="image-panel image-frame relative aspect-[4/5] max-h-[560px] w-full">
+          <div className="image-panel image-frame relative aspect-[4/3] w-full">
             <Image
               src={imagery.hero}
-              alt="Soft abstract art in the practice's periwinkle blue, evoking calm, light-filled care"
+              alt="Sunlit contemporary treatment room — atmospheric photography, not the Elverta Road office"
               fill
               preload
-              sizes="(min-width: 1024px) 40vw, 100vw"
-              className="object-cover object-[62%_center]"
+              sizes="(min-width: 1024px) 46vw, 100vw"
+              className="object-cover object-center"
             />
           </div>
         </ScrollReveal>

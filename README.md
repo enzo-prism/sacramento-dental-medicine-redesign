@@ -7,10 +7,11 @@ patients to book.
 ## Highlights
 
 - **Multi-step scheduler** — a mobile-first wizard (visit type → day & time of
-  day → details) with auto-advance, large tap targets, and morning / afternoon /
-  evening windows. The front desk confirms a specific time.
-- **Native lead capture** — submissions flow through a Server Action with
-  validation and a spam honeypot; a delivery seam is ready for email/CRM.
+  day → how we can reach you) with auto-advance, large tap targets, and morning /
+  afternoon / evening windows. The front desk confirms a specific time.
+- **Native lead capture** — a Server Action validates the request (name, plus a
+  phone number or an email — at least one) and POSTs JSON to Formspree. Optional
+  `LEAD_WEBHOOK_URL` is a second hop.
 - **Source-backed social proof** — patient review excerpts published by the
   practice, without displaying an unverified rating.
 - **Dedicated emergency path** — a distinct "in pain? call now" band for
@@ -52,7 +53,7 @@ src/
 │                          # NewPatients (+ FAQ), Visit, Footer
 ├── data/site.ts          # single source of truth: copy, hours, services,
 │                          # visit types, reviews, schema.org data
-└── lib/appointment.ts    # shared form state types (kept out of the server file)
+└── lib/appointment.ts    # form state types + phone/email validation helpers
 ```
 
 All site copy and configuration live in **`src/data/site.ts`** — edit content
@@ -98,19 +99,31 @@ A few production values still need configuration or final confirmation:
 The scheduler posts to the `requestAppointment` Server Action
 (`src/app/actions.ts`), which validates the request and POSTs JSON to
 **Formspree** (`https://formspree.io/f/xvkpdvyz`, overridable with
-`FORMSPREE_ENDPOINT`). Confirm in the Formspree dashboard that email is not
-marked required — the site requires a phone number or an email, not both.
+`FORMSPREE_ENDPOINT`). Shared validation lives in `src/lib/appointment.ts`.
 
-Optional: set **`LEAD_WEBHOOK_URL`** for a second delivery hop after Formspree
-succeeds. Do not publicly launch the form until a controlled test submission
-is received successfully by the front desk.
+Required fields:
+
+- **Name**
+- **Phone or email** — at least one usable contact method. Filling both is
+  fine; leaving both empty is not. Incomplete extras still error (short phone,
+  malformed email).
+
+Confirm in the Formspree dashboard that **email is not marked required**. Empty
+phone and email are omitted from the JSON payload so phone-only requests do not
+400. Optional: set **`LEAD_WEBHOOK_URL`** for a second delivery hop after
+Formspree succeeds.
+
+Do not publicly launch the form until a controlled test submission is received
+successfully by the front desk. A successful on-site “Request sent” only means
+Formspree accepted the POST — not that a visit is booked.
 
 ## Local development
 
 ```bash
-npm install
+npm ci
 npm run dev      # http://localhost:3000
 npm run lint
+npm test         # phone/email contact validation
 npm run build
 npm run start    # serve the production build
 ```
@@ -136,7 +149,7 @@ Visual system lives in `src/app/globals.css`. Do not invent a second palette.
 - **Brand as atmosphere, navy as action.** Mid periwinkle (`--brand` `#6a8ece`) is for tints and dark-band accents. It fails WCAG AA on white — body type and pills use `--brand-deep` / `--brand-ink`. Ember is reserved for the emergency path.
 - **One night band.** Only the Visit / scheduler chapter uses `--night`. Technology stays on the light canvas.
 - **Primary Book pills** live in the header, hero, Visit scheduler, footer, and mobile CTA bar. Other sections use text links.
-- **Scheduler honesty.** Patients pick a day and a morning / afternoon / evening window. Copy says the front desk will confirm a specific time.
+- **Scheduler honesty.** Patients pick a day and a morning / afternoon / evening window. Copy says the front desk will reach out to confirm a specific time.
 
 ## Assets still needed
 

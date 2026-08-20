@@ -109,8 +109,8 @@ def main() -> None:
     og.save(APP / "twitter-image.jpg", "JPEG", quality=90, optimize=True, progressive=True)
 
     alt = "Sacramento Dental Medicine — family and cosmetic dentistry in Antelope, CA"
-    (APP / "opengraph-image.alt.txt").write_text(alt + "\n")
-    (APP / "twitter-image.alt.txt").write_text(alt + "\n")
+    (APP / "opengraph-image.alt.txt").write_text(alt)
+    (APP / "twitter-image.alt.txt").write_text(alt)
 
     print("wrote", apple, apple.stat().st_size)
     print("wrote", APP / "icon.png", (APP / "icon.png").stat().st_size)

@@ -4,7 +4,7 @@ import { contact, hours, imagery, navItems } from "@/data/site";
 
 export function Footer() {
   return (
-    <footer className="relative overflow-hidden border-t border-white/10 bg-night text-white">
+    <footer className="relative overflow-hidden border-t border-white/10 bg-night pb-24 text-white lg:pb-0">
       <div className="container-x relative py-16 md:py-20">
         <div className="grid gap-12 md:grid-cols-[1.2fr_0.8fr_0.8fr_1fr]">
           <div>
@@ -66,7 +66,7 @@ export function Footer() {
             </address>
             <a
               href={contact.mapsHref}
-              className="mt-3 inline-flex items-center gap-1.5 py-2 text-sm font-semibold text-brand transition hover:text-white"
+              className="mt-3 inline-flex items-center gap-1.5 py-2 text-sm font-semibold text-[#d5e1f4] transition hover:text-white"
             >
               <MapPin className="size-4" />
               Get directions

@@ -30,13 +30,13 @@ npm run lint
 npm run build
 ```
 
-Optional: `LEAD_WEBHOOK_URL` in `.env.local` / Vercel / Cloud Agent secrets. Until it is set, scheduler submissions are only logged server-side.
+Optional: `LEAD_WEBHOOK_URL` in `.env.local` / Vercel / Cloud Agent secrets is a second hop after Formspree. Appointment requests deliver through Formspree (`formspreeEndpoint` in `src/data/site.ts`).
 
 ## Cursor Cloud specific instructions
 
 - Install is `npm ci`. Dev server is already started in the `dev` terminal on port 3000.
 - After UI or content changes, run `npm run lint` and `npm run build`. Open http://localhost:3000 and click through Home, the scheduler (`#visit`), Emergency, Doctors, and New Patients (FAQ lives there).
-- Do **not** treat a successful form submit as practice delivery unless `LEAD_WEBHOOK_URL` is configured and the user asked for a controlled test.
+- Do **not** treat a successful form submit as practice delivery unless Formspree (or `LEAD_WEBHOOK_URL`) accepted the request and the user asked for a controlled test.
 - Do not attach or cut over `sacramentodentalmedicine.com`. Preview URL only until the practice signs off.
 - Positioning: grow new-patient volume via search, phone, and simple lead capture. Keep booking friction low.
 - Design: tokens in `src/app/globals.css` only. Periwinkle is atmosphere; navy is action. Ember is emergencies. Keep a single night band (Visit). Primary Book pills: header, hero, Visit, footer, mobile bar.

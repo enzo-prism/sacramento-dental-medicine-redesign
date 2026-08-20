@@ -5,20 +5,29 @@ import { CalendarDays, Phone } from "lucide-react";
 import { contact } from "@/data/site";
 
 export function MobileCTA() {
-  const [visitInView, setVisitInView] = useState(false);
+  const [hidden, setHidden] = useState(false);
 
   useEffect(() => {
     const visit = document.querySelector("#visit");
-    if (!visit) return;
+    const footer = document.querySelector("footer");
+    const nodes = [visit, footer].filter(Boolean) as Element[];
+    if (nodes.length === 0) return;
+
+    const seen = new Map<Element, boolean>();
     const observer = new IntersectionObserver(
-      ([entry]) => setVisitInView(entry.isIntersecting),
-      { threshold: 0.15 }
+      (entries) => {
+        for (const entry of entries) {
+          seen.set(entry.target, entry.isIntersecting);
+        }
+        setHidden([...seen.values()].some(Boolean));
+      },
+      { threshold: 0.12 },
     );
-    observer.observe(visit);
+    for (const node of nodes) observer.observe(node);
     return () => observer.disconnect();
   }, []);
 
-  if (visitInView) return null;
+  if (hidden) return null;
 
   return (
     <nav aria-label="Quick actions" className="mobile-cta lg:hidden">

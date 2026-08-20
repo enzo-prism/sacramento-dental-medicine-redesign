@@ -3,19 +3,22 @@ import {
   Boxes,
   CalendarClock,
   Droplets,
+  Ellipsis,
   HeartPulse,
   type LucideIcon,
-  MessageCircle,
   Microscope,
   ShieldCheck,
-  Siren,
   Smile,
   SmilePlus,
   Sparkles,
   Stethoscope,
   Syringe,
+  UserPlus,
   Waves,
 } from "lucide-react";
+
+// Public Formspree form — appointment requests POST here from the Server Action.
+export const formspreeEndpoint = "https://formspree.io/f/xvkpdvyz";
 
 // Canonical site origin (used by metadata, sitemap, and robots) --------------
 export const siteUrl = "https://sacramentodentalmedicine.com";
@@ -307,7 +310,7 @@ export const visitTypes: VisitType[] = [
     id: "new-patient",
     label: "New patient exam",
     blurb: "Exam, X-rays & a gentle cleaning",
-    icon: Stethoscope,
+    icon: UserPlus,
   },
   {
     id: "checkup",
@@ -325,14 +328,14 @@ export const visitTypes: VisitType[] = [
     id: "emergency",
     label: "Pain or emergency",
     blurb: "Call for the earliest available visit",
-    icon: Siren,
+    icon: HeartPulse,
     urgent: true,
   },
   {
     id: "other",
     label: "Something else",
     blurb: "Tell us what you need",
-    icon: MessageCircle,
+    icon: Ellipsis,
   },
 ];
 
@@ -370,7 +373,7 @@ export const newPatient = {
 export const faqs: { q: string; a: string }[] = [
   {
     q: "Are you accepting new patients?",
-    a: "Yes. Sacramento Dental Medicine is welcoming new patients of all ages across Antelope and Greater Sacramento. Book online or call the office, and we'll find a first appointment that fits your schedule.",
+    a: "Yes. Sacramento Dental Medicine is welcoming new patients of all ages across Antelope and Greater Sacramento. Request a visit online or call the office, and we'll find a first appointment that fits your schedule.",
   },
   {
     q: "What should I expect at my first visit?",

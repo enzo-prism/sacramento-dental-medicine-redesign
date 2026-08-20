@@ -7,9 +7,8 @@ patients to book.
 ## Highlights
 
 - **Multi-step scheduler** — a mobile-first wizard (visit type → day & time of
-  day → details). Windows are morning / afternoon / evening inside office hours,
-  not 30-minute slots that look like live inventory. The front desk confirms a
-  specific time.
+  day → details) with auto-advance, large tap targets, and morning / afternoon /
+  evening windows. The front desk confirms a specific time.
 - **Native lead capture** — submissions flow through a Server Action with
   validation and a spam honeypot; a delivery seam is ready for email/CRM.
 - **Source-backed social proof** — patient review excerpts published by the
@@ -97,13 +96,14 @@ A few production values still need configuration or final confirmation:
 ### Scheduler backend
 
 The scheduler posts to the `requestAppointment` Server Action
-(`src/app/actions.ts`), which validates the request and then calls a delivery
-seam. To deliver leads in production, set **`LEAD_WEBHOOK_URL`** (Vercel →
-Project → Environment Variables) to a webhook that receives the JSON payload, or
-swap in an email send (e.g. Resend). Until configured, submissions are only
-logged server-side and are **not** reliably delivered to the practice. See
-[`.env.example`](.env.example) for the variable. Do not publicly launch the form
-until a controlled test submission is received successfully by the front desk.
+(`src/app/actions.ts`), which validates the request and POSTs JSON to
+**Formspree** (`https://formspree.io/f/xvkpdvyz`, overridable with
+`FORMSPREE_ENDPOINT`). Confirm in the Formspree dashboard that email is not
+marked required — the site treats phone as required and email as optional.
+
+Optional: set **`LEAD_WEBHOOK_URL`** for a second delivery hop after Formspree
+succeeds. Do not publicly launch the form until a controlled test submission
+is received successfully by the front desk.
 
 ## Local development
 

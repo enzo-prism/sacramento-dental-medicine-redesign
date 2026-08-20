@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { CalendarDays, MapPin, Phone } from "lucide-react";
+import { CalendarDays, Phone } from "lucide-react";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { contact, imagery } from "@/data/site";
 
@@ -19,9 +19,8 @@ export function Hero() {
 
       <div className="container-x relative grid items-center gap-12 pb-16 sm:pb-20 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14 lg:pb-24">
         <ScrollReveal className="max-w-3xl">
-          <p className="inline-flex items-center gap-2 text-sm font-medium text-ink-faint">
-            <MapPin className="size-4 text-brand-deep" />
-            Antelope, CA
+          <p className="text-sm font-medium text-ink-faint">
+            Sacramento Dental Medicine · Antelope, CA
           </p>
 
           <h1 className="mt-5 font-display text-[clamp(1.85rem,8vw,3.4rem)] font-semibold leading-[1.02] tracking-[-0.03em] text-ink text-balance lg:text-[clamp(2.6rem,4.4vw,3.6rem)]">

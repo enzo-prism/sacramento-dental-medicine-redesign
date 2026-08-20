@@ -32,7 +32,7 @@ export function Reviews() {
                   {featured.name}
                 </p>
                 <p className="mt-0.5 text-xs text-ink-faint">
-                  Published on {featured.source}
+                  From {featured.source}
                 </p>
               </figcaption>
             </figure>
@@ -47,7 +47,7 @@ export function Reviews() {
                 <figcaption className="mt-4">
                   <p className="text-sm font-medium text-ink">{review.name}</p>
                   <p className="mt-0.5 text-xs text-ink-faint">
-                    Published on {review.source}
+                    From {review.source}
                   </p>
                 </figcaption>
               </figure>

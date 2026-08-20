@@ -3,7 +3,6 @@
 import { useActionState, useEffect, useRef, useState } from "react";
 import {
   ArrowLeft,
-  ArrowRight,
   CalendarDays,
   Check,
   CircleCheck,
@@ -30,8 +29,6 @@ const MONTHS = [
   "Jan", "Feb", "Mar", "Apr", "May", "Jun",
   "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
 ];
-
-const STEPS = ["Visit", "Date & time", "Your details"];
 
 type DayOption = {
   iso: string;
@@ -61,7 +58,14 @@ function formatTime(min: number) {
   return `${h12}:${pad(m)} ${ampm}`;
 }
 
-// Build the next `count` open days (uses Date — runs client-side only).
+function formatPhone(raw: string) {
+  const d = raw.replace(/\D/g, "").slice(0, 10);
+  if (d.length === 0) return "";
+  if (d.length < 4) return d;
+  if (d.length < 7) return `(${d.slice(0, 3)}) ${d.slice(3)}`;
+  return `(${d.slice(0, 3)}) ${d.slice(3, 6)}-${d.slice(6)}`;
+}
+
 function buildDays(count: number): DayOption[] {
   const out: DayOption[] = [];
   const today = new Date();
@@ -121,6 +125,13 @@ function dayLabel(day: DayOption) {
 }
 
 export function Scheduler() {
+  const [formKey, setFormKey] = useState(0);
+  return (
+    <SchedulerForm key={formKey} onReset={() => setFormKey((k) => k + 1)} />
+  );
+}
+
+function SchedulerForm({ onReset }: { onReset: () => void }) {
   const [state, formAction, pending] = useActionState(
     requestAppointment,
     initialAppointmentState,
@@ -139,13 +150,11 @@ export function Scheduler() {
   const headingRef = useRef<HTMLHeadingElement>(null);
   const firstRender = useRef(true);
 
-  // Date list depends on "today" — compute on the client to avoid SSR mismatch.
   useEffect(() => {
-    const frame = window.requestAnimationFrame(() => setDays(buildDays(10)));
+    const frame = window.requestAnimationFrame(() => setDays(buildDays(8)));
     return () => window.cancelAnimationFrame(frame);
   }, []);
 
-  // Move focus to the step heading when advancing (skip initial mount).
   useEffect(() => {
     if (firstRender.current) {
       firstRender.current = false;
@@ -174,20 +183,25 @@ export function Scheduler() {
     if (!earliestDay || !earliestPart) return;
     setDateIso(earliestDay.iso);
     setPartId(earliestPart.id);
+    setStep(2);
   }
 
-  // ---- Success ----
+  function pickPart(id: DayPart["id"]) {
+    setPartId(id);
+    setStep(2);
+  }
+
   if (state.ok) {
     return (
-      <div className="surface-card mx-auto flex max-w-2xl flex-col items-center gap-5 p-8 text-center md:p-12">
-        <span className="grid size-16 place-items-center rounded-full orb-brand">
-          <CircleCheck className="size-8" />
+      <div className="scheduler-card mx-auto flex max-w-xl flex-col items-center gap-5 p-7 text-center md:p-10">
+        <span className="grid size-14 place-items-center rounded-full orb-brand">
+          <CircleCheck className="size-7" strokeWidth={1.75} />
         </span>
-        <h3 className="font-display text-3xl font-medium text-ink">
-          Request received
+        <h3 className="font-display text-2xl font-medium text-ink md:text-3xl">
+          Request sent
         </h3>
         {selectedVisit && selectedDay && selectedPart ? (
-          <div className="surface-wash w-full max-w-md p-5 text-left">
+          <div className="surface-wash w-full p-4 text-left">
             <SummaryRow icon={selectedVisit.icon} label={selectedVisit.label} />
             <div className="my-3 hairline" />
             <SummaryRow icon={CalendarDays} label={dayLabel(selectedDay)} />
@@ -198,62 +212,58 @@ export function Scheduler() {
             />
           </div>
         ) : null}
-        <p className="max-w-md text-pretty text-sm leading-7 text-ink-soft md:text-base">
+        <p className="max-w-md text-pretty text-sm leading-7 text-ink-soft">
           {state.message}
         </p>
-        <a href={contact.phoneHref} className="btn btn-outline">
-          <Phone className="size-4" />
-          Questions? Call {contact.phoneDisplay}
-        </a>
+        <div className="flex w-full flex-col gap-2 sm:flex-row sm:justify-center">
+          <a href={contact.phoneHref} className="btn btn-outline">
+            <Phone className="size-4" />
+            Call {contact.phoneDisplay}
+          </a>
+          <button type="button" onClick={onReset} className="btn-text justify-center">
+            Request another visit
+          </button>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="surface-card mx-auto w-full min-w-0 max-w-3xl overflow-hidden">
-      {/* Progress header */}
-      <div className="border-b border-line bg-white px-5 py-4 md:px-7">
+    <div className="scheduler-card mx-auto w-full min-w-0 max-w-xl">
+      <div className="flex items-center gap-3 border-b border-line px-5 py-3.5 md:px-6">
+        {step > 0 ? (
+          <button
+            type="button"
+            onClick={() => setStep((s) => s - 1)}
+            className="grid size-11 shrink-0 place-items-center rounded-full border border-line text-ink transition hover:border-brand-deep hover:text-brand-deep"
+            aria-label="Back"
+          >
+            <ArrowLeft className="size-4" />
+          </button>
+        ) : (
+          <span className="size-11 shrink-0" aria-hidden />
+        )}
         <p className="sr-only" aria-live="polite">
-          Step {step + 1} of {STEPS.length}: {STEPS[step]}
+          Step {step + 1} of 3
         </p>
-        <ol className="flex items-center gap-2" aria-hidden="true">
-          {STEPS.map((label, i) => (
+        <ol className="flex flex-1 items-center justify-center gap-2" aria-hidden="true">
+          {[0, 1, 2].map((i) => (
             <li
-              key={label}
-              className={`flex items-center gap-2 ${
-                i < STEPS.length - 1 ? "flex-1" : ""
+              key={i}
+              className={`h-1.5 rounded-full transition-all ${
+                i === step
+                  ? "w-7 bg-brand-deep"
+                  : i < step
+                    ? "w-1.5 bg-brand-deep"
+                    : "w-1.5 bg-line"
               }`}
-            >
-              <span
-                className={`inline-flex h-8 shrink-0 items-center gap-1.5 rounded-full px-3 text-xs font-semibold transition ${
-                  i < step
-                    ? "bg-brand-tint text-brand-ink"
-                    : i === step
-                      ? "bg-brand-deep text-white"
-                      : "bg-brand-tint/50 text-brand-ink"
-                }`}
-              >
-                {i < step ? (
-                  <Check className="size-3.5" />
-                ) : (
-                  <span className="text-[11px] font-bold">{i + 1}</span>
-                )}
-                <span className="hidden sm:inline">{label}</span>
-              </span>
-              {i < STEPS.length - 1 ? (
-                <span
-                  className={`mx-1 h-px flex-1 ${
-                    i < step ? "bg-brand-deep" : "bg-line"
-                  }`}
-                />
-              ) : null}
-            </li>
+            />
           ))}
         </ol>
+        <span className="size-11 shrink-0" aria-hidden />
       </div>
 
-      <form action={formAction} className="p-5 md:p-7">
-        {/* Selections travel with the form for submission */}
+      <form action={formAction} className="relative">
         <input type="hidden" name="visitType" value={selectedVisit?.label ?? ""} />
         <input type="hidden" name="date" value={dateIso ?? ""} />
         <input
@@ -271,244 +281,242 @@ export function Scheduler() {
           }
         />
 
-        {/* STEP 0 — visit type */}
-        {step === 0 ? (
-          <div className="step-panel" key="step-visit">
-            <h3
-              ref={headingRef}
-              tabIndex={-1}
-              className="font-display text-2xl font-medium text-ink outline-none"
-            >
-              What brings you in?
-            </h3>
-            <p className="mt-1.5 text-sm text-ink-soft">
-              Pick the closest fit. You can add details later.
-            </p>
+        <div className="px-5 pb-5 pt-6 md:px-6 md:pb-6">
+          {step === 0 ? (
+            <div className="step-panel" key="step-visit">
+              <h3
+                ref={headingRef}
+                tabIndex={-1}
+                className="font-display text-[1.65rem] font-medium leading-tight text-ink outline-none md:text-2xl"
+              >
+                What do you need?
+              </h3>
+              <p className="mt-1.5 text-sm text-ink-soft">
+                One tap. You can add details at the end.
+              </p>
 
-            <div
-              role="group"
-              aria-label="Visit type"
-              className="mt-6 grid gap-3 sm:grid-cols-2"
-            >
-              {visitTypes.map((v) => {
-                const active = visitId === v.id;
-                return (
-                  <button
-                    key={v.id}
-                    type="button"
-                    aria-pressed={active}
-                    onClick={() => chooseVisit(v.id, v.urgent)}
-                    className={`option-tile flex items-center gap-4 rounded-2xl border p-4 text-left ${
-                      active
-                        ? "border-brand-deep bg-wash ring-1 ring-brand-deep"
-                        : "border-line bg-white hover:border-brand/60"
-                    }`}
-                  >
-                    <span
-                      className={`grid size-11 shrink-0 place-items-center rounded-xl ${
-                        v.urgent ? "orb-ember" : "orb-brand"
+              <div
+                role="group"
+                aria-label="Visit type"
+                className="mt-5 grid gap-2.5"
+              >
+                {visitTypes.map((v) => {
+                  const active = visitId === v.id;
+                  return (
+                    <button
+                      key={v.id}
+                      type="button"
+                      aria-pressed={active}
+                      onClick={() => chooseVisit(v.id, v.urgent)}
+                      className={`option-tile flex min-h-16 items-center gap-3.5 rounded-2xl border px-3.5 py-3.5 text-left sm:min-h-[4.25rem] ${
+                        active
+                          ? "border-brand-deep bg-wash ring-1 ring-brand-deep"
+                          : "border-line bg-white hover:border-brand/60"
                       }`}
                     >
-                      <v.icon className="size-5" />
-                    </span>
-                    <span className="min-w-0 flex-1">
-                      <span className="block font-display text-base font-medium text-ink">
-                        {v.label}
-                      </span>
-                      <span className="block text-xs leading-5 text-ink-soft">
-                        {v.blurb}
-                      </span>
-                    </span>
-                    {active ? (
-                      <Check className="size-5 shrink-0 text-brand-deep" />
-                    ) : null}
-                  </button>
-                );
-              })}
-            </div>
-
-            {selectedVisit?.urgent ? (
-              <div className="mt-4 flex flex-col gap-3 rounded-2xl border border-ember/30 bg-ember-tint p-4 sm:flex-row sm:items-center sm:justify-between">
-                <p className="text-sm font-medium text-ember-deep">
-                  Calling is the fastest way in. We&apos;ll do everything we
-                  can to see you today.
-                </p>
-                <div className="flex shrink-0 flex-wrap gap-2">
-                  <a
-                    href={contact.phoneHref}
-                    className="btn btn-ember text-sm"
-                  >
-                    <Phone className="size-4" />
-                    Call now
-                  </a>
-                  <button
-                    type="button"
-                    onClick={() => setStep(1)}
-                    className="inline-flex min-h-11 items-center gap-1 rounded-full border border-ember/40 px-4 py-2.5 text-sm font-semibold text-ember-deep transition hover:bg-white/60"
-                  >
-                    Schedule online
-                    <ArrowRight className="size-4" />
-                  </button>
-                </div>
-              </div>
-            ) : null}
-          </div>
-        ) : null}
-
-        {/* STEP 1 — date & time */}
-        {step === 1 ? (
-          <div className="step-panel" key="step-time">
-            <h3
-              ref={headingRef}
-              tabIndex={-1}
-              className="font-display text-2xl font-medium text-ink outline-none"
-            >
-              Choose a day & time
-            </h3>
-            <p className="mt-1.5 text-sm text-ink-soft">
-              Choose a window inside our office hours. We&apos;ll confirm a
-              specific time when we call.
-            </p>
-
-            {earliestDay && earliestPart ? (
-              <button
-                type="button"
-                onClick={pickEarliest}
-                className="mt-5 inline-flex min-h-11 items-center gap-2 rounded-full border border-brand/40 bg-wash px-4 py-2 text-sm font-semibold text-brand-ink transition hover:bg-wash-2"
-              >
-                <Zap className="size-4" />
-                Soonest to request: {earliestDay.relative || earliestDay.weekday}{" "}
-                {earliestPart.label.toLowerCase()}
-              </button>
-            ) : null}
-
-            {/* Date rail */}
-            <div className="mt-5">
-              <div className="no-scrollbar -mx-1 flex snap-x gap-2 overflow-x-auto px-1 pb-1">
-                {days.length === 0 ? (
-                  <p className="py-6 text-sm text-ink-faint">Loading days…</p>
-                ) : (
-                  days.map((d) => {
-                    const active = dateIso === d.iso;
-                    return (
-                      <button
-                        key={d.iso}
-                        type="button"
-                        onClick={() => {
-                          setDateIso(d.iso);
-                          setPartId(null);
-                        }}
-                        aria-pressed={active}
-                        className={`option-tile flex w-16 shrink-0 snap-start flex-col items-center gap-0.5 rounded-2xl border px-2 py-3 ${
-                          active
-                            ? "border-brand-deep bg-brand-deep text-white"
-                            : "border-line bg-white text-ink hover:border-brand/60"
+                      <span
+                        className={`grid size-12 shrink-0 place-items-center rounded-2xl ${
+                          v.urgent ? "orb-ember" : "orb-brand"
                         }`}
                       >
-                        <span
-                          className={`text-[10px] font-bold uppercase tracking-wide ${
-                            active ? "text-white/90" : "text-ink-faint"
+                        <v.icon className="size-5" strokeWidth={1.75} />
+                      </span>
+                      <span className="min-w-0 flex-1">
+                        <span className="block font-display text-base font-medium text-ink">
+                          {v.label}
+                        </span>
+                        <span className="block text-sm leading-5 text-ink-soft">
+                          {v.blurb}
+                        </span>
+                      </span>
+                      {active ? (
+                        <Check className="size-5 shrink-0 text-brand-deep" />
+                      ) : null}
+                    </button>
+                  );
+                })}
+              </div>
+
+              {selectedVisit?.urgent ? (
+                <div className="mt-4 flex flex-col gap-3 rounded-2xl border border-ember/30 bg-ember-tint p-4">
+                  <p className="text-sm font-medium leading-6 text-ember-deep">
+                    Calling is the fastest way in. We&apos;ll do everything we
+                    can to see you today.
+                  </p>
+                  <div className="flex flex-col gap-2 sm:flex-row">
+                    <a href={contact.phoneHref} className="btn btn-ember h-12 flex-1">
+                      <Phone className="size-4" />
+                      Call now
+                    </a>
+                    <button
+                      type="button"
+                      onClick={() => setStep(1)}
+                      className="btn btn-outline h-12 flex-1 border-ember/30 text-ember-deep"
+                    >
+                      Request a time instead
+                    </button>
+                  </div>
+                </div>
+              ) : null}
+            </div>
+          ) : null}
+
+          {step === 1 ? (
+            <div className="step-panel" key="step-time">
+              <h3
+                ref={headingRef}
+                tabIndex={-1}
+                className="font-display text-[1.65rem] font-medium leading-tight text-ink outline-none md:text-2xl"
+              >
+                When works?
+              </h3>
+              <p className="mt-1.5 text-sm text-ink-soft">
+                Pick a window. We&apos;ll confirm a specific time by phone.
+              </p>
+
+              {earliestDay && earliestPart ? (
+                <button
+                  type="button"
+                  onClick={pickEarliest}
+                  className="mt-5 flex min-h-12 w-full items-center justify-center gap-2 rounded-2xl border border-brand/35 bg-wash px-4 text-sm font-semibold text-brand-ink transition hover:bg-wash-2"
+                >
+                  <Zap className="size-4" strokeWidth={1.75} />
+                  Soonest: {earliestDay.relative || earliestDay.weekday}{" "}
+                  {earliestPart.label.toLowerCase()}
+                </button>
+              ) : null}
+
+              <div className="mt-5">
+                <div className="no-scrollbar -mx-1 flex snap-x gap-2 overflow-x-auto px-1 pb-1">
+                  {days.length === 0 ? (
+                    <p className="py-6 text-sm text-ink-faint">Loading days…</p>
+                  ) : (
+                    days.map((d) => {
+                      const active = dateIso === d.iso;
+                      return (
+                        <button
+                          key={d.iso}
+                          type="button"
+                          onClick={() => {
+                            setDateIso(d.iso);
+                            setPartId(null);
+                          }}
+                          aria-pressed={active}
+                          className={`option-tile flex h-[4.75rem] w-[4.35rem] shrink-0 snap-start flex-col items-center justify-center gap-0.5 rounded-2xl border ${
+                            active
+                              ? "border-brand-deep bg-brand-deep text-white"
+                              : "border-line bg-white text-ink hover:border-brand/60"
                           }`}
                         >
-                          {d.relative || d.weekday}
-                        </span>
-                        <span className="font-display text-xl font-medium leading-none">
-                          {d.dayNum}
-                        </span>
-                        <span
-                          className={`text-[10px] font-semibold ${
-                            active ? "text-white/90" : "text-ink-faint"
+                          <span
+                            className={`text-[11px] font-bold uppercase tracking-wide ${
+                              active ? "text-white/90" : "text-ink-faint"
+                            }`}
+                          >
+                            {d.relative || d.weekday}
+                          </span>
+                          <span className="font-display text-[1.35rem] font-medium leading-none">
+                            {d.dayNum}
+                          </span>
+                          <span
+                            className={`text-[11px] font-semibold ${
+                              active ? "text-white/90" : "text-ink-faint"
+                            }`}
+                          >
+                            {d.month}
+                          </span>
+                        </button>
+                      );
+                    })
+                  )}
+                </div>
+              </div>
+
+              <div className="mt-5 min-h-[5.5rem]">
+                {!selectedDay ? (
+                  <div className="flex min-h-[5.5rem] items-center justify-center gap-2 rounded-2xl border border-dashed border-line px-4 text-sm text-ink-faint">
+                    <CalendarDays className="size-4" />
+                    Pick a day
+                  </div>
+                ) : (
+                  <div
+                    role="group"
+                    aria-label="Time of day"
+                    className="grid grid-cols-3 gap-2"
+                  >
+                    {parts.map((part) => {
+                      const active = partId === part.id;
+                      return (
+                        <button
+                          key={part.id}
+                          type="button"
+                          onClick={() => pickPart(part.id)}
+                          aria-pressed={active}
+                          className={`option-tile flex min-h-[5.5rem] flex-col items-center justify-center gap-1 rounded-2xl border px-1.5 text-center ${
+                            active
+                              ? "border-brand-deep bg-brand-deep text-white"
+                              : "border-line bg-white text-ink hover:border-brand/60"
                           }`}
                         >
-                          {d.month}
-                        </span>
-                      </button>
-                    );
-                  })
+                          <part.icon
+                            className={`size-5 ${active ? "text-white" : "text-brand-ink"}`}
+                            strokeWidth={1.75}
+                          />
+                          <span className="font-display text-sm font-medium leading-tight">
+                            {part.label}
+                          </span>
+                          <span
+                            className={`text-[10px] leading-tight sm:text-[11px] ${
+                              active ? "text-white/85" : "text-ink-soft"
+                            }`}
+                          >
+                            {part.rangeLabel}
+                          </span>
+                        </button>
+                      );
+                    })}
+                  </div>
                 )}
               </div>
             </div>
+          ) : null}
 
-            {/* Time slots */}
-            <div className="mt-6 min-h-[7rem]">
-              {!selectedDay ? (
-                <div className="flex items-center gap-2 rounded-2xl border border-dashed border-line px-4 py-8 text-sm text-ink-faint">
-                  <CalendarDays className="size-4" />
-                  Pick a day to see morning, afternoon, or evening.
-                </div>
-              ) : (
-                <div
-                  role="group"
-                  aria-label="Time of day"
-                  className="grid gap-3 sm:grid-cols-3"
-                >
-                  {parts.map((part) => {
-                    const active = partId === part.id;
-                    return (
-                      <button
-                        key={part.id}
-                        type="button"
-                        onClick={() => setPartId(part.id)}
-                        aria-pressed={active}
-                        className={`option-tile flex flex-col items-start gap-2 rounded-2xl border p-4 text-left ${
-                          active
-                            ? "border-brand-deep bg-wash ring-1 ring-brand-deep"
-                            : "border-line bg-white hover:border-brand/60"
-                        }`}
-                      >
-                        <part.icon className="size-5 text-brand-ink" />
-                        <span className="font-display text-base font-medium text-ink">
-                          {part.label}
-                        </span>
-                        <span className="text-xs text-ink-soft">
-                          {part.rangeLabel}
-                        </span>
-                      </button>
-                    );
-                  })}
-                </div>
-              )}
-            </div>
-          </div>
-        ) : null}
+          {step === 2 ? (
+            <div className="step-panel" key="step-details">
+              <h3
+                ref={headingRef}
+                tabIndex={-1}
+                className="font-display text-[1.65rem] font-medium leading-tight text-ink outline-none md:text-2xl"
+              >
+                How can we reach you?
+              </h3>
+              <p className="mt-1.5 text-sm text-ink-soft">
+                Name and phone. We&apos;ll confirm by call or text.
+              </p>
 
-        {/* STEP 2 — details */}
-        {step === 2 ? (
-          <div className="step-panel" key="step-details">
-            <h3
-              ref={headingRef}
-              tabIndex={-1}
-              className="font-display text-2xl font-medium text-ink outline-none"
-            >
-              Where can we reach you?
-            </h3>
-            <p className="mt-1.5 text-sm text-ink-soft">
-              We&apos;ll text or call to confirm your appointment.
-            </p>
+              <div className="mt-5 flex flex-wrap gap-2">
+                <SummaryChip
+                  label={selectedVisit?.label ?? "Visit"}
+                  onEdit={() => setStep(0)}
+                />
+                <SummaryChip
+                  label={
+                    selectedDay && selectedPart
+                      ? `${selectedDay.weekday} ${selectedDay.dayNum} · ${selectedPart.label}`
+                      : "When"
+                  }
+                  onEdit={() => setStep(1)}
+                />
+              </div>
 
-            {/* Editable summary */}
-            <div className="mt-5 flex flex-wrap gap-2">
-              <SummaryChip
-                label={selectedVisit?.label ?? "Visit"}
-                onEdit={() => setStep(0)}
-              />
-              <SummaryChip
-                label={
-                  selectedDay && selectedPart
-                    ? `${dayLabel(selectedDay)} · ${selectedPart.label}`
-                    : "Date & time"
-                }
-                onEdit={() => setStep(1)}
-              />
-            </div>
-
-            <div className="mt-6 grid gap-4">
-              <div className="grid gap-4 sm:grid-cols-2">
+              <div className="mt-5 grid gap-3">
                 <TextField
                   label="Your name"
                   name="name"
                   type="text"
                   autoComplete="name"
+                  autoCapitalize="words"
+                  enterKeyHint="next"
                   required
                   value={name}
                   onChange={setName}
@@ -518,106 +526,65 @@ export function Scheduler() {
                   label="Phone"
                   name="phone"
                   type="tel"
+                  inputMode="tel"
                   autoComplete="tel"
+                  enterKeyHint="next"
                   required
                   value={phone}
-                  onChange={setPhone}
+                  onChange={(value) => setPhone(formatPhone(value))}
                   error={state.errors.phone}
                 />
-              </div>
-              <TextField
-                label="Email"
-                name="email"
-                type="email"
-                autoComplete="email"
-                optional
-                value={email}
-                onChange={setEmail}
-                error={state.errors.email}
-              />
-              <label className="flex flex-col gap-1.5">
-                <span className="text-sm font-semibold text-ink">
-                  Anything we should know?{" "}
-                  <span className="font-normal text-ink-faint">(optional)</span>
-                </span>
-                <textarea
-                  name="notes"
-                  rows={3}
-                  value={notes}
-                  onChange={(e) => setNotes(e.target.value)}
-                  placeholder="A specific tooth, insurance questions, dental anxiety…"
-                  className="resize-none rounded-xl border border-line bg-white px-3.5 py-3 text-sm leading-6 text-ink outline-none transition placeholder:text-ink-faint focus:border-brand-deep"
+                <TextField
+                  label="Email"
+                  name="email"
+                  type="email"
+                  inputMode="email"
+                  autoComplete="email"
+                  optional
+                  value={email}
+                  onChange={setEmail}
+                  error={state.errors.email}
                 />
-              </label>
+                <label className="flex flex-col gap-1.5">
+                  <span className="text-sm font-semibold text-ink">
+                    Anything we should know?{" "}
+                    <span className="font-normal text-ink-faint">(optional)</span>
+                  </span>
+                  <textarea
+                    name="notes"
+                    rows={2}
+                    value={notes}
+                    onChange={(e) => setNotes(e.target.value)}
+                    placeholder="A tooth that hurts, insurance questions, dental anxiety…"
+                    className="resize-none rounded-2xl border border-line bg-white px-3.5 py-3 text-base leading-6 text-ink outline-none transition placeholder:text-ink-faint focus:border-brand-deep md:text-sm"
+                  />
+                </label>
+              </div>
+
+              <p className="sr-only" aria-hidden="true">
+                <label>
+                  Company
+                  <input type="text" name="company" tabIndex={-1} autoComplete="off" />
+                </label>
+              </p>
             </div>
-
-            {/* Honeypot */}
-            <div aria-hidden="true" className="absolute left-[-9999px]">
-              <label>
-                Company
-                <input type="text" name="company" tabIndex={-1} autoComplete="off" />
-              </label>
-            </div>
-
-          </div>
-        ) : null}
-
-        {/* Submission errors — container stays mounted so screen readers
-            announce content swapped into it */}
-        <div aria-live="polite">
-          {step === 2 && state.message && !state.ok ? (
-            <p className="mt-4 rounded-xl border border-ember/40 bg-ember-tint px-4 py-3 text-sm font-medium text-ember-deep">
-              {state.message}
-            </p>
           ) : null}
+
+          <div aria-live="polite">
+            {step === 2 && state.message && !state.ok ? (
+              <p className="mt-4 rounded-2xl border border-ember/40 bg-ember-tint px-4 py-3 text-sm font-medium text-ember-deep">
+                {state.message}
+              </p>
+            ) : null}
+          </div>
         </div>
 
-        {/* Footer nav */}
-        <div className="mt-7 flex items-center gap-3 border-t border-line pt-5">
-          {step > 0 ? (
-            <button
-              type="button"
-              onClick={() => setStep((s) => s - 1)}
-              className="btn btn-outline shrink-0"
-            >
-              <ArrowLeft className="size-4" />
-              Back
-            </button>
-          ) : (
-            <span className="shrink-0 text-xs text-ink-faint">
-              Takes about a minute
-            </span>
-          )}
-
-          {step === 0 ? (
-            <button
-              type="button"
-              disabled={!visitId}
-              onClick={() => setStep(1)}
-              className="btn btn-primary flex-1 disabled:cursor-not-allowed disabled:opacity-40"
-            >
-              Continue
-              <ArrowRight className="size-4" />
-            </button>
-          ) : null}
-
-          {step === 1 ? (
-            <button
-              type="button"
-              disabled={!dateIso || !partId}
-              onClick={() => setStep(2)}
-              className="btn btn-primary flex-1 disabled:cursor-not-allowed disabled:opacity-40"
-            >
-              Continue
-              <ArrowRight className="size-4" />
-            </button>
-          ) : null}
-
-          {step === 2 ? (
+        {step === 2 ? (
+          <div className="scheduler-sticky">
             <button
               type="submit"
               disabled={!canSubmit}
-              className="btn btn-primary flex-1 disabled:cursor-not-allowed disabled:opacity-50"
+              className="btn btn-primary h-12 w-full disabled:cursor-not-allowed disabled:opacity-50"
             >
               {pending ? (
                 <>
@@ -627,12 +594,15 @@ export function Scheduler() {
               ) : (
                 <>
                   <Check className="size-4" />
-                  Request appointment
+                  Request this visit
                 </>
               )}
             </button>
-          ) : null}
-        </div>
+            <p className="mt-2 text-center text-xs leading-5 text-ink-faint">
+              We only use this to confirm your visit.
+            </p>
+          </div>
+        ) : null}
       </form>
     </div>
   );
@@ -641,7 +611,7 @@ export function Scheduler() {
 function SummaryRow({ icon: Icon, label }: { icon: LucideIcon; label: string }) {
   return (
     <div className="flex items-center gap-3">
-      <Icon className="size-4 shrink-0 text-brand-deep" />
+      <Icon className="size-4 shrink-0 text-brand-deep" strokeWidth={1.75} />
       <span className="font-medium text-ink">{label}</span>
     </div>
   );
@@ -652,10 +622,10 @@ function SummaryChip({ label, onEdit }: { label: string; onEdit: () => void }) {
     <button
       type="button"
       onClick={onEdit}
-      className="inline-flex items-center gap-2 rounded-full border border-line bg-white py-1.5 pl-3.5 pr-2.5 text-sm font-medium text-ink transition hover:border-brand/60"
+      className="inline-flex min-h-11 items-center gap-2 rounded-full border border-line bg-white py-2 pl-3.5 pr-2.5 text-sm font-medium text-ink transition hover:border-brand/60"
     >
       {label}
-      <span className="grid size-5 place-items-center rounded-full bg-wash text-ink-faint">
+      <span className="grid size-6 place-items-center rounded-full bg-wash text-ink-faint">
         <Pencil className="size-3" />
       </span>
     </button>
@@ -669,6 +639,9 @@ type TextFieldProps = {
   value: string;
   onChange: (value: string) => void;
   autoComplete?: string;
+  autoCapitalize?: string;
+  inputMode?: "text" | "tel" | "email";
+  enterKeyHint?: "next" | "done";
   optional?: boolean;
   required?: boolean;
   error?: string;
@@ -681,6 +654,9 @@ function TextField({
   value,
   onChange,
   autoComplete,
+  autoCapitalize,
+  inputMode,
+  enterKeyHint,
   optional,
   required,
   error,
@@ -697,23 +673,22 @@ function TextField({
       <input
         name={name}
         type={type}
+        inputMode={inputMode}
+        enterKeyHint={enterKeyHint}
         autoComplete={autoComplete}
+        autoCapitalize={autoCapitalize}
         value={value}
         onChange={(e) => onChange(e.target.value)}
         aria-required={required ? true : undefined}
         aria-invalid={error ? true : undefined}
         aria-describedby={error ? errorId : undefined}
-        className={`h-12 rounded-xl border bg-white px-3.5 text-sm text-ink outline-none transition placeholder:text-ink-faint focus:border-brand-deep ${
+        className={`h-12 rounded-2xl border bg-white px-3.5 text-base text-ink outline-none transition placeholder:text-ink-faint focus:border-brand-deep md:text-sm ${
           error ? "border-ember" : "border-line"
         }`}
       />
-      {/* Always-mounted live region — error text is swapped in */}
       <span aria-live="polite">
         {error ? (
-          <span
-            id={errorId}
-            className="text-xs font-medium text-ember-deep"
-          >
+          <span id={errorId} className="text-xs font-medium text-ember-deep">
             {error}
           </span>
         ) : null}

@@ -1,6 +1,6 @@
 "use server";
 
-import { contact } from "@/data/site";
+import { contact, formspreeEndpoint } from "@/data/site";
 import type { AppointmentState } from "@/lib/appointment";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -11,21 +11,17 @@ function field(formData: FormData, key: string): string {
 }
 
 /**
- * Native appointment-request handler.
+ * Appointment-request handler.
  *
- * This validates the lead and is the single place to wire real delivery
- * (email via Resend, a Dentrix webhook, or a CRM). Until that's connected it
- * logs the lead for development visibility. Logs are not durable delivery and
- * must not be treated as an office inbox.
- *
- * NOTE: Server Functions are reachable via direct POST, so all input is treated
- * as untrusted and validated here. Add rate limiting / CAPTCHA before launch.
+ * Validates the lead, then delivers via Formspree. Optional LEAD_WEBHOOK_URL
+ * is a second hop after Formspree succeeds. Server Functions are reachable
+ * via direct POST, so all input is treated as untrusted.
  */
 export async function requestAppointment(
   _prevState: AppointmentState,
   formData: FormData,
 ): Promise<AppointmentState> {
-  // Honeypot: real users never fill this hidden field. Pretend success on bots.
+  // Honeypot: real users never fill this. Pretend success on bots.
   if (field(formData, "company")) {
     return { ok: true, message: "Thanks — we'll be in touch shortly.", errors: {} };
   }
@@ -39,11 +35,10 @@ export async function requestAppointment(
   const time = field(formData, "time");
   const notes = field(formData, "notes");
 
-  // A direct POST could skip the step UI, so re-check the scheduling choices.
   if (!visitType || !date || !time) {
     return {
       ok: false,
-      message: "Please choose a visit type, day, and time before submitting.",
+      message: "Please choose a visit type, day, and time of day first.",
       errors: {},
     };
   }
@@ -62,7 +57,7 @@ export async function requestAppointment(
     };
   }
 
-  const lead = {
+  const lead: Lead = {
     name,
     phone,
     email,
@@ -75,9 +70,9 @@ export async function requestAppointment(
   };
 
   try {
-    await deliverLead(lead);
+    await deliverToFormspree(lead);
   } catch (err) {
-    console.error("[appointment] delivery failed", err);
+    console.error("[appointment] Formspree delivery failed", err);
     return {
       ok: false,
       message: `Something went wrong on our end. Please call us at ${contact.phoneDisplay}.`,
@@ -85,10 +80,24 @@ export async function requestAppointment(
     };
   }
 
+  const webhook = process.env.LEAD_WEBHOOK_URL;
+  if (webhook) {
+    try {
+      const res = await fetch(webhook, {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(lead),
+      });
+      if (!res.ok) console.error("[appointment] extra webhook returned", res.status);
+    } catch (err) {
+      console.error("[appointment] extra webhook failed", err);
+    }
+  }
+
   return {
     ok: true,
     message:
-      "Thanks, your request is in. The front desk will call or text during office hours to confirm your time.",
+      "Your request was sent. We'll call or text during office hours to confirm a time.",
     errors: {},
   };
 }
@@ -105,23 +114,53 @@ type Lead = {
   receivedAt: string;
 };
 
-/**
- * Delivery seam — wire one of these for production:
- *   • Email: connect an approved office inbox through your email provider
- *   • Webhook: `await fetch(process.env.LEAD_WEBHOOK_URL, { method: "POST", ... })`
- * Set the relevant env var in Vercel and replace the log below.
- */
-async function deliverLead(lead: Lead): Promise<void> {
-  const webhook = process.env.LEAD_WEBHOOK_URL;
-  if (webhook) {
-    const res = await fetch(webhook, {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify(lead),
-    });
-    if (!res.ok) throw new Error(`Lead webhook returned ${res.status}`);
-    return;
+function formspreeErrorMessage(body: unknown, status: number): string {
+  if (body && typeof body === "object") {
+    if ("errors" in body && Array.isArray((body as { errors: unknown }).errors)) {
+      const parts = (body as { errors: { message?: string }[] }).errors
+        .map((e) => e.message)
+        .filter(Boolean);
+      if (parts.length) return parts.join("; ");
+    }
+    if ("error" in body && (body as { error: unknown }).error) {
+      return String((body as { error: unknown }).error);
+    }
   }
-  // Fallback until delivery is configured: don't drop the lead.
-  console.info("[appointment] new request (configure LEAD_WEBHOOK_URL to deliver):", lead);
+  return `HTTP ${status}`;
+}
+
+async function deliverToFormspree(lead: Lead): Promise<void> {
+  const endpoint = process.env.FORMSPREE_ENDPOINT ?? formspreeEndpoint;
+  const payload: Record<string, string> = {
+    name: lead.name,
+    phone: lead.phone,
+    subject: `New appointment request from ${lead.name}`,
+    visitType: lead.visitType,
+    date: lead.dateLabel || lead.date,
+    time: lead.time,
+    message: [
+      `Visit: ${lead.visitType}`,
+      `When: ${lead.dateLabel || lead.date} · ${lead.time}`,
+      `Phone: ${lead.phone}`,
+      lead.email && `Email: ${lead.email}`,
+      lead.notes && `Notes: ${lead.notes}`,
+    ]
+      .filter(Boolean)
+      .join("\n"),
+  };
+  if (lead.email) payload.email = lead.email;
+
+  const res = await fetch(endpoint, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  });
+
+  const body: unknown = await res.json().catch(() => null);
+  if (!res.ok) {
+    throw new Error(`Formspree rejected the lead: ${formspreeErrorMessage(body, res.status)}`);
+  }
 }

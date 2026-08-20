@@ -1,6 +1,7 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Bricolage_Grotesque, Geist } from "next/font/google";
-import { siteUrl } from "@/data/site";
+import { contact, seo } from "@/data/site";
+import { isPreviewDeploy, siteUrl } from "@/lib/site-url";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -15,54 +16,56 @@ const bricolage = Bricolage_Grotesque({
   display: "swap",
 });
 
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f7f9fc" },
+    { media: "(prefers-color-scheme: dark)", color: "#0a1424" },
+  ],
+};
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
+  applicationName: contact.practiceName,
   title: {
-    default: "Sacramento Dental Medicine | Antelope, CA Dentist",
+    default: seo.title,
     template: "%s · Sacramento Dental Medicine",
   },
-  description:
-    "Family, cosmetic, restorative, and emergency dentistry in Antelope, CA from Dr. Narodovich and Dr. Sheppard. Gentle, plain-spoken care with same-day emergency visits when possible. Book online or call (916) 727-6453.",
+  description: seo.description,
   alternates: {
     canonical: "/",
   },
-  keywords: [
-    "Antelope dentist",
-    "Sacramento dentist",
-    "Sacramento Dental Medicine",
-    "cosmetic dentistry",
-    "dental implants",
-    "Invisalign",
-    "emergency dentist",
-    "family dentist Antelope",
-    "Dr. Narodovich",
-  ],
-  authors: [{ name: "Sacramento Dental Medicine" }],
-  openGraph: {
-    title: "Sacramento Dental Medicine",
-    description:
-      "Modern family, cosmetic, restorative, and emergency dental care in Antelope, CA.",
-    type: "website",
-    siteName: "Sacramento Dental Medicine",
-    images: [
-      {
-        url: "/images/og.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Sacramento Dental Medicine — modern dental care in Antelope, CA",
+  robots: isPreviewDeploy
+    ? { index: false, follow: false }
+    : {
+        index: true,
+        follow: true,
+        googleBot: {
+          index: true,
+          follow: true,
+          "max-image-preview": "large",
+        },
       },
-    ],
+  formatDetection: {
+    telephone: false,
+    email: false,
+    address: false,
+  },
+  appleWebApp: {
+    title: contact.shortName,
+    statusBarStyle: "default",
+  },
+  openGraph: {
+    title: seo.ogTitle,
+    description: seo.ogDescription,
+    type: "website",
+    locale: "en_US",
+    url: "/",
+    siteName: contact.practiceName,
   },
   twitter: {
     card: "summary_large_image",
-    title: "Sacramento Dental Medicine",
-    description:
-      "Modern family, cosmetic, restorative, and emergency dental care in Antelope, CA.",
-    images: ["/images/og.jpg"],
-  },
-  icons: {
-    icon: "/favicon.ico",
-    apple: "/apple-touch-icon.png",
+    title: seo.ogTitle,
+    description: seo.ogDescription,
   },
 };
 

@@ -20,8 +20,19 @@ import {
 // Public Formspree form — appointment requests POST here from the Server Action.
 export const formspreeEndpoint = "https://formspree.io/f/xvkpdvyz";
 
-// Canonical site origin (used by metadata, sitemap, and robots) --------------
-export const siteUrl = "https://sacramentodentalmedicine.com";
+/** Official custom domain. Do not attach DNS from this repo. */
+export const productionDomain = "https://sacramentodentalmedicine.com";
+
+export const seo = {
+  title: "Sacramento Dental Medicine | Antelope, CA Dentist",
+  description:
+    "Family, cosmetic, restorative & emergency dentistry in Antelope, CA. Drs. Narodovich & Sheppard. Same-day emergency visits when possible. Call (916) 727-6453.",
+  ogTitle: "Sacramento Dental Medicine | Antelope, CA",
+  ogDescription:
+    "Family, cosmetic, restorative & emergency care in Antelope. Same-day emergency visits when possible. Book online or call (916) 727-6453.",
+  ogImageAlt:
+    "Sacramento Dental Medicine — family and cosmetic dentistry in Antelope, CA",
+};
 
 // Contact + conversion targets ----------------------------------------------
 export const contact = {
@@ -412,8 +423,6 @@ export const structuredData = {
   "@context": "https://schema.org",
   "@type": "Dentist",
   name: contact.practiceName,
-  image: `${siteUrl}${imagery.hero}`,
-  url: "https://sacramentodentalmedicine.com",
   telephone: "+1-916-727-6453",
   address: {
     "@type": "PostalAddress",

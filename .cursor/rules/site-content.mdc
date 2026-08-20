@@ -12,6 +12,6 @@ alwaysApply: true
 - Same-day emergency visits are offered when possible, not guaranteed.
 - Scheduler requires name plus a phone number or an email (at least one, not both).
 - Scheduler delivery uses Formspree (`https://formspree.io/f/xvkpdvyz`). Keep email optional in the Formspree dashboard so phone-only requests succeed. Optional `LEAD_WEBHOOK_URL` is a second hop. Without a successful Formspree response, do not claim the front desk received a lead.
-- Do not connect or cut over `sacramentodentalmedicine.com`.
+- Do not connect or cut over `sacramentodentalmedicine.com`. Canonical URLs follow `src/lib/site-url.ts` (the Vercel production host until cutover).
 - Hero / waiting / still-life images are atmospheric stand-ins, not photographs of the Elverta Road office.
 - This repo is Sacramento Dental Medicine only. Waikiki Dental lives in `enzo-prism/waikiki-dental`.

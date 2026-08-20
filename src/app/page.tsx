@@ -12,6 +12,7 @@ import { NewPatients } from "@/components/sections/NewPatients";
 import { Visit } from "@/components/sections/Visit";
 import { Footer } from "@/components/sections/Footer";
 import { faqStructuredData, structuredData } from "@/data/site";
+import { siteUrl } from "@/lib/site-url";
 
 // Escape `<` so JSON-LD payloads can't break out of the <script> tag (XSS-safe).
 function jsonLd(data: unknown) {
@@ -23,7 +24,13 @@ export default function Home() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: jsonLd(structuredData) }}
+        dangerouslySetInnerHTML={{
+          __html: jsonLd({
+            ...structuredData,
+            url: siteUrl,
+            image: `${siteUrl}/images/og.jpg`,
+          }),
+        }}
       />
       <script
         type="application/ld+json"

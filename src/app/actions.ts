@@ -1,9 +1,7 @@
 "use server";
 
 import { contact, formspreeEndpoint } from "@/data/site";
-import type { AppointmentState } from "@/lib/appointment";
-
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+import { contactFieldErrors, type AppointmentState } from "@/lib/appointment";
 
 function field(formData: FormData, key: string): string {
   const value = formData.get(key);
@@ -43,11 +41,10 @@ export async function requestAppointment(
     };
   }
 
-  const errors: AppointmentState["errors"] = {};
+  const errors: AppointmentState["errors"] = {
+    ...contactFieldErrors(phone, email),
+  };
   if (name.length < 2) errors.name = "Please enter your name.";
-  if (phone.replace(/\D/g, "").length < 10)
-    errors.phone = "Please enter a phone number we can reach you at.";
-  if (email && !EMAIL_RE.test(email)) errors.email = "That email doesn't look right.";
 
   if (Object.keys(errors).length > 0) {
     return {
@@ -97,7 +94,7 @@ export async function requestAppointment(
   return {
     ok: true,
     message:
-      "Your request was sent. We'll call or text during office hours to confirm a time.",
+      "Your request was sent. We'll reach out during office hours to confirm a time.",
     errors: {},
   };
 }
@@ -133,7 +130,6 @@ async function deliverToFormspree(lead: Lead): Promise<void> {
   const endpoint = process.env.FORMSPREE_ENDPOINT ?? formspreeEndpoint;
   const payload: Record<string, string> = {
     name: lead.name,
-    phone: lead.phone,
     subject: `New appointment request from ${lead.name}`,
     visitType: lead.visitType,
     date: lead.dateLabel || lead.date,
@@ -141,13 +137,14 @@ async function deliverToFormspree(lead: Lead): Promise<void> {
     message: [
       `Visit: ${lead.visitType}`,
       `When: ${lead.dateLabel || lead.date} · ${lead.time}`,
-      `Phone: ${lead.phone}`,
+      lead.phone && `Phone: ${lead.phone}`,
       lead.email && `Email: ${lead.email}`,
       lead.notes && `Notes: ${lead.notes}`,
     ]
       .filter(Boolean)
       .join("\n"),
   };
+  if (lead.phone) payload.phone = lead.phone;
   if (lead.email) payload.email = lead.email;
 
   const res = await fetch(endpoint, {

@@ -19,7 +19,7 @@ export function Visit() {
             Request a visit in about a minute.
           </h2>
           <p className="max-w-2xl text-balance text-base leading-7 text-white/70 md:text-lg md:leading-8">
-            Pick what you need and a time of day. We&apos;ll call or text during
+            Pick what you need and a time of day. We&apos;ll reach out during
             office hours to confirm. Prefer a human? Call, or just stop by.
           </p>
         </ScrollReveal>

@@ -17,7 +17,11 @@ import {
   Zap,
 } from "lucide-react";
 import { requestAppointment } from "@/app/actions";
-import { initialAppointmentState } from "@/lib/appointment";
+import {
+  hasUsableEmail,
+  hasUsablePhone,
+  initialAppointmentState,
+} from "@/lib/appointment";
 import {
   contact,
   officeHours,
@@ -172,7 +176,16 @@ function SchedulerForm({ onReset }: { onReset: () => void }) {
   const earliestPart = earliestDay ? buildParts(earliestDay.wd)[0] ?? null : null;
 
   const phoneDigits = phone.replace(/\D/g, "").length;
-  const canSubmit = name.trim().length > 1 && phoneDigits >= 10 && !pending;
+  const phoneOk = hasUsablePhone(phone);
+  const emailOk = hasUsableEmail(email);
+  const phoneComplete = phoneDigits === 0 || phoneOk;
+  const emailComplete = email.trim() === "" || emailOk;
+  const canSubmit =
+    name.trim().length > 1 &&
+    (phoneOk || emailOk) &&
+    phoneComplete &&
+    emailComplete &&
+    !pending;
 
   function chooseVisit(id: string, urgent?: boolean) {
     setVisitId(id);
@@ -371,7 +384,7 @@ function SchedulerForm({ onReset }: { onReset: () => void }) {
                 When works?
               </h3>
               <p className="mt-1.5 text-sm text-ink-soft">
-                Pick a window. We&apos;ll confirm a specific time by phone.
+                Pick a window. We&apos;ll confirm a specific time.
               </p>
 
               {earliestDay && earliestPart ? (
@@ -491,7 +504,7 @@ function SchedulerForm({ onReset }: { onReset: () => void }) {
                 How can we reach you?
               </h3>
               <p className="mt-1.5 text-sm text-ink-soft">
-                Name and phone. We&apos;ll confirm by call or text.
+                Your name, plus a phone number or an email — we only need one.
               </p>
 
               <div className="mt-5 flex flex-wrap gap-2">
@@ -522,29 +535,34 @@ function SchedulerForm({ onReset }: { onReset: () => void }) {
                   onChange={setName}
                   error={state.errors.name}
                 />
-                <TextField
-                  label="Phone"
-                  name="phone"
-                  type="tel"
-                  inputMode="tel"
-                  autoComplete="tel"
-                  enterKeyHint="next"
-                  required
-                  value={phone}
-                  onChange={(value) => setPhone(formatPhone(value))}
-                  error={state.errors.phone}
-                />
-                <TextField
-                  label="Email"
-                  name="email"
-                  type="email"
-                  inputMode="email"
-                  autoComplete="email"
-                  optional
-                  value={email}
-                  onChange={setEmail}
-                  error={state.errors.email}
-                />
+                <fieldset className="grid gap-3 border-0 p-0">
+                  <legend className="sr-only">
+                    Phone or email — at least one is required
+                  </legend>
+                  <TextField
+                    label="Phone"
+                    name="phone"
+                    type="tel"
+                    inputMode="tel"
+                    autoComplete="tel"
+                    enterKeyHint="next"
+                    optional
+                    value={phone}
+                    onChange={(value) => setPhone(formatPhone(value))}
+                    error={state.errors.phone}
+                  />
+                  <TextField
+                    label="Email"
+                    name="email"
+                    type="email"
+                    inputMode="email"
+                    autoComplete="email"
+                    optional
+                    value={email}
+                    onChange={setEmail}
+                    error={state.errors.email}
+                  />
+                </fieldset>
                 <label className="flex flex-col gap-1.5">
                   <span className="text-sm font-semibold text-ink">
                     Anything we should know?{" "}
@@ -599,7 +617,9 @@ function SchedulerForm({ onReset }: { onReset: () => void }) {
               )}
             </button>
             <p className="mt-2 text-center text-xs leading-5 text-ink-faint">
-              We only use this to confirm your visit.
+              {name.trim().length > 1 && !phoneOk && !emailOk
+                ? "Add a phone number or an email — at least one."
+                : "We only use this to confirm your visit."}
             </p>
           </div>
         ) : null}

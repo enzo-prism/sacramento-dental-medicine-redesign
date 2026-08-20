@@ -99,7 +99,7 @@ The scheduler posts to the `requestAppointment` Server Action
 (`src/app/actions.ts`), which validates the request and POSTs JSON to
 **Formspree** (`https://formspree.io/f/xvkpdvyz`, overridable with
 `FORMSPREE_ENDPOINT`). Confirm in the Formspree dashboard that email is not
-marked required — the site treats phone as required and email as optional.
+marked required — the site requires a phone number or an email, not both.
 
 Optional: set **`LEAD_WEBHOOK_URL`** for a second delivery hop after Formspree
 succeeds. Do not publicly launch the form until a controlled test submission

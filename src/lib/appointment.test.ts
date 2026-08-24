@@ -2,6 +2,8 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import {
   contactFieldErrors,
+  contactStatusMessage,
+  formatUsPhone,
   hasUsableEmail,
   hasUsablePhone,
 } from "./appointment.ts";
@@ -54,5 +56,43 @@ describe("hasUsablePhone / hasUsableEmail", () => {
     assert.equal(hasUsableEmail("pat@example.com"), true);
     assert.equal(hasUsableEmail("pat@"), false);
     assert.equal(hasUsableEmail("  "), false);
+  });
+});
+
+describe("formatUsPhone", () => {
+  it("formats a ten-digit phone number", () => {
+    assert.equal(formatUsPhone("9165550100"), "(916) 555-0100");
+  });
+
+  it("drops the US country code from autofilled phone numbers", () => {
+    assert.equal(formatUsPhone("+1 (916) 555-0100"), "(916) 555-0100");
+  });
+});
+
+describe("contactStatusMessage", () => {
+  it("explains that either contact method is enough", () => {
+    assert.equal(
+      contactStatusMessage("", ""),
+      "Add a phone number or an email — at least one.",
+    );
+    assert.equal(
+      contactStatusMessage("(916) 555-0100", ""),
+      "Phone added — email is optional.",
+    );
+    assert.equal(
+      contactStatusMessage("", "pat@example.com"),
+      "Email added — phone is optional.",
+    );
+  });
+
+  it("gives a specific recovery path for incomplete contact details", () => {
+    assert.equal(
+      contactStatusMessage("555-01", "pat@example.com"),
+      "Enter a 10-digit phone number, or clear it and use email.",
+    );
+    assert.equal(
+      contactStatusMessage("(916) 555-0100", "pat@"),
+      "Enter a valid email address, or clear it and use phone.",
+    );
   });
 });

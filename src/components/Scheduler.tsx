@@ -18,6 +18,8 @@ import {
 } from "lucide-react";
 import { requestAppointment } from "@/app/actions";
 import {
+  contactStatusMessage,
+  formatUsPhone,
   hasUsableEmail,
   hasUsablePhone,
   initialAppointmentState,
@@ -60,14 +62,6 @@ function formatTime(min: number) {
   const ampm = h24 >= 12 ? "PM" : "AM";
   const h12 = h24 % 12 === 0 ? 12 : h24 % 12;
   return `${h12}:${pad(m)} ${ampm}`;
-}
-
-function formatPhone(raw: string) {
-  const d = raw.replace(/\D/g, "").slice(0, 10);
-  if (d.length === 0) return "";
-  if (d.length < 4) return d;
-  if (d.length < 7) return `(${d.slice(0, 3)}) ${d.slice(3)}`;
-  return `(${d.slice(0, 3)}) ${d.slice(3, 6)}-${d.slice(6)}`;
 }
 
 function buildDays(count: number): DayOption[] {
@@ -186,6 +180,7 @@ function SchedulerForm({ onReset }: { onReset: () => void }) {
     phoneComplete &&
     emailComplete &&
     !pending;
+  const contactStatus = contactStatusMessage(phone, email);
 
   function chooseVisit(id: string, urgent?: boolean) {
     setVisitId(id);
@@ -535,33 +530,49 @@ function SchedulerForm({ onReset }: { onReset: () => void }) {
                   onChange={setName}
                   error={state.errors.name}
                 />
-                <fieldset className="grid gap-3 border-0 p-0">
-                  <legend className="sr-only">
-                    Phone or email — at least one is required
+                <fieldset
+                  className="grid gap-3 rounded-2xl border border-line bg-wash/45 p-3.5"
+                  aria-describedby="contact-status"
+                >
+                  <legend className="px-1 text-sm font-semibold text-ink">
+                    Contact details{" "}
+                    <span className="font-normal text-ink-soft">
+                      (phone or email required)
+                    </span>
                   </legend>
-                  <TextField
-                    label="Phone"
-                    name="phone"
-                    type="tel"
-                    inputMode="tel"
-                    autoComplete="tel"
-                    enterKeyHint="next"
-                    optional
-                    value={phone}
-                    onChange={(value) => setPhone(formatPhone(value))}
-                    error={state.errors.phone}
-                  />
-                  <TextField
-                    label="Email"
-                    name="email"
-                    type="email"
-                    inputMode="email"
-                    autoComplete="email"
-                    optional
-                    value={email}
-                    onChange={setEmail}
-                    error={state.errors.email}
-                  />
+                  <div className="grid gap-3 sm:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] sm:items-center sm:gap-2.5">
+                    <TextField
+                      label="Phone"
+                      name="phone"
+                      type="tel"
+                      inputMode="tel"
+                      autoComplete="tel"
+                      enterKeyHint="next"
+                      value={phone}
+                      onChange={(value) => setPhone(formatUsPhone(value))}
+                      error={state.errors.phone}
+                    />
+                    <div
+                      className="flex items-center gap-3 sm:mt-6"
+                      aria-hidden="true"
+                    >
+                      <span className="h-px flex-1 bg-line sm:hidden" />
+                      <span className="text-xs font-semibold uppercase tracking-[0.16em] text-ink-faint">
+                        or
+                      </span>
+                      <span className="h-px flex-1 bg-line sm:hidden" />
+                    </div>
+                    <TextField
+                      label="Email"
+                      name="email"
+                      type="email"
+                      inputMode="email"
+                      autoComplete="email"
+                      value={email}
+                      onChange={setEmail}
+                      error={state.errors.email}
+                    />
+                  </div>
                 </fieldset>
                 <label className="flex flex-col gap-1.5">
                   <span className="text-sm font-semibold text-ink">
@@ -616,10 +627,12 @@ function SchedulerForm({ onReset }: { onReset: () => void }) {
                 </>
               )}
             </button>
-            <p className="mt-2 text-center text-xs leading-5 text-ink-faint">
-              {name.trim().length > 1 && !phoneOk && !emailOk
-                ? "Add a phone number or an email — at least one."
-                : "We only use this to confirm your visit."}
+            <p
+              id="contact-status"
+              className="mt-2 text-center text-xs leading-5 text-ink-faint"
+              aria-live="polite"
+            >
+              {contactStatus} We only use this to confirm your visit.
             </p>
           </div>
         ) : null}
@@ -662,7 +675,6 @@ type TextFieldProps = {
   autoCapitalize?: string;
   inputMode?: "text" | "tel" | "email";
   enterKeyHint?: "next" | "done";
-  optional?: boolean;
   required?: boolean;
   error?: string;
 };
@@ -677,7 +689,6 @@ function TextField({
   autoCapitalize,
   inputMode,
   enterKeyHint,
-  optional,
   required,
   error,
 }: TextFieldProps) {
@@ -686,9 +697,6 @@ function TextField({
     <label className="flex flex-col gap-1.5">
       <span className="text-sm font-semibold text-ink">
         {label}
-        {optional ? (
-          <span className="font-normal text-ink-faint"> (optional)</span>
-        ) : null}
       </span>
       <input
         name={name}
@@ -697,6 +705,7 @@ function TextField({
         enterKeyHint={enterKeyHint}
         autoComplete={autoComplete}
         autoCapitalize={autoCapitalize}
+        required={required}
         value={value}
         onChange={(e) => onChange(e.target.value)}
         aria-required={required ? true : undefined}

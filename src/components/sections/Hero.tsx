@@ -11,6 +11,7 @@ export function Hero() {
           src={imagery.hero}
           alt=""
           fill
+          loading="eager"
           sizes="100vw"
           className="object-cover object-center opacity-30"
         />

@@ -302,7 +302,7 @@ export type GoogleReviewTheme = {
 
 export const googleReviewAnalysis = {
   summary:
-    "Across the full corpus, patients most often praise a kind team, a clean office, Dr. Mike, long-term trust, comfort for anxious patients, and clear explanations.",
+    "Across the full corpus, patients most often praise a kind team, a clean office, Dr. Mike, long-term and family care, comfort for anxious patients, and clear explanations.",
   lowerRatedNote:
     "The smaller set of lower-rated reviews most often mentions communication friction, cost or insurance frustration, scheduling issues, or procedure discomfort.",
 };

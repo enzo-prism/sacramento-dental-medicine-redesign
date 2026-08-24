@@ -22,7 +22,6 @@ import {
   googleReviewThemes,
   socialProof,
 } from "@/data/site";
-import { siteUrl } from "@/lib/site-url";
 
 export const metadata: Metadata = {
   title: "Patient Reviews",
@@ -54,10 +53,6 @@ export const metadata: Metadata = {
 
 const themeIcons = [UsersRound, Sparkles, ShieldCheck, HeartHandshake, CheckCircle2, MessageCircleMore];
 
-function jsonLd(data: unknown) {
-  return JSON.stringify(data).replace(/</g, "\\u003c");
-}
-
 export default function ReviewsPage() {
   const fiveStarShare = Math.round(
     (socialProof.fiveStarReviews / socialProof.totalReviews) * 1000,
@@ -65,30 +60,6 @@ export default function ReviewsPage() {
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: jsonLd({
-            "@context": "https://schema.org",
-            "@type": "CollectionPage",
-            name: `${contact.practiceName} patient reviews`,
-            url: `${siteUrl}/reviews`,
-            description: metadata.description,
-            mainEntity: {
-              "@type": "Dentist",
-              name: contact.practiceName,
-              aggregateRating: {
-                "@type": "AggregateRating",
-                ratingValue: socialProof.rating,
-                reviewCount: socialProof.totalReviews,
-                bestRating: 5,
-                worstRating: 1,
-              },
-            },
-            sameAs: [socialProof.moreReviewsUrl],
-          }),
-        }}
-      />
       <Header />
       <main id="main" className="flex-1">
         <section className="relative overflow-hidden pb-16 pt-32 sm:pb-20 lg:pb-24 lg:pt-40">

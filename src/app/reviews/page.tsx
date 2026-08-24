@@ -24,30 +24,25 @@ import {
 } from "@/data/site";
 
 export const metadata: Metadata = {
-  title: "Patient Reviews",
-  description: `Explore the themes behind Sacramento Dental Medicine's ${socialProof.rating}-star Google rating from ${socialProof.totalReviews} patient reviews.`,
+  title: {
+    absolute: `${contact.practiceName} Reviews | ${socialProof.rating} on Google`,
+  },
+  description: `Read what ${socialProof.totalReviews} patients say about Sacramento Dental Medicine in Antelope, including comfort, clear explanations, Dr. Mike, and long-term care.`,
   alternates: { canonical: "/reviews" },
   openGraph: {
-    title: `${socialProof.rating} Stars From ${socialProof.totalReviews} Patient Reviews`,
+    title: `${socialProof.totalReviews} Patient Reviews. One Clear Pattern.`,
     description:
-      "See what Sacramento Dental Medicine patients say about comfort, clear explanations, the team, and long-term care.",
+      `See the patterns across ${socialProof.totalReviews} Google reviews, including comfort, kindness, clear explanations, and long-term care.`,
     type: "website",
     locale: "en_US",
     url: "/reviews",
     siteName: contact.practiceName,
-    images: [
-      {
-        url: "/opengraph-image.jpg",
-        alt: `${contact.practiceName} patient reviews`,
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${socialProof.rating} Stars From ${socialProof.totalReviews} Patient Reviews`,
+    title: `${socialProof.totalReviews} Patient Reviews. One Clear Pattern.`,
     description:
-      "See what patients say about comfort, clear explanations, the team, and long-term care.",
-    images: ["/twitter-image.jpg"],
+      `See the patterns across ${socialProof.totalReviews} Google reviews, including comfort, kindness, clear explanations, and long-term care.`,
   },
 };
 

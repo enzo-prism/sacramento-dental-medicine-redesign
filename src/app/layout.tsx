@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   applicationName: contact.practiceName,
   title: {
     default: seo.title,
-    template: "%s · Sacramento Dental Medicine",
+    template: "%s | Sacramento Dental Medicine",
   },
   description: seo.description,
   alternates: {

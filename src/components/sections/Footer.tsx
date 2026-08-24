@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { CalendarDays, MapPin, Phone } from "lucide-react";
 import { contact, hours, imagery, navItems } from "@/data/site";
 
@@ -8,8 +9,8 @@ export function Footer() {
       <div className="container-x relative py-16 md:py-20">
         <div className="grid gap-12 md:grid-cols-[1.2fr_0.8fr_0.8fr_1fr]">
           <div>
-            <a
-              href="#top"
+            <Link
+              href="/"
               className="inline-block"
               aria-label="Sacramento Dental Medicine — home"
             >
@@ -20,16 +21,16 @@ export function Footer() {
                 height={209}
                 className="h-auto w-[132px]"
               />
-            </a>
+            </Link>
             <p className="mt-6 max-w-xs text-sm leading-7 text-white/70">
               {contact.tagline}. The same doctors, the same careful pace,
               every visit.
             </p>
             <div className="mt-6 flex flex-col gap-2.5 sm:flex-row">
-              <a href={contact.bookingHref} className="btn btn-primary">
+              <Link href={contact.bookingHref} className="btn btn-primary">
                 <CalendarDays className="size-4" />
                 Book online
-              </a>
+              </Link>
               <a href={contact.phoneHref} className="btn btn-ghost-light">
                 <Phone className="size-4" />
                 {contact.phoneDisplay}
@@ -44,12 +45,12 @@ export function Footer() {
             <ul className="mt-4 space-y-2.5 text-sm">
               {navItems.map((item) => (
                 <li key={item.href}>
-                  <a
+                  <Link
                     href={item.href}
                     className="inline-block py-2 text-white/70 transition hover:text-white"
                   >
                     {item.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>

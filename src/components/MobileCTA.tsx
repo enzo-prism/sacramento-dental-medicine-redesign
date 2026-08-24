@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { CalendarDays, Phone } from "lucide-react";
 import { contact } from "@/data/site";
@@ -8,9 +9,9 @@ export function MobileCTA() {
   const [hidden, setHidden] = useState(false);
 
   useEffect(() => {
-    const visit = document.querySelector("#visit");
-    const footer = document.querySelector("footer");
-    const nodes = [visit, footer].filter(Boolean) as Element[];
+    const nodes = [
+      ...document.querySelectorAll("#visit, [data-mobile-cta-stop], footer"),
+    ];
     if (nodes.length === 0) return;
 
     const seen = new Map<Element, boolean>();
@@ -35,10 +36,10 @@ export function MobileCTA() {
         <Phone className="size-4" />
         Call
       </a>
-      <a href={contact.bookingHref} className="mobile-cta-primary">
+      <Link href={contact.bookingHref} className="mobile-cta-primary">
         <CalendarDays className="size-4" />
         Book online
-      </a>
+      </Link>
     </nav>
   );
 }

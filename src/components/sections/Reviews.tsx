@@ -1,10 +1,12 @@
-import { ArrowUpRight } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { ReviewStars } from "@/components/ReviewStars";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { SectionLabel } from "@/components/SectionLabel";
-import { reviews, socialProof } from "@/data/site";
+import { googleReviewExcerpts, socialProof } from "@/data/site";
 
 export function Reviews() {
-  const [featured, ...rest] = reviews;
+  const [featured, ...rest] = googleReviewExcerpts.slice(0, 3);
 
   return (
     <section id="reviews" className="section relative bg-canvas">
@@ -12,12 +14,13 @@ export function Reviews() {
         <SectionLabel
           eyebrow="Patient reviews"
           title="Take their word for it."
-          intro="Their words, exactly as they wrote them. We'd rather show you those than grade ourselves."
+          intro={`A ${socialProof.rating}-star Google rating across ${socialProof.totalReviews} reviews, grounded in hundreds of specific patient experiences.`}
         />
 
         <div className="mt-12 grid gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:gap-12">
           <ScrollReveal variant="fade">
             <figure>
+              <ReviewStars className="text-base" />
               <span
                 aria-hidden
                 className="block h-[0.55em] font-display text-[72px] font-medium leading-none text-brand-deep"
@@ -32,7 +35,7 @@ export function Reviews() {
                   {featured.name}
                 </p>
                 <p className="mt-0.5 text-xs text-ink-faint">
-                  From {featured.source}
+                  Google review · {featured.date}
                 </p>
               </figcaption>
             </figure>
@@ -47,7 +50,7 @@ export function Reviews() {
                 <figcaption className="mt-4">
                   <p className="text-sm font-medium text-ink">{review.name}</p>
                   <p className="mt-0.5 text-xs text-ink-faint">
-                    From {review.source}
+                    Google review · {review.date}
                   </p>
                 </figcaption>
               </figure>
@@ -55,17 +58,16 @@ export function Reviews() {
           </div>
         </div>
 
-        <p className="mt-10">
-          <a
-            href={socialProof.moreReviewsUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-text"
-          >
-            More reviews on Google Maps
+        <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-7">
+          <Link href={socialProof.reviewsUrl} className="btn-text">
+            Explore the full review story
+            <ArrowRight className="size-4" aria-hidden />
+          </Link>
+          <a href={socialProof.moreReviewsUrl} target="_blank" rel="noopener noreferrer" className="btn-text text-ink-faint">
+            All reviews on Google
             <ArrowUpRight className="size-4" aria-hidden />
           </a>
-        </p>
+        </div>
       </div>
     </section>
   );

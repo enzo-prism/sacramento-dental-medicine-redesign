@@ -1,11 +1,14 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { ArrowRight, CalendarDays, ChevronRight, Menu, Phone, X } from "lucide-react";
 import { contact, imagery, navItems } from "@/data/site";
 
 export function Header() {
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const toggleRef = useRef<HTMLButtonElement>(null);
@@ -54,8 +57,8 @@ export function Header() {
   return (
     <header className="site-header" data-scrolled={scrolled}>
       <div className="container-x flex items-center justify-between py-3.5">
-        <a
-          href="#top"
+        <Link
+          href="/"
           className="group flex items-center gap-3"
           aria-label={`${contact.practiceName} home`}
         >
@@ -79,32 +82,32 @@ export function Header() {
               {contact.shortName}
             </span>
           </span>
-        </a>
+        </Link>
 
         <nav className="hidden items-center gap-1 text-sm font-medium text-ink-soft lg:flex">
           {navItems.map((item) => (
-            <a
+            <Link
               key={item.href}
               href={item.href}
-              className="rounded-lg px-3 py-2 transition hover:bg-wash hover:text-ink"
+              aria-current={item.href === pathname ? "page" : undefined}
+              className={`rounded-lg px-3 py-2 transition hover:bg-wash hover:text-ink ${
+                item.href === pathname ? "bg-wash text-ink" : ""
+              }`}
             >
               {item.label}
-            </a>
+            </Link>
           ))}
         </nav>
 
         <div className="hidden items-center gap-2.5 lg:flex">
-          <a
-            href={contact.phoneHref}
-            className="btn btn-outline h-10 px-3.5 text-sm"
-          >
+          <a href={contact.phoneHref} className="btn btn-outline h-10 px-3.5 text-sm">
             <Phone className="size-4" />
             {contact.phoneDisplay}
           </a>
-          <a href={contact.bookingHref} className="btn btn-primary h-10 px-4 text-sm">
+          <Link href={contact.bookingHref} className="btn btn-primary h-10 px-4 text-sm">
             Book online
             <ArrowRight className="size-4" />
-          </a>
+          </Link>
         </div>
 
         <button
@@ -130,15 +133,18 @@ export function Header() {
           <div id="mobile-menu" className="mobile-menu-panel container-x pb-6 pt-1">
             <nav className="surface-card flex flex-col gap-1 p-3">
               {navItems.map((item) => (
-                <a
+                <Link
                   key={item.href}
                   href={item.href}
+                  aria-current={item.href === pathname ? "page" : undefined}
                   onClick={() => setMenuOpen(false)}
-                  className="flex items-center justify-between rounded-xl px-4 py-3.5 text-base font-medium text-ink transition hover:bg-wash"
+                  className={`flex items-center justify-between rounded-xl px-4 py-3.5 text-base font-medium text-ink transition hover:bg-wash ${
+                    item.href === pathname ? "bg-wash" : ""
+                  }`}
                 >
                   {item.label}
                   <ChevronRight className="size-4 text-ink-faint" />
-                </a>
+                </Link>
               ))}
               <a
                 href={contact.phoneHref}
@@ -148,14 +154,14 @@ export function Header() {
                 <Phone className="size-4" />
                 {contact.phoneDisplay}
               </a>
-              <a
+              <Link
                 href={contact.bookingHref}
                 onClick={() => setMenuOpen(false)}
                 className="btn btn-primary mt-2 h-12 w-full"
               >
                 <CalendarDays className="size-4" />
                 Book online
-              </a>
+              </Link>
             </nav>
           </div>
         </div>

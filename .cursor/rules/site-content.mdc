@@ -8,7 +8,7 @@ alwaysApply: true
 - Edit practice facts, hours, services, doctors, reviews, and schema in `src/data/site.ts`.
 - Keep design tokens in `src/app/globals.css`. Do not invent a second palette.
 - Verified phone is (916) 727-6453. Address is 4320 Elverta Rd #3, Antelope, CA 95843. Doctors on the public site: Michael Narodovich, DMD and Lucas L. Sheppard, DMD.
-- Do not invent insurance lists, CareCredit, a front-desk email, or a Google star rating.
+- Do not invent insurance lists, CareCredit, or a front-desk email. The Google rating snapshot in `socialProof` was checked directly on August 24, 2026; re-check the live listing before changing its rating or counts.
 - Same-day emergency visits are offered when possible, not guaranteed.
 - Scheduler requires name plus a phone number or an email (at least one, not both).
 - Scheduler delivery uses Formspree (`https://formspree.io/f/xvkpdvyz`). Keep email optional in the Formspree dashboard so phone-only requests succeed. Optional `LEAD_WEBHOOK_URL` is a second hop. Without a successful Formspree response, do not claim the front desk received a lead.

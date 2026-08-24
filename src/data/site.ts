@@ -45,7 +45,7 @@ export const contact = {
   // captures leads natively. When the practice provides its Dentrix Ascend
   // deep link, point this at it instead — the bare bookit.dentrixascend.com
   // domain lands on a generic portal that doesn't identify the practice.
-  bookingHref: "#visit",
+  bookingHref: "/#visit",
   addressLine1: "4320 Elverta Rd #3",
   addressLine2: "Antelope, CA 95843",
   mapsHref:
@@ -70,11 +70,11 @@ export const imagery = {
 
 // Primary navigation ---------------------------------------------------------
 export const navItems = [
-  { label: "Care", href: "#services" },
-  { label: "Technology", href: "#technology" },
-  { label: "Doctors", href: "#doctors" },
-  { label: "Reviews", href: "#reviews" },
-  { label: "Visit", href: "#visit" },
+  { label: "Care", href: "/#services" },
+  { label: "Technology", href: "/#technology" },
+  { label: "Doctors", href: "/#doctors" },
+  { label: "Reviews", href: "/reviews" },
+  { label: "Visit", href: "/#visit" },
 ];
 
 // Emergency pathway (high-intent, time-sensitive) ----------------------------
@@ -84,13 +84,26 @@ export const emergency = {
   body: "A chipped or knocked-out tooth, swelling, a lost filling or crown, pain that kept you up last night. Call now and we'll do everything we can to see you today.",
 };
 
-// Social proof — keep this verifiable -----------------------------------------
-// The quoted reviews live on this page (#reviews); more patient reviews are
-// visible on the practice's Google Maps listing.
+// Social proof — verified directly against the practice's Google Business
+// Profile on August 24, 2026. Counts will change as new reviews arrive, so
+// re-check the live listing before revising this snapshot.
 export const socialProof = {
-  reviewsUrl: "#reviews",
-  moreReviewsUrl: contact.mapsHref,
-  label: "Read patient reviews",
+  rating: 4.8,
+  totalReviews: 632,
+  fiveStarReviews: 589,
+  writtenReviews: 428,
+  checkedDate: "August 24, 2026",
+  reviewsUrl: "/reviews",
+  moreReviewsUrl:
+    "https://www.google.com/maps/place/Sacramento+Dental+Medicine/@38.7122668,-121.3634404,17z/data=!4m8!3m7!1s0x809b274f1a844d9f:0xe2ebfbf8063fa173!8m2!3d38.7122668!4d-121.3634404!9m1!1b1!16s%2Fg%2F1vzg2h6z",
+  label: "Read all patient reviews",
+  distribution: [
+    { stars: 5, count: 589 },
+    { stars: 4, count: 16 },
+    { stars: 3, count: 9 },
+    { stars: 2, count: 4 },
+    { stars: 1, count: 14 },
+  ],
 };
 
 // Quick facts (sub-hero band) ------------------------------------------------
@@ -281,6 +294,120 @@ export const reviews: Review[] = [
   },
 ];
 
+export type GoogleReviewTheme = {
+  title: string;
+  count: number;
+  body: string;
+};
+
+export const googleReviewAnalysis = {
+  summary:
+    "Across the full corpus, patients most often praise a kind team, a clean office, Dr. Mike, long-term trust, comfort for anxious patients, and clear explanations.",
+  lowerRatedNote:
+    "The smaller set of lower-rated reviews most often mentions communication friction, cost or insurance frustration, scheduling issues, or procedure discomfort.",
+};
+
+// Theme counts are overlapping text matches across the 428 written Google
+// reviews, not a survey or mutually exclusive categories.
+export const googleReviewThemes: GoogleReviewTheme[] = [
+  {
+    title: "Friendly, kind care",
+    count: 228,
+    body: "Patients repeatedly describe a warm welcome, patient assistants, and a team that remembers them.",
+  },
+  {
+    title: "A clean, organized office",
+    count: 140,
+    body: "Cleanliness and organization are among the most common practical details patients mention.",
+  },
+  {
+    title: "Dr. Mike",
+    count: 100,
+    body: "Reviews frequently call out Dr. Michael Narodovich for being thorough, gentle, and easy to talk to.",
+  },
+  {
+    title: "Long-term and family care",
+    count: 89,
+    body: "Many patients mention years with the practice, bringing family, or continuing to drive back after moving.",
+  },
+  {
+    title: "Comfort for anxious patients",
+    count: 75,
+    body: "People who describe dental anxiety often say the team helped them feel safe, relaxed, and never judged.",
+  },
+  {
+    title: "Clear explanations",
+    count: 64,
+    body: "Patients value having X-rays, options, costs, and next steps explained before treatment begins.",
+  },
+];
+
+export type GoogleReviewExcerpt = {
+  quote: string;
+  name: string;
+  date: string;
+  theme: "Comfort" | "Communication" | "Team" | "Long-term care" | "Urgent care";
+};
+
+// Short excerpts from public Google reviews. Each excerpt is under 25 words;
+// the full, live reviews remain on Google via socialProof.moreReviewsUrl.
+export const googleReviewExcerpts: GoogleReviewExcerpt[] = [
+  {
+    quote: "They make the experience completely doable and not so scary.",
+    name: "Rebecca Simpson",
+    date: "2 years ago",
+    theme: "Comfort",
+  },
+  {
+    quote: "He takes the time to explain everything and give me options, so I don’t feel pressured.",
+    name: "Whitney Eklund",
+    date: "2 years ago",
+    theme: "Communication",
+  },
+  {
+    quote: "Staff are professional & friendly; made me feel very welcomed.",
+    name: "Beverly A. Plunkett",
+    date: "Edited 2 years ago",
+    theme: "Team",
+  },
+  {
+    quote: "We have been going to Sacramento Dental Medicine for over 20 years.",
+    name: "Ael S.",
+    date: "Edited a year ago",
+    theme: "Long-term care",
+  },
+  {
+    quote: "I am so happy to finally have found a dental team that I can trust.",
+    name: "Roxanne Gray",
+    date: "Edited 4 years ago",
+    theme: "Comfort",
+  },
+  {
+    quote: "Everyone who treated me was very thorough and explained every step of the appointment.",
+    name: "Megan E. Swan",
+    date: "8 years ago",
+    theme: "Communication",
+  },
+  {
+    quote: "The staff were kind, friendly and above all else concerned enough to stay late to save my tooth.",
+    name: "Riptan Tornup",
+    date: "2 years ago",
+    theme: "Urgent care",
+  },
+  {
+    quote: "We even moved out of the area a few years ago but commute back to them because they’re so great.",
+    name: "Dave Eubanks",
+    date: "4 years ago",
+    theme: "Long-term care",
+  },
+  {
+    quote: "Kim the cleaning tech was very gentle on my sensitive teeth and did an amazing job.",
+    name: "Haley Daniels",
+    date: "2 years ago",
+    theme: "Team",
+  },
+];
+
 // Office hours ---------------------------------------------------------------
 export const hours: { day: string; time: string }[] = [
   { day: "Monday", time: "9:00 AM – 6:00 PM" },
@@ -424,6 +551,7 @@ export const structuredData = {
   "@type": "Dentist",
   name: contact.practiceName,
   telephone: "+1-916-727-6453",
+  sameAs: [socialProof.moreReviewsUrl],
   address: {
     "@type": "PostalAddress",
     streetAddress: contact.addressLine1,
@@ -441,6 +569,13 @@ export const structuredData = {
   ],
   areaServed: contact.serviceArea,
   medicalSpecialty: ["Dentistry", "Cosmetic Dentistry", "Endodontics"],
+  aggregateRating: {
+    "@type": "AggregateRating",
+    ratingValue: socialProof.rating,
+    reviewCount: socialProof.totalReviews,
+    bestRating: 5,
+    worstRating: 1,
+  },
 };
 
 // FAQ structured data (schema.org / FAQPage) ---------------------------------

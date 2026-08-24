@@ -12,8 +12,10 @@ patients to book.
 - **Native lead capture** — a Server Action validates the request (name, plus a
   phone number or an email — at least one) and POSTs JSON to Formspree. Optional
   `LEAD_WEBHOOK_URL` is a second hop.
-- **Source-backed social proof** — patient review excerpts published by the
-  practice, without displaying an unverified rating.
+- **Deep review evidence** — a dedicated responsive reviews page based on all
+  632 Google ratings and 428 written reviews, with a verified distribution,
+  overlapping theme analysis, short attributed excerpts, and a link to the
+  complete live Google archive.
 - **Dedicated emergency path** — a distinct "in pain? call now" band for
   high-intent visitors.
 - **New-patient info** — coverage questions, payment options, what to bring,
@@ -83,8 +85,19 @@ Primary sources: the practice's [contact page](https://sacramentodentalmedicine.
 [emergency guidance](https://sacramentodentalmedicine.com/dental-emergencies/).
 
 The current public website does not confirm a front-desk email, accepted
-insurance plans, CareCredit, or an exact Google rating. Do not add those claims
-without written confirmation from the practice or a direct authoritative source.
+insurance plans, or CareCredit. Do not add those claims without written
+confirmation from the practice or a direct authoritative source.
+
+The practice's Google Business Profile was checked directly on August 24, 2026:
+
+- **4.8 stars** across **632 reviews**
+- Rating distribution: 589 five-star, 16 four-star, 9 three-star, 4 two-star,
+  and 14 one-star reviews
+- 428 reviews included written feedback; the rest were rating-only
+
+The review counts are a dated snapshot and should be re-checked before future
+copy changes. The public reviews page uses aggregate analysis and short excerpts;
+the complete, continuously updated review text remains on Google.
 Confirm the active provider roster and Saturday appointment policy directly
 with the practice before the final domain cutover.
 
@@ -94,9 +107,9 @@ A few production values still need configuration or final confirmation:
 
 | What | Where | Notes |
 | --- | --- | --- |
-| Booking URL | `contact.bookingHref` | Currently `#visit` (the on-site scheduler). Swap in the practice-specific Dentrix Ascend deep link when provided — the bare portal domain doesn't identify the practice. |
+| Booking URL | `contact.bookingHref` | Currently `/#visit` (the on-site scheduler). Swap in the practice-specific Dentrix Ascend deep link when provided — the bare portal domain doesn't identify the practice. |
 | Saturday availability | `officeHours` | The contact page says closed; confirm whether advance appointments are offered. |
-| Reviews links | `socialProof` | "More reviews" points to the practice's Google Maps listing. Swap in the practice's canonical Google Business review link if they have one. |
+| Reviews links | `socialProof` | The internal page lives at `/reviews`; the external link opens the verified Google Maps review panel. |
 
 ### Scheduler backend
 

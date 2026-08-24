@@ -2,6 +2,7 @@ import { Header } from "@/components/Header";
 import { MobileCTA } from "@/components/MobileCTA";
 import { Hero } from "@/components/sections/Hero";
 import { TrustBand } from "@/components/sections/TrustBand";
+import { ReviewProof } from "@/components/sections/ReviewProof";
 import { Emergency } from "@/components/sections/Emergency";
 import { Intro } from "@/components/sections/Intro";
 import { Services } from "@/components/sections/Services";
@@ -39,6 +40,7 @@ export default function Home() {
       <Header />
       <main id="main" className="flex-1">
         <Hero />
+        <ReviewProof />
         <TrustBand />
         <Emergency />
         <Intro />

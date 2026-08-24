@@ -12,7 +12,7 @@ export function Hero() {
           alt=""
           fill
           loading="eager"
-          sizes="100vw"
+          sizes="(max-width: 1023px) 100vw, 1px"
           className="object-cover object-center opacity-30"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-canvas/20 via-canvas/80 to-canvas" />

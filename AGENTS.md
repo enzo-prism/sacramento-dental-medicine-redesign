@@ -23,10 +23,33 @@ Sibling practice site: `enzo-prism/waikiki-dental`. Do not mix copy, phone numbe
 - Appointment Server Action: `src/app/actions.ts`
 - Scheduler UI: `src/components/Scheduler.tsx`
 - Contact validation helpers: `src/lib/appointment.ts`
-- Title, description, Open Graph copy: `seo` in `src/data/site.ts`
+- Home title, description, and social copy: `seo` in `src/data/site.ts`
+- Reviews metadata: `src/app/reviews/page.tsx` (derived from `socialProof`)
+- Social-card layout: `src/lib/social-image.tsx`
+- Favicon and app-icon generator: `scripts/generate-seo-assets.py`
 - Canonical / OG origin: `src/lib/site-url.ts` (Vercel production host until cutover)
 
-Do not invent insurance lists, CareCredit, a front-desk email, or a Google star rating. Those are unconfirmed. Do not claim same-day emergency visits are guaranteed.
+Do not invent insurance lists, CareCredit, or a front-desk email. The Google
+rating and review counts are a dated snapshot in `socialProof`; re-check the
+live Business Profile before changing them. Do not claim same-day emergency
+visits are guaranteed.
+
+## Metadata and social sharing
+
+- Home and Reviews have separate title, description, Open Graph, and X copy.
+- Home social images live at `src/app/opengraph-image.tsx` and
+  `src/app/twitter-image.tsx`; Reviews overrides them inside
+  `src/app/reviews/`.
+- Keep social images at 1200×630 and preserve explicit alt text, width, height,
+  and `image/png` metadata.
+- Social cards must use the existing mark, palette, contact data, and verified
+  review snapshot. Do not add unverified ratings or generic stock-office claims.
+- Regenerate `favicon.ico`, `icon.png`, and `apple-icon.png` with
+  `python3 scripts/generate-seo-assets.py`. The script must read the canonical
+  `public/images/logo-mark.png`, never a previously generated icon.
+- A successful build is not production verification. After `main` deploys,
+  read back the live Home and Reviews `<head>` tags and confirm every icon,
+  Open Graph, and X image endpoint returns 200 with the expected content type.
 
 ## Scheduler
 
@@ -47,6 +70,7 @@ npm run dev      # http://localhost:3000
 npm run lint
 npm test
 npm run build
+python3 scripts/generate-seo-assets.py  # only after changing the practice mark or icon treatment
 ```
 
 ## Cursor Cloud specific instructions

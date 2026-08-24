@@ -50,8 +50,8 @@ function BrandLockup({ inverse = false }: { inverse?: boolean }) {
         <img
           src={logoSrc}
           alt=""
-          width="56"
-          height="56"
+          width={56}
+          height={56}
           style={{ width: 56, height: 56 }}
         />
       </div>

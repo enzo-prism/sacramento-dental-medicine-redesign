@@ -64,7 +64,7 @@ export function Hero() {
               src={imagery.hero}
               alt="Sunlit contemporary treatment room — atmospheric photography, not the Elverta Road office"
               fill
-              preload
+              loading="eager"
               sizes="(min-width: 1024px) 46vw, 100vw"
               className="object-cover object-center"
             />

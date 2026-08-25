@@ -54,7 +54,8 @@ export function ReviewsExplorer() {
       </div>
 
       <p className="sr-only" aria-live="polite">
-        Showing {visibleReviews.length} review excerpts for {filter}.
+        Showing {visibleReviews.length} review excerpt
+        {visibleReviews.length === 1 ? "" : "s"} for {filter}.
       </p>
 
       <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">

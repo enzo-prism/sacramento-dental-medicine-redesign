@@ -56,8 +56,8 @@ src/
 ├── components/
 │   ├── Scheduler.tsx     # multi-step scheduling wizard ('use client')
 │   ├── Header.tsx, MobileCTA.tsx, SectionLabel.tsx, ScrollReveal.tsx
-│   └── sections/         # page order: Hero, TrustBand, Emergency, Intro,
-│                          # Services, Technology, Doctors, Reviews,
+│   └── sections/         # page order: Hero, ReviewProof, TrustBand, Emergency,
+│                          # Intro, Services, Technology, Doctors, Reviews,
 │                          # NewPatients (+ FAQ), Visit, Footer
 ├── data/site.ts          # copy, hours, services, visit types, reviews,
 │                          # schema.org data, seo title/description
@@ -185,6 +185,10 @@ python3 scripts/generate-seo-assets.py
 
 See [`docs/metadata.md`](docs/metadata.md) for the current metadata inventory,
 maintenance workflow, and production verification checklist.
+
+See [`docs/production-readiness.md`](docs/production-readiness.md) for the
+browser, booking, accessibility, responsive, and release gates used before a
+production handoff.
 
 ## Design
 

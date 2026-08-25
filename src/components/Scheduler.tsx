@@ -258,7 +258,7 @@ function SchedulerForm({ onReset }: { onReset: () => void }) {
           {[0, 1, 2].map((i) => (
             <li
               key={i}
-              className={`h-1.5 rounded-full transition-all ${
+              className={`h-1.5 rounded-full transition-[width,background-color] ${
                 i === step
                   ? "w-7 bg-brand-deep"
                   : i < step
@@ -295,7 +295,7 @@ function SchedulerForm({ onReset }: { onReset: () => void }) {
               <h3
                 ref={headingRef}
                 tabIndex={-1}
-                className="font-display text-[1.65rem] font-medium leading-tight text-ink outline-none md:text-2xl"
+                className="font-display text-[1.65rem] font-medium leading-tight text-ink md:text-2xl"
               >
                 What do you need?
               </h3>
@@ -374,7 +374,7 @@ function SchedulerForm({ onReset }: { onReset: () => void }) {
               <h3
                 ref={headingRef}
                 tabIndex={-1}
-                className="font-display text-[1.65rem] font-medium leading-tight text-ink outline-none md:text-2xl"
+                className="font-display text-[1.65rem] font-medium leading-tight text-ink md:text-2xl"
               >
                 When works?
               </h3>
@@ -494,7 +494,7 @@ function SchedulerForm({ onReset }: { onReset: () => void }) {
               <h3
                 ref={headingRef}
                 tabIndex={-1}
-                className="font-display text-[1.65rem] font-medium leading-tight text-ink outline-none md:text-2xl"
+                className="font-display text-[1.65rem] font-medium leading-tight text-ink md:text-2xl"
               >
                 How can we reach you?
               </h3>
@@ -585,7 +585,7 @@ function SchedulerForm({ onReset }: { onReset: () => void }) {
                     value={notes}
                     onChange={(e) => setNotes(e.target.value)}
                     placeholder="A tooth that hurts, insurance questions, dental anxiety…"
-                    className="resize-none rounded-2xl border border-line bg-white px-3.5 py-3 text-base leading-6 text-ink outline-none transition placeholder:text-ink-faint focus:border-brand-deep md:text-sm"
+                    className="resize-none rounded-2xl border border-line bg-white px-3.5 py-3 text-base leading-6 text-ink transition placeholder:text-ink-faint focus:border-brand-deep md:text-sm"
                   />
                 </label>
               </div>
@@ -711,7 +711,7 @@ function TextField({
         aria-required={required ? true : undefined}
         aria-invalid={error ? true : undefined}
         aria-describedby={error ? errorId : undefined}
-        className={`h-12 rounded-2xl border bg-white px-3.5 text-base text-ink outline-none transition placeholder:text-ink-faint focus:border-brand-deep md:text-sm ${
+        className={`h-12 rounded-2xl border bg-white px-3.5 text-base text-ink transition placeholder:text-ink-faint focus:border-brand-deep md:text-sm ${
           error ? "border-ember" : "border-line"
         }`}
       />

@@ -25,7 +25,7 @@ export function Hero() {
           </p>
 
           <h1 className="mt-5 font-display text-[clamp(1.85rem,8vw,3.4rem)] font-semibold leading-[1.02] tracking-[-0.03em] text-ink text-balance lg:text-[clamp(2.6rem,4.4vw,3.6rem)]">
-            A dentist visit
+            A dentist visit{" "}
             <span className="block text-brand-deep">you won&apos;t dread.</span>
           </h1>
 

@@ -6,9 +6,10 @@ patients to book.
 
 ## Highlights
 
-- **Multi-step scheduler** — a mobile-first wizard (visit type → day & time of
-  day → how we can reach you) with auto-advance, large tap targets, and morning /
-  afternoon / evening windows. The front desk confirms a specific time.
+- **Dedicated scheduling page** — `/schedule` keeps the appointment journey
+  focused and gives the multi-step scheduler room to work on every device. The
+  wizard covers visit type → day & time of day → how we can reach you, and the
+  front desk confirms a specific time.
 - **Native lead capture** — a Server Action validates the request (name, plus a
   phone number or an email — at least one) and POSTs JSON to Formspree. Optional
   `LEAD_WEBHOOK_URL` is a second hop.
@@ -18,7 +19,7 @@ patients to book.
   complete live Google archive.
 - **Search and sharing system** — page-specific titles and descriptions,
   high-resolution favicon/app icons, and distinct 1200×630 Open Graph and X
-  cards for Home and Reviews.
+  cards for Home, Reviews, and Schedule.
 - **Dedicated emergency path** — a distinct "in pain? call now" band for
   high-intent visitors.
 - **New-patient info** — coverage questions, payment options, what to bring,
@@ -49,6 +50,7 @@ src/
 │   ├── favicon.ico, icon.png, apple-icon.png
 │   ├── opengraph-image.tsx, twitter-image.tsx
 │   ├── reviews/           # review page + route-specific social cards
+│   ├── schedule/          # dedicated appointment page + route metadata
 │   ├── actions.ts        # 'use server' appointment-request handler
 │   ├── sitemap.ts        # generated sitemap
 │   ├── robots.ts         # generated robots.txt
@@ -58,13 +60,13 @@ src/
 │   ├── Header.tsx, MobileCTA.tsx, SectionLabel.tsx, ScrollReveal.tsx
 │   └── sections/         # page order: Hero, ReviewProof, TrustBand, Emergency,
 │                          # Intro, Services, Technology, Doctors, Reviews,
-│                          # NewPatients (+ FAQ), Visit, Footer
+│                          # NewPatients (+ FAQ), ScheduleCTA, Footer
 ├── data/site.ts          # copy, hours, services, visit types, reviews,
 │                          # schema.org data, seo title/description
 └── lib/
     ├── appointment.ts    # form state types + phone/email validation helpers
-    ├── social-image.tsx  # shared 1200×630 Home/Reviews card renderer
-    └── site-url.ts       # canonical origin (Vercel host until domain cutover)
+    ├── social-image.tsx  # shared 1200×630 Home/Reviews/Schedule card renderer
+    └── site-url.ts       # canonical/social origin resolver
 ```
 
 All site copy and configuration live in **`src/data/site.ts`** — edit content
@@ -112,7 +114,7 @@ A few production values still need configuration or final confirmation:
 
 | What | Where | Notes |
 | --- | --- | --- |
-| Booking URL | `contact.bookingHref` | Currently `/#visit` (the on-site scheduler). Swap in the practice-specific Dentrix Ascend deep link when provided — the bare portal domain doesn't identify the practice. |
+| Booking URL | `contact.bookingHref` | Currently `/schedule` (the dedicated on-site scheduler). Swap in the practice-specific Dentrix Ascend deep link when provided — the bare portal domain doesn't identify the practice. |
 | Saturday availability | `officeHours` | The contact page says closed; confirm whether advance appointments are offered. |
 | Reviews links | `socialProof` | The internal page lives at `/reviews`; the external link opens the verified Google Maps review panel. |
 
@@ -122,6 +124,9 @@ The scheduler posts to the `requestAppointment` Server Action
 (`src/app/actions.ts`), which validates the request and POSTs JSON to
 **Formspree** (`https://formspree.io/f/xvkpdvyz`, overridable with
 `FORMSPREE_ENDPOINT`). Shared validation lives in `src/lib/appointment.ts`.
+The server independently validates the selected visit type, Sacramento-local
+future business date, 40-day booking horizon, and exact office-hours window;
+hidden browser fields are never treated as trusted input.
 
 Required fields:
 
@@ -132,8 +137,9 @@ Required fields:
 
 Confirm in the Formspree dashboard that **email is not marked required**. Empty
 phone and email are omitted from the JSON payload so phone-only requests do not
-400. Optional: set **`LEAD_WEBHOOK_URL`** for a second delivery hop after
-Formspree succeeds.
+400. Formspree delivery has a bounded timeout. Optional: set
+**`LEAD_WEBHOOK_URL`** for a non-blocking second hop after Formspree succeeds;
+that optional delivery cannot reverse the accepted Formspree response.
 
 Do not publicly launch the form until a controlled test submission is received
 successfully by the front desk. A successful on-site “Request sent” only means
@@ -168,12 +174,13 @@ sitemap, and Open Graph URLs flip with the cutover.
 
 ### Metadata
 
-Title, meta description, and social copy live in `seo` (`src/data/site.ts`).
-Favicon and app-icon files are generated from the canonical practice mark by
-`scripts/generate-seo-assets.py`. Home and Reviews use route-specific Open
-Graph and Twitter images generated by Next.js from `src/lib/social-image.tsx`.
-Until the custom domain is attached, `metadataBase` uses the Vercel production
-host so canonical and social-image URLs resolve correctly.
+Title, meta description, and social copy live in `seo` (`src/data/site.ts`) and
+the Reviews and Schedule route metadata. Favicon and app-icon files are
+generated from the canonical practice mark by `scripts/generate-seo-assets.py`.
+Home, Reviews, and Schedule use route-specific Open Graph and X images generated
+by Next.js from `src/lib/social-image.tsx`. Until the custom domain is attached,
+`metadataBase` uses the Vercel production host so canonical and social-image
+URLs resolve correctly.
 
 The icon generator produces a multi-frame 16/32/48px `favicon.ico`, a 512px
 `icon.png`, and a 180px Apple touch icon. Run it only after the canonical
@@ -190,13 +197,16 @@ See [`docs/production-readiness.md`](docs/production-readiness.md) for the
 browser, booking, accessibility, responsive, and release gates used before a
 production handoff.
 
+See [`design-qa.md`](design-qa.md) for the August 25, 2026 multi-device audit,
+fixed-issue history, browser evidence, and final release-gate result.
+
 ## Design
 
 Visual system lives in `src/app/globals.css`. Do not invent a second palette.
 
 - **Brand as atmosphere, navy as action.** Mid periwinkle (`--brand` `#6a8ece`) is for tints and dark-band accents. It fails WCAG AA on white — body type and pills use `--brand-deep` / `--brand-ink`. Ember is reserved for the emergency path.
-- **One night band.** Only the Visit / scheduler chapter uses `--night`. Technology stays on the light canvas.
-- **Primary Book pills** live in the header, hero, Visit scheduler, footer, and mobile CTA bar. Other sections use text links.
+- **One night band per page.** Home uses a compact scheduling invitation; `/schedule` uses the night treatment around the focused form. Technology stays on the light canvas.
+- **Primary Book pills** live in the header, hero, scheduling invitation, footer, and mobile CTA bar. Every one routes to `/schedule`; other sections use text links.
 - **Scheduler honesty.** Patients pick a day and a morning / afternoon / evening window. Copy says the front desk will reach out to confirm a specific time.
 
 ## Assets still needed

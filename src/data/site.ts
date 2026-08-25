@@ -41,11 +41,11 @@ export const contact = {
   tagline: "Modern family, cosmetic & restorative dentistry in Antelope, CA",
   phoneDisplay: "(916) 727-6453",
   phoneHref: "tel:+19167276453",
-  // All "Book online" CTAs route to the on-site scheduler (#visit), which
+  // All booking CTAs route to the dedicated on-site scheduling page, which
   // captures leads natively. When the practice provides its Dentrix Ascend
   // deep link, point this at it instead — the bare bookit.dentrixascend.com
   // domain lands on a generic portal that doesn't identify the practice.
-  bookingHref: "/#visit",
+  bookingHref: "/schedule",
   addressLine1: "4320 Elverta Rd #3",
   addressLine2: "Antelope, CA 95843",
   mapsHref:
@@ -74,7 +74,7 @@ export const navItems = [
   { label: "Technology", href: "/#technology" },
   { label: "Doctors", href: "/#doctors" },
   { label: "Reviews", href: "/reviews" },
-  { label: "Visit", href: "/#visit" },
+  { label: "Schedule", href: "/schedule" },
 ];
 
 // Emergency pathway (high-intent, time-sensitive) ----------------------------

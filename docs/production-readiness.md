@@ -20,8 +20,8 @@ email remains an error even when the other contact method is valid.
 
 ## Browser journey
 
-Test the production build at 320, 375, 390, 768, 1024, and 1440 CSS pixels.
-Home and Reviews must have no horizontal overflow. At minimum, verify:
+Test the production build at 320, 375, 390, 430, 768, 1024, and 1440 CSS pixels.
+Home, Reviews, and Schedule must have no horizontal overflow. At minimum, verify:
 
 1. Home renders the hero, Google-review proof, primary call and booking actions,
    and the atmospheric-image disclosure correctly.
@@ -29,16 +29,19 @@ Home and Reviews must have no horizontal overflow. At minimum, verify:
    archive link, and booking call to action.
 3. Mobile navigation opens, identifies the current page, closes with Escape,
    restores focus to its toggle, and does not leave the page scroll-locked.
-4. Every Book online action reaches `/#visit` with the scheduler visible below
-   the fixed header.
-5. The scheduler advances from visit type to day/time to contact details and
+4. Every Book online action reaches `/schedule`, lands at the top of the
+   dedicated page, and keeps the scheduler visible near the main heading.
+5. A direct visit or refresh at `/schedule` succeeds, the Schedule navigation
+   item identifies the current page, and the Home page no longer embeds the
+   appointment form near its footer.
+6. The scheduler advances from visit type to day/time to contact details and
    moves programmatic focus to the new step heading.
-6. The request button stays disabled with no contact method or name only,
+7. The request button stays disabled with no contact method or name only,
    enables with name plus phone, enables with name plus email, and disables for
    a partial phone or malformed email.
-7. Server validation rejects a forced request with neither phone nor email
+8. Server validation rejects a forced request with neither phone nor email
    before any Formspree request is made.
-8. Keyboard focus is visible; form controls have labels, autocomplete hints,
+9. Keyboard focus is visible; form controls have labels, autocomplete hints,
    input modes, inline status text, and reduced-motion behavior.
 
 Do not send a real appointment request during routine QA. A controlled
@@ -57,11 +60,15 @@ After pushing `main`:
 
 1. Wait for the Git-linked production deployment to report Ready.
 2. Confirm the production alias resolves to that deployment.
-3. Read back Home and Reviews in a fresh browser session and check for console
-   errors, failed requests, layout overflow, and stale metadata.
+3. Read back Home, Reviews, and Schedule in a fresh browser session and check
+   for console errors, failed requests, layout overflow, and stale metadata.
 4. Re-run the booking journey without submitting a real lead.
 5. Confirm the deployed commit matches `origin/main`.
 
 The current release target is the Vercel production alias. The custom domain is
 not part of this release until the practice approves DNS cutover and lead
 delivery has been verified separately.
+
+The complete August 25, 2026 responsive and interaction record is in
+[`../design-qa.md`](../design-qa.md). Keep the final screenshots it references
+when archiving or reproducing the release gate.

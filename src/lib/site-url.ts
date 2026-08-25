@@ -1,9 +1,9 @@
 /**
  * Public origin for canonical URLs, Open Graph images, sitemap, and robots.
  *
- * Until sacramentodentalmedicine.com is attached to this Vercel project, the
- * production host is the .vercel.app alias. Set NEXT_PUBLIC_SITE_URL at
- * cutover. Do not attach the custom domain from this repo.
+ * An explicit NEXT_PUBLIC_SITE_URL wins. Vercel's production alias is used
+ * when present; otherwise production defaults to the public custom domain.
+ * Do not attach or change DNS from this repository.
  */
 export function resolveSiteUrl(): string {
   const explicit = process.env.NEXT_PUBLIC_SITE_URL?.trim().replace(/\/$/, "");

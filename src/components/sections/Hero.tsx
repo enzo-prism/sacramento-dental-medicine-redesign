@@ -5,7 +5,11 @@ import { contact, imagery } from "@/data/site";
 
 export function Hero() {
   return (
-    <section id="top" className="relative overflow-hidden pt-32 lg:pt-40">
+    <section
+      id="top"
+      data-mobile-cta-stop
+      className="relative overflow-hidden pt-32 lg:pt-40"
+    >
       <div aria-hidden="true" className="absolute inset-x-0 top-0 h-72 lg:hidden">
         <Image
           src={imagery.hero}
@@ -35,7 +39,10 @@ export function Hero() {
             seen a dentist in years.
           </p>
 
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+          <div
+            data-mobile-cta-stop
+            className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center"
+          >
             <a href={contact.bookingHref} className="btn btn-primary h-12 px-5 text-base">
               <CalendarDays className="size-5" />
               Book online

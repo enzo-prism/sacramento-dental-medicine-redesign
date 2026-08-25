@@ -210,6 +210,130 @@ export function createHomeSocialImage() {
   );
 }
 
+export function createScheduleSocialImage() {
+  return new ImageResponse(
+    <div
+      style={{
+        width: "100%",
+        height: "100%",
+        display: "flex",
+        background: colors.canvas,
+        color: colors.ink,
+      }}
+    >
+      <div
+        style={{
+          width: 790,
+          height: "100%",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          padding: "62px 58px 56px 74px",
+        }}
+      >
+        <BrandLockup />
+        <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              fontSize: 62,
+              lineHeight: 1.02,
+              letterSpacing: "-0.055em",
+            }}
+          >
+            <span>Let&apos;s find a visit</span>
+            <span style={{ color: colors.brandDeep }}>that works.</span>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              maxWidth: 610,
+              color: colors.inkSoft,
+              fontSize: 23,
+              lineHeight: 1.35,
+            }}
+          >
+            Request a preferred day and time in about a minute. No account needed.
+          </div>
+        </div>
+        <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+          <div
+            style={{
+              display: "flex",
+              borderRadius: 999,
+              background: colors.night,
+              color: "#ffffff",
+              padding: "12px 20px",
+              fontSize: 18,
+            }}
+          >
+            New patients welcome
+          </div>
+          <div style={{ display: "flex", color: colors.inkSoft, fontSize: 18 }}>
+            {contact.phoneDisplay}
+          </div>
+        </div>
+      </div>
+
+      <div
+        style={{
+          width: 410,
+          height: "100%",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          padding: "68px 52px 58px",
+          background: colors.night,
+          color: "#ffffff",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            color: "#d5e1f4",
+            fontSize: 15,
+            letterSpacing: "0.15em",
+            textTransform: "uppercase",
+          }}
+        >
+          Three simple steps
+        </div>
+        <div style={{ display: "flex", flexDirection: "column", gap: 30 }}>
+          {["Choose your care", "Pick a time", "Tell us how to reach you"].map(
+            (label, index) => (
+              <div key={label} style={{ display: "flex", alignItems: "center", gap: 17 }}>
+                <div
+                  style={{
+                    width: 42,
+                    height: 42,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    borderRadius: 999,
+                    background: colors.brandTint,
+                    color: colors.brandDeep,
+                    fontSize: 19,
+                  }}
+                >
+                  {index + 1}
+                </div>
+                <div style={{ display: "flex", maxWidth: 220, fontSize: 22, lineHeight: 1.15 }}>
+                  {label}
+                </div>
+              </div>
+            ),
+          )}
+        </div>
+        <div style={{ display: "flex", color: "#d5e1f4", fontSize: 17 }}>
+          Phone or email · You only need one
+        </div>
+      </div>
+    </div>,
+    imageOptions,
+  );
+}
+
 export function createReviewsSocialImage({
   rating,
   totalReviews,

@@ -7,11 +7,22 @@ import { useEffect, useRef, useState } from "react";
 import { ArrowRight, CalendarDays, ChevronRight, Menu, Phone, X } from "lucide-react";
 import { contact, imagery, navItems } from "@/data/site";
 
+const FOCUSABLE_SELECTOR = [
+  "a[href]",
+  "button:not([disabled])",
+  "input:not([disabled])",
+  "select:not([disabled])",
+  "textarea:not([disabled])",
+  "[tabindex]:not([tabindex='-1'])",
+].join(", ");
+
 export function Header() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [activeSectionHref, setActiveSectionHref] = useState<string | null>(null);
   const toggleRef = useRef<HTMLButtonElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
 
   const closeAndRefocus = () => {
     setMenuOpen(false);
@@ -19,11 +30,43 @@ export function Header() {
   };
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    let frame = 0;
+    const updateHeaderState = () => {
+      setScrolled(window.scrollY > 24);
+      if (pathname !== "/") {
+        setActiveSectionHref(null);
+        return;
+      }
+
+      const threshold = 150;
+      const active = navItems
+        .filter((item) => item.href.startsWith("/#"))
+        .map((item) => ({
+          href: item.href,
+          element: document.getElementById(item.href.slice(2)),
+        }))
+        .filter((item) => item.element)
+        .findLast((item) => item.element!.getBoundingClientRect().top <= threshold);
+      setActiveSectionHref(active?.href ?? null);
+    };
+    const onScroll = () => {
+      window.cancelAnimationFrame(frame);
+      frame = window.requestAnimationFrame(updateHeaderState);
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+    window.addEventListener("hashchange", onScroll);
+    return () => {
+      window.cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("hashchange", onScroll);
+    };
+  }, [pathname]);
+
+  function isActive(href: string) {
+    if (href.startsWith("/#")) return pathname === "/" && href === activeSectionHref;
+    return href === pathname;
+  }
 
   useEffect(() => {
     if (!menuOpen) return;
@@ -31,10 +74,36 @@ export function Header() {
       if (event.key === "Escape") {
         setMenuOpen(false);
         toggleRef.current?.focus();
+        return;
+      }
+
+      if (event.key !== "Tab") return;
+
+      const focusable = menuRef.current?.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR);
+      if (!focusable?.length) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
       }
     };
+
+    const frame = window.requestAnimationFrame(() => {
+      const firstFocusable = menuRef.current?.querySelector<HTMLElement>(FOCUSABLE_SELECTOR);
+      firstFocusable?.focus();
+    });
+
     window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
+    return () => {
+      window.cancelAnimationFrame(frame);
+      window.removeEventListener("keydown", onKey);
+    };
   }, [menuOpen]);
 
   useEffect(() => {
@@ -85,18 +154,21 @@ export function Header() {
         </Link>
 
         <nav className="hidden items-center gap-1 text-sm font-medium text-ink-soft lg:flex">
-          {navItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              aria-current={item.href === pathname ? "page" : undefined}
-              className={`rounded-lg px-3 py-2 transition hover:bg-wash hover:text-ink ${
-                item.href === pathname ? "bg-wash text-ink" : ""
-              }`}
-            >
-              {item.label}
-            </Link>
-          ))}
+          {navItems.map((item) => {
+            const active = isActive(item.href);
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                aria-current={active ? (item.href.startsWith("/#") ? "location" : "page") : undefined}
+                className={`rounded-lg px-3 py-2 transition hover:bg-wash hover:text-ink ${
+                  active ? "bg-wash text-ink" : ""
+                }`}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
         </nav>
 
         <div className="hidden items-center gap-2.5 lg:flex">
@@ -117,7 +189,7 @@ export function Header() {
           className="grid size-10 place-items-center rounded-xl border border-line bg-white text-ink shadow-sm lg:hidden"
           aria-label={menuOpen ? "Close navigation" : "Open navigation"}
           aria-expanded={menuOpen}
-          aria-controls={menuOpen ? "mobile-menu" : undefined}
+          aria-controls="mobile-menu"
         >
           {menuOpen ? <X className="size-5" /> : <Menu className="size-5" />}
         </button>
@@ -130,22 +202,32 @@ export function Header() {
             onClick={closeAndRefocus}
             aria-hidden="true"
           />
-          <div id="mobile-menu" className="mobile-menu-panel container-x pb-6 pt-1">
+          <div
+            id="mobile-menu"
+            ref={menuRef}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Site navigation"
+            className="mobile-menu-panel container-x pb-6 pt-1"
+          >
             <nav className="surface-card flex flex-col gap-1 p-3">
-              {navItems.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  aria-current={item.href === pathname ? "page" : undefined}
-                  onClick={() => setMenuOpen(false)}
-                  className={`flex items-center justify-between rounded-xl px-4 py-3.5 text-base font-medium text-ink transition hover:bg-wash ${
-                    item.href === pathname ? "bg-wash" : ""
-                  }`}
-                >
-                  {item.label}
-                  <ChevronRight className="size-4 text-ink-faint" />
-                </Link>
-              ))}
+              {navItems.map((item) => {
+                const active = isActive(item.href);
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    aria-current={active ? (item.href.startsWith("/#") ? "location" : "page") : undefined}
+                    onClick={() => setMenuOpen(false)}
+                    className={`flex items-center justify-between rounded-xl px-4 py-3.5 text-base font-medium text-ink transition hover:bg-wash ${
+                      active ? "bg-wash" : ""
+                    }`}
+                  >
+                    {item.label}
+                    <ChevronRight className="size-4 text-ink-faint" />
+                  </Link>
+                );
+              })}
               <a
                 href={contact.phoneHref}
                 onClick={() => setMenuOpen(false)}

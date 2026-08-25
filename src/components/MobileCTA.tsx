@@ -10,7 +10,7 @@ export function MobileCTA() {
 
   useEffect(() => {
     const nodes = [
-      ...document.querySelectorAll("#visit, [data-mobile-cta-stop], footer"),
+      ...document.querySelectorAll("[data-mobile-cta-stop], footer"),
     ];
     if (nodes.length === 0) return;
 

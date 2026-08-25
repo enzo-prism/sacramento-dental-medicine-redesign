@@ -30,11 +30,20 @@ import {
   visitTypes,
 } from "@/data/site";
 
-const WEEKDAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-const MONTHS = [
-  "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
-];
+const SCHEDULING_TIME_ZONE = "America/Los_Angeles";
+const dayCardFormatter = new Intl.DateTimeFormat("en-US", {
+  weekday: "short",
+  month: "short",
+  day: "numeric",
+  timeZone: "UTC",
+});
+const daySummaryFormatter = new Intl.DateTimeFormat("en-US", {
+  weekday: "short",
+  month: "short",
+  day: "numeric",
+  year: "numeric",
+  timeZone: "UTC",
+});
 
 type DayOption = {
   iso: string;
@@ -64,19 +73,36 @@ function formatTime(min: number) {
   return `${h12}:${pad(m)} ${ampm}`;
 }
 
+function sacramentoTodayUtc() {
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone: SCHEDULING_TIME_ZONE,
+    year: "numeric",
+    month: "numeric",
+    day: "numeric",
+  }).formatToParts(new Date());
+  const value = (type: Intl.DateTimeFormatPartTypes) =>
+    Number(parts.find((part) => part.type === type)?.value ?? 0);
+
+  return new Date(Date.UTC(value("year"), value("month") - 1, value("day")));
+}
+
 function buildDays(count: number): DayOption[] {
   const out: DayOption[] = [];
-  const today = new Date();
+  const today = sacramentoTodayUtc();
   for (let i = 1; out.length < count && i <= 40; i++) {
-    const d = new Date(today.getFullYear(), today.getMonth(), today.getDate() + i);
-    const wd = d.getDay();
+    const d = new Date(today);
+    d.setUTCDate(today.getUTCDate() + i);
+    const wd = d.getUTCDay();
     if (!officeHours[wd]) continue;
+    const cardParts = dayCardFormatter.formatToParts(d);
+    const cardValue = (type: Intl.DateTimeFormatPartTypes) =>
+      cardParts.find((part) => part.type === type)?.value ?? "";
     out.push({
-      iso: `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`,
+      iso: `${d.getUTCFullYear()}-${pad(d.getUTCMonth() + 1)}-${pad(d.getUTCDate())}`,
       wd,
-      weekday: WEEKDAYS[wd],
-      dayNum: d.getDate(),
-      month: MONTHS[d.getMonth()],
+      weekday: cardValue("weekday"),
+      dayNum: d.getUTCDate(),
+      month: cardValue("month"),
       relative: i === 1 ? "Tomorrow" : "",
     });
   }
@@ -119,7 +145,7 @@ function buildParts(wd: number): DayPart[] {
 }
 
 function dayLabel(day: DayOption) {
-  return `${day.weekday}, ${day.month} ${day.dayNum}`;
+  return daySummaryFormatter.format(new Date(`${day.iso}T12:00:00Z`));
 }
 
 export function Scheduler() {
@@ -149,8 +175,13 @@ function SchedulerForm({ onReset }: { onReset: () => void }) {
   const firstRender = useRef(true);
 
   useEffect(() => {
-    const frame = window.requestAnimationFrame(() => setDays(buildDays(8)));
-    return () => window.cancelAnimationFrame(frame);
+    const refreshDays = () => setDays(buildDays(8));
+    const frame = window.requestAnimationFrame(refreshDays);
+    const interval = window.setInterval(refreshDays, 60_000);
+    return () => {
+      window.cancelAnimationFrame(frame);
+      window.clearInterval(interval);
+    };
   }, []);
 
   useEffect(() => {
@@ -160,6 +191,16 @@ function SchedulerForm({ onReset }: { onReset: () => void }) {
     }
     headingRef.current?.focus({ preventScroll: true });
   }, [step]);
+
+  useEffect(() => {
+    if (state.ok || !state.message) return;
+    const firstInvalidField = (["name", "phone", "email"] as const).find(
+      (field) => state.errors[field],
+    );
+    if (firstInvalidField) {
+      document.getElementById(`appointment-${firstInvalidField}`)?.focus();
+    }
+  }, [state]);
 
   const selectedVisit = visitTypes.find((v) => v.id === visitId) ?? null;
   const selectedDay = days.find((d) => d.iso === dateIso) ?? null;
@@ -205,9 +246,9 @@ function SchedulerForm({ onReset }: { onReset: () => void }) {
         <span className="grid size-14 place-items-center rounded-full orb-brand">
           <CircleCheck className="size-7" strokeWidth={1.75} />
         </span>
-        <h3 className="font-display text-2xl font-medium text-ink md:text-3xl">
+        <h2 className="font-display text-2xl font-medium text-ink md:text-3xl">
           Request sent
-        </h3>
+        </h2>
         {selectedVisit && selectedDay && selectedPart ? (
           <div className="surface-wash w-full p-4 text-left">
             <SummaryRow icon={selectedVisit.icon} label={selectedVisit.label} />
@@ -243,7 +284,8 @@ function SchedulerForm({ onReset }: { onReset: () => void }) {
           <button
             type="button"
             onClick={() => setStep((s) => s - 1)}
-            className="grid size-11 shrink-0 place-items-center rounded-full border border-line text-ink transition hover:border-brand-deep hover:text-brand-deep"
+            disabled={pending}
+            className="grid size-11 shrink-0 place-items-center rounded-full border border-line text-ink transition hover:border-brand-deep hover:text-brand-deep disabled:cursor-not-allowed disabled:opacity-50"
             aria-label="Back"
           >
             <ArrowLeft className="size-4" />
@@ -271,7 +313,7 @@ function SchedulerForm({ onReset }: { onReset: () => void }) {
         <span className="size-11 shrink-0" aria-hidden />
       </div>
 
-      <form action={formAction} className="relative">
+      <form action={formAction} className="relative" aria-busy={pending}>
         <input type="hidden" name="visitType" value={selectedVisit?.label ?? ""} />
         <input type="hidden" name="date" value={dateIso ?? ""} />
         <input
@@ -289,16 +331,17 @@ function SchedulerForm({ onReset }: { onReset: () => void }) {
           }
         />
 
+        <fieldset disabled={pending} className="contents">
         <div className="px-5 pb-5 pt-6 md:px-6 md:pb-6">
           {step === 0 ? (
             <div className="step-panel" key="step-visit">
-              <h3
+              <h2
                 ref={headingRef}
                 tabIndex={-1}
                 className="font-display text-[1.65rem] font-medium leading-tight text-ink md:text-2xl"
               >
                 What do you need?
-              </h3>
+              </h2>
               <p className="mt-1.5 text-sm text-ink-soft">
                 One tap. You can add details at the end.
               </p>
@@ -371,13 +414,13 @@ function SchedulerForm({ onReset }: { onReset: () => void }) {
 
           {step === 1 ? (
             <div className="step-panel" key="step-time">
-              <h3
+              <h2
                 ref={headingRef}
                 tabIndex={-1}
                 className="font-display text-[1.65rem] font-medium leading-tight text-ink md:text-2xl"
               >
                 When works?
-              </h3>
+              </h2>
               <p className="mt-1.5 text-sm text-ink-soft">
                 Pick a window. We&apos;ll confirm a specific time.
               </p>
@@ -491,13 +534,13 @@ function SchedulerForm({ onReset }: { onReset: () => void }) {
 
           {step === 2 ? (
             <div className="step-panel" key="step-details">
-              <h3
+              <h2
                 ref={headingRef}
                 tabIndex={-1}
                 className="font-display text-[1.65rem] font-medium leading-tight text-ink md:text-2xl"
               >
                 How can we reach you?
-              </h3>
+              </h2>
               <p className="mt-1.5 text-sm text-ink-soft">
                 Your name, plus a phone number or an email — we only need one.
               </p>
@@ -532,7 +575,7 @@ function SchedulerForm({ onReset }: { onReset: () => void }) {
                 />
                 <fieldset
                   className="grid gap-3 rounded-2xl border border-line bg-wash/45 p-3.5"
-                  aria-describedby="contact-status"
+                  aria-describedby="contact-help contact-status"
                 >
                   <legend className="px-1 text-sm font-semibold text-ink">
                     Contact details{" "}
@@ -540,6 +583,9 @@ function SchedulerForm({ onReset }: { onReset: () => void }) {
                       (phone or email required)
                     </span>
                   </legend>
+                  <p id="contact-help" className="text-xs leading-5 text-ink-soft">
+                    Use whichever is easiest. If you fill in both, both need to be complete.
+                  </p>
                   <div className="grid gap-3 sm:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] sm:items-center sm:gap-2.5">
                     <TextField
                       label="Phone"
@@ -550,6 +596,7 @@ function SchedulerForm({ onReset }: { onReset: () => void }) {
                       enterKeyHint="next"
                       value={phone}
                       onChange={(value) => setPhone(formatUsPhone(value))}
+                      describedBy="contact-help contact-status"
                       error={state.errors.phone}
                     />
                     <div
@@ -568,8 +615,10 @@ function SchedulerForm({ onReset }: { onReset: () => void }) {
                       type="email"
                       inputMode="email"
                       autoComplete="email"
+                      spellCheck={false}
                       value={email}
                       onChange={setEmail}
+                      describedBy="contact-help contact-status"
                       error={state.errors.email}
                     />
                   </div>
@@ -590,12 +639,12 @@ function SchedulerForm({ onReset }: { onReset: () => void }) {
                 </label>
               </div>
 
-              <p className="sr-only" aria-hidden="true">
+              <div className="hidden" aria-hidden="true">
                 <label>
-                  Company
-                  <input type="text" name="company" tabIndex={-1} autoComplete="off" />
+                  Leave this field empty
+                  <input type="text" name="_gotcha" tabIndex={-1} autoComplete="off" />
                 </label>
-              </p>
+              </div>
             </div>
           ) : null}
 
@@ -636,6 +685,7 @@ function SchedulerForm({ onReset }: { onReset: () => void }) {
             </p>
           </div>
         ) : null}
+        </fieldset>
       </form>
     </div>
   );
@@ -676,6 +726,8 @@ type TextFieldProps = {
   inputMode?: "text" | "tel" | "email";
   enterKeyHint?: "next" | "done";
   required?: boolean;
+  describedBy?: string;
+  spellCheck?: boolean;
   error?: string;
 };
 
@@ -690,15 +742,19 @@ function TextField({
   inputMode,
   enterKeyHint,
   required,
+  describedBy,
+  spellCheck,
   error,
 }: TextFieldProps) {
   const errorId = `${name}-error`;
+  const describedByIds = [describedBy, error ? errorId : null].filter(Boolean).join(" ") || undefined;
   return (
     <label className="flex flex-col gap-1.5">
       <span className="text-sm font-semibold text-ink">
         {label}
       </span>
       <input
+        id={`appointment-${name}`}
         name={name}
         type={type}
         inputMode={inputMode}
@@ -706,11 +762,12 @@ function TextField({
         autoComplete={autoComplete}
         autoCapitalize={autoCapitalize}
         required={required}
+        spellCheck={spellCheck}
         value={value}
         onChange={(e) => onChange(e.target.value)}
         aria-required={required ? true : undefined}
         aria-invalid={error ? true : undefined}
-        aria-describedby={error ? errorId : undefined}
+        aria-describedby={describedByIds}
         className={`h-12 rounded-2xl border bg-white px-3.5 text-base text-ink transition placeholder:text-ink-faint focus:border-brand-deep md:text-sm ${
           error ? "border-ember" : "border-line"
         }`}

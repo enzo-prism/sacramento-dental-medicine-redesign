@@ -57,7 +57,10 @@ export default function ReviewsPage() {
     <>
       <Header />
       <main id="main" className="flex-1">
-        <section className="relative overflow-hidden pb-16 pt-32 sm:pb-20 lg:pb-24 lg:pt-40">
+        <section
+          data-mobile-cta-stop
+          className="relative overflow-hidden pb-16 pt-32 sm:pb-20 lg:pb-24 lg:pt-40"
+        >
           <div aria-hidden="true" className="absolute -right-36 top-16 size-[30rem] rounded-full bg-brand-tint/65 blur-3xl" />
           <div className="container-x relative grid items-end gap-12 lg:grid-cols-[1.08fr_0.92fr] lg:gap-16">
             <div>
@@ -68,7 +71,10 @@ export default function ReviewsPage() {
               <p className="mt-6 max-w-2xl text-pretty text-base leading-7 text-ink-soft md:text-lg md:leading-8">
                 We read every Google review: the praise, the practical details, and the criticism. Here is the clearest picture of what patients consistently say.
               </p>
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <div
+                data-mobile-cta-stop
+                className="mt-8 flex flex-col gap-3 sm:flex-row"
+              >
                 <Link href="#review-stories" className="btn btn-primary h-12 px-5 text-base">
                   Explore their stories
                   <ArrowRight className="size-4" aria-hidden="true" />
@@ -94,7 +100,11 @@ export default function ReviewsPage() {
                     <p className="mt-1 text-sm text-ink-faint">Google reviews</p>
                   </div>
                 </div>
-                <div className="mt-6 space-y-3" aria-label="Google rating distribution">
+                <div
+                  role="group"
+                  className="mt-6 space-y-3"
+                  aria-label="Google rating distribution"
+                >
                   {socialProof.distribution.map((row) => (
                     <div key={row.stars} className="grid grid-cols-[2.5rem_1fr_2.8rem] items-center gap-3 text-sm">
                       <span className="font-medium text-ink">{row.stars}★</span>

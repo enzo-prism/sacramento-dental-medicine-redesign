@@ -1,7 +1,21 @@
 "use server";
 
-import { contact, formspreeEndpoint } from "@/data/site";
-import { contactFieldErrors, type AppointmentState } from "@/lib/appointment";
+import { after } from "next/server";
+import {
+  contact,
+  formspreeEndpoint,
+  officeHours,
+  visitTypes,
+} from "@/data/site";
+import {
+  contactFieldErrors,
+  formatUsPhone,
+  type AppointmentState,
+  validateAppointmentSelection,
+} from "@/lib/appointment";
+
+const FORMSPREE_TIMEOUT_MS = 8_000;
+const WEBHOOK_TIMEOUT_MS = 4_000;
 
 function field(formData: FormData, key: string): string {
   const value = formData.get(key);
@@ -20,7 +34,7 @@ export async function requestAppointment(
   formData: FormData,
 ): Promise<AppointmentState> {
   // Honeypot: real users never fill this. Pretend success on bots.
-  if (field(formData, "company")) {
+  if (field(formData, "_gotcha")) {
     return { ok: true, message: "Thanks — we'll be in touch shortly.", errors: {} };
   }
 
@@ -29,7 +43,6 @@ export async function requestAppointment(
   const email = field(formData, "email");
   const visitType = field(formData, "visitType");
   const date = field(formData, "date");
-  const dateLabel = field(formData, "dateLabel");
   const time = field(formData, "time");
   const notes = field(formData, "notes");
 
@@ -37,6 +50,22 @@ export async function requestAppointment(
     return {
       ok: false,
       message: "Please choose a visit type, day, and time of day first.",
+      errors: {},
+    };
+  }
+
+  const selection = validateAppointmentSelection(
+    { visitType, date, time },
+    {
+      visitTypeLabels: visitTypes.map((type) => type.label),
+      officeHours,
+    },
+  );
+  if (!selection.ok) {
+    console.warn("[appointment] rejected invalid selection", selection.reason);
+    return {
+      ok: false,
+      message: "That appointment option is no longer available. Please choose again.",
       errors: {},
     };
   }
@@ -56,11 +85,11 @@ export async function requestAppointment(
 
   const lead: Lead = {
     name,
-    phone,
+    phone: phone ? formatUsPhone(phone) : "",
     email,
     visitType,
     date,
-    dateLabel,
+    dateLabel: selection.dateLabel,
     time,
     notes,
     receivedAt: new Date().toISOString(),
@@ -77,17 +106,15 @@ export async function requestAppointment(
     };
   }
 
+  // Formspree is the authoritative delivery. Run the optional second hop after
+  // the response lifecycle so it cannot delay or reverse an accepted request.
   const webhook = process.env.LEAD_WEBHOOK_URL;
   if (webhook) {
     try {
-      const res = await fetch(webhook, {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify(lead),
-      });
-      if (!res.ok) console.error("[appointment] extra webhook returned", res.status);
+      after(() => deliverToWebhook(webhook, lead));
     } catch (err) {
-      console.error("[appointment] extra webhook failed", err);
+      // Registration is best-effort too: Formspree already accepted the lead.
+      console.error("[appointment] could not schedule extra webhook", err);
     }
   }
 
@@ -154,10 +181,25 @@ async function deliverToFormspree(lead: Lead): Promise<void> {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(payload),
+    signal: AbortSignal.timeout(FORMSPREE_TIMEOUT_MS),
   });
 
   const body: unknown = await res.json().catch(() => null);
   if (!res.ok) {
     throw new Error(`Formspree rejected the lead: ${formspreeErrorMessage(body, res.status)}`);
+  }
+}
+
+async function deliverToWebhook(webhook: string, lead: Lead): Promise<void> {
+  try {
+    const res = await fetch(webhook, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(lead),
+      signal: AbortSignal.timeout(WEBHOOK_TIMEOUT_MS),
+    });
+    if (!res.ok) console.error("[appointment] extra webhook returned", res.status);
+  } catch (err) {
+    console.error("[appointment] extra webhook failed", err);
   }
 }

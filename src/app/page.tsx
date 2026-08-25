@@ -10,7 +10,7 @@ import { Technology } from "@/components/sections/Technology";
 import { Doctors } from "@/components/sections/Doctors";
 import { Reviews } from "@/components/sections/Reviews";
 import { NewPatients } from "@/components/sections/NewPatients";
-import { Visit } from "@/components/sections/Visit";
+import { ScheduleCTA } from "@/components/sections/ScheduleCTA";
 import { Footer } from "@/components/sections/Footer";
 import { faqStructuredData, structuredData } from "@/data/site";
 import { siteUrl } from "@/lib/site-url";
@@ -49,7 +49,7 @@ export default function Home() {
         <Doctors />
         <Reviews />
         <NewPatients />
-        <Visit />
+        <ScheduleCTA />
       </main>
       <Footer />
       <MobileCTA />

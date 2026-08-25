@@ -9,17 +9,18 @@ Sacramento Dental Medicine.
 | --- | --- |
 | Home title, description, and social copy | `seo` in `src/data/site.ts` |
 | Reviews title and description | `src/app/reviews/page.tsx`, derived from `socialProof` |
+| Schedule title and description | `src/app/schedule/page.tsx` |
 | Canonical and social origin | `src/lib/site-url.ts` |
 | Shared social-card layout | `src/lib/social-image.tsx` |
 | Home Open Graph and X routes | `src/app/opengraph-image.tsx`, `src/app/twitter-image.tsx` |
 | Reviews Open Graph and X routes | `src/app/reviews/opengraph-image.tsx`, `src/app/reviews/twitter-image.tsx` |
+| Schedule Open Graph and X routes | `src/app/schedule/opengraph-image.tsx`, `src/app/schedule/twitter-image.tsx` |
 | Favicon and app-icon generation | `scripts/generate-seo-assets.py` |
 | Canonical practice mark | `public/images/logo-mark.png` |
 
 Next.js metadata file conventions add image URLs, content type, dimensions, and
-alt text to the rendered `<head>`. Home and Reviews intentionally use different
-social cards so a shared Reviews link describes the review evidence rather than
-falling back to a generic practice card.
+alt text to the rendered `<head>`. Home, Reviews, and Schedule intentionally use
+different social cards so each shared link describes its destination.
 
 ## Current production output
 
@@ -27,6 +28,7 @@ falling back to a generic practice card.
 | --- | --- | --- | --- |
 | `/` | `Antelope, CA Dentist \| Sacramento Dental Medicine` | Gentle family, cosmetic, restorative, and emergency care; new-patient and same-day context | Patient-friendly positioning, core care categories, location, and phone |
 | `/reviews` | `Sacramento Dental Medicine Reviews \| 4.8 on Google` | The verified review corpus and the themes a visitor can explore | 4.8 rating, 632 reviews, five-star share, and analysis date |
+| `/schedule` | `Schedule a Dentist Appointment \| Sacramento Dental Medicine` | A fast appointment request using a phone number or email | The three-step request flow, new-patient welcome, and practice phone |
 
 The Reviews values are a snapshot checked August 24, 2026. Before changing the
 rating, total, distribution, written-review count, or analysis date, verify the
@@ -61,6 +63,8 @@ one output or substitute a different logo treatment.
   product decision is to maintain it as dated content.
 - Derive Reviews numbers from `socialProof`; do not duplicate the values in the
   route or renderer.
+- Keep Schedule centered on the request journey. It must say that the request is
+  not a confirmed appointment and that phone or email is enough.
 - Preserve descriptive alt text for both Open Graph and X images.
 - The atmospheric site photography is not the Elverta office. Do not represent
   it as an office photo in social copy or alt text.
@@ -82,14 +86,16 @@ The build output should include these static routes:
 /twitter-image
 /reviews/opengraph-image
 /reviews/twitter-image
+/schedule/opengraph-image
+/schedule/twitter-image
 /icon.png
 /apple-icon.png
 ```
 
-Open Home and Reviews and inspect the rendered `<head>`. Confirm that each route
-has the intended title, unique description, canonical URL, social title,
-social description, image URL, image alt text, width, and height. Fetch all four
-social-image routes and verify they are valid 1200×630 PNG files.
+Open Home, Reviews, and Schedule and inspect the rendered `<head>`. Confirm that
+each route has the intended title, unique description, canonical URL, social
+title, social description, image URL, image alt text, width, and height. Fetch
+all six social-image routes and verify they are valid 1200×630 PNG files.
 
 ## Production verification
 
@@ -98,25 +104,26 @@ local build is not proof that the production alias has updated.
 
 After Vercel reports the deployment Ready, verify:
 
-1. `/` and `/reviews` both return 200 from
+1. `/`, `/reviews`, and `/schedule` all return 200 from
    `https://sacramento-dental-medicine-redesign.vercel.app`.
 2. Live titles, descriptions, canonicals, and social tags match the intended
    route-specific values.
 3. `/favicon.ico`, `/icon.png`, and `/apple-icon.png` return 200 with the
    expected formats and dimensions.
-4. All four Open Graph and X image routes return 200 as 1200×630 PNG files.
+4. All six Open Graph and X image routes return 200 as 1200×630 PNG files.
 5. The production alias points to the new Ready deployment, not merely an
    immutable deployment URL.
 
 ## Custom-domain cutover
 
-The current canonical host is the approved Vercel production alias. Do not
-attach or change DNS from this repository. When the practice approves the
-custom-domain launch, set:
+The current canonical host is the approved Vercel production alias because
+Vercel supplies `VERCEL_PROJECT_PRODUCTION_URL`. The custom domain is not
+attached to this project. Do not attach or change DNS from this repository.
+When the practice approves the custom-domain launch, set:
 
 ```text
 NEXT_PUBLIC_SITE_URL=https://sacramentodentalmedicine.com
 ```
 
 Then redeploy and re-run the production checks above, including canonical,
-sitemap, Open Graph, and X URLs on both routes.
+sitemap, Open Graph, and X URLs on all three routes.

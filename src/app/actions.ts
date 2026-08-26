@@ -13,6 +13,12 @@ import {
   type AppointmentState,
   validateAppointmentSelection,
 } from "@/lib/appointment";
+import {
+  applyAttributionToPayload,
+  formatAttributionMessageLines,
+  readAttributionFromFormData,
+  type FirstTouchAttribution,
+} from "@/lib/lead-attribution";
 
 const FORMSPREE_TIMEOUT_MS = 8_000;
 const WEBHOOK_TIMEOUT_MS = 4_000;
@@ -93,6 +99,7 @@ export async function requestAppointment(
     time,
     notes,
     receivedAt: new Date().toISOString(),
+    attribution: readAttributionFromFormData(formData),
   };
 
   try {
@@ -136,6 +143,7 @@ type Lead = {
   time: string;
   notes: string;
   receivedAt: string;
+  attribution: FirstTouchAttribution;
 };
 
 function formspreeErrorMessage(body: unknown, status: number): string {
@@ -155,6 +163,7 @@ function formspreeErrorMessage(body: unknown, status: number): string {
 
 async function deliverToFormspree(lead: Lead): Promise<void> {
   const endpoint = process.env.FORMSPREE_ENDPOINT ?? formspreeEndpoint;
+  const attributionLines = formatAttributionMessageLines(lead.attribution);
   const payload: Record<string, string> = {
     name: lead.name,
     subject: `New appointment request from ${lead.name}`,
@@ -167,12 +176,14 @@ async function deliverToFormspree(lead: Lead): Promise<void> {
       lead.phone && `Phone: ${lead.phone}`,
       lead.email && `Email: ${lead.email}`,
       lead.notes && `Notes: ${lead.notes}`,
+      attributionLines.length ? `Attribution: ${attributionLines.join("; ")}` : "",
     ]
       .filter(Boolean)
       .join("\n"),
   };
   if (lead.phone) payload.phone = lead.phone;
   if (lead.email) payload.email = lead.email;
+  applyAttributionToPayload(payload, lead.attribution);
 
   const res = await fetch(endpoint, {
     method: "POST",

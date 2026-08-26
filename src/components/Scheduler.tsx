@@ -17,6 +17,7 @@ import {
   Zap,
 } from "lucide-react";
 import { requestAppointment } from "@/app/actions";
+import { LeadAttributionHiddenFields } from "@/components/LeadAttributionFields";
 import {
   contactStatusMessage,
   formatUsPhone,
@@ -330,6 +331,7 @@ function SchedulerForm({ onReset }: { onReset: () => void }) {
               : ""
           }
         />
+        <LeadAttributionHiddenFields />
 
         <fieldset disabled={pending} className="contents">
         <div className="px-5 pb-5 pt-6 md:px-6 md:pb-6">

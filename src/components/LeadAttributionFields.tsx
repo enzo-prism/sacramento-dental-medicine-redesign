@@ -1,24 +1,29 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 import {
   ATTRIBUTION_FIELD_NAMES,
-  emptyAttribution,
   persistFirstTouchFromLocation,
-  type FirstTouchAttribution,
 } from "@/lib/lead-attribution";
 
 export function LeadAttributionHiddenFields() {
-  const [attribution, setAttribution] = useState<FirstTouchAttribution>(emptyAttribution);
+  const rootRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    setAttribution(persistFirstTouchFromLocation());
+    const attribution = persistFirstTouchFromLocation();
+    const root = rootRef.current;
+    if (!root) return;
+
+    for (const field of ATTRIBUTION_FIELD_NAMES) {
+      const input = root.querySelector<HTMLInputElement>(`input[name="${field}"]`);
+      if (input) input.value = attribution[field];
+    }
   }, []);
 
   return (
-    <div hidden>
+    <div hidden ref={rootRef}>
       {ATTRIBUTION_FIELD_NAMES.map((field) => (
-        <input key={field} type="hidden" name={field} value={attribution[field]} />
+        <input key={field} type="hidden" name={field} defaultValue="" />
       ))}
     </div>
   );

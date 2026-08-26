@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Bricolage_Grotesque, Geist } from "next/font/google";
+import { LeadAttributionCapture } from "@/components/LeadAttributionCapture";
 import { contact, seo } from "@/data/site";
 import { isPreviewDeploy, siteUrl } from "@/lib/site-url";
 import "./globals.css";
@@ -87,6 +88,7 @@ export default function RootLayout({
         >
           Skip to content
         </a>
+        <LeadAttributionCapture />
         {children}
       </body>
     </html>

@@ -17,6 +17,11 @@ import {
   Zap,
 } from "lucide-react";
 import { requestAppointment } from "@/app/actions";
+import { LeadAttributionHiddenFields } from "@/components/LeadAttributionFields";
+import {
+  ATTRIBUTION_FIELD_NAMES,
+  refreshAttributionSnapshot,
+} from "@/lib/lead-attribution";
 import {
   contactStatusMessage,
   formatUsPhone,
@@ -313,7 +318,19 @@ function SchedulerForm({ onReset }: { onReset: () => void }) {
         <span className="size-11 shrink-0" aria-hidden />
       </div>
 
-      <form action={formAction} className="relative" aria-busy={pending}>
+      <form
+        action={formAction}
+        className="relative"
+        aria-busy={pending}
+        onSubmit={(event) => {
+          const attribution = refreshAttributionSnapshot();
+          const form = event.currentTarget;
+          for (const field of ATTRIBUTION_FIELD_NAMES) {
+            const input = form.querySelector<HTMLInputElement>(`input[name="${field}"]`);
+            if (input) input.value = attribution[field];
+          }
+        }}
+      >
         <input type="hidden" name="visitType" value={selectedVisit?.label ?? ""} />
         <input type="hidden" name="date" value={dateIso ?? ""} />
         <input
@@ -330,6 +347,7 @@ function SchedulerForm({ onReset }: { onReset: () => void }) {
               : ""
           }
         />
+        <LeadAttributionHiddenFields />
 
         <fieldset disabled={pending} className="contents">
         <div className="px-5 pb-5 pt-6 md:px-6 md:pb-6">

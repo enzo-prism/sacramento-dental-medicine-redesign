@@ -214,6 +214,42 @@ function parseStoredCapturedAt(raw: string) {
   return "";
 }
 
+const attributionListeners = new Set<() => void>();
+let attributionSnapshot: FirstTouchAttribution = EMPTY_ATTRIBUTION;
+
+export function subscribeAttributionSnapshot(listener: () => void) {
+  attributionListeners.add(listener);
+  return () => {
+    attributionListeners.delete(listener);
+  };
+}
+
+export function getAttributionSnapshot() {
+  return attributionSnapshot;
+}
+
+export function getEmptyAttributionSnapshot() {
+  return EMPTY_ATTRIBUTION;
+}
+
+export function refreshAttributionSnapshot(
+  search?: string,
+  now: Date = new Date(),
+): FirstTouchAttribution {
+  const next = persistFirstTouchFromLocation(
+    search ?? (typeof window === "undefined" ? "" : window.location.search),
+    now,
+  );
+  const unchanged = ATTRIBUTION_FIELD_NAMES.every(
+    (field) => attributionSnapshot[field] === next[field],
+  );
+  if (unchanged) return attributionSnapshot;
+
+  attributionSnapshot = next;
+  for (const listener of attributionListeners) listener();
+  return attributionSnapshot;
+}
+
 export function persistFirstTouchFromLocation(
   search: string = typeof window === "undefined" ? "" : window.location.search,
   now: Date = new Date(),

@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Bricolage_Grotesque, Geist } from "next/font/google";
+import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { LeadAttributionCapture } from "@/components/LeadAttributionCapture";
 import { SiteAnalytics } from "@/components/SiteAnalytics";
 import { contact, seo } from "@/data/site";
@@ -93,6 +94,7 @@ export default function RootLayout({
         </a>
         <LeadAttributionCapture />
         {children}
+        <GoogleAnalytics />
         {analyticsEnabled ? <SiteAnalytics /> : null}
       </body>
     </html>

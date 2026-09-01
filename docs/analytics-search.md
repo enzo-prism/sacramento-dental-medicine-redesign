@@ -39,28 +39,38 @@ without a separate spend approval.
 
 ## Google Analytics 4
 
-GA4 is intentionally not embedded. The connected Google identity has no
-Sacramento Dental Medicine property or web stream, and the only editable
-dental-adjacent account found is Roseville Dental Academy. Do not mix this
-practice into that property or another client's account.
+The authorized GA4 property is `552407134`; its production web stream is
+`15554690024` with measurement ID `G-E1QV3QH6XD`. The root layout initializes it
+only on `sacramentodentalmedicine.com` and `www.sacramentodentalmedicine.com`, so
+local, preview, and generated Vercel URLs cannot contaminate production data.
 
-There is also a healthcare privacy gate. Google's current guidance says
-HIPAA-regulated entities must not expose PHI to Google Analytics and should not
-tag pages that legal/compliance determines are HIPAA-covered. These public
-pages describe dental services and appointment intent, so consent alone is not
-a sufficient technical safeguard. Before adding GA4, obtain:
+The implementation disables GA's automatic initial page view and sends a
+privacy-reduced manual page view on each public route change. It:
 
-1. the practice's written legal/compliance determination identifying pages
-   permitted to use GA4;
-2. an authorized, dedicated GA4 account/property and production web stream;
-3. a measurement plan that strips all query strings and forbids names, email,
-   phone, appointment reasons, form text, UTM values containing PII, and other
-   sensitive fields; and
-4. a live DebugView/Realtime test proving one page view per permitted route and
-   no collection from excluded routes.
+- removes query strings and URL fragments;
+- reports `/schedule` as `/conversion`;
+- keeps the public `/reviews` aggregate;
+- groups all other public routes under `/`;
+- excludes `/privacy-practices`;
+- clears the page referrer; and
+- disables Google Signals and ad-personalization signals.
 
-Until those gates are met, privacy-redacted Vercel page groups are the intended
-traffic source.
+Do not add form values, names, email addresses, phone numbers, treatment or
+appointment reasons, notes, UTM values, click IDs, user IDs, or custom lead
+events to GA4. Formspree remains the lead source of truth.
+
+The stream's Enhanced Measurement settings were verified on September 1, 2026.
+**Page views** is the only active measurement, and **Page changes based on
+browser history events** is off. Scrolls, outbound clicks, site search, form
+interactions, video engagement, and file downloads are off. The application
+owns route-change page views; this avoids double-counting and prevents automatic
+events from bypassing the redaction boundary. Use Realtime or DebugView to
+confirm exactly one `/`, `/reviews`, or `/conversion` page view per navigation
+and no event on `/privacy-practices`.
+
+The Analytics Data API identity does not currently have access to the new
+property, so automated dashboard readback requires Viewer access to be granted
+on that property. Site-side collection does not depend on that API permission.
 
 ## Google Search Console
 

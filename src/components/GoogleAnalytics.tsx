@@ -20,8 +20,10 @@ function initializeGoogleAnalytics() {
   window.dataLayer = window.dataLayer || [];
   window.gtag =
     window.gtag ||
-    function gtag(...args: unknown[]) {
-      window.dataLayer?.push(args);
+    function gtag() {
+      // Google requires each command to retain its Arguments object shape.
+      // eslint-disable-next-line prefer-rest-params
+      window.dataLayer?.push(arguments);
     };
 
   if (window.__sacramentoGoogleAnalyticsInitialized) return;

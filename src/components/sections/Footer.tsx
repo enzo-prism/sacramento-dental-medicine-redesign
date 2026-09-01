@@ -94,7 +94,12 @@ export function Footer() {
             © {new Date().getFullYear()} {contact.practiceName}. All rights
             reserved.
           </p>
-          <p>Serving {contact.serviceArea.slice(0, 4).join(" · ")}</p>
+          <div className="flex flex-wrap items-center gap-4">
+            <Link href="/privacy-practices/" className="transition hover:text-white">
+              Privacy Practices
+            </Link>
+            <p>Serving {contact.serviceArea.slice(0, 4).join(" · ")}</p>
+          </div>
         </div>
       </div>
     </footer>

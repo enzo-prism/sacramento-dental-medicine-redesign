@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Bricolage_Grotesque, Geist } from "next/font/google";
 import { LeadAttributionCapture } from "@/components/LeadAttributionCapture";
+import { SiteAnalytics } from "@/components/SiteAnalytics";
 import { contact, seo } from "@/data/site";
 import { isPreviewDeploy, siteUrl } from "@/lib/site-url";
 import "./globals.css";
@@ -75,6 +76,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const analyticsEnabled = process.env.VERCEL_WEB_ANALYTICS_ENABLED === "true";
+
   return (
     <html
       lang="en"
@@ -90,6 +93,7 @@ export default function RootLayout({
         </a>
         <LeadAttributionCapture />
         {children}
+        {analyticsEnabled ? <SiteAnalytics /> : null}
       </body>
     </html>
   );

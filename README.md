@@ -200,6 +200,9 @@ See [`docs/production-readiness.md`](docs/production-readiness.md) for the
 browser, booking, accessibility, responsive, and release gates used before a
 production handoff.
 
+See [`docs/analytics-search.md`](docs/analytics-search.md) for the privacy-safe
+Vercel Analytics boundary and the account-side GA4 and Search Console gates.
+
 See [`design-qa.md`](design-qa.md) for the August 25, 2026 multi-device audit,
 fixed-issue history, browser evidence, and final release-gate result.
 

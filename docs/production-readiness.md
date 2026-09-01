@@ -74,3 +74,12 @@ diagnostic endpoint but is not the public completion criterion.
 The complete August 25, 2026 responsive and interaction record is in
 [`../design-qa.md`](../design-qa.md). Keep the final screenshots it references
 when archiving or reproducing the release gate.
+
+## Analytics and Search Console
+
+Follow [`analytics-search.md`](analytics-search.md). Code readiness is not
+account enablement: verify the Vercel project feature, production script and
+beacon, then dashboard/API data. Do not add GA4 until the dedicated property and
+healthcare privacy gates in that document are satisfied. Search Console is not
+complete until the operating Google identity has verified access and the live
+sitemap can be read back through the API.

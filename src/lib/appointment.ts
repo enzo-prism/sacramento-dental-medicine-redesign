@@ -4,7 +4,7 @@
 export type AppointmentState = {
   ok: boolean;
   message: string;
-  errors: Partial<Record<"name" | "phone" | "email", string>>;
+  errors: Partial<Record<"name" | "phone" | "email" | "notes" | "privacy", string>>;
 };
 
 export const initialAppointmentState: AppointmentState = {
@@ -14,6 +14,12 @@ export const initialAppointmentState: AppointmentState = {
 };
 
 export const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+export const APPOINTMENT_FIELD_LIMITS = {
+  name: 120,
+  phone: 32,
+  email: 254,
+  notes: 500,
+} as const;
 
 export const APPOINTMENT_TIME_ZONE = "America/Los_Angeles";
 export const APPOINTMENT_HORIZON_DAYS = 40;
@@ -67,7 +73,8 @@ export function hasUsablePhone(phone: string) {
 }
 
 export function hasUsableEmail(email: string) {
-  return EMAIL_RE.test(email.trim());
+  const value = email.trim();
+  return value.length <= APPOINTMENT_FIELD_LIMITS.email && EMAIL_RE.test(value);
 }
 
 export function formatUsPhone(raw: string) {

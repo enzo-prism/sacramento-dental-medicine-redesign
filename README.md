@@ -65,6 +65,7 @@ src/
 │                          # schema.org data, seo title/description
 └── lib/
     ├── appointment.ts    # form state types + phone/email validation helpers
+    ├── formspree.ts      # safe endpoint resolution + tested lead payload builder
     ├── social-image.tsx  # shared 1200×630 Home/Reviews/Schedule card renderer
     └── site-url.ts       # canonical/social origin resolver
 ```
@@ -106,11 +107,11 @@ The review counts are a dated snapshot and should be re-checked before future
 copy changes. The public reviews page uses aggregate analysis and short excerpts;
 the complete, continuously updated review text remains on Google.
 Confirm the active provider roster and Saturday appointment policy directly
-with the practice before the final domain cutover.
+with the practice before changing those facts.
 
 ## Configuration
 
-A few production values still need configuration or final confirmation:
+A few production values still need periodic confirmation:
 
 | What | Where | Notes |
 | --- | --- | --- |
@@ -134,16 +135,21 @@ Required fields:
 - **Phone or email** — at least one usable contact method. Filling both is
   fine; leaving both empty is not. Incomplete extras still error (short phone,
   malformed email).
+- **Privacy confirmation** — visitors must acknowledge that the request contains
+  no sensitive health, insurance, or payment information.
 
 Confirm in the Formspree dashboard that **email is not marked required**. Empty
 phone and email are omitted from the JSON payload so phone-only requests do not
-400. Formspree delivery has a bounded timeout. Optional: set
+400. The server forwards the current runtime host or origin when posting to
+Formspree so production-domain restriction remains compatible without letting
+preview or local traffic impersonate the live site automatically.
+Formspree delivery has a bounded timeout. Optional: set
 **`LEAD_WEBHOOK_URL`** for a non-blocking second hop after Formspree succeeds;
 that optional delivery cannot reverse the accepted Formspree response.
 
-Do not publicly launch the form until a controlled test submission is received
-successfully by the front desk. A successful on-site “Request sent” only means
-Formspree accepted the POST — not that a visit is booked.
+After form or Formspree-account changes, run a controlled synthetic delivery
+test and confirm it reaches the intended front desk. A successful on-site
+“Request sent” only means Formspree accepted the POST — not that a visit is booked.
 
 ## Local development
 
@@ -163,14 +169,12 @@ The GitHub repository is connected to Vercel and deploys automatically:
 - **Push to `main`** → production deploy.
 - Pull requests → preview deploys.
 
-Vercel production currently runs at
-[sacramento-dental-medicine-redesign.vercel.app](https://sacramento-dental-medicine-redesign.vercel.app).
-The custom domain `sacramentodentalmedicine.com` is not yet attached to this
-Vercel project, so a successful production deployment does not replace the
-current public website. Attach and verify the custom domain, DNS, and HTTPS only
-after the booking link and lead delivery are ready. Then set
-`NEXT_PUBLIC_SITE_URL=https://sacramentodentalmedicine.com` so canonical,
-sitemap, and Open Graph URLs flip with the cutover.
+The public production domain is
+[sacramentodentalmedicine.com](https://sacramentodentalmedicine.com/), served by
+the Vercel project `sacramento-dental-medicine-redesign`. Canonical, sitemap,
+robots, and social metadata resolve to that domain. A release is complete only
+after the Git-linked deployment is Ready and the public domain serves the
+intended commit.
 
 ### Metadata
 
@@ -178,9 +182,8 @@ Title, meta description, and social copy live in `seo` (`src/data/site.ts`) and
 the Reviews and Schedule route metadata. Favicon and app-icon files are
 generated from the canonical practice mark by `scripts/generate-seo-assets.py`.
 Home, Reviews, and Schedule use route-specific Open Graph and X images generated
-by Next.js from `src/lib/social-image.tsx`. Until the custom domain is attached,
-`metadataBase` uses the Vercel production host so canonical and social-image
-URLs resolve correctly.
+by Next.js from `src/lib/social-image.tsx`. `metadataBase` uses the live custom
+domain so canonical and social-image URLs remain stable across deployments.
 
 The icon generator produces a multi-frame 16/32/48px `favicon.ico`, a 512px
 `icon.png`, and a 180px Apple touch icon. Run it only after the canonical

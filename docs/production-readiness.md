@@ -64,10 +64,12 @@ After pushing `main`:
    for console errors, failed requests, layout overflow, and stale metadata.
 4. Re-run the booking journey without submitting a real lead.
 5. Confirm the deployed commit matches `origin/main`.
+6. Confirm `https://sacramentodentalmedicine.com/`, `/reviews/`, and
+   `/schedule/` serve that deployment with valid HTTPS and canonical metadata.
 
-The current release target is the Vercel production alias. The custom domain is
-not part of this release until the practice approves DNS cutover and lead
-delivery has been verified separately.
+The release target is the public custom domain
+`https://sacramentodentalmedicine.com/`; the Vercel alias remains a useful
+diagnostic endpoint but is not the public completion criterion.
 
 The complete August 25, 2026 responsive and interaction record is in
 [`../design-qa.md`](../design-qa.md). Keep the final screenshots it references

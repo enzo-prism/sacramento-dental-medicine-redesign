@@ -105,25 +105,25 @@ local build is not proof that the production alias has updated.
 After Vercel reports the deployment Ready, verify:
 
 1. `/`, `/reviews`, and `/schedule` all return 200 from
-   `https://sacramento-dental-medicine-redesign.vercel.app`.
+   `https://sacramentodentalmedicine.com`.
 2. Live titles, descriptions, canonicals, and social tags match the intended
    route-specific values.
 3. `/favicon.ico`, `/icon.png`, and `/apple-icon.png` return 200 with the
    expected formats and dimensions.
 4. All six Open Graph and X image routes return 200 as 1200×630 PNG files.
-5. The production alias points to the new Ready deployment, not merely an
-   immutable deployment URL.
+5. The custom domain serves the new Ready deployment, not merely an immutable
+   deployment URL.
 
-## Custom-domain cutover
+## Custom-domain production
 
-The current canonical host is the approved Vercel production alias because
-Vercel supplies `VERCEL_PROJECT_PRODUCTION_URL`. The custom domain is not
-attached to this project. Do not attach or change DNS from this repository.
-When the practice approves the custom-domain launch, set:
+The canonical and public host is `https://sacramentodentalmedicine.com`.
+`src/lib/site-url.ts` uses it for every non-development build unless an explicit
+`NEXT_PUBLIC_SITE_URL` is supplied. If an environment override is needed, set:
 
 ```text
 NEXT_PUBLIC_SITE_URL=https://sacramentodentalmedicine.com
 ```
 
-Then redeploy and re-run the production checks above, including canonical,
-sitemap, Open Graph, and X URLs on all three routes.
+After any domain or environment change, redeploy and re-run the production
+checks above, including canonical, sitemap, Open Graph, and X URLs on all three
+routes.

@@ -23,6 +23,7 @@ import {
   refreshAttributionSnapshot,
 } from "@/lib/lead-attribution";
 import {
+  APPOINTMENT_FIELD_LIMITS,
   contactStatusMessage,
   formatUsPhone,
   hasUsableEmail,
@@ -175,6 +176,7 @@ function SchedulerForm({ onReset }: { onReset: () => void }) {
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [notes, setNotes] = useState("");
+  const [privacyConfirmed, setPrivacyConfirmed] = useState(false);
 
   const headingRef = useRef<HTMLHeadingElement>(null);
   const firstRender = useRef(true);
@@ -199,7 +201,7 @@ function SchedulerForm({ onReset }: { onReset: () => void }) {
 
   useEffect(() => {
     if (state.ok || !state.message) return;
-    const firstInvalidField = (["name", "phone", "email"] as const).find(
+    const firstInvalidField = (["name", "phone", "email", "notes", "privacy"] as const).find(
       (field) => state.errors[field],
     );
     if (firstInvalidField) {
@@ -225,6 +227,7 @@ function SchedulerForm({ onReset }: { onReset: () => void }) {
     (phoneOk || emailOk) &&
     phoneComplete &&
     emailComplete &&
+    privacyConfirmed &&
     !pending;
   const contactStatus = contactStatusMessage(phone, email);
 
@@ -589,6 +592,7 @@ function SchedulerForm({ onReset }: { onReset: () => void }) {
                   required
                   value={name}
                   onChange={setName}
+                  maxLength={APPOINTMENT_FIELD_LIMITS.name}
                   error={state.errors.name}
                 />
                 <fieldset
@@ -614,6 +618,7 @@ function SchedulerForm({ onReset }: { onReset: () => void }) {
                       enterKeyHint="next"
                       value={phone}
                       onChange={(value) => setPhone(formatUsPhone(value))}
+                      maxLength={APPOINTMENT_FIELD_LIMITS.phone}
                       describedBy="contact-help contact-status"
                       error={state.errors.phone}
                     />
@@ -636,6 +641,7 @@ function SchedulerForm({ onReset }: { onReset: () => void }) {
                       spellCheck={false}
                       value={email}
                       onChange={setEmail}
+                      maxLength={APPOINTMENT_FIELD_LIMITS.email}
                       describedBy="contact-help contact-status"
                       error={state.errors.email}
                     />
@@ -647,13 +653,50 @@ function SchedulerForm({ onReset }: { onReset: () => void }) {
                     <span className="font-normal text-ink-faint">(optional)</span>
                   </span>
                   <textarea
+                    id="appointment-notes"
                     name="notes"
                     rows={2}
+                    maxLength={APPOINTMENT_FIELD_LIMITS.notes}
                     value={notes}
                     onChange={(e) => setNotes(e.target.value)}
-                    placeholder="A tooth that hurts, insurance questions, dental anxiety…"
+                    placeholder="Accessibility needs, scheduling context, or a general question"
+                    aria-invalid={state.errors.notes ? true : undefined}
+                    aria-describedby={state.errors.notes ? "notes-error" : "notes-privacy-help"}
                     className="resize-none rounded-2xl border border-line bg-white px-3.5 py-3 text-base leading-6 text-ink transition placeholder:text-ink-faint focus:border-brand-deep md:text-sm"
                   />
+                  <span id="notes-privacy-help" className="text-xs leading-5 text-ink-soft">
+                    Please do not include symptoms, medical history, insurance IDs, or payment details.
+                  </span>
+                  {state.errors.notes ? (
+                    <span id="notes-error" className="text-xs font-medium text-ember-deep">
+                      {state.errors.notes}
+                    </span>
+                  ) : null}
+                </label>
+                <label className="flex items-start gap-3 rounded-2xl border border-line bg-wash/45 p-3.5 text-xs leading-5 text-ink-soft">
+                  <input
+                    id="appointment-privacy"
+                    name="privacyConsent"
+                    type="checkbox"
+                    value="confirmed"
+                    checked={privacyConfirmed}
+                    onChange={(event) => setPrivacyConfirmed(event.target.checked)}
+                    required
+                    aria-invalid={state.errors.privacy ? true : undefined}
+                    aria-describedby={state.errors.privacy ? "privacy-error" : undefined}
+                    className="mt-0.5 size-4 shrink-0 accent-brand-deep"
+                  />
+                  <span>
+                    I understand this is a scheduling request and will not include sensitive health or payment information. See our{" "}
+                    <a href="/privacy-practices/" className="font-semibold text-brand-deep underline underline-offset-2">
+                      privacy practices
+                    </a>.
+                    {state.errors.privacy ? (
+                      <span id="privacy-error" className="mt-1 block font-medium text-ember-deep">
+                        {state.errors.privacy}
+                      </span>
+                    ) : null}
+                  </span>
                 </label>
               </div>
 
@@ -746,6 +789,7 @@ type TextFieldProps = {
   required?: boolean;
   describedBy?: string;
   spellCheck?: boolean;
+  maxLength?: number;
   error?: string;
 };
 
@@ -762,6 +806,7 @@ function TextField({
   required,
   describedBy,
   spellCheck,
+  maxLength,
   error,
 }: TextFieldProps) {
   const errorId = `${name}-error`;
@@ -781,6 +826,7 @@ function TextField({
         autoCapitalize={autoCapitalize}
         required={required}
         spellCheck={spellCheck}
+        maxLength={maxLength}
         value={value}
         onChange={(e) => onChange(e.target.value)}
         aria-required={required ? true : undefined}

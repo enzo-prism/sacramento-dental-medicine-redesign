@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test": "node --experimental-strip-types --test src/lib/appointment.test.ts src/data/reviews.test.ts src/lib/lead-attribution.test.ts"
+    "test": "node --experimental-strip-types --test src/lib/appointment.test.ts src/data/reviews.test.ts src/lib/lead-attribution.test.ts src/lib/formspree.test.ts"
   },
   "dependencies": {
     "lucide-react": "^1.20.0",

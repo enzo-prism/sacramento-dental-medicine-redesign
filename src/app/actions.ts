@@ -1,5 +1,6 @@
 "use server";
 
+import { headers } from "next/headers";
 import { after } from "next/server";
 import {
   contact,
@@ -8,19 +9,24 @@ import {
   visitTypes,
 } from "@/data/site";
 import {
+  APPOINTMENT_FIELD_LIMITS,
   contactFieldErrors,
   formatUsPhone,
   type AppointmentState,
   validateAppointmentSelection,
 } from "@/lib/appointment";
 import {
-  applyAttributionToPayload,
-  formatAttributionMessageLines,
   readAttributionFromFormData,
-  type FirstTouchAttribution,
 } from "@/lib/lead-attribution";
+import {
+  buildAppointmentFormspreePayload,
+  buildFormspreeRequestInit,
+  resolveFormspreeReferer,
+  resolveFormspreeEndpoint,
+  type AppointmentLead,
+} from "@/lib/formspree";
+import { siteUrl } from "@/lib/site-url";
 
-const FORMSPREE_TIMEOUT_MS = 8_000;
 const WEBHOOK_TIMEOUT_MS = 4_000;
 
 function field(formData: FormData, key: string): string {
@@ -51,6 +57,7 @@ export async function requestAppointment(
   const date = field(formData, "date");
   const time = field(formData, "time");
   const notes = field(formData, "notes");
+  const privacyConsent = field(formData, "privacyConsent");
 
   if (!visitType || !date || !time) {
     return {
@@ -80,6 +87,21 @@ export async function requestAppointment(
     ...contactFieldErrors(phone, email),
   };
   if (name.length < 2) errors.name = "Please enter your name.";
+  else if (name.length > APPOINTMENT_FIELD_LIMITS.name) {
+    errors.name = "Please keep your name under 120 characters.";
+  }
+  if (phone.length > APPOINTMENT_FIELD_LIMITS.phone) {
+    errors.phone = "Please enter a shorter phone number.";
+  }
+  if (email.length > APPOINTMENT_FIELD_LIMITS.email) {
+    errors.email = "Please keep your email under 254 characters.";
+  }
+  if (notes.length > APPOINTMENT_FIELD_LIMITS.notes) {
+    errors.notes = "Please keep your note under 500 characters.";
+  }
+  if (privacyConsent !== "confirmed") {
+    errors.privacy = "Please confirm that your message does not include sensitive health or payment information.";
+  }
 
   if (Object.keys(errors).length > 0) {
     return {
@@ -89,7 +111,7 @@ export async function requestAppointment(
     };
   }
 
-  const lead: Lead = {
+  const lead: AppointmentLead = {
     name,
     phone: phone ? formatUsPhone(phone) : "",
     email,
@@ -101,9 +123,10 @@ export async function requestAppointment(
     receivedAt: new Date().toISOString(),
     attribution: readAttributionFromFormData(formData),
   };
+  const formspreeReferer = resolveFormspreeReferer(await headers(), siteUrl);
 
   try {
-    await deliverToFormspree(lead);
+    await deliverToFormspree(lead, formspreeReferer);
   } catch (err) {
     console.error("[appointment] Formspree delivery failed", err);
     return {
@@ -133,19 +156,6 @@ export async function requestAppointment(
   };
 }
 
-type Lead = {
-  name: string;
-  phone: string;
-  email: string;
-  visitType: string;
-  date: string;
-  dateLabel: string;
-  time: string;
-  notes: string;
-  receivedAt: string;
-  attribution: FirstTouchAttribution;
-};
-
 function formspreeErrorMessage(body: unknown, status: number): string {
   if (body && typeof body === "object") {
     if ("errors" in body && Array.isArray((body as { errors: unknown }).errors)) {
@@ -161,39 +171,14 @@ function formspreeErrorMessage(body: unknown, status: number): string {
   return `HTTP ${status}`;
 }
 
-async function deliverToFormspree(lead: Lead): Promise<void> {
-  const endpoint = process.env.FORMSPREE_ENDPOINT ?? formspreeEndpoint;
-  const attributionLines = formatAttributionMessageLines(lead.attribution);
-  const payload: Record<string, string> = {
-    name: lead.name,
-    subject: `New appointment request from ${lead.name}`,
-    visitType: lead.visitType,
-    date: lead.dateLabel || lead.date,
-    time: lead.time,
-    message: [
-      `Visit: ${lead.visitType}`,
-      `When: ${lead.dateLabel || lead.date} · ${lead.time}`,
-      lead.phone && `Phone: ${lead.phone}`,
-      lead.email && `Email: ${lead.email}`,
-      lead.notes && `Notes: ${lead.notes}`,
-      attributionLines.length ? `Attribution: ${attributionLines.join("; ")}` : "",
-    ]
-      .filter(Boolean)
-      .join("\n"),
-  };
-  if (lead.phone) payload.phone = lead.phone;
-  if (lead.email) payload.email = lead.email;
-  applyAttributionToPayload(payload, lead.attribution);
+async function deliverToFormspree(lead: AppointmentLead, referer: string): Promise<void> {
+  const endpoint = resolveFormspreeEndpoint(process.env.FORMSPREE_ENDPOINT, formspreeEndpoint);
+  const payload = buildAppointmentFormspreePayload(lead);
 
-  const res = await fetch(endpoint, {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(payload),
-    signal: AbortSignal.timeout(FORMSPREE_TIMEOUT_MS),
-  });
+  const res = await fetch(
+    endpoint,
+    buildFormspreeRequestInit(payload, referer),
+  );
 
   const body: unknown = await res.json().catch(() => null);
   if (!res.ok) {
@@ -201,7 +186,7 @@ async function deliverToFormspree(lead: Lead): Promise<void> {
   }
 }
 
-async function deliverToWebhook(webhook: string, lead: Lead): Promise<void> {
+async function deliverToWebhook(webhook: string, lead: AppointmentLead): Promise<void> {
   try {
     const res = await fetch(webhook, {
       method: "POST",

@@ -12,7 +12,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 Marketing site redesign for Sacramento Dental Medicine (Antelope, CA) — Dr. Michael Narodovich and Dr. Lucas L. Sheppard. Next.js 16 App Router, React 19, Tailwind v4, npm.
 
-This is a **new site** (not live on `sacramentodentalmedicine.com` yet). Production preview: https://sacramento-dental-medicine-redesign.vercel.app/
+This site is live at https://sacramentodentalmedicine.com/ in Vercel project `sacramento-dental-medicine-redesign`.
 
 Sibling practice site: `enzo-prism/waikiki-dental`. Do not mix copy, phone numbers, hours, doctors, or brand tokens between the two.
 
@@ -27,7 +27,7 @@ Sibling practice site: `enzo-prism/waikiki-dental`. Do not mix copy, phone numbe
 - Reviews metadata: `src/app/reviews/page.tsx` (derived from `socialProof`)
 - Social-card layout: `src/lib/social-image.tsx`
 - Favicon and app-icon generator: `scripts/generate-seo-assets.py`
-- Canonical / OG origin: `src/lib/site-url.ts` (Vercel production host until cutover)
+- Canonical / OG origin: `src/lib/site-url.ts` (public production domain by default)
 
 Do not invent insurance lists, CareCredit, or a front-desk email. The Google
 rating and review counts are a dated snapshot in `socialProof`; re-check the
@@ -79,7 +79,7 @@ python3 scripts/generate-seo-assets.py  # only after changing the practice mark 
 - After UI or content changes, run `npm run lint`, `npm test`, and `npm run build`. Open http://localhost:3000 and click through Home, the scheduler (`#visit`), Emergency, Doctors, and New Patients (FAQ lives there).
 - Scheduler contact step: name plus phone **or** email. Confirm submit stays disabled with neither, and enables with either one alone.
 - Do **not** treat a successful form submit as practice delivery unless Formspree (or `LEAD_WEBHOOK_URL`) accepted the request and the user asked for a controlled test.
-- Do not attach or cut over `sacramentodentalmedicine.com`. Preview URL only until the practice signs off. At cutover, set `NEXT_PUBLIC_SITE_URL=https://sacramentodentalmedicine.com` — do not change DNS from this repo.
+- Preserve `sacramentodentalmedicine.com` as the canonical production domain and verify it after every release.
 - Positioning: grow new-patient volume via search, phone, and simple lead capture. Keep booking friction low.
 - Design: tokens in `src/app/globals.css` only. Periwinkle is atmosphere; navy is action. Ember is emergencies. Keep a single night band (Visit). Primary Book pills: header, hero, Visit, footer, mobile bar.
 - Hero / waiting / still-life images are atmospheric stand-ins, not the Elverta office. Do not write alt text or copy that claims they are the practice's rooms.

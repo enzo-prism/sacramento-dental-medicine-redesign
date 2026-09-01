@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { SectionLabel } from "@/components/SectionLabel";
 import { contact, doctors } from "@/data/site";
@@ -41,6 +42,11 @@ export function Doctors() {
                 <p className="mt-5 text-sm font-medium text-brand-ink">
                   {doctor.highlights}
                 </p>
+                {doctor.name === "Dr. Michael Narodovich" ? (
+                  <Link href="/meet-dr-narodovich" className="mt-4 inline-flex text-sm font-semibold text-brand-deep hover:underline">
+                    Meet Dr. Narodovich
+                  </Link>
+                ) : null}
               </div>
             </article>
           ))}

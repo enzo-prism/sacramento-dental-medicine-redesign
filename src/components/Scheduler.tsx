@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useActionState, useEffect, useRef, useState } from "react";
 import {
   ArrowLeft,
@@ -688,9 +689,9 @@ function SchedulerForm({ onReset }: { onReset: () => void }) {
                   />
                   <span>
                     I understand this is a scheduling request and will not include sensitive health or payment information. See our{" "}
-                    <a href="/privacy-practices/" className="font-semibold text-brand-deep underline underline-offset-2">
+                    <Link href="/privacy-practices/" className="font-semibold text-brand-deep underline underline-offset-2">
                       privacy practices
-                    </a>.
+                    </Link>.
                     {state.errors.privacy ? (
                       <span id="privacy-error" className="mt-1 block font-medium text-ember-deep">
                         {state.errors.privacy}

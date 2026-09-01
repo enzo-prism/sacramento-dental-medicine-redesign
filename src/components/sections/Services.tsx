@@ -1,8 +1,28 @@
 import Image from "next/image";
+import Link from "next/link";
 import { Check } from "lucide-react";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { SectionLabel } from "@/components/SectionLabel";
 import { imagery, services } from "@/data/site";
+
+const serviceLinks: Record<string, { href: string; label: string }[]> = {
+  "Preventive care": [
+    { href: "/gum-disease-treatment", label: "Gum disease treatment" },
+    { href: "/our-services", label: "All dental services" },
+  ],
+  "Cosmetic dentistry": [
+    { href: "/invisalign", label: "Invisalign" },
+    { href: "/orthodontics", label: "Orthodontics" },
+  ],
+  "Restorative dentistry": [
+    { href: "/dental-crowns", label: "Dental crowns" },
+    { href: "/dental-implants", label: "Dental implants" },
+  ],
+  "Oral surgery": [
+    { href: "/tooth-extractions", label: "Tooth extractions" },
+    { href: "/sedation-dentistry", label: "Comfort options" },
+  ],
+};
 
 export function Services() {
   const [featured, ...rest] = services;
@@ -66,6 +86,15 @@ export function Services() {
                 <p className="mt-3 text-sm text-ink-faint">
                   {service.details.join(" · ")}
                 </p>
+                {serviceLinks[service.title]?.length ? (
+                  <div className="mt-4 flex flex-wrap gap-x-4 gap-y-2">
+                    {serviceLinks[service.title].map((link) => (
+                      <Link key={link.href} href={link.href} className="text-sm font-semibold text-brand-deep hover:underline">
+                        {link.label}
+                      </Link>
+                    ))}
+                  </div>
+                ) : null}
               </article>
             ))}
           </div>

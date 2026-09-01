@@ -29,7 +29,7 @@ export default function Home() {
           __html: jsonLd({
             ...structuredData,
             url: siteUrl,
-            image: `${siteUrl}/images/og.jpg`,
+            image: `${siteUrl}/images/hero.webp`,
           }),
         }}
       />

@@ -4,6 +4,18 @@ import type { NextConfig } from "next";
 // needed. Re-add `images.remotePatterns` here if a remote source is introduced.
 const servicesDestination = "/#services";
 
+const restoredServiceRoutes = [
+  "our-services",
+  "dental-crowns",
+  "sedation-dentistry",
+  "orthodontics",
+  "invisalign",
+  "tooth-extractions",
+  "dental-implants",
+  "gum-disease-treatment",
+  "dental-emergencies",
+] as const;
+
 const legacyRedirects = [
   { source: "/about-us", destination: "/#doctors" },
   { source: "/appointments", destination: "/schedule" },
@@ -37,18 +49,10 @@ const legacyRedirects = [
     destination: servicesDestination,
   },
   { source: "/dental-care-children", destination: servicesDestination },
-  { source: "/dental-crowns", destination: servicesDestination },
-  { source: "/dental-emergencies", destination: "/schedule" },
-  { source: "/dental-implants", destination: servicesDestination },
-  { source: "/gum-disease-treatment", destination: servicesDestination },
-  { source: "/invisalign", destination: servicesDestination },
-  { source: "/meet-dr-narodovich", destination: "/#doctors" },
   { source: "/meet-dr-sheppard", destination: "/#doctors" },
   { source: "/oral-surgery", destination: servicesDestination },
-  { source: "/orthodontics", destination: servicesDestination },
   { source: "/our-dental-team", destination: "/#doctors" },
   { source: "/our-office", destination: "/schedule" },
-  { source: "/our-services", destination: servicesDestination },
   { source: "/patient-reviews", destination: "/reviews" },
   { source: "/platelet-rich-fibrin", destination: servicesDestination },
   { source: "/privacy-policy", destination: "/privacy-practices/" },
@@ -56,10 +60,8 @@ const legacyRedirects = [
   { source: "/restorations", destination: servicesDestination },
   { source: "/root-canal-therapy", destination: servicesDestination },
   { source: "/sedation-dentistry-guide", destination: servicesDestination },
-  { source: "/sedation-dentistry", destination: servicesDestination },
   { source: "/technology", destination: "/#technology" },
   { source: "/teeth-whitening", destination: servicesDestination },
-  { source: "/tooth-extractions", destination: servicesDestination },
   { source: "/veneers", destination: servicesDestination },
 ] as const;
 
@@ -77,6 +79,28 @@ const nextConfig: NextConfig = {
       },
       { source: "/reviews/", destination: "/reviews", permanent: true },
       { source: "/schedule/", destination: "/schedule", permanent: true },
+      {
+        source: "/meet-dr-narodovich/",
+        destination: "/meet-dr-narodovich",
+        permanent: true,
+      },
+      ...restoredServiceRoutes.map((slug) => ({
+        source: `/${slug}/`,
+        destination: `/${slug}`,
+        permanent: true,
+      })),
+      { source: "/home", destination: "/", permanent: true },
+      { source: "/home/", destination: "/", permanent: true },
+      {
+        source: "/services/crowns-bridges",
+        destination: "/dental-crowns",
+        permanent: true,
+      },
+      {
+        source: "/services/crowns-bridges/",
+        destination: "/dental-crowns",
+        permanent: true,
+      },
       ...legacyRedirects.flatMap(({ source, destination }) => [
         { source, destination, permanent: true },
         { source: `${source}/`, destination, permanent: true },

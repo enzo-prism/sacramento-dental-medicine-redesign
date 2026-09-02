@@ -56,8 +56,10 @@ export const contact = {
 // Imagery --------------------------------------------------------------------
 // All assets are self-hosted under /public/images.
 // Hero, waiting, and still-life frames are atmospheric stand-ins — they are
-// not photographs of the Elverta Road office. Replace with a practice shoot
-// when one exists. Doctor portraits are the practice's own photos, matted.
+// not photographs of the Elverta Road office. Doctor portraits are the
+// practice's own photos, matted. `officePhotos` are Mike's August 2026
+// JPEGs of 4320 Elverta Rd #3 (IMG_4036–4044, 4046). IMG_4040 and IMG_4043
+// were dropped as near-duplicates of reception and the same treatment room.
 export const imagery = {
   logo: "/images/logo-mark.png",
   logoFull: "/images/logo-full-on-dark.png",
@@ -67,6 +69,64 @@ export const imagery = {
   narodovich: "/images/dr-narodovich.webp",
   sheppard: "/images/dr-sheppard-portrait.webp",
 };
+
+export type OfficePhoto = {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+};
+
+export const officePhotos: OfficePhoto[] = [
+  {
+    src: "/images/office-exterior.webp",
+    alt: "Sacramento Dental Medicine storefront at 4320 Elverta Rd in Antelope",
+    width: 1536,
+    height: 1152,
+  },
+  {
+    src: "/images/office-waiting.webp",
+    alt: "Waiting area with a tufted sofa, artwork, and marble-look tile at the Elverta Road office",
+    width: 1536,
+    height: 1152,
+  },
+  {
+    src: "/images/office-lounge.webp",
+    alt: "Lounge seating, abstract wall art, and a snake plant in the office waiting room",
+    width: 1152,
+    height: 1536,
+  },
+  {
+    src: "/images/office-reception.webp",
+    alt: "Front reception desk and granite counter at Sacramento Dental Medicine",
+    width: 1536,
+    height: 1152,
+  },
+  {
+    src: "/images/office-hallway.webp",
+    alt: "Office hallway with framed certificates looking into a treatment room",
+    width: 1152,
+    height: 1536,
+  },
+  {
+    src: "/images/office-treatment.webp",
+    alt: "Treatment room with a dental chair, exam light, and cabinetry",
+    width: 1152,
+    height: 1536,
+  },
+  {
+    src: "/images/office-operatory.webp",
+    alt: "Treatment bay with a dental chair, sink station, and ceiling monitor",
+    width: 1152,
+    height: 1536,
+  },
+  {
+    src: "/images/office-scanner.webp",
+    alt: "Intraoral scanner and air purifier in a treatment room at the Elverta Road office",
+    width: 1152,
+    height: 1536,
+  },
+];
 
 // Primary navigation ---------------------------------------------------------
 export const navItems = [

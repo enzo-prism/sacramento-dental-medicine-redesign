@@ -7,6 +7,7 @@ import { Emergency } from "@/components/sections/Emergency";
 import { Intro } from "@/components/sections/Intro";
 import { Services } from "@/components/sections/Services";
 import { Technology } from "@/components/sections/Technology";
+import { Office } from "@/components/sections/Office";
 import { Doctors } from "@/components/sections/Doctors";
 import { Reviews } from "@/components/sections/Reviews";
 import { NewPatients } from "@/components/sections/NewPatients";
@@ -46,6 +47,7 @@ export default function Home() {
         <Intro />
         <Services />
         <Technology />
+        <Office />
         <Doctors />
         <Reviews />
         <NewPatients />

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowLeft,
@@ -13,7 +14,7 @@ import { Header } from "@/components/Header";
 import { Scheduler } from "@/components/Scheduler";
 import { ScheduleRouteStart } from "@/components/ScheduleRouteStart";
 import { Footer } from "@/components/sections/Footer";
-import { contact, hours } from "@/data/site";
+import { contact, hours, officePhotos } from "@/data/site";
 
 export const metadata: Metadata = {
   title: {
@@ -140,23 +141,34 @@ export default function SchedulePage() {
                 </ul>
               </section>
 
-              <section className="surface-night-card flex flex-col p-6" aria-labelledby="schedule-office-title">
-                <h2 id="schedule-office-title" className="flex items-center gap-2 font-display text-xl font-medium text-white">
-                  <MapPin className="size-5 text-[#d5e1f4]" aria-hidden="true" />
-                  The office
-                </h2>
-                <address className="mt-5 not-italic font-display text-xl font-medium leading-snug text-white">
-                  {contact.addressLine1}<br />
-                  {contact.addressLine2}
-                </address>
-                <p className="mt-3 max-w-md text-sm leading-6 text-white/65">
-                  Convenient to Antelope, Sacramento, Roseville, North Highlands,
-                  and Citrus Heights.
-                </p>
-                <a href={contact.mapsHref} className="btn-text-light mt-4">
-                  <Navigation className="size-4" aria-hidden="true" />
-                  Open in Maps
-                </a>
+              <section className="surface-night-card flex flex-col overflow-hidden p-0" aria-labelledby="schedule-office-title">
+                <div className="relative aspect-[16/10] w-full">
+                  <Image
+                    src={officePhotos[0].src}
+                    alt={officePhotos[0].alt}
+                    fill
+                    sizes="(min-width: 768px) 22rem, 100vw"
+                    className="object-cover"
+                  />
+                </div>
+                <div className="flex flex-col p-6">
+                  <h2 id="schedule-office-title" className="flex items-center gap-2 font-display text-xl font-medium text-white">
+                    <MapPin className="size-5 text-[#d5e1f4]" aria-hidden="true" />
+                    The office
+                  </h2>
+                  <address className="mt-5 not-italic font-display text-xl font-medium leading-snug text-white">
+                    {contact.addressLine1}<br />
+                    {contact.addressLine2}
+                  </address>
+                  <p className="mt-3 max-w-md text-sm leading-6 text-white/65">
+                    Convenient to Antelope, Sacramento, Roseville, North Highlands,
+                    and Citrus Heights.
+                  </p>
+                  <a href={contact.mapsHref} className="btn-text-light mt-4">
+                    <Navigation className="size-4" aria-hidden="true" />
+                    Open in Maps
+                  </a>
+                </div>
               </section>
             </div>
           </div>

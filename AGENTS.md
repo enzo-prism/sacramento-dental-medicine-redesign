@@ -83,4 +83,5 @@ python3 scripts/generate-seo-assets.py  # only after changing the practice mark 
 - Positioning: grow new-patient volume via search, phone, and simple lead capture. Keep booking friction low.
 - Design: tokens in `src/app/globals.css` only. Periwinkle is atmosphere; navy is action. Ember is emergencies. Keep a single night band (Visit). Primary Book pills: header, hero, Visit, footer, mobile bar.
 - Hero / waiting / still-life images are atmospheric stand-ins, not the Elverta office. Do not write alt text or copy that claims they are the practice's rooms.
+- `officePhotos` in `src/data/site.ts` are real Elverta Road interiors and the storefront (`/images/office-*.webp`). Keep those alts honest (office rooms, not patients).
 - If `LEAD_WEBHOOK_URL` is missing, the site still runs. Add it only as a Cloud Agents **runtime secret**, never in git.

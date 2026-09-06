@@ -1,6 +1,6 @@
 # Analytics and search operations
 
-Last verified: September 1, 2026
+GA4 last verified: September 6, 2026; other account sections: September 1, 2026
 
 This document separates code readiness from account-side enablement. A package,
 resource ID, DNS token, or successful build is not proof that traffic is being
@@ -44,33 +44,79 @@ The authorized GA4 property is `552407134`; its production web stream is
 only on `sacramentodentalmedicine.com` and `www.sacramentodentalmedicine.com`, so
 local, preview, and generated Vercel URLs cannot contaminate production data.
 
-The implementation disables GA's automatic initial page view and sends a
-privacy-reduced manual page view on each public route change. It:
+The application owns page views: automatic initial views and Enhanced
+Measurement browser-history views are disabled. Scroll, outbound, search, form,
+video and download measurement remain off. Google Signals remains off.
 
-- removes query strings and URL fragments;
-- reports `/schedule` as `/conversion`;
-- keeps the public `/reviews` aggregate;
-- groups all other public routes under `/`;
-- excludes `/privacy-practices`;
-- clears the page referrer; and
-- disables Google Signals and ad-personalization signals.
+Every event inherits sanitized tag-wide location, title, referrer and content
+group before the tag loads. Page-specific fields must stay out of the initial
+`config` call: config scope overrides later global `set` calls. Explicit page
+views deduplicate React effect replays. Excluded/unknown routes disable the
+loaded tag as well as skipping manual views.
 
-Do not add form values, names, email addresses, phone numbers, treatment or
-appointment reasons, notes, UTM values, click IDs, user IDs, or custom lead
-events to GA4. Formspree remains the lead source of truth.
+| Public route | Reported path | Content group |
+| --- | --- | --- |
+| Home | `/` | Home |
+| Reviews | `/reviews` | Reviews |
+| Services directory | `/our-services` | Care overview |
+| New patients | `/new-patients` | Visit information |
+| Doctor biography | `/team` | Team |
+| Scheduling | `/conversion` | Contact page |
+| Reviewed treatment pages | `/care` | Care information |
 
-The stream's Enhanced Measurement settings were verified on September 1, 2026.
-**Page views** is the only active measurement, and **Page changes based on
-browser history events** is off. Scrolls, outbound clicks, site search, form
-interactions, video engagement, and file downloads are off. The application
-owns route-change page views; this avoids double-counting and prevents automatic
-events from bypassing the redaction boundary. Use Realtime or DebugView to
-confirm exactly one `/`, `/reviews`, or `/conversion` page view per navigation
-and no event on `/privacy-practices`.
+`/conversion` is a legacy aggregate path, **not a completed lead or key event**.
+Privacy, unknown routes and nonproduction hosts are excluded. No form values,
+contact details, treatment reasons, click IDs or user IDs are sent. Formspree
+remains the lead source of truth; do not equate page visits with appointments.
 
-The Analytics Data API identity does not currently have access to the new
-property, so automated dashboard readback requires Viewer access to be granted
-on that property. Site-side collection does not depend on that API permission.
+Acquisition now preserves only recognized referral origins (no paths or query
+strings), and fixed allowlisted `utm_source` + `utm_medium` pairs. Both must be
+recognized. Unknown external referrers become `other-referral / referral`.
+Raw campaign names, campaign IDs, terms and content stay suppressed. See
+`src/lib/google-analytics.ts` for the exact allowlists. Examples:
+
+- `utm_source=google&utm_medium=cpc` identifies paid Google visits.
+- `utm_source=facebook&utm_medium=paid_social` identifies paid social visits.
+- Recognized Google or AI referral origins can identify incoming organic/referral traffic.
+
+Click-ID-only paid visits cannot reliably be distinguished from organic visits;
+use approved source/medium tags when managing acquisition links. Historical
+Direct traffic cannot be reconstructed, and browser/referrer restrictions still
+limit attribution. This is privacy-reduced traffic measurement, not an
+individual patient attribution system.
+
+On September 6, the stream's email redaction was confirmed active and URL query
+redaction was enabled for 30 additional keys: `name`, `first_name`, `last_name`,
+`email`, `phone`, `telephone`, `address`, `dob`, `patient_id`, `visittype`, `date`,
+`datelabel`, `time`, `reason`, `symptoms`, `medical_history`, `notes`, `message`,
+`insurance`, `insurance_id`, `policy_number`, `utm_campaign`, `utm_term`,
+`utm_content`, `gclid`, `fbclid`, `ttclid`, `ad_id`, `token`, `access_token`.
+This is defense in depth, not a replacement for application sanitization.
+
+For QA, open `/?analytics=off` in the test tab before browsing. The session-only
+opt-out prevents loading Google Analytics and persists across navigation in that
+tab. Open `/?analytics=on` to restore measurement. Reload after changing the
+flag on the same path. Preview/local hosts never load the production tag.
+The existing internal-traffic filter remains in Testing; do not activate it
+without validating its rule. Retention and advertising settings were not expanded.
+
+Use GA4 Traffic acquisition with **Session source / medium**, and Pages and
+screens with **Content group** or **Page title**, to inspect new traffic. Allow
+normal report processing time after release. September 6 marks a reporting
+break: older views used a single title and mostly the homepage path.
+
+The signed-in Chrome account can view/edit this property. CLI OAuth/delegated
+API access was unavailable during this audit; that is separate from working
+browser access and production tag collection. Do not infer API permissions from
+a successful website request.
+
+Validation includes lifecycle/privacy unit tests and real Google tag requests
+in an isolated fixture with collection blocked, including a parameterless probe
+to verify inherited context after SPA navigation. No synthetic leads are sent.
+
+References: [Google tag configuration](https://developers.google.com/analytics/devguides/collection/ga4/reference/config),
+[manual page views](https://developers.google.com/analytics/devguides/collection/ga4/views),
+[Google healthcare data guidance](https://support.google.com/analytics/answer/13297105).
 
 ## Google Search Console
 

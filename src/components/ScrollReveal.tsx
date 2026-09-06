@@ -34,7 +34,14 @@ export function ScrollReveal({
     const node = ref.current;
     if (!node) return;
 
-    setIsReady(true);
+    // Keep server-rendered content visible when motion cannot improve it.
+    // In particular, never hide content already visible during hydration.
+    if (
+      typeof IntersectionObserver === "undefined" ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) return;
+    const bounds = node.getBoundingClientRect();
+    if (bounds.top < window.innerHeight && bounds.bottom > 0) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -47,11 +54,12 @@ export function ScrollReveal({
       },
       {
         rootMargin: "0px 0px -10% 0px",
-        threshold: 0.14,
+        threshold: 0,
       },
     );
 
     observer.observe(node);
+    setIsReady(true);
     return () => observer.disconnect();
   }, [once]);
 
@@ -60,6 +68,7 @@ export function ScrollReveal({
   return (
     <Tag
       ref={ref}
+      onFocusCapture={() => setIsVisible(true)}
       data-ready={isReady}
       data-visible={isVisible}
       data-variant={variant}

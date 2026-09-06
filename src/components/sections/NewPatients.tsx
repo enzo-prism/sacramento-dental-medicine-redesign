@@ -1,9 +1,11 @@
 import Link from "next/link";
-import { Check, ClipboardList } from "lucide-react";
+import { ArrowUpRight, BadgeCheck, Check, ClipboardList, Users, Wallet } from "lucide-react";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { SectionLabel } from "@/components/SectionLabel";
 import { FAQ } from "@/components/sections/FAQ";
 import { contact, newPatient } from "@/data/site";
+
+const billingIcons = [BadgeCheck, Wallet, Users];
 
 export function NewPatients() {
   return (
@@ -17,29 +19,41 @@ export function NewPatients() {
 
         <div className="mt-12 grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:gap-14">
           <div>
-            {newPatient.billing.map((item, index) => (
-              <div
-                key={item.title}
-                className={index > 0 ? "border-t border-line pt-7 mt-7" : ""}
-              >
-                <h3 className="font-display text-lg font-medium text-ink">
-                  {item.title}
-                </h3>
-                <p className="mt-2 max-w-md text-sm leading-6 text-ink-soft">
-                  {item.body}
-                </p>
-              </div>
-            ))}
+            {newPatient.billing.map((item, index) => {
+              const Icon = billingIcons[index];
+              return (
+                <div
+                  key={item.title}
+                  className={`detail-row flex items-start gap-4 ${index > 0 ? "mt-7 border-t border-line pt-7" : ""}`}
+                >
+                  <span className="detail-icon grid size-11 shrink-0 place-items-center rounded-xl bg-brand-tint text-brand-ink">
+                    <Icon className="size-5" strokeWidth={1.7} aria-hidden="true" />
+                  </span>
+                  <div className="min-w-0 pt-1.5">
+                  <h3 className="font-display text-lg font-medium text-ink">
+                    {item.title}
+                  </h3>
+                  <p className="mt-2 max-w-md text-sm leading-6 text-ink-soft">
+                    {item.body}
+                  </p>
+                  </div>
+                </div>
+              );
+            })}
 
             <p className="mt-8 text-sm leading-7 text-brand-ink">
               <span className="font-semibold">Your first visit: </span>
               {newPatient.firstVisit}
             </p>
 
-            <a href={contact.bookingHref} className="btn-text mt-6">
+            <a href={contact.bookingHref} className="btn-text mt-6 min-h-11 gap-2">
               Book your first visit
+              <ArrowUpRight className="size-4 shrink-0" aria-hidden="true" />
             </a>
-            <Link href="/new-patients" className="btn-text mt-4 block">First-visit, insurance and payment questions</Link>
+            <Link href="/new-patients" className="btn-text mt-2 flex min-h-11 gap-2">
+              <span>First-visit, insurance and payment questions</span>
+              <ArrowUpRight className="size-4 shrink-0" aria-hidden="true" />
+            </Link>
           </div>
 
           <div className="surface-wash flex flex-col p-6 md:p-7">

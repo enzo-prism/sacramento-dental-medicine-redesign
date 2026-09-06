@@ -31,27 +31,30 @@ export function Technology() {
         </div>
 
         <ol className="mt-12 grid gap-0 border-t border-line md:mt-16 md:grid-cols-2 md:gap-x-12">
-          {technology.map((item, index) => (
-            <li
-              key={item.title}
-              className="flex items-baseline gap-5 border-b border-line py-7"
-            >
-              <span
-                aria-hidden="true"
-                className="font-display text-sm font-semibold tracking-[0.08em] text-brand-ink"
+          {technology.map((item) => {
+            const Icon = item.icon;
+            return (
+              <li
+                key={item.title}
+                className="detail-row flex items-start gap-4 border-b border-line py-7"
               >
-                0{index + 1}
-              </span>
-              <div>
-                <h3 className="font-display text-lg font-semibold tracking-[-0.01em] text-ink">
-                  {item.title}
-                </h3>
-                <p className="mt-2 max-w-md text-pretty text-sm leading-6 text-ink-soft">
-                  {item.body}
-                </p>
-              </div>
-            </li>
-          ))}
+                <span
+                  aria-hidden="true"
+                  className="detail-icon grid size-11 shrink-0 place-items-center rounded-xl bg-brand-tint text-brand-ink"
+                >
+                  <Icon className="size-5" strokeWidth={1.7} />
+                </span>
+                <div className="min-w-0 pt-1.5">
+                  <h3 className="font-display text-lg font-semibold tracking-[-0.01em] text-ink">
+                    {item.title}
+                  </h3>
+                  <p className="mt-2 max-w-md text-pretty text-sm leading-6 text-ink-soft">
+                    {item.body}
+                  </p>
+                </div>
+              </li>
+            );
+          })}
         </ol>
       </div>
     </section>

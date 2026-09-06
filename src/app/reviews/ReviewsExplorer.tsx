@@ -41,7 +41,7 @@ export function ReviewsExplorer() {
               type="button"
               aria-pressed={active}
               onClick={() => setFilter(item)}
-              className={`shrink-0 rounded-full border px-4 py-2 text-sm font-semibold transition ${
+              className={`min-h-11 shrink-0 rounded-full border px-4 py-2 text-sm font-semibold transition ${
                 active
                   ? "border-brand-deep bg-brand-deep text-white shadow-sm"
                   : "border-line bg-white text-ink-soft hover:border-brand hover:text-ink"

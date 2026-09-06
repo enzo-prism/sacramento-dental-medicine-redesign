@@ -21,12 +21,14 @@ export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSectionHref, setActiveSectionHref] = useState<string | null>(null);
+  const headerRef = useRef<HTMLElement>(null);
+  const topBarRef = useRef<HTMLDivElement>(null);
   const toggleRef = useRef<HTMLButtonElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
 
   const closeAndRefocus = () => {
     setMenuOpen(false);
-    toggleRef.current?.focus();
+    window.requestAnimationFrame(() => toggleRef.current?.focus());
   };
 
   useEffect(() => {
@@ -73,7 +75,7 @@ export function Header() {
     const onKey = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         setMenuOpen(false);
-        toggleRef.current?.focus();
+        window.requestAnimationFrame(() => toggleRef.current?.focus());
         return;
       }
 
@@ -85,7 +87,10 @@ export function Header() {
       const first = focusable[0];
       const last = focusable[focusable.length - 1];
 
-      if (event.shiftKey && document.activeElement === first) {
+      if (!menuRef.current?.contains(document.activeElement)) {
+        event.preventDefault();
+        first.focus();
+      } else if (event.shiftKey && document.activeElement === first) {
         event.preventDefault();
         last.focus();
       } else if (!event.shiftKey && document.activeElement === last) {
@@ -107,6 +112,47 @@ export function Header() {
   }, [menuOpen]);
 
   useEffect(() => {
+    if (!menuOpen) return;
+    const desktop = window.matchMedia("(min-width: 1024px)");
+    const closeOnDesktop = () => {
+      if (!desktop.matches) return;
+      const focusWasInMenu = menuRef.current?.contains(document.activeElement);
+      setMenuOpen(false);
+      if (focusWasInMenu) {
+        window.requestAnimationFrame(() => {
+          headerRef.current?.querySelector<HTMLAnchorElement>("a[href]")?.focus();
+        });
+      }
+    };
+    desktop.addEventListener("change", closeOnDesktop);
+    return () => desktop.removeEventListener("change", closeOnDesktop);
+  }, [menuOpen]);
+
+  useEffect(() => {
+    if (!menuOpen || !headerRef.current) return;
+    // Isolate the dialog from both the page and the header controls behind it.
+    const previous = new Map<HTMLElement, boolean>();
+    const makeInert = (element: HTMLElement) => {
+      previous.set(element, element.hasAttribute("inert"));
+      element.setAttribute("inert", "");
+    };
+    if (topBarRef.current) makeInert(topBarRef.current);
+    let branch: HTMLElement = headerRef.current;
+    while (branch.parentElement) {
+      for (const sibling of branch.parentElement.children) {
+        if (sibling !== branch && sibling instanceof HTMLElement) makeInert(sibling);
+      }
+      if (branch.parentElement === document.body) break;
+      branch = branch.parentElement;
+    }
+    return () => {
+      for (const [element, inert] of previous) {
+        if (!inert) element.removeAttribute("inert");
+      }
+    };
+  }, [menuOpen]);
+
+  useEffect(() => {
     if (menuOpen) document.documentElement.dataset.menuOpen = "true";
     else delete document.documentElement.dataset.menuOpen;
     return () => {
@@ -124,8 +170,8 @@ export function Header() {
   }, [menuOpen]);
 
   return (
-    <header className="site-header" data-scrolled={scrolled}>
-      <div className="container-x flex items-center justify-between py-3.5">
+    <header ref={headerRef} className="site-header" data-scrolled={scrolled}>
+      <div ref={topBarRef} className="container-x flex items-center justify-between py-3.5">
         <Link
           href="/"
           className="group flex items-center gap-3"
@@ -211,6 +257,14 @@ export function Header() {
             className="mobile-menu-panel container-x pb-6 pt-1"
           >
             <nav className="surface-card flex flex-col gap-1 p-3">
+              <button
+                type="button"
+                onClick={closeAndRefocus}
+                className="mb-1 flex min-h-11 items-center justify-between rounded-xl px-4 text-sm font-semibold text-ink-soft transition hover:bg-wash"
+              >
+                Close navigation
+                <X className="size-4" aria-hidden="true" />
+              </button>
               {navItems.map((item) => {
                 const active = isActive(item.href);
                 return (

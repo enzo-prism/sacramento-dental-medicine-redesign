@@ -34,7 +34,7 @@ export function Office() {
                 src={photo.src}
                 alt={photo.alt}
                 fill
-                sizes="(min-width: 768px) 40vw, 100vw"
+                sizes="(min-width: 1280px) 592px, (min-width: 768px) calc(50vw - 48px), calc(100vw - 40px)"
                 className="object-cover"
               />
             </ScrollReveal>
@@ -53,7 +53,7 @@ export function Office() {
                 src={photo.src}
                 alt={photo.alt}
                 fill
-                sizes="(min-width: 768px) 28vw, 50vw"
+                sizes="(min-width: 1280px) 389px, (min-width: 768px) calc(33.33vw - 38px), calc(50vw - 26px)"
                 className="object-cover"
               />
             </ScrollReveal>

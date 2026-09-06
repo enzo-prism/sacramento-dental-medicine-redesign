@@ -1,6 +1,5 @@
 import Image from "next/image";
-import { CalendarDays, Phone } from "lucide-react";
-import { ScrollReveal } from "@/components/ScrollReveal";
+import { CalendarDays, MapPin, Phone } from "lucide-react";
 import { contact, imagery } from "@/data/site";
 
 export function Hero() {
@@ -10,21 +9,10 @@ export function Hero() {
       data-mobile-cta-stop
       className="relative overflow-hidden pt-32 lg:pt-40"
     >
-      <div aria-hidden="true" className="absolute inset-x-0 top-0 h-72 lg:hidden">
-        <Image
-          src={imagery.hero}
-          alt=""
-          fill
-          loading="eager"
-          sizes="(max-width: 1023px) 100vw, 1px"
-          className="object-cover object-center opacity-30"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-canvas/20 via-canvas/80 to-canvas" />
-      </div>
-
       <div className="container-x relative grid items-center gap-12 pb-16 sm:pb-20 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14 lg:pb-24">
-        <ScrollReveal className="max-w-3xl">
-          <p className="text-sm font-medium text-ink-faint">
+        <div className="relative z-10 max-w-3xl">
+          <p className="flex items-center gap-2 text-sm font-medium text-ink-faint">
+            <MapPin className="size-4 shrink-0 text-brand-deep" aria-hidden="true" />
             Sacramento Dental Medicine · Antelope, CA
           </p>
 
@@ -55,28 +43,26 @@ export function Hero() {
               {contact.phoneDisplay}
             </a>
           </div>
-        </ScrollReveal>
+        </div>
 
-        <ScrollReveal
-          variant="fade"
-          delay={80}
-          className="relative hidden lg:block"
-        >
+        <div className="absolute inset-x-0 -top-32 h-72 lg:relative lg:inset-auto lg:col-start-2 lg:row-start-1 lg:h-auto">
           <div
             aria-hidden="true"
-            className="absolute -inset-6 rounded-[32px] bg-brand-tint/50 blur-2xl"
+            className="absolute -inset-6 hidden rounded-[32px] bg-brand-tint/50 blur-2xl lg:block"
           />
-          <div className="image-panel image-frame relative aspect-[4/3] w-full">
+          <div className="relative h-full w-full lg:aspect-[4/3] lg:overflow-hidden lg:rounded-[22px] lg:shadow-xl">
             <Image
               src={imagery.hero}
               alt="Sunlit contemporary treatment room — atmospheric photography, not the Elverta Road office"
               fill
               loading="eager"
-              sizes="(min-width: 1024px) 46vw, 100vw"
-              className="object-cover object-center"
+              fetchPriority="high"
+              sizes="(min-width: 1280px) 544px, (min-width: 1024px) calc(47.5vw - 65px), 100vw"
+              className="object-cover object-center opacity-30 lg:opacity-100"
             />
+            <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-b from-canvas/20 via-canvas/80 to-canvas lg:hidden" />
           </div>
-        </ScrollReveal>
+        </div>
       </div>
     </section>
   );

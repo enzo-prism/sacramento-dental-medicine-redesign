@@ -158,11 +158,11 @@ function dayLabel(day: DayOption) {
 export function Scheduler() {
   const [formKey, setFormKey] = useState(0);
   return (
-    <SchedulerForm key={formKey} onReset={() => setFormKey((k) => k + 1)} />
+    <SchedulerForm key={formKey} focusOnMount={formKey > 0} onReset={() => setFormKey((k) => k + 1)} />
   );
 }
 
-function SchedulerForm({ onReset }: { onReset: () => void }) {
+function SchedulerForm({ onReset, focusOnMount }: { onReset: () => void; focusOnMount: boolean }) {
   const [state, formAction, pending] = useActionState(
     requestAppointment,
     initialAppointmentState,
@@ -180,6 +180,7 @@ function SchedulerForm({ onReset }: { onReset: () => void }) {
   const [privacyConfirmed, setPrivacyConfirmed] = useState(false);
 
   const headingRef = useRef<HTMLHeadingElement>(null);
+  const successRef = useRef<HTMLHeadingElement>(null);
   const firstRender = useRef(true);
 
   useEffect(() => {
@@ -195,10 +196,15 @@ function SchedulerForm({ onReset }: { onReset: () => void }) {
   useEffect(() => {
     if (firstRender.current) {
       firstRender.current = false;
+      if (focusOnMount) headingRef.current?.focus();
       return;
     }
-    headingRef.current?.focus({ preventScroll: true });
-  }, [step]);
+    headingRef.current?.focus();
+  }, [step, focusOnMount]);
+
+  useEffect(() => {
+    if (state.ok) successRef.current?.focus();
+  }, [state.ok]);
 
   useEffect(() => {
     if (state.ok || !state.message) return;
@@ -223,7 +229,9 @@ function SchedulerForm({ onReset }: { onReset: () => void }) {
   const emailOk = hasUsableEmail(email);
   const phoneComplete = phoneDigits === 0 || phoneOk;
   const emailComplete = email.trim() === "" || emailOk;
+  const selectionReady = Boolean(selectedVisit && selectedDay && selectedPart);
   const canSubmit =
+    selectionReady &&
     name.trim().length > 1 &&
     (phoneOk || emailOk) &&
     phoneComplete &&
@@ -255,7 +263,7 @@ function SchedulerForm({ onReset }: { onReset: () => void }) {
         <span className="grid size-14 place-items-center rounded-full orb-brand">
           <CircleCheck className="size-7" strokeWidth={1.75} />
         </span>
-        <h2 className="font-display text-2xl font-medium text-ink md:text-3xl">
+        <h2 ref={successRef} tabIndex={-1} className="font-display text-2xl font-medium text-ink md:text-3xl">
           Request sent
         </h2>
         {selectedVisit && selectedDay && selectedPart ? (
@@ -567,6 +575,15 @@ function SchedulerForm({ onReset }: { onReset: () => void }) {
                 Your name, plus a phone number or an email — we only need one.
               </p>
 
+              {!selectionReady ? (
+                <div role="status" className="mt-4 rounded-2xl border border-ember/30 bg-ember-tint p-4 text-sm text-ember-deep">
+                  <p>Your preferred day is no longer available. Please choose a new day before sending your request.</p>
+                  <button type="button" onClick={() => setStep(1)} className="btn-text mt-2 min-h-11">
+                    Choose another day
+                  </button>
+                </div>
+              ) : null}
+
               <div className="mt-5 flex flex-wrap gap-2">
                 <SummaryChip
                   label={selectedVisit?.label ?? "Visit"}
@@ -767,6 +784,7 @@ function SummaryChip({ label, onEdit }: { label: string; onEdit: () => void }) {
     <button
       type="button"
       onClick={onEdit}
+      aria-label={`Edit ${label}`}
       className="inline-flex min-h-11 items-center gap-2 rounded-full border border-line bg-white py-2 pl-3.5 pr-2.5 text-sm font-medium text-ink transition hover:border-brand/60"
     >
       {label}

@@ -12,7 +12,7 @@ export function MobileCTA() {
     const nodes = [
       ...document.querySelectorAll("[data-mobile-cta-stop], footer"),
     ];
-    if (nodes.length === 0) return;
+    if (nodes.length === 0 || typeof IntersectionObserver === "undefined") return;
 
     const seen = new Map<Element, boolean>();
     const observer = new IntersectionObserver(

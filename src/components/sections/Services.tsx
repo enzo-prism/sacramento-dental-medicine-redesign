@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Check } from "lucide-react";
+import { ArrowUpRight, Check } from "lucide-react";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { SectionLabel } from "@/components/SectionLabel";
 import { imagery, services } from "@/data/site";
@@ -27,6 +27,7 @@ const serviceLinks: Record<string, { href: string; label: string }[]> = {
 
 export function Services() {
   const [featured, ...rest] = services;
+  const FeaturedIcon = featured.icon;
 
   return (
     <section id="services" className="section bg-wash">
@@ -51,9 +52,12 @@ export function Services() {
                 />
               </div>
               <div className="flex flex-1 flex-col p-6 md:p-8">
-                <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-brand-ink">
-                  Start here
-                </span>
+                <div className="flex items-center gap-3">
+                  <span className="detail-icon grid size-11 shrink-0 place-items-center rounded-xl bg-brand-tint text-brand-ink">
+                    <FeaturedIcon className="size-5" strokeWidth={1.7} aria-hidden="true" />
+                  </span>
+                  <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-brand-ink">Start here</span>
+                </div>
                 <h3 className="mt-3 font-display text-2xl font-semibold tracking-[-0.015em] text-ink">
                   {featured.title}
                 </h3>
@@ -66,14 +70,17 @@ export function Services() {
                       key={detail}
                       className="flex items-center gap-2.5 text-sm text-ink-soft"
                     >
-                      <Check className="size-4 shrink-0 text-brand-deep" />
+                      <Check className="size-4 shrink-0 text-brand-deep" aria-hidden="true" />
                       {detail}
                     </li>
                   ))}
                 </ul>
                 <div className="mt-5 flex flex-wrap gap-x-4 gap-y-2">
                   {serviceLinks[featured.title].map((link) => (
-                    <Link key={link.href} href={link.href} className="text-sm font-semibold text-brand-deep hover:underline">{link.label}</Link>
+                    <Link key={link.href} href={link.href} className="service-link inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-brand-deep">
+                      {link.label}
+                      <ArrowUpRight className="size-4 shrink-0" aria-hidden="true" />
+                    </Link>
                   ))}
                 </div>
               </div>
@@ -81,28 +88,37 @@ export function Services() {
           </ScrollReveal>
 
           <div className="flex flex-col justify-center divide-y divide-line rounded-[20px] border border-line bg-card px-5 md:px-7">
-            {rest.map((service) => (
-              <article key={service.title} className="py-6 md:py-7">
-                <h3 className="font-display text-xl font-semibold tracking-[-0.015em] text-ink">
-                  {service.title}
-                </h3>
-                <p className="mt-2 text-pretty text-sm leading-6 text-ink-soft">
-                  {service.blurb}
-                </p>
-                <p className="mt-3 text-sm text-ink-faint">
-                  {service.details.join(" · ")}
-                </p>
-                {serviceLinks[service.title]?.length ? (
-                  <div className="mt-4 flex flex-wrap gap-x-4 gap-y-2">
-                    {serviceLinks[service.title].map((link) => (
-                      <Link key={link.href} href={link.href} className="text-sm font-semibold text-brand-deep hover:underline">
-                        {link.label}
-                      </Link>
-                    ))}
+            {rest.map((service) => {
+              const Icon = service.icon;
+              return (
+                <article key={service.title} className="detail-row py-6 md:py-7">
+                  <div className="flex items-center gap-3">
+                    <span className="detail-icon grid size-11 shrink-0 place-items-center rounded-xl bg-brand-tint text-brand-ink">
+                      <Icon className="size-5" strokeWidth={1.7} aria-hidden="true" />
+                    </span>
+                  <h3 className="font-display text-xl font-semibold tracking-[-0.015em] text-ink">
+                    {service.title}
+                  </h3>
                   </div>
-                ) : null}
-              </article>
-            ))}
+                  <p className="mt-2 text-pretty text-sm leading-6 text-ink-soft">
+                    {service.blurb}
+                  </p>
+                  <p className="mt-3 text-sm text-ink-faint">
+                    {service.details.join(" · ")}
+                  </p>
+                  {serviceLinks[service.title]?.length ? (
+                    <div className="mt-4 flex flex-wrap gap-x-4 gap-y-2">
+                      {serviceLinks[service.title].map((link) => (
+                        <Link key={link.href} href={link.href} className="service-link inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-brand-deep">
+                          {link.label}
+                          <ArrowUpRight className="size-4 shrink-0" aria-hidden="true" />
+                        </Link>
+                      ))}
+                    </div>
+                  ) : null}
+                </article>
+              );
+            })}
           </div>
         </div>
       </div>

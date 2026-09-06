@@ -59,7 +59,7 @@ export default function DrNarodovichPage() {
                 alt={`${doctor.name}, ${doctor.title}`}
                 fill
                 priority
-                sizes="(min-width: 1024px) 360px, 80vw"
+                sizes="(min-width: 450px) 360px, calc(100vw - 40px)"
                 className="object-cover object-top"
               />
             </div>

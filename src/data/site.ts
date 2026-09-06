@@ -130,7 +130,7 @@ export const officePhotos: OfficePhoto[] = [
 
 // Primary navigation ---------------------------------------------------------
 export const navItems = [
-  { label: "Care", href: "/#services" },
+  { label: "Care", href: "/our-services" },
   { label: "Technology", href: "/#technology" },
   { label: "Doctors", href: "/#doctors" },
   { label: "Reviews", href: "/reviews" },
@@ -609,6 +609,11 @@ export const philosophy = {
 export const structuredData = {
   "@context": "https://schema.org",
   "@type": "Dentist",
+  "@id": `${productionDomain}/#practice`,
+  url: productionDomain,
+  image: `${productionDomain}/images/office-exterior.webp`,
+  logo: `${productionDomain}${imagery.logo}`,
+  hasMap: contact.mapsHref,
   name: contact.practiceName,
   telephone: "+1-916-727-6453",
   sameAs: [socialProof.moreReviewsUrl],
@@ -629,17 +634,11 @@ export const structuredData = {
   ],
   areaServed: contact.serviceArea,
   medicalSpecialty: ["Dentistry", "Cosmetic Dentistry", "Endodontics"],
-  aggregateRating: {
-    "@type": "AggregateRating",
-    ratingValue: socialProof.rating,
-    reviewCount: socialProof.totalReviews,
-    bestRating: 5,
-    worstRating: 1,
-  },
+
 };
 
 // FAQ structured data (schema.org / FAQPage) ---------------------------------
-// Surfaces the existing FAQ content to search engines for rich results.
+// Describes visible answers. Google retired FAQ rich results in May 2026.
 export const faqStructuredData = {
   "@context": "https://schema.org",
   "@type": "FAQPage",

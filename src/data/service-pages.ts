@@ -9,6 +9,7 @@ export type ServicePage = {
   steps: { title: string; body: string }[];
   faqs: { question: string; answer: string }[];
   relatedSlugs: string[];
+  sources?: { label: string; url: string }[];
 };
 
 export const servicePages: ServicePage[] = [
@@ -42,6 +43,7 @@ export const servicePages: ServicePage[] = [
       },
     ],
     faqs: [
+      { question: "Where is Sacramento Dental Medicine located?", answer: "The office is at 4320 Elverta Rd #3, Antelope, CA 95843. Sacramento Dental Medicine serves patients from Antelope and the greater Sacramento area at this location." },
       {
         question: "Are you accepting new dental patients?",
         answer:
@@ -85,6 +87,8 @@ export const servicePages: ServicePage[] = [
       },
     ],
     faqs: [
+      { question: "How is a crown different from an implant?", answer: "A crown restores the visible part of a damaged tooth. An implant replaces a missing tooth root and can support a crown. The exam determines whether your existing tooth can be restored or whether replacement should be considered." },
+      { question: "How much does a dental crown cost?", answer: "The estimate depends on the tooth, the restoration, any additional treatment, and your insurance benefits. Ask the front desk about the exam cost and request a treatment estimate after the dentist evaluates the tooth." },
       {
         question: "How do I know if I need a dental crown?",
         answer:
@@ -96,6 +100,7 @@ export const servicePages: ServicePage[] = [
           "Often, yes. Whether the tooth can be restored depends on how much healthy structure remains and the condition of the root and surrounding bone.",
       },
     ],
+    sources: [{"label": "ADA: Crowns", "url": "https://www.mouthhealthy.org/all-topics-a-z/crowns"}],
     relatedSlugs: ["dental-implants", "tooth-extractions"],
   },
   {
@@ -128,6 +133,8 @@ export const servicePages: ServicePage[] = [
       },
     ],
     faqs: [
+      { question: "Which sedation options can I request?", answer: "Call the office to ask which options are currently available. A dentist must review your medical history and planned treatment before confirming whether sedation is appropriate. Do not assume a particular medication or sedation method is offered." },
+      { question: "Is local numbing the same as sedation?", answer: "Local anesthesia numbs the area being treated. Sedation is a separate approach to managing awareness or anxiety. Tell the dentist about your concerns so they can explain the available comfort choices and any preparation instructions." },
       {
         question: "Can I ask about sedation before scheduling treatment?",
         answer:
@@ -171,6 +178,7 @@ export const servicePages: ServicePage[] = [
       },
     ],
     faqs: [
+      { question: "How are orthodontics and Invisalign related?", answer: "Orthodontics is the broader area of care for tooth alignment and bite. Invisalign is one clear aligner treatment option. This practice offers Invisalign evaluations; the dentist will explain whether aligners or another approach fits your needs." },
       {
         question: "Do you offer Invisalign in the Sacramento area?",
         answer:
@@ -182,6 +190,7 @@ export const servicePages: ServicePage[] = [
           "No. Some alignment and bite concerns need a different type of treatment. The dentist can explain the most appropriate next step after an evaluation.",
       },
     ],
+    sources: [{"label": "ADA: Braces and aligners", "url": "https://www.mouthhealthy.org/all-topics-a-z/braces"}],
     relatedSlugs: ["invisalign", "dental-crowns"],
   },
   {
@@ -214,6 +223,8 @@ export const servicePages: ServicePage[] = [
       },
     ],
     faqs: [
+      { question: "How long does Invisalign treatment take?", answer: "Treatment length depends on the planned tooth movement, your bite, and how consistently you follow the wear instructions. An evaluation is needed before the dentist can discuss a timeline for your case." },
+      { question: "How much does Invisalign cost?", answer: "Cost depends on the treatment plan and your dental benefits. Ask for an estimate after your alignment and bite evaluation, and confirm any orthodontic coverage with the front desk and your insurer." },
       {
         question: "Can I remove Invisalign aligners?",
         answer:
@@ -225,6 +236,7 @@ export const servicePages: ServicePage[] = [
           "A dental and bite evaluation is needed. The dentist will consider your alignment, oral health, and treatment goals before recommending clear aligners.",
       },
     ],
+    sources: [{"label": "ADA: Braces and aligners", "url": "https://www.mouthhealthy.org/all-topics-a-z/braces"}],
     relatedSlugs: ["orthodontics", "dental-crowns"],
   },
   {
@@ -300,6 +312,8 @@ export const servicePages: ServicePage[] = [
       },
     ],
     faqs: [
+      { question: "Is getting a dental implant a single appointment?", answer: "Implant treatment involves planning, placement, healing, and the final restoration. Healing and any preparatory treatment affect the timeline. Ask the dentist to explain your sequence before starting; a finished tooth in one visit is not guaranteed." },
+      { question: "What are the alternatives to a dental implant?", answer: "Depending on which teeth are missing and the health of the remaining teeth, a bridge or a removable partial or full denture may be considered. The dentist can compare the options with you at an exam." },
       {
         question: "Am I a candidate for a dental implant?",
         answer:
@@ -311,6 +325,7 @@ export const servicePages: ServicePage[] = [
           "Yes. Dental implants can be used to replace a single missing tooth, while other implant-supported options may be considered for several missing teeth.",
       },
     ],
+    sources: [{"label": "ADA: Implants", "url": "https://www.mouthhealthy.org/all-topics-a-z/implants"}],
     relatedSlugs: ["tooth-extractions", "dental-crowns"],
   },
   {
@@ -343,6 +358,8 @@ export const servicePages: ServicePage[] = [
       },
     ],
     faqs: [
+      { question: "How is a deep cleaning different from a regular cleaning?", answer: "Scaling and root planing is a deeper cleaning below the gumline used to treat gum disease. Gum measurements and an exam help determine whether routine cleaning or more focused periodontal care is appropriate." },
+      { question: "Can gum disease be present without pain?", answer: "Yes. Gum disease is often painless. Bleeding, gum recession, persistent bad breath, or loose teeth can be warning signs, but an exam is needed to assess gum health." },
       {
         question: "Are bleeding gums normal?",
         answer:
@@ -354,6 +371,7 @@ export const servicePages: ServicePage[] = [
           "Yes. Advanced gum disease can damage the tissues and bone that support teeth. Earlier evaluation creates more options for protecting them.",
       },
     ],
+    sources: [{"label": "ADA: Gum disease", "url": "https://www.mouthhealthy.org/all-topics-a-z/gum-disease"}, {"label": "ADA: Scaling and root planing", "url": "https://www.mouthhealthy.org/all-topics-a-z/scaling-and-root-planing"}],
     relatedSlugs: ["our-services", "dental-crowns"],
   },
   {
@@ -386,6 +404,8 @@ export const servicePages: ServicePage[] = [
       },
     ],
     faqs: [
+      { question: "Should I use the online form for urgent dental pain?", answer: "Call (916) 727-6453 first for urgent dental pain or an injury. The online form is an appointment request reviewed during office hours, so it should not be used when you need immediate guidance." },
+      { question: "Are you open evenings or weekends for emergencies?", answer: "The office is open until 7 PM on Wednesday and Thursday and is closed Saturday and Sunday. Call to check the earliest available visit; the practice does not advertise 24-hour emergency coverage." },
       {
         question: "What should I do for a dental emergency?",
         answer:
@@ -399,6 +419,63 @@ export const servicePages: ServicePage[] = [
     ],
     relatedSlugs: ["tooth-extractions", "dental-crowns", "sedation-dentistry"],
   },
+  {
+  "slug": "root-canal-therapy",
+  "title": "Root Canal Treatment in Antelope & Sacramento, CA",
+  "navLabel": "Root canal treatment",
+  "eyebrow": "Endodontic care",
+  "description": "Explore root canal care at Sacramento Dental Medicine in Antelope, with endodontic specialist Dr. Lucas L. Sheppard. Call for a tooth-pain evaluation.",
+  "intro": "Root canal treatment removes infected or damaged tissue inside a tooth, cleans and seals the canals, and can help preserve a tooth that would otherwise need removal. Sacramento Dental Medicine lists endodontic specialist Dr. Lucas L. Sheppard on its team for complex root canal care. An exam determines whether the tooth can be saved.",
+  "benefits": [
+    "Evaluate a painful or infected tooth",
+    "Understand whether the natural tooth can be saved",
+    "Discuss specialist care for complex cases",
+    "Plan the final filling or crown after treatment"
+  ],
+  "steps": [
+    {
+      "title": "Diagnose the tooth",
+      "body": "The dentist examines the tooth and uses appropriate imaging to understand the roots and surrounding tissues."
+    },
+    {
+      "title": "Treat the inside of the tooth",
+      "body": "If root canal treatment is recommended, the affected tissue is removed and the canals are cleaned, filled, and sealed. Discuss numbing and comfort concerns before treatment."
+    },
+    {
+      "title": "Complete the restoration",
+      "body": "A follow-up filling or crown protects the treated tooth. The dentist explains the restoration and follow-up your tooth needs."
+    }
+  ],
+  "faqs": [
+    {
+      "question": "Does a toothache always mean I need a root canal?",
+      "answer": "No. Tooth pain can have several causes. An exam and appropriate imaging are needed to determine whether a filling, root canal treatment, extraction, or another approach fits the problem."
+    },
+    {
+      "question": "Who provides specialist root canal care at the practice?",
+      "answer": "Dr. Lucas L. Sheppard, DMD, is the endodontic specialist listed on the Sacramento Dental Medicine team. Call the office to ask about an evaluation and current specialist availability."
+    },
+    {
+      "question": "Will I need a crown after a root canal?",
+      "answer": "The tooth needs a final restoration after root canal treatment. A crown or filling may be recommended depending on the tooth and how much healthy structure remains."
+    },
+    {
+      "question": "What should I do if my tooth hurts now?",
+      "answer": "Call (916) 727-6453 to describe the problem and ask for the earliest available evaluation. Same-day visits are offered when possible; an online appointment request does not confirm a visit."
+    }
+  ],
+  "relatedSlugs": [
+    "dental-crowns",
+    "dental-emergencies",
+    "tooth-extractions"
+  ],
+  "sources": [
+    {
+      "label": "ADA: Root canals",
+      "url": "https://www.mouthhealthy.org/all-topics-a-z/root-canals"
+    }
+  ]
+},
 ];
 
 export const servicePageBySlug = new Map(

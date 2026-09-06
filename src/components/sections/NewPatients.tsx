@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Check, ClipboardList } from "lucide-react";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { SectionLabel } from "@/components/SectionLabel";
@@ -38,6 +39,7 @@ export function NewPatients() {
             <a href={contact.bookingHref} className="btn-text mt-6">
               Book your first visit
             </a>
+            <Link href="/new-patients" className="btn-text mt-4 block">First-visit, insurance and payment questions</Link>
           </div>
 
           <div className="surface-wash flex flex-col p-6 md:p-7">

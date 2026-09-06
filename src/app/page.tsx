@@ -13,31 +13,14 @@ import { Reviews } from "@/components/sections/Reviews";
 import { NewPatients } from "@/components/sections/NewPatients";
 import { ScheduleCTA } from "@/components/sections/ScheduleCTA";
 import { Footer } from "@/components/sections/Footer";
-import { faqStructuredData, structuredData } from "@/data/site";
-import { siteUrl } from "@/lib/site-url";
-
-// Escape `<` so JSON-LD payloads can't break out of the <script> tag (XSS-safe).
-function jsonLd(data: unknown) {
-  return JSON.stringify(data).replace(/</g, "\\u003c");
-}
+import { faqStructuredData, seo } from "@/data/site";
+import { JsonLd } from "@/components/JsonLd";
+import { pageGraph } from "@/lib/structured-data";
 
 export default function Home() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: jsonLd({
-            ...structuredData,
-            url: siteUrl,
-            image: `${siteUrl}/images/hero.webp`,
-          }),
-        }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: jsonLd(faqStructuredData) }}
-      />
+      <JsonLd data={pageGraph("/", seo.title, [faqStructuredData])} />
       <Header />
       <main id="main" className="flex-1">
         <Hero />

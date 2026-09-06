@@ -2,9 +2,11 @@ import type { NextConfig } from "next";
 
 // All images are self-hosted under /public, so no remote image patterns are
 // needed. Re-add `images.remotePatterns` here if a remote source is introduced.
-const servicesDestination = "/#services";
+const servicesDestination = "/our-services";
 
 const restoredServiceRoutes = [
+  "new-patients",
+  "root-canal-therapy",
   "our-services",
   "dental-crowns",
   "sedation-dentistry",
@@ -22,44 +24,43 @@ const legacyRedirects = [
   { source: "/bruxism", destination: servicesDestination },
   { source: "/contact-us", destination: "/schedule" },
   { source: "/cosmetic", destination: servicesDestination },
-  { source: "/deep-cleanings", destination: servicesDestination },
+  { source: "/deep-cleanings", destination: "/gum-disease-treatment" },
   { source: "/dental-blog", destination: servicesDestination },
   { source: "/dental-blog/archive-202508", destination: servicesDestination },
   { source: "/dental-blog/archive-202606", destination: servicesDestination },
   { source: "/dental-blog/archive-202607", destination: servicesDestination },
   {
     source: "/dental-blog/category/sedation-dentistry",
-    destination: servicesDestination,
+    destination: "/sedation-dentistry",
   },
   {
     source: "/dental-blog/2746152-is-sedation-dentistry-right-for-you",
-    destination: servicesDestination,
+    destination: "/sedation-dentistry",
   },
   {
     source: "/dental-blog/2758139-choosing-sedation-dentistry-for-treatment",
-    destination: servicesDestination,
+    destination: "/sedation-dentistry",
   },
   {
     source: "/dental-blog/2758140-sedation-dentistry-in-sacramento-separating-the-myths-from-the-facts",
-    destination: servicesDestination,
+    destination: "/sedation-dentistry",
   },
   {
     source:
       "/dental-blog/2758141-no-fear-no-anxiety-dentistry-in-antelope-ca-comfortable-care-for-the-whole-family",
-    destination: servicesDestination,
+    destination: "/sedation-dentistry",
   },
   { source: "/dental-care-children", destination: servicesDestination },
   { source: "/meet-dr-sheppard", destination: "/#doctors" },
-  { source: "/oral-surgery", destination: servicesDestination },
+  { source: "/oral-surgery", destination: "/tooth-extractions" },
   { source: "/our-dental-team", destination: "/#doctors" },
   { source: "/our-office", destination: "/schedule" },
   { source: "/patient-reviews", destination: "/reviews" },
   { source: "/platelet-rich-fibrin", destination: servicesDestination },
   { source: "/privacy-policy", destination: "/privacy-practices/" },
   { source: "/preventive-care", destination: servicesDestination },
-  { source: "/restorations", destination: servicesDestination },
-  { source: "/root-canal-therapy", destination: servicesDestination },
-  { source: "/sedation-dentistry-guide", destination: servicesDestination },
+  { source: "/restorations", destination: "/dental-crowns" },
+  { source: "/sedation-dentistry-guide", destination: "/sedation-dentistry" },
   { source: "/technology", destination: "/#technology" },
   { source: "/teeth-whitening", destination: servicesDestination },
   { source: "/veneers", destination: servicesDestination },

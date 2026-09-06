@@ -17,6 +17,7 @@ const serviceLinks: Record<string, { href: string; label: string }[]> = {
   "Restorative dentistry": [
     { href: "/dental-crowns", label: "Dental crowns" },
     { href: "/dental-implants", label: "Dental implants" },
+    { href: "/root-canal-therapy", label: "Root canal treatment" },
   ],
   "Oral surgery": [
     { href: "/tooth-extractions", label: "Tooth extractions" },
@@ -70,6 +71,11 @@ export function Services() {
                     </li>
                   ))}
                 </ul>
+                <div className="mt-5 flex flex-wrap gap-x-4 gap-y-2">
+                  {serviceLinks[featured.title].map((link) => (
+                    <Link key={link.href} href={link.href} className="text-sm font-semibold text-brand-deep hover:underline">{link.label}</Link>
+                  ))}
+                </div>
               </div>
             </article>
           </ScrollReveal>

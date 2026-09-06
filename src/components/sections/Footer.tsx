@@ -43,7 +43,7 @@ export function Footer() {
               Explore
             </p>
             <ul className="mt-4 space-y-2.5 text-sm">
-              {navItems.map((item) => (
+              {[...navItems, { label: "New patients", href: "/new-patients" }, { label: "Emergency dentist", href: "/dental-emergencies" }].map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}

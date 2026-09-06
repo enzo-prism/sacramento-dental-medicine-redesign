@@ -4,9 +4,10 @@ import { siteUrl } from "@/lib/site-url";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const coreRoutes: MetadataRoute.Sitemap = [
+    { url: `${siteUrl}/new-patients`, lastModified: new Date("2026-09-06"), changeFrequency: "monthly", priority: 0.8 },
     {
       url: siteUrl,
-      lastModified: new Date("2026-08-31"),
+      lastModified: new Date("2026-09-06"),
       changeFrequency: "monthly",
       priority: 1,
     },
@@ -24,7 +25,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${siteUrl}/meet-dr-narodovich`,
-      lastModified: new Date("2026-09-01"),
+      lastModified: new Date("2026-09-06"),
       changeFrequency: "monthly",
       priority: 0.8,
     },
@@ -32,7 +33,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const serviceRoutes: MetadataRoute.Sitemap = servicePages.map(({ slug }) => ({
     url: `${siteUrl}/${slug}`,
-    lastModified: new Date("2026-09-01"),
+    lastModified: new Date("2026-09-06"),
     changeFrequency: "monthly",
     priority: 0.8,
   }));

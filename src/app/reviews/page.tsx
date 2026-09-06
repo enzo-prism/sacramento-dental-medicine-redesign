@@ -1,3 +1,5 @@
+import { JsonLd } from "@/components/JsonLd";
+import { pageGraph } from "@/lib/structured-data";
 import type { Metadata } from "next";
 import Link from "next/link";
 import {
@@ -55,6 +57,7 @@ export default function ReviewsPage() {
 
   return (
     <>
+      <JsonLd data={pageGraph("/reviews", "Patient reviews", [], "CollectionPage")} />
       <Header />
       <main id="main" className="flex-1">
         <section

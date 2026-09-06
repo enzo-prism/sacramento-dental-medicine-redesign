@@ -1,3 +1,5 @@
+import { JsonLd } from "@/components/JsonLd";
+import { pageGraph } from "@/lib/structured-data";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -61,6 +63,7 @@ const assurances = [
 export default function SchedulePage() {
   return (
     <>
+      <JsonLd data={pageGraph("/schedule", "Request a dental appointment", [], "ContactPage")} />
       <ScheduleRouteStart />
       <Header />
       <main id="main" className="flex-1">

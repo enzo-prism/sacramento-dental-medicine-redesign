@@ -5,6 +5,8 @@ import { LeadAttributionCapture } from "@/components/LeadAttributionCapture";
 import { SiteAnalytics } from "@/components/SiteAnalytics";
 import { contact, seo } from "@/data/site";
 import { isPreviewDeploy, siteUrl } from "@/lib/site-url";
+import { JsonLd } from "@/components/JsonLd";
+import { practiceGraph } from "@/lib/structured-data";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -92,6 +94,7 @@ export default function RootLayout({
         >
           Skip to content
         </a>
+        <JsonLd data={practiceGraph} />
         <LeadAttributionCapture />
         {children}
         <GoogleAnalytics />

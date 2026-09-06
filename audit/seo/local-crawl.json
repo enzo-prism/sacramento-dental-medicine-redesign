@@ -1,0 +1,208 @@
+{
+  "base": "http://localhost:3100",
+  "pages": [
+    {
+      "path": "/new-patients",
+      "status": 200,
+      "title": "New Patients in Antelope | Sacramento Dental Medicine",
+      "descriptionLength": 150,
+      "schemaTypes": [
+        "Dentist",
+        "WebSite",
+        "WebPage",
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "path": "/",
+      "status": 200,
+      "title": "Antelope, CA Dentist | Sacramento Dental Medicine",
+      "descriptionLength": 140,
+      "schemaTypes": [
+        "Dentist",
+        "WebSite",
+        "WebPage",
+        "FAQPage"
+      ]
+    },
+    {
+      "path": "/reviews",
+      "status": 200,
+      "title": "Sacramento Dental Medicine Reviews | 4.8 on Google",
+      "descriptionLength": 141,
+      "schemaTypes": [
+        "Dentist",
+        "WebSite",
+        "CollectionPage",
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "path": "/schedule",
+      "status": 200,
+      "title": "Schedule a Dentist Appointment | Sacramento Dental Medicine",
+      "descriptionLength": 145,
+      "schemaTypes": [
+        "Dentist",
+        "WebSite",
+        "ContactPage",
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "path": "/meet-dr-narodovich",
+      "status": 200,
+      "title": "Dr. Michael Narodovich, DMD | Sacramento Dentist",
+      "descriptionLength": 143,
+      "schemaTypes": [
+        "Dentist",
+        "WebSite",
+        "ProfilePage",
+        "BreadcrumbList",
+        "Person"
+      ]
+    },
+    {
+      "path": "/our-services",
+      "status": 200,
+      "title": "Dental Services in Sacramento & Antelope, CA",
+      "descriptionLength": 128,
+      "schemaTypes": [
+        "Dentist",
+        "WebSite",
+        "WebPage",
+        "BreadcrumbList",
+        "ItemList",
+        "FAQPage"
+      ]
+    },
+    {
+      "path": "/dental-crowns",
+      "status": 200,
+      "title": "Dental Crowns in Sacramento & Antelope, CA",
+      "descriptionLength": 129,
+      "schemaTypes": [
+        "Dentist",
+        "WebSite",
+        "WebPage",
+        "BreadcrumbList",
+        "Service",
+        "FAQPage"
+      ]
+    },
+    {
+      "path": "/sedation-dentistry",
+      "status": 200,
+      "title": "Sedation Dentistry for Nervous Patients in Sacramento",
+      "descriptionLength": 129,
+      "schemaTypes": [
+        "Dentist",
+        "WebSite",
+        "WebPage",
+        "BreadcrumbList",
+        "Service",
+        "FAQPage"
+      ]
+    },
+    {
+      "path": "/orthodontics",
+      "status": 200,
+      "title": "Orthodontics & Clear Aligners in Sacramento, CA",
+      "descriptionLength": 136,
+      "schemaTypes": [
+        "Dentist",
+        "WebSite",
+        "WebPage",
+        "BreadcrumbList",
+        "Service",
+        "FAQPage"
+      ]
+    },
+    {
+      "path": "/invisalign",
+      "status": 200,
+      "title": "Invisalign Clear Aligners in Sacramento & Antelope",
+      "descriptionLength": 123,
+      "schemaTypes": [
+        "Dentist",
+        "WebSite",
+        "WebPage",
+        "BreadcrumbList",
+        "Service",
+        "FAQPage"
+      ]
+    },
+    {
+      "path": "/tooth-extractions",
+      "status": 200,
+      "title": "Tooth Extractions in Sacramento & Antelope, CA",
+      "descriptionLength": 112,
+      "schemaTypes": [
+        "Dentist",
+        "WebSite",
+        "WebPage",
+        "BreadcrumbList",
+        "Service",
+        "FAQPage"
+      ]
+    },
+    {
+      "path": "/dental-implants",
+      "status": 200,
+      "title": "Dental Implants in Sacramento & Antelope, CA",
+      "descriptionLength": 128,
+      "schemaTypes": [
+        "Dentist",
+        "WebSite",
+        "WebPage",
+        "BreadcrumbList",
+        "Service",
+        "FAQPage"
+      ]
+    },
+    {
+      "path": "/gum-disease-treatment",
+      "status": 200,
+      "title": "Gum Disease Treatment in Sacramento & Antelope",
+      "descriptionLength": 128,
+      "schemaTypes": [
+        "Dentist",
+        "WebSite",
+        "WebPage",
+        "BreadcrumbList",
+        "Service",
+        "FAQPage"
+      ]
+    },
+    {
+      "path": "/dental-emergencies",
+      "status": 200,
+      "title": "Emergency Dentist in Sacramento & Antelope, CA",
+      "descriptionLength": 125,
+      "schemaTypes": [
+        "Dentist",
+        "WebSite",
+        "WebPage",
+        "BreadcrumbList",
+        "Service",
+        "FAQPage"
+      ]
+    },
+    {
+      "path": "/root-canal-therapy",
+      "status": 200,
+      "title": "Root Canal Treatment in Antelope & Sacramento, CA",
+      "descriptionLength": 150,
+      "schemaTypes": [
+        "Dentist",
+        "WebSite",
+        "WebPage",
+        "BreadcrumbList",
+        "Service",
+        "FAQPage"
+      ]
+    }
+  ],
+  "internalDestinations": 16,
+  "checks": "metadata, canonical, social metadata, H1, image alts, JSON-LD, visible FAQ parity, reachability, links, fragments, robots, 404, privacy noindex, Googlebot parity"
+}

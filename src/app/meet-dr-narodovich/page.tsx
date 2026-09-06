@@ -1,3 +1,4 @@
+import { openGraphImages, twitterImages } from "@/lib/social-metadata";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -5,8 +6,10 @@ import { ArrowRight, Check, Phone } from "lucide-react";
 import { Header } from "@/components/Header";
 import { MobileCTA } from "@/components/MobileCTA";
 import { Footer } from "@/components/sections/Footer";
-import { contact, doctors, structuredData } from "@/data/site";
+import { contact, doctors } from "@/data/site";
 import { siteUrl } from "@/lib/site-url";
+import { JsonLd } from "@/components/JsonLd";
+import { pageGraph, practiceId } from "@/lib/structured-data";
 
 const doctor = doctors[0];
 
@@ -16,6 +19,7 @@ export const metadata: Metadata = {
     "Meet Dr. Michael Narodovich, a family and cosmetic dentist at Sacramento Dental Medicine in Antelope, CA, known for gentle, judgment-free care.",
   alternates: { canonical: "/meet-dr-narodovich" },
   openGraph: {
+      images: openGraphImages,
     title: "Meet Dr. Michael Narodovich, DMD",
     description:
       "Family, cosmetic, and anxious-patient dental care at Sacramento Dental Medicine in Antelope, CA.",
@@ -25,6 +29,7 @@ export const metadata: Metadata = {
     siteName: contact.practiceName,
   },
   twitter: {
+      images: twitterImages,
     card: "summary_large_image",
     title: "Meet Dr. Michael Narodovich, DMD",
     description: "Gentle, judgment-free dentistry in Antelope, CA.",
@@ -33,39 +38,16 @@ export const metadata: Metadata = {
 
 export default function DrNarodovichPage() {
   const url = `${siteUrl}/meet-dr-narodovich`;
-  const jsonLd = [
-    {
-      "@context": "https://schema.org",
-      "@type": "Dentist",
-      "@id": `${url}#dentist`,
-      name: doctor.name,
-      jobTitle: `${doctor.title}, Family & Cosmetic Dentist`,
-      description: doctor.description,
-      image: `${siteUrl}${doctor.image}`,
-      url,
-      worksFor: {
-        "@type": "Dentist",
-        name: contact.practiceName,
-        url: siteUrl,
-        address: structuredData.address,
-      },
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: siteUrl },
-        { "@type": "ListItem", position: 2, name: doctor.name, item: url },
-      ],
-    },
-  ];
+  const graph = pageGraph("/meet-dr-narodovich", doctor.name, [{
+    "@type": "Person", "@id": `${url}#person`, name: doctor.name,
+    honorificSuffix: doctor.title, jobTitle: "Family and cosmetic dentist",
+    description: doctor.description, image: `${siteUrl}${doctor.image}`, url,
+    worksFor: { "@id": practiceId },
+  }], "ProfilePage", `${url}#person`);
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <JsonLd data={graph} />
       <Header />
       <main id="main" className="flex-1">
         <section className="relative overflow-hidden pb-16 pt-32 sm:pb-20 lg:pb-24 lg:pt-40">

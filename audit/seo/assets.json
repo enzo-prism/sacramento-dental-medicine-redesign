@@ -1,0 +1,76 @@
+[
+  {
+    "path": "/opengraph-image",
+    "status": 200,
+    "type": "image/png",
+    "size": [
+      1200,
+      630
+    ]
+  },
+  {
+    "path": "/twitter-image",
+    "status": 200,
+    "type": "image/png",
+    "size": [
+      1200,
+      630
+    ]
+  },
+  {
+    "path": "/reviews/opengraph-image",
+    "status": 200,
+    "type": "image/png",
+    "size": [
+      1200,
+      630
+    ]
+  },
+  {
+    "path": "/reviews/twitter-image",
+    "status": 200,
+    "type": "image/png",
+    "size": [
+      1200,
+      630
+    ]
+  },
+  {
+    "path": "/schedule/opengraph-image",
+    "status": 200,
+    "type": "image/png",
+    "size": [
+      1200,
+      630
+    ]
+  },
+  {
+    "path": "/schedule/twitter-image",
+    "status": 200,
+    "type": "image/png",
+    "size": [
+      1200,
+      630
+    ]
+  },
+  {
+    "path": "/icon.png",
+    "status": 200,
+    "type": "image/png"
+  },
+  {
+    "path": "/apple-icon.png",
+    "status": 200,
+    "type": "image/png"
+  },
+  {
+    "path": "/favicon.ico",
+    "status": 200,
+    "type": "image/x-icon"
+  },
+  {
+    "path": "/privacy-practices.pdf",
+    "status": 200,
+    "type": "application/pdf"
+  }
+]

@@ -1,3 +1,4 @@
+import { openGraphImages, twitterImages } from "@/lib/social-metadata";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -5,13 +6,15 @@ import { ArrowRight, Check, Phone } from "lucide-react";
 import { Header } from "@/components/Header";
 import { MobileCTA } from "@/components/MobileCTA";
 import { Footer } from "@/components/sections/Footer";
-import { contact, structuredData } from "@/data/site";
+import { contact } from "@/data/site";
 import {
   servicePageBySlug,
   servicePages,
   type ServicePage,
 } from "@/data/service-pages";
 import { siteUrl } from "@/lib/site-url";
+import { JsonLd } from "@/components/JsonLd";
+import { pageGraph, practiceId } from "@/lib/structured-data";
 
 type Props = {
   params: Promise<{ service: string }>;
@@ -32,6 +35,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description: service.description,
     alternates: { canonical: `/${service.slug}` },
     openGraph: {
+      images: openGraphImages,
       title: service.title,
       description: service.description,
       type: "website",
@@ -40,65 +44,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       siteName: contact.practiceName,
     },
     twitter: {
+      images: twitterImages,
       card: "summary_large_image",
       title: service.title,
       description: service.description,
     },
   };
-}
-
-function JsonLd({ service }: { service: ServicePage }) {
-  const graph = [
-    structuredData,
-    {
-      "@context": "https://schema.org",
-      "@type": "Service",
-      name: service.navLabel,
-      description: service.description,
-      url: `${siteUrl}/${service.slug}`,
-      areaServed: contact.serviceArea,
-      provider: {
-        "@type": "Dentist",
-        name: contact.practiceName,
-        telephone: "+1-916-727-6453",
-        address: structuredData.address,
-      },
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        {
-          "@type": "ListItem",
-          position: 1,
-          name: "Home",
-          item: siteUrl,
-        },
-        {
-          "@type": "ListItem",
-          position: 2,
-          name: service.navLabel,
-          item: `${siteUrl}/${service.slug}`,
-        },
-      ],
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      mainEntity: service.faqs.map((faq) => ({
-        "@type": "Question",
-        name: faq.question,
-        acceptedAnswer: { "@type": "Answer", text: faq.answer },
-      })),
-    },
-  ];
-
-  return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(graph) }}
-    />
-  );
 }
 
 export default async function ServiceRoute({ params }: Props) {
@@ -112,7 +63,25 @@ export default async function ServiceRoute({ params }: Props) {
 
   return (
     <>
-      <JsonLd service={service} />
+      <JsonLd data={pageGraph(`/${service.slug}`, service.navLabel, [
+        ...(service.slug === "our-services" ? [{
+          "@type": "ItemList",
+          "@id": `${siteUrl}/our-services#services`,
+          itemListElement: servicePages.filter((item) => item.slug !== "our-services").map((item, index) => ({
+            "@type": "ListItem", position: index + 1, name: item.navLabel, url: `${siteUrl}/${item.slug}`,
+          })),
+        }] : [{
+          "@type": "Service", "@id": `${siteUrl}/${service.slug}#service`,
+          name: service.navLabel, description: service.intro, url: `${siteUrl}/${service.slug}`,
+          areaServed: contact.serviceArea, provider: { "@id": practiceId },
+        }]),
+        {
+          "@type": "FAQPage", "@id": `${siteUrl}/${service.slug}#faq`,
+          mainEntity: service.faqs.map(({ question, answer }) => ({
+            "@type": "Question", name: question, acceptedAnswer: { "@type": "Answer", text: answer },
+          })),
+        },
+      ])} />
       <Header />
       <main id="main" className="flex-1">
         <section className="relative overflow-hidden pb-16 pt-32 sm:pb-20 lg:pb-24 lg:pt-40">
@@ -122,6 +91,11 @@ export default async function ServiceRoute({ params }: Props) {
           />
           <div className="container-x relative grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-start lg:gap-16">
             <div>
+              <nav aria-label="Breadcrumb" className="mb-6 text-sm text-ink-soft">
+                <Link href="/" className="hover:underline">Home</Link>
+                {service.slug !== "our-services" && <><span aria-hidden="true"> / </span><Link href="/our-services" className="hover:underline">Dental services</Link></>}
+                <span aria-hidden="true"> / </span><span aria-current="page">{service.navLabel}</span>
+              </nav>
               <p className="eyebrow text-brand-deep">{service.eyebrow}</p>
               <h1 className="mt-5 max-w-3xl text-balance font-display text-[clamp(2.4rem,7vw,4.8rem)] font-semibold leading-[0.98] tracking-[-0.055em] text-ink">
                 {service.title}
@@ -130,13 +104,13 @@ export default async function ServiceRoute({ params }: Props) {
                 {service.intro}
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <Link href={contact.bookingHref} className="btn btn-primary h-12 px-5 text-base">
-                  Request an appointment
+                <Link href={service.slug === "dental-emergencies" ? contact.phoneHref : contact.bookingHref} className="btn btn-primary h-12 px-5 text-base">
+                  {service.slug === "dental-emergencies" ? `Call ${contact.phoneDisplay} first` : "Request an appointment"}
                   <ArrowRight className="size-4" aria-hidden="true" />
                 </Link>
-                <a href={contact.phoneHref} className="btn btn-outline h-12 px-5 text-base">
+                <a href={service.slug === "dental-emergencies" ? contact.bookingHref : contact.phoneHref} className="btn btn-outline h-12 px-5 text-base">
                   <Phone className="size-4" aria-hidden="true" />
-                  Call {contact.phoneDisplay}
+                  {service.slug === "dental-emergencies" ? "Request a non-urgent visit" : `Call ${contact.phoneDisplay}`}
                 </a>
               </div>
             </div>
@@ -158,6 +132,22 @@ export default async function ServiceRoute({ params }: Props) {
             </aside>
           </div>
         </section>
+
+        {service.slug === "our-services" && (
+          <section className="section bg-wash" aria-labelledby="care-directory-title">
+            <div className="container-x">
+              <h2 id="care-directory-title" className="font-display text-3xl font-semibold text-ink">Find the care you need</h2>
+              <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {servicePages.filter((item) => item.slug !== "our-services").map((item) => (
+                  <Link key={item.slug} href={`/${item.slug}`} className="surface-card p-6 transition hover:border-brand-deep">
+                    <h3 className="font-display text-xl font-semibold text-brand-deep">{item.navLabel}</h3>
+                    <p className="mt-3 text-sm leading-6 text-ink-soft">{item.description}</p>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
 
         <section className="section bg-white" aria-labelledby="process-title">
           <div className="container-x">
@@ -188,12 +178,28 @@ export default async function ServiceRoute({ params }: Props) {
               </h2>
             </div>
             <div className="divide-y divide-line border-y border-line">
-              {service.faqs.map((faq) => (
-                <article key={faq.question} className="py-6 first:pt-0 last:pb-0">
+              {service.faqs.map((faq, index) => (
+                <article id={`question-${index + 1}`} key={faq.question} className="py-6 first:pt-0 last:pb-0">
                   <h3 className="font-display text-xl font-semibold text-ink">{faq.question}</h3>
                   <p className="mt-3 text-sm leading-7 text-ink-soft">{faq.answer}</p>
                 </article>
               ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="section bg-white" aria-labelledby="visit-details-title">
+          <div className="container-x grid gap-8 md:grid-cols-2">
+            <div>
+              <h2 id="visit-details-title" className="font-display text-2xl font-semibold text-ink">Plan your visit in Antelope</h2>
+              <p className="mt-4 text-sm leading-7 text-ink-soft">Sacramento Dental Medicine is at {contact.addressLine1}, {contact.addressLine2}. Call {contact.phoneDisplay} to ask about availability, your dental plan, and treatment estimates.</p>
+              <div className="mt-5 flex flex-wrap gap-5"><a href={contact.mapsHref} className="btn-text">Get directions</a><Link href="/new-patients" className="btn-text">New-patient guide</Link></div>
+            </div>
+            <div>
+              <h2 className="font-display text-2xl font-semibold text-ink">Get to know your dental team</h2>
+              <p className="mt-4 text-sm leading-7 text-ink-soft">Meet Dr. Michael Narodovich and learn about the practice before requesting an appointment. Your dentist will explain which treatment fits your exam findings and goals.</p>
+              <Link href="/meet-dr-narodovich" className="btn-text mt-5">Meet Dr. Narodovich</Link>
+              {service.sources?.length ? <p className="mt-5 text-sm leading-7 text-ink-soft">Patient education: {service.sources.map((source, index) => <span key={source.url}>{index > 0 ? "; " : ""}<a className="underline underline-offset-4" href={source.url}>{source.label}</a></span>)}. General information; your treatment recommendations follow an exam.</p> : null}
             </div>
           </div>
         </section>

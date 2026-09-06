@@ -127,3 +127,15 @@ NEXT_PUBLIC_SITE_URL=https://sacramentodentalmedicine.com
 After any domain or environment change, redeploy and re-run the production
 checks above, including canonical, sitemap, Open Graph, and X URLs on all three
 routes.
+
+## September 6 SEO/AEO update
+
+See [the complete audit](seo-aeo-audit.md). Service, doctor, and new-patient
+metadata explicitly includes the shared OG/X images because nested metadata
+objects replace their parent values. Layout emits the shared practice/WebSite
+graph; page graphs link to it using stable IDs. Person/ProfilePage describes
+the doctor, and self-serving AggregateRating is omitted. The sitemap now includes
+15 indexable routes, including `/new-patients` and `/root-canal-therapy`.
+
+Run `npm run seo:check -- <production-build-url>` to check actual rendered HTML,
+links, visible FAQ parity, metadata, robots, and unknown-page status.

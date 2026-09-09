@@ -21,12 +21,12 @@ export const servicePages: ServicePage[] = [
     description:
       "Explore preventive, cosmetic, restorative, orthodontic, and oral surgery services at Sacramento Dental Medicine in Antelope, CA.",
     intro:
-      "From preventive visits to rebuilding or replacing a tooth, Sacramento Dental Medicine brings a broad range of care into one familiar office. Start with an exam and a clear conversation about what matters to you, then build the treatment plan from there.",
+      "From preventive visits to root canal treatment, wisdom teeth, and PRF or grafting support, Sacramento Dental Medicine brings a broad range of care into one familiar office. Start with an exam and a clear conversation about what matters to you, then build the treatment plan from there.",
     benefits: [
       "Preventive exams, cleanings, and gum care",
       "Cosmetic dentistry and clear aligners",
-      "Crowns, implants, and root canal care",
-      "Extractions and oral surgery planning",
+      "Crowns, implants, and root canal treatment",
+      "Wisdom teeth, extractions, and PRF or grafting support",
     ],
     steps: [
       {
@@ -55,7 +55,7 @@ export const servicePages: ServicePage[] = [
           "Yes. An exam is the right place to understand what is happening, review options, and decide what you want to do next.",
       },
     ],
-    relatedSlugs: ["dental-crowns", "invisalign", "tooth-extractions"],
+    relatedSlugs: ["root-canal-therapy", "wisdom-teeth", "platelet-rich-fibrin"],
   },
   {
     slug: "dental-crowns",
@@ -280,7 +280,7 @@ export const servicePages: ServicePage[] = [
           "Call the office at (916) 727-6453. The team can provide immediate guidance and ask about the earliest available visit.",
       },
     ],
-    relatedSlugs: ["dental-implants", "sedation-dentistry"],
+    relatedSlugs: ["wisdom-teeth", "dental-implants", "platelet-rich-fibrin"],
   },
   {
     slug: "dental-implants",
@@ -326,7 +326,7 @@ export const servicePages: ServicePage[] = [
       },
     ],
     sources: [{"label": "ADA: Implants", "url": "https://www.mouthhealthy.org/all-topics-a-z/implants"}],
-    relatedSlugs: ["tooth-extractions", "dental-crowns"],
+    relatedSlugs: ["tooth-extractions", "platelet-rich-fibrin"],
   },
   {
     slug: "gum-disease-treatment",
@@ -417,7 +417,7 @@ export const servicePages: ServicePage[] = [
           "The practice offers same-day emergency visits when possible. Calling first is the fastest way to ask about current availability.",
       },
     ],
-    relatedSlugs: ["tooth-extractions", "dental-crowns", "sedation-dentistry"],
+    relatedSlugs: ["tooth-extractions", "root-canal-therapy", "wisdom-teeth"],
   },
   {
   "slug": "root-canal-therapy",
@@ -476,7 +476,125 @@ export const servicePages: ServicePage[] = [
     }
   ]
 },
+  {
+    slug: "wisdom-teeth",
+    title: "Wisdom Teeth Removal in Antelope & Sacramento, CA",
+    navLabel: "Wisdom teeth",
+    eyebrow: "Oral surgery",
+    description:
+      "Get a wisdom teeth evaluation or removal at Sacramento Dental Medicine in Antelope, serving the greater Sacramento area.",
+    intro:
+      "Wisdom teeth can stay quiet for years or start to crowd, inflame, or decay. Sacramento Dental Medicine evaluates them in-house and handles removal when that is the healthier next step. An exam and imaging show whether the teeth should be watched, treated, or removed, and whether a specialist should be involved.",
+    benefits: [
+      "Evaluate erupting, impacted, or painful wisdom teeth",
+      "Understand whether removal is recommended now",
+      "Plan a clear, in-house extraction visit when appropriate",
+      "Discuss comfort options and after-care before treatment",
+    ],
+    steps: [
+      {
+        title: "Examine the teeth",
+        body: "The dentist reviews symptoms and uses appropriate imaging to see the wisdom teeth, roots, and nearby structures.",
+      },
+      {
+        title: "Review the recommendation",
+        body: "You will hear whether watchful waiting, treatment, or removal is the safer path, and whether a specialist should be involved.",
+      },
+      {
+        title: "Plan the visit and recovery",
+        body: "If removal is recommended, the team explains what to expect, comfort options, and how to care for the area afterward.",
+      },
+    ],
+    faqs: [
+      {
+        question: "Do all wisdom teeth need to be removed?",
+        answer:
+          "No. Some wisdom teeth stay healthy and have enough space. Others crowd, partially erupt, or become difficult to clean. An exam and imaging determine whether removal is recommended.",
+      },
+      {
+        question: "Can wisdom teeth be removed at this office?",
+        answer:
+          "Yes. Sacramento Dental Medicine lists wisdom teeth removal among its in-house oral surgery services. Complex cases may be coordinated with a specialist when that is the safer plan.",
+      },
+      {
+        question: "What should I do if a wisdom tooth hurts now?",
+        answer:
+          "Call (916) 727-6453 to describe the pain or swelling and ask about the earliest available evaluation. Same-day visits are offered when possible.",
+      },
+      {
+        question: "Will I be numb for wisdom teeth removal?",
+        answer:
+          "Local numbing is part of extraction care. Tell the team about anxiety or comfort concerns so they can explain the options that may be appropriate for your health and the procedure.",
+      },
+    ],
+    sources: [
+      {
+        label: "ADA: Wisdom teeth",
+        url: "https://www.mouthhealthy.org/all-topics-a-z/wisdom-teeth",
+      },
+    ],
+    relatedSlugs: ["tooth-extractions", "sedation-dentistry", "platelet-rich-fibrin"],
+  },
+  {
+    slug: "platelet-rich-fibrin",
+    title: "PRF & Grafting in Antelope & Sacramento, CA",
+    navLabel: "PRF & grafting",
+    eyebrow: "Oral surgery",
+    description:
+      "Ask about platelet rich fibrin (PRF) and grafting support after an extraction or implant plan at Sacramento Dental Medicine in Antelope, CA.",
+    intro:
+      "Platelet rich fibrin (PRF) is listed among the practice's oral surgery services. It is prepared from a small sample of your own blood and may be placed at a surgical site when the dentist recommends extra support after an extraction or as part of a grafting plan. The exam determines whether PRF, grafting, both, or neither is appropriate. This page does not promise a specific healing time or outcome.",
+    benefits: [
+      "Discuss PRF when planning an extraction or implant site",
+      "Understand whether grafting support is recommended",
+      "Use material prepared from your own blood when PRF is chosen",
+      "Leave with clear after-care instructions",
+    ],
+    steps: [
+      {
+        title: "Evaluate the site",
+        body: "The dentist examines the tooth or implant site and uses appropriate imaging to understand the bone and surrounding tissues.",
+      },
+      {
+        title: "Review PRF or grafting",
+        body: "If extra support may help the site, the team explains what PRF or grafting would involve and why it is being considered for your case.",
+      },
+      {
+        title: "Plan the visit",
+        body: "You will know what to expect on the day of treatment, including any blood draw for PRF, and how to care for the area afterward.",
+      },
+    ],
+    faqs: [
+      {
+        question: "What is platelet rich fibrin (PRF)?",
+        answer:
+          "PRF is a fibrin material prepared from a small sample of your own blood. Dentists may place it at a surgical site to support the local healing environment. Whether it is used depends on the procedure and the dentist's recommendation.",
+      },
+      {
+        question: "Do you offer bone grafting?",
+        answer:
+          "Grafting needs are evaluated case by case, often after an extraction or when planning an implant. The dentist will explain whether grafting, PRF, both, or neither is recommended for your site.",
+      },
+      {
+        question: "Does PRF guarantee faster healing?",
+        answer:
+          "No. PRF may be used to support a healing site, but results vary and no specific healing time or outcome is promised. Ask the dentist what to expect for your procedure.",
+      },
+      {
+        question: "Is PRF right for every extraction?",
+        answer:
+          "No. Many extractions do not need PRF or grafting. The recommendation follows an exam of the tooth, bone, and your health history.",
+      },
+    ],
+    relatedSlugs: ["tooth-extractions", "wisdom-teeth", "dental-implants"],
+  },
 ];
+
+export const highlightedServiceSlugs = [
+  "root-canal-therapy",
+  "wisdom-teeth",
+  "platelet-rich-fibrin",
+] as const;
 
 export const servicePageBySlug = new Map(
   servicePages.map((service) => [service.slug, service]),

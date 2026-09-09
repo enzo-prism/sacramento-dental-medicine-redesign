@@ -8,6 +8,7 @@ import { MobileCTA } from "@/components/MobileCTA";
 import { Footer } from "@/components/sections/Footer";
 import { contact } from "@/data/site";
 import {
+  highlightedServiceSlugs,
   servicePageBySlug,
   servicePages,
   type ServicePage,
@@ -137,8 +138,20 @@ export default async function ServiceRoute({ params }: Props) {
           <section className="section bg-wash" aria-labelledby="care-directory-title">
             <div className="container-x">
               <h2 id="care-directory-title" className="font-display text-3xl font-semibold text-ink">Find the care you need</h2>
+              <div className="mt-8 grid gap-4 sm:grid-cols-3">
+                {highlightedServiceSlugs
+                  .map((slug) => servicePageBySlug.get(slug))
+                  .filter((item): item is ServicePage => Boolean(item))
+                  .map((item) => (
+                    <Link key={item.slug} href={`/${item.slug}`} className="surface-card border-brand-deep/40 p-6 transition hover:border-brand-deep">
+                      <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-brand-ink">Often requested</p>
+                      <h3 className="mt-3 font-display text-xl font-semibold text-brand-deep">{item.navLabel}</h3>
+                      <p className="mt-3 text-sm leading-6 text-ink-soft">{item.description}</p>
+                    </Link>
+                  ))}
+              </div>
               <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                {servicePages.filter((item) => item.slug !== "our-services").map((item) => (
+                {servicePages.filter((item) => item.slug !== "our-services" && !highlightedServiceSlugs.some((slug) => slug === item.slug)).map((item) => (
                   <Link key={item.slug} href={`/${item.slug}`} className="surface-card p-6 transition hover:border-brand-deep">
                     <h3 className="font-display text-xl font-semibold text-brand-deep">{item.navLabel}</h3>
                     <p className="mt-3 text-sm leading-6 text-ink-soft">{item.description}</p>

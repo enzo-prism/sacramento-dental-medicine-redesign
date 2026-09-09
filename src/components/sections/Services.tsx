@@ -4,6 +4,10 @@ import { ArrowUpRight, Check } from "lucide-react";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { SectionLabel } from "@/components/SectionLabel";
 import { imagery, services } from "@/data/site";
+import {
+  highlightedServiceSlugs,
+  servicePageBySlug,
+} from "@/data/service-pages";
 
 const serviceLinks: Record<string, { href: string; label: string }[]> = {
   "Preventive care": [
@@ -20,10 +24,15 @@ const serviceLinks: Record<string, { href: string; label: string }[]> = {
     { href: "/root-canal-therapy", label: "Root canal treatment" },
   ],
   "Oral surgery": [
+    { href: "/wisdom-teeth", label: "Wisdom teeth" },
+    { href: "/platelet-rich-fibrin", label: "PRF & grafting" },
     { href: "/tooth-extractions", label: "Tooth extractions" },
-    { href: "/sedation-dentistry", label: "Comfort options" },
   ],
 };
+
+const highlightedServices = highlightedServiceSlugs
+  .map((slug) => servicePageBySlug.get(slug))
+  .filter((item): item is NonNullable<typeof item> => Boolean(item));
 
 export function Services() {
   const [featured, ...rest] = services;
@@ -38,6 +47,26 @@ export function Services() {
           title="From first cleanings to full restorations."
           intro="Preventive, cosmetic, restorative, and surgical care in one place, from a team that knows your history, your goals, and exactly how you feel about dental chairs."
         />
+
+        <div className="mt-8 flex flex-wrap gap-x-5 gap-y-2">
+          {highlightedServices.map((service) => (
+            <Link
+              key={service.slug}
+              href={`/${service.slug}`}
+              className="service-link inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-brand-deep"
+            >
+              {service.navLabel}
+              <ArrowUpRight className="size-4 shrink-0" aria-hidden="true" />
+            </Link>
+          ))}
+          <Link
+            href="/our-services"
+            className="service-link inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-brand-deep"
+          >
+            All dental services
+            <ArrowUpRight className="size-4 shrink-0" aria-hidden="true" />
+          </Link>
+        </div>
 
         <div className="mt-12 grid gap-6 lg:grid-cols-[1.15fr_0.85fr] lg:gap-8">
           <ScrollReveal variant="fade" className="h-full">

@@ -20,6 +20,7 @@ const TREATMENT_PATHS = new Set([
   "/dental-crowns", "/sedation-dentistry", "/orthodontics", "/invisalign",
   "/tooth-extractions", "/dental-implants", "/gum-disease-treatment",
   "/dental-emergencies", "/root-canal-therapy",
+  "/wisdom-teeth", "/platelet-rich-fibrin",
 ]);
 
 function normalizedPathname(value: string) {

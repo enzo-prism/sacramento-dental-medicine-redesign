@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { serializeJsonLd } from "./json-ld.ts";
-import { servicePages } from "../data/service-pages.ts";
+import { highlightedServiceSlugs, servicePages } from "../data/service-pages.ts";
 import { officeHours, structuredData } from "../data/site.ts";
 
 describe("search content integrity", () => {
@@ -24,6 +24,19 @@ describe("search content integrity", () => {
         assert.notEqual(slug, service.slug);
       }
     }
+  });
+  it("publishes dedicated pages for root canal, wisdom teeth, and PRF grafting", () => {
+    const slugs = new Set(servicePages.map(({ slug }) => slug));
+    for (const slug of highlightedServiceSlugs) {
+      assert.ok(slugs.has(slug), `missing highlighted service page ${slug}`);
+      const page = servicePages.find((service) => service.slug === slug);
+      assert.ok(page?.intro.includes("exam") || page?.faqs.some((faq) => faq.answer.includes("exam")));
+    }
+    assert.deepEqual([...highlightedServiceSlugs], [
+      "root-canal-therapy",
+      "wisdom-teeth",
+      "platelet-rich-fibrin",
+    ]);
   });
   it("keeps practice schema truthful and consistent with scheduling hours", () => {
     assert.ok(!("aggregateRating" in structuredData));

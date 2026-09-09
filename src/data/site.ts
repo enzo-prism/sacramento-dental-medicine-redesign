@@ -242,11 +242,11 @@ export const services: Service[] = [
     index: "04",
     title: "Oral surgery",
     blurb:
-      "Extractions and wisdom teeth handled gently in-house, with specialists brought in when a case calls for one.",
+      "Extractions and wisdom teeth handled gently in-house. PRF or grafting may be used to support a site when the dentist recommends it.",
     details: [
       "Tooth extractions",
       "Wisdom teeth removal",
-      "Platelet rich fibrin (PRF)",
+      "PRF & grafting",
       "Specialist coordination",
     ],
     icon: Stethoscope,

@@ -7,6 +7,7 @@ import { Header } from "@/components/Header";
 import { MobileCTA } from "@/components/MobileCTA";
 import { Footer } from "@/components/sections/Footer";
 import { contact } from "@/data/site";
+import { OfficeEmail } from "@/components/OfficeEmail";
 import {
   highlightedServiceSlugs,
   servicePageBySlug,
@@ -205,7 +206,7 @@ export default async function ServiceRoute({ params }: Props) {
           <div className="container-x grid gap-8 md:grid-cols-2">
             <div>
               <h2 id="visit-details-title" className="font-display text-2xl font-semibold text-ink">Plan your visit in Antelope</h2>
-              <p className="mt-4 text-sm leading-7 text-ink-soft">Sacramento Dental Medicine is at {contact.addressLine1}, {contact.addressLine2}. Call {contact.phoneDisplay} or email <a className="underline underline-offset-4" href={contact.emailHref}>{contact.email}</a> to ask about availability, your dental plan, and treatment estimates.</p>
+              <p className="mt-4 text-sm leading-7 text-ink-soft">Sacramento Dental Medicine is at {contact.addressLine1}, {contact.addressLine2}. Call {contact.phoneDisplay} or email <a className="underline underline-offset-4" href={contact.emailHref}><OfficeEmail /></a> to ask about availability, your dental plan, and treatment estimates.</p>
               <div className="mt-5 flex flex-wrap gap-5"><a href={contact.mapsHref} className="btn-text">Get directions</a><a href={contact.emailHref} className="btn-text">Email the office</a><Link href="/new-patients" className="btn-text">New-patient guide</Link></div>
             </div>
             <div>

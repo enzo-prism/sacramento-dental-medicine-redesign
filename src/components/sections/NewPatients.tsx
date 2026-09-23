@@ -4,6 +4,7 @@ import { ScrollReveal } from "@/components/ScrollReveal";
 import { SectionLabel } from "@/components/SectionLabel";
 import { FAQ } from "@/components/sections/FAQ";
 import { contact, newPatient } from "@/data/site";
+import { OfficeEmail } from "@/components/OfficeEmail";
 
 const billingIcons = [BadgeCheck, Wallet, Users];
 
@@ -94,7 +95,7 @@ export function NewPatients() {
                     Front desk: {contact.phoneDisplay}
                   </a>
                   <a href={contact.emailHref} className="btn-text">
-                    {contact.email}
+                    <OfficeEmail />
                   </a>
                 </div>
               </div>

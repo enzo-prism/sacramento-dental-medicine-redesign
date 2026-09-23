@@ -1,4 +1,4 @@
-import { EMAIL_RE } from "./appointment";
+import { EMAIL_RE } from "./appointment.ts";
 import type { FirstTouchAttribution } from "./lead-attribution";
 
 const ATTRIBUTION_FIELDS = [

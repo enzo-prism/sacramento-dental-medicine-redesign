@@ -29,10 +29,11 @@ Sibling practice site: `enzo-prism/waikiki-dental`. Do not mix copy, phone numbe
 - Favicon and app-icon generator: `scripts/generate-seo-assets.py`
 - Canonical / OG origin: `src/lib/site-url.ts` (public production domain by default)
 
-Do not invent insurance lists, CareCredit, or a front-desk email. The Google
-rating and review counts are a dated snapshot in `socialProof`; re-check the
-live Business Profile before changing them. Do not claim same-day emergency
-visits are guaranteed.
+Do not invent insurance lists, CareCredit, or extra mailboxes. The verified
+front-desk email is `office@sacramentodentalmedicine.com` (`contact.email`).
+The Google rating and review counts are a dated snapshot in `socialProof`;
+re-check the live Business Profile before changing them. Do not claim same-day
+emergency visits are guaranteed.
 
 ## Metadata and social sharing
 

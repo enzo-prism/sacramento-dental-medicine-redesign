@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { serializeJsonLd } from "./json-ld.ts";
 import { highlightedServiceSlugs, servicePages } from "../data/service-pages.ts";
-import { officeHours, structuredData } from "../data/site.ts";
+import { contact, officeHours, structuredData } from "../data/site.ts";
 
 describe("search content integrity", () => {
   it("escapes script-breakout content while preserving valid JSON", () => {
@@ -41,6 +41,12 @@ describe("search content integrity", () => {
   it("keeps practice schema truthful and consistent with scheduling hours", () => {
     assert.ok(!("aggregateRating" in structuredData));
     assert.ok(structuredData.image.endsWith("/images/office-exterior.webp"));
+    assert.equal(contact.email, "office@sacramentodentalmedicine.com");
+    assert.equal(contact.emailHref, "mailto:office@sacramentodentalmedicine.com");
+    assert.equal(structuredData.email, contact.email);
+    assert.equal(structuredData.contactPoint["@type"], "ContactPoint");
+    assert.equal(structuredData.contactPoint.email, contact.email);
+    assert.equal(structuredData.contactPoint.telephone, structuredData.telephone);
     for (const [index, day] of structuredData.openingHoursSpecification.entries()) {
       const minutes = (time: string) => time.split(":").map(Number).reduce((h, m) => h * 60 + m);
       assert.equal(minutes(day.opens), officeHours[index + 1]?.open);

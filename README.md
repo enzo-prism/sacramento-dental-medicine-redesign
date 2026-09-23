@@ -79,6 +79,7 @@ The public-facing facts were checked against the practice's current website on
 July 12, 2026:
 
 - Phone: **(916) 727-6453**
+- Front-desk email: **office@sacramentodentalmedicine.com**
 - Address: **4320 Elverta Rd #3, Antelope, CA 95843**
 - Hours: Monday 9–6, Tuesday 8–5, Wednesday 10–7, Thursday 11–7,
   Friday 8–2, Saturday–Sunday closed
@@ -92,9 +93,10 @@ Primary sources: the practice's [contact page](https://sacramentodentalmedicine.
 [appointments page](https://sacramentodentalmedicine.com/appointments/), and
 [emergency guidance](https://sacramentodentalmedicine.com/dental-emergencies/).
 
-The current public website does not confirm a front-desk email, accepted
-insurance plans, or CareCredit. Do not add those claims without written
-confirmation from the practice or a direct authoritative source.
+The front-desk mailbox **office@sacramentodentalmedicine.com** was confirmed
+in the 2026-09-23 RDA+Enzo client sync. Do not invent additional emails,
+accepted insurance plans, or CareCredit without written confirmation from the
+practice or a direct authoritative source.
 
 The practice's Google Business Profile was checked directly on August 24, 2026:
 
@@ -140,9 +142,11 @@ Required fields:
 
 Confirm in the Formspree dashboard that **email is not marked required**. Empty
 phone and email are omitted from the JSON payload so phone-only requests do not
-400. The server forwards the current runtime host or origin when posting to
-Formspree so production-domain restriction remains compatible without letting
-preview or local traffic impersonate the live site automatically.
+400. To have leads reach the front desk directly, add
+**`office@sacramentodentalmedicine.com`** as a notification recipient in the
+Formspree dashboard (the site does not send `_cc`). The server forwards the current runtime host or origin when
+posting to Formspree so production-domain restriction remains compatible without
+letting preview or local traffic impersonate the live site automatically.
 Formspree delivery has a bounded timeout. Optional: set
 **`LEAD_WEBHOOK_URL`** for a non-blocking second hop after Formspree succeeds;
 that optional delivery cannot reverse the accepted Formspree response.

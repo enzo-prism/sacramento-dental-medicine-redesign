@@ -131,7 +131,7 @@ export async function requestAppointment(
     console.error("[appointment] Formspree delivery failed", err);
     return {
       ok: false,
-      message: `Something went wrong on our end. Please call us at ${contact.phoneDisplay}.`,
+      message: `Something went wrong on our end. Please call us at ${contact.phoneDisplay} or email ${contact.email}.`,
       errors: {},
     };
   }

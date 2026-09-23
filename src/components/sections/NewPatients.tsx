@@ -4,6 +4,7 @@ import { ScrollReveal } from "@/components/ScrollReveal";
 import { SectionLabel } from "@/components/SectionLabel";
 import { FAQ } from "@/components/sections/FAQ";
 import { contact, newPatient } from "@/data/site";
+import { OfficeEmail } from "@/components/OfficeEmail";
 
 const billingIcons = [BadgeCheck, Wallet, Users];
 
@@ -89,9 +90,12 @@ export function NewPatients() {
                   The things new patients actually ask. For anything else, call
                   the front desk.
                 </p>
-                <div className="mt-8 lg:mt-auto lg:pt-8">
+                <div className="mt-8 flex flex-col items-start gap-2 lg:mt-auto lg:pt-8">
                   <a href={contact.phoneHref} className="btn-text">
                     Front desk: {contact.phoneDisplay}
+                  </a>
+                  <a href={contact.emailHref} className="btn-text">
+                    <OfficeEmail />
                   </a>
                 </div>
               </div>

@@ -7,6 +7,7 @@ import {
   ArrowLeft,
   CheckCircle2,
   Clock3,
+  Mail,
   MapPin,
   Navigation,
   Phone,
@@ -17,6 +18,7 @@ import { Scheduler } from "@/components/Scheduler";
 import { ScheduleRouteStart } from "@/components/ScheduleRouteStart";
 import { Footer } from "@/components/sections/Footer";
 import { contact, hours, officePhotos } from "@/data/site";
+import { OfficeEmail } from "@/components/OfficeEmail";
 
 export const metadata: Metadata = {
   title: {
@@ -163,6 +165,10 @@ export default function SchedulePage() {
                     {contact.addressLine1}<br />
                     {contact.addressLine2}
                   </address>
+                  <a href={contact.emailHref} className="btn-text-light mt-4">
+                    <Mail className="size-4 shrink-0" aria-hidden="true" />
+                    <OfficeEmail />
+                  </a>
                   <p className="mt-3 max-w-md text-sm leading-6 text-white/65">
                     Convenient to Antelope, Sacramento, Roseville, North Highlands,
                     and Citrus Heights.

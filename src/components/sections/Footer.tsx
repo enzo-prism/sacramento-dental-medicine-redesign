@@ -1,13 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
-import { CalendarDays, MapPin, Phone } from "lucide-react";
+import { CalendarDays, Mail, MapPin, Phone } from "lucide-react";
 import { contact, hours, imagery, navItems } from "@/data/site";
+import { OfficeEmail } from "@/components/OfficeEmail";
 
 export function Footer() {
   return (
     <footer className="relative overflow-hidden border-t border-white/10 bg-night pb-24 text-white lg:pb-0">
       <div className="container-x relative py-16 md:py-20">
-        <div className="grid gap-12 md:grid-cols-[1.2fr_0.8fr_0.8fr_1fr]">
+        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-[1.2fr_0.8fr_0.8fr_1fr]">
           <div>
             <Link
               href="/"
@@ -65,6 +66,13 @@ export function Footer() {
               <br />
               {contact.addressLine2}
             </address>
+            <a
+              href={contact.emailHref}
+              className="mt-3 inline-flex items-center gap-1.5 py-2 text-sm font-semibold text-[#d5e1f4] transition hover:text-white"
+            >
+              <Mail className="size-4 shrink-0" />
+              <OfficeEmail />
+            </a>
             <a
               href={contact.mapsHref}
               className="mt-3 inline-flex items-center gap-1.5 py-2 text-sm font-semibold text-[#d5e1f4] transition hover:text-white"

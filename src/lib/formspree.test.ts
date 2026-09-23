@@ -4,16 +4,12 @@ import { emptyAttribution } from "./lead-attribution.ts";
 import {
   buildAppointmentFormspreePayload,
   buildFormspreeRequestInit,
-  buildLeadWebhookPayload,
   resolveFormspreeReferer,
   resolveFormspreeEndpoint,
-  resolveFormspreeNotifyEmail,
   type AppointmentLead,
 } from "./formspree.ts";
-import { contact } from "../data/site.ts";
 
 const fallback = "https://formspree.io/f/xvkpdvyz";
-const officeEmail = "office@sacramentodentalmedicine.com";
 
 function lead(overrides: Partial<AppointmentLead> = {}): AppointmentLead {
   return {
@@ -40,38 +36,22 @@ describe("resolveFormspreeEndpoint", () => {
   });
 });
 
-describe("resolveFormspreeNotifyEmail", () => {
-  it("uses a valid override and otherwise the office mailbox", () => {
-    assert.equal(
-      resolveFormspreeNotifyEmail(" extra@sacramentodentalmedicine.com ", officeEmail),
-      "extra@sacramentodentalmedicine.com",
-    );
-    assert.equal(resolveFormspreeNotifyEmail("", officeEmail), officeEmail);
-    assert.equal(resolveFormspreeNotifyEmail("not-an-email", officeEmail), officeEmail);
-    assert.equal(contact.email, officeEmail);
-  });
-});
-
 describe("buildAppointmentFormspreePayload", () => {
   it("builds an operationally labeled phone-only request", () => {
-    const payload = buildAppointmentFormspreePayload(lead(), officeEmail);
+    const payload = buildAppointmentFormspreePayload(lead());
     assert.equal(payload.subject, "New appointment request from Form QA");
     assert.equal(payload.form_type, "appointment_request");
     assert.equal(payload.source, "sacramentodentalmedicine.com schedule form");
     assert.equal(payload.phone, "(202) 555-0100");
     assert.equal(payload.email, undefined);
-    assert.equal(payload._cc, officeEmail);
-    assert.equal(payload.office_email, officeEmail);
     assert.equal(payload.privacy_check, "confirmed");
     assert.equal(payload.received_at, "2026-09-01T20:00:00.000Z");
     assert.match(payload.message, /^APPOINTMENT REQUEST \(not confirmed\)/);
-    assert.match(payload.message, /Office notify: office@sacramentodentalmedicine\.com/);
   });
 
   it("omits empty phone and notes for an email-only request", () => {
     const payload = buildAppointmentFormspreePayload(
       lead({ phone: "", email: "form-qa@example.com", notes: "" }),
-      officeEmail,
     );
     assert.equal(payload.phone, undefined);
     assert.equal(payload.notes, undefined);
@@ -82,21 +62,10 @@ describe("buildAppointmentFormspreePayload", () => {
     const attribution = emptyAttribution();
     attribution.utm_source = "google";
     attribution.gclid = "qa-click-id";
-    const payload = buildAppointmentFormspreePayload(lead({ attribution }), officeEmail);
+    const payload = buildAppointmentFormspreePayload(lead({ attribution }));
     assert.equal(payload.utm_source, "google");
     assert.equal(payload.gclid, "qa-click-id");
     assert.match(payload.message, /Attribution: utm_source=google; gclid=qa-click-id/);
-  });
-});
-
-describe("buildLeadWebhookPayload", () => {
-  it("adds the office notify address without replacing the patient email", () => {
-    const payload = buildLeadWebhookPayload(
-      lead({ email: "form-qa@example.com" }),
-      officeEmail,
-    );
-    assert.equal(payload.email, "form-qa@example.com");
-    assert.equal(payload.notifyEmail, officeEmail);
   });
 });
 

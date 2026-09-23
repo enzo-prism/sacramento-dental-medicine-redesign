@@ -142,18 +142,14 @@ Required fields:
 
 Confirm in the Formspree dashboard that **email is not marked required**. Empty
 phone and email are omitted from the JSON payload so phone-only requests do not
-400. Each accepted request CCs **`office@sacramentodentalmedicine.com`** via
-Formspree `_cc` and labels `office_email` in the payload. Optional
-**`FORMSPREE_CC`** overrides that notify address; blank or malformed values fall
-back to `contact.email`. Also add the office mailbox as a Formspree dashboard
-notification recipient so staff still receive leads if `_cc` is ignored for an
-unverified address. The server forwards the current runtime host or origin when
+400. To have leads reach the front desk directly, add
+**`office@sacramentodentalmedicine.com`** as a notification recipient in the
+Formspree dashboard (the site does not send `_cc`). The server forwards the current runtime host or origin when
 posting to Formspree so production-domain restriction remains compatible without
 letting preview or local traffic impersonate the live site automatically.
 Formspree delivery has a bounded timeout. Optional: set
 **`LEAD_WEBHOOK_URL`** for a non-blocking second hop after Formspree succeeds;
-that hop includes `notifyEmail` and cannot reverse the accepted Formspree
-response.
+that optional delivery cannot reverse the accepted Formspree response.
 
 After form or Formspree-account changes, run a controlled synthetic delivery
 test and confirm it reaches the intended front desk. A successful on-site

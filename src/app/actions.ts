@@ -21,8 +21,10 @@ import {
 import {
   buildAppointmentFormspreePayload,
   buildFormspreeRequestInit,
+  buildLeadWebhookPayload,
   resolveFormspreeReferer,
   resolveFormspreeEndpoint,
+  resolveFormspreeNotifyEmail,
   type AppointmentLead,
 } from "@/lib/formspree";
 import { siteUrl } from "@/lib/site-url";
@@ -37,9 +39,10 @@ function field(formData: FormData, key: string): string {
 /**
  * Appointment-request handler.
  *
- * Validates the lead, then delivers via Formspree. Optional LEAD_WEBHOOK_URL
- * is a second hop after Formspree succeeds. Server Functions are reachable
- * via direct POST, so all input is treated as untrusted.
+ * Validates the lead, then delivers via Formspree and CCs the office mailbox.
+ * Optional LEAD_WEBHOOK_URL is a second hop after Formspree succeeds and
+ * includes notifyEmail. Server Functions are reachable via direct POST, so all
+ * input is treated as untrusted.
  */
 export async function requestAppointment(
   _prevState: AppointmentState,
@@ -131,7 +134,7 @@ export async function requestAppointment(
     console.error("[appointment] Formspree delivery failed", err);
     return {
       ok: false,
-      message: `Something went wrong on our end. Please call us at ${contact.phoneDisplay}.`,
+      message: `Something went wrong on our end. Please call us at ${contact.phoneDisplay} or email ${contact.email}.`,
       errors: {},
     };
   }
@@ -171,9 +174,13 @@ function formspreeErrorMessage(body: unknown, status: number): string {
   return `HTTP ${status}`;
 }
 
+function officeNotifyEmail() {
+  return resolveFormspreeNotifyEmail(process.env.FORMSPREE_CC, contact.email);
+}
+
 async function deliverToFormspree(lead: AppointmentLead, referer: string): Promise<void> {
   const endpoint = resolveFormspreeEndpoint(process.env.FORMSPREE_ENDPOINT, formspreeEndpoint);
-  const payload = buildAppointmentFormspreePayload(lead);
+  const payload = buildAppointmentFormspreePayload(lead, officeNotifyEmail());
 
   const res = await fetch(
     endpoint,
@@ -191,7 +198,7 @@ async function deliverToWebhook(webhook: string, lead: AppointmentLead): Promise
     const res = await fetch(webhook, {
       method: "POST",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify(lead),
+      body: JSON.stringify(buildLeadWebhookPayload(lead, officeNotifyEmail())),
       signal: AbortSignal.timeout(WEBHOOK_TIMEOUT_MS),
     });
     if (!res.ok) console.error("[appointment] extra webhook returned", res.status);

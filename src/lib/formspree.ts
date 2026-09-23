@@ -1,3 +1,4 @@
+import { EMAIL_RE } from "./appointment";
 import type { FirstTouchAttribution } from "./lead-attribution";
 
 const ATTRIBUTION_FIELDS = [
@@ -35,7 +36,13 @@ export function resolveFormspreeEndpoint(candidate: string | undefined, fallback
   return value && FORMSPREE_ENDPOINT_RE.test(value) ? value.replace(/\/$/, "") : fallback;
 }
 
-export function buildAppointmentFormspreePayload(lead: AppointmentLead) {
+/** Optional FORMSPREE_CC override; otherwise use the verified office mailbox. */
+export function resolveFormspreeNotifyEmail(candidate: string | undefined, fallback: string) {
+  const value = candidate?.trim();
+  return value && EMAIL_RE.test(value) ? value : fallback;
+}
+
+export function buildAppointmentFormspreePayload(lead: AppointmentLead, notifyEmail: string) {
   const attributionLines = ATTRIBUTION_FIELDS.filter((field) => lead.attribution[field]).map(
     (field) => `${field}=${lead.attribution[field]}`,
   );
@@ -49,6 +56,8 @@ export function buildAppointmentFormspreePayload(lead: AppointmentLead) {
     time: lead.time,
     received_at: lead.receivedAt,
     privacy_check: "confirmed",
+    _cc: notifyEmail,
+    office_email: notifyEmail,
     message: [
       "APPOINTMENT REQUEST (not confirmed)",
       `Visit: ${lead.visitType}`,
@@ -57,6 +66,7 @@ export function buildAppointmentFormspreePayload(lead: AppointmentLead) {
       lead.email && `Email: ${lead.email}`,
       lead.notes && `Notes: ${lead.notes}`,
       attributionLines.length ? `Attribution: ${attributionLines.join("; ")}` : "",
+      `Office notify: ${notifyEmail}`,
       `Received: ${lead.receivedAt}`,
     ]
       .filter(Boolean)
@@ -69,6 +79,10 @@ export function buildAppointmentFormspreePayload(lead: AppointmentLead) {
     if (lead.attribution[field]) payload[field] = lead.attribution[field];
   }
   return payload;
+}
+
+export function buildLeadWebhookPayload(lead: AppointmentLead, notifyEmail: string) {
+  return { ...lead, notifyEmail };
 }
 
 function normalizeHttpOrigin(value: string) {

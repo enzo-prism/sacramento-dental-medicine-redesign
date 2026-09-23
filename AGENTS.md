@@ -29,10 +29,11 @@ Sibling practice site: `enzo-prism/waikiki-dental`. Do not mix copy, phone numbe
 - Favicon and app-icon generator: `scripts/generate-seo-assets.py`
 - Canonical / OG origin: `src/lib/site-url.ts` (public production domain by default)
 
-Do not invent insurance lists, CareCredit, or a front-desk email. The Google
-rating and review counts are a dated snapshot in `socialProof`; re-check the
-live Business Profile before changing them. Do not claim same-day emergency
-visits are guaranteed.
+Do not invent insurance lists, CareCredit, or extra mailboxes. The verified
+front-desk email is `office@sacramentodentalmedicine.com` (`contact.email`).
+The Google rating and review counts are a dated snapshot in `socialProof`;
+re-check the live Business Profile before changing them. Do not claim same-day
+emergency visits are guaranteed.
 
 ## Metadata and social sharing
 
@@ -57,10 +58,12 @@ Name is required. A phone number **or** an email is enough — at least one, not
 both. Keep email **optional** in the Formspree dashboard or phone-only requests
 will 400. Endpoint: `formspreeEndpoint` in `src/data/site.ts`
 (`https://formspree.io/f/xvkpdvyz`), overridable with `FORMSPREE_ENDPOINT`.
+Lead notify CCs `contact.email` (`_cc` + `office_email`). Optional
+`FORMSPREE_CC` overrides that mailbox.
 
 Optional `LEAD_WEBHOOK_URL` in `.env.local` / Vercel / Cloud Agent secrets is a
-second hop after Formspree succeeds. Do not claim the front desk received a lead
-unless Formspree accepted the POST.
+second hop after Formspree succeeds and includes `notifyEmail`. Do not claim the
+front desk received a lead unless Formspree accepted the POST.
 
 ## Commands
 

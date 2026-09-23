@@ -41,6 +41,9 @@ export const contact = {
   tagline: "Modern family, cosmetic & restorative dentistry in Antelope, CA",
   phoneDisplay: "(916) 727-6453",
   phoneHref: "tel:+19167276453",
+  // Confirmed 2026-09-23 RDA+Enzo client sync. Do not invent extra mailboxes.
+  email: "office@sacramentodentalmedicine.com",
+  emailHref: "mailto:office@sacramentodentalmedicine.com",
   // All booking CTAs route to the dedicated on-site scheduling page, which
   // captures leads natively. When the practice provides its Dentrix Ascend
   // deep link, point this at it instead — the bare bookit.dentrixascend.com
@@ -616,6 +619,15 @@ export const structuredData = {
   hasMap: contact.mapsHref,
   name: contact.practiceName,
   telephone: "+1-916-727-6453",
+  email: contact.email,
+  contactPoint: {
+    "@type": "ContactPoint",
+    telephone: "+1-916-727-6453",
+    email: contact.email,
+    contactType: "customer service",
+    areaServed: contact.serviceArea,
+    availableLanguage: "English",
+  },
   sameAs: [socialProof.moreReviewsUrl],
   address: {
     "@type": "PostalAddress",

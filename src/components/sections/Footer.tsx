@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { CalendarDays, MapPin, Phone } from "lucide-react";
+import { CalendarDays, Mail, MapPin, Phone } from "lucide-react";
 import { contact, hours, imagery, navItems } from "@/data/site";
 
 export function Footer() {
@@ -65,6 +65,13 @@ export function Footer() {
               <br />
               {contact.addressLine2}
             </address>
+            <a
+              href={contact.emailHref}
+              className="mt-3 inline-flex items-center gap-1.5 py-2 text-sm font-semibold text-[#d5e1f4] transition hover:text-white"
+            >
+              <Mail className="size-4" />
+              {contact.email}
+            </a>
             <a
               href={contact.mapsHref}
               className="mt-3 inline-flex items-center gap-1.5 py-2 text-sm font-semibold text-[#d5e1f4] transition hover:text-white"

@@ -31,7 +31,12 @@ export function Hero() {
             data-mobile-cta-stop
             className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center"
           >
-            <a href={contact.bookingHref} className="btn btn-primary h-12 px-5 text-base">
+            <a
+              href={contact.jarvisBookingHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-primary h-12 px-5 text-base"
+            >
               <CalendarDays className="size-5" />
               Book online
             </a>

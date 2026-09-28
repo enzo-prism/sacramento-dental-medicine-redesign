@@ -28,10 +28,15 @@ export function Footer() {
               every visit.
             </p>
             <div className="mt-6 flex flex-col gap-2.5 sm:flex-row">
-              <Link href={contact.bookingHref} className="btn btn-primary">
+              <a
+                href={contact.jarvisBookingHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-primary"
+              >
                 <CalendarDays className="size-4" />
                 Book online
-              </Link>
+              </a>
               <a href={contact.phoneHref} className="btn btn-ghost-light">
                 <Phone className="size-4" />
                 {contact.phoneDisplay}

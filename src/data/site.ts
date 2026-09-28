@@ -44,11 +44,12 @@ export const contact = {
   // Confirmed 2026-09-23 RDA+Enzo client sync. Do not invent extra mailboxes.
   email: "office@sacramentodentalmedicine.com",
   emailHref: "mailto:office@sacramentodentalmedicine.com",
-  // All booking CTAs route to the dedicated on-site scheduling page, which
-  // captures leads natively. When the practice provides its Dentrix Ascend
-  // deep link, point this at it instead — the bare bookit.dentrixascend.com
-  // domain lands on a generic portal that doesn't identify the practice.
+  // On-site Formspree request form. Request-worded CTAs stay here.
   bookingHref: "/schedule",
+  // Live Jarvis scheduler for this practice (4320 Elverta Rd, Antelope).
+  // The page blocks iframe embedding, so booking CTAs open it in a new tab.
+  jarvisBookingHref:
+    "https://schedule.jarvisanalytics.com/frame?eoid=9251&elid=9000000000334",
   addressLine1: "4320 Elverta Rd #3",
   addressLine2: "Antelope, CA 95843",
   mapsHref:

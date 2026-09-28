@@ -222,10 +222,15 @@ export function Header() {
             <Phone className="size-4" />
             {contact.phoneDisplay}
           </a>
-          <Link href={contact.bookingHref} className="btn btn-primary h-10 px-4 text-sm">
+          <a
+            href={contact.jarvisBookingHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn-primary h-10 px-4 text-sm"
+          >
             Book online
             <ArrowRight className="size-4" />
-          </Link>
+          </a>
         </div>
 
         <button
@@ -290,14 +295,16 @@ export function Header() {
                 <Phone className="size-4" />
                 {contact.phoneDisplay}
               </a>
-              <Link
-                href={contact.bookingHref}
+              <a
+                href={contact.jarvisBookingHref}
+                target="_blank"
+                rel="noopener noreferrer"
                 onClick={() => setMenuOpen(false)}
                 className="btn btn-primary mt-2 h-12 w-full"
               >
                 <CalendarDays className="size-4" />
                 Book online
-              </Link>
+              </a>
             </nav>
           </div>
         </div>

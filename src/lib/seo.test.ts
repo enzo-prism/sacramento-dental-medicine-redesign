@@ -43,6 +43,11 @@ describe("search content integrity", () => {
     assert.ok(structuredData.image.endsWith("/images/office-exterior.webp"));
     assert.equal(contact.email, "office@sacramentodentalmedicine.com");
     assert.equal(contact.emailHref, "mailto:office@sacramentodentalmedicine.com");
+    assert.equal(contact.bookingHref, "/schedule");
+    assert.equal(
+      contact.jarvisBookingHref,
+      "https://schedule.jarvisanalytics.com/frame?eoid=9251&elid=9000000000334",
+    );
     assert.equal(structuredData.email, contact.email);
     assert.equal(structuredData.contactPoint["@type"], "ContactPoint");
     assert.equal(structuredData.contactPoint.email, contact.email);

@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { ArrowRight, CalendarDays, Phone } from "lucide-react";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { contact } from "@/data/site";
@@ -23,11 +22,16 @@ export function ScheduleCTA() {
           </div>
 
           <div className="flex flex-col gap-3 sm:flex-row lg:flex-col xl:flex-row">
-            <Link href={contact.bookingHref} className="btn btn-primary h-12 px-5 text-base">
+            <a
+              href={contact.jarvisBookingHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-primary h-12 px-5 text-base"
+            >
               <CalendarDays className="size-5" aria-hidden="true" />
               Schedule online
               <ArrowRight className="size-4" aria-hidden="true" />
-            </Link>
+            </a>
             <a href={contact.phoneHref} className="btn btn-ghost-light h-12 px-5 text-base">
               <Phone className="size-5" aria-hidden="true" />
               Call {contact.phoneDisplay}

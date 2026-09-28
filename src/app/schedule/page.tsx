@@ -92,6 +92,17 @@ export default function SchedulePage() {
               </div>
 
               <div className="min-w-0 lg:sticky lg:top-28 lg:col-start-2 lg:row-span-2 lg:row-start-1">
+                <p className="mb-3 text-sm leading-6 text-white/70">
+                  Prefer to book instantly?{" "}
+                  <a
+                    href={contact.jarvisBookingHref}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-semibold text-[#d5e1f4] underline-offset-4 transition hover:text-white hover:underline"
+                  >
+                    Book online
+                  </a>
+                </p>
                 <Scheduler />
               </div>
 

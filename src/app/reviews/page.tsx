@@ -201,10 +201,15 @@ export default function ReviewsPage() {
               </p>
             </div>
             <div className="flex flex-col gap-3 sm:flex-row">
-              <Link href={contact.bookingHref} className="btn btn-primary h-12 px-5">
+              <a
+                href={contact.jarvisBookingHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-primary h-12 px-5"
+              >
                 <CalendarDays className="size-4" aria-hidden="true" />
                 Book online
-              </Link>
+              </a>
               <a href={contact.phoneHref} className="btn btn-ghost-light h-12 px-5">
                 Call {contact.phoneDisplay}
               </a>

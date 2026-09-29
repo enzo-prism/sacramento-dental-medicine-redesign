@@ -48,7 +48,7 @@ export function NewPatients() {
               {newPatient.firstVisit}
             </p>
 
-            <BookingLink className="btn-text mt-6 min-h-11 gap-2">
+            <BookingLink location="new_patients" className="btn-text mt-6 min-h-11 gap-2">
               Book your first visit
               <ArrowUpRight className="size-4 shrink-0" aria-hidden="true" />
             </BookingLink>

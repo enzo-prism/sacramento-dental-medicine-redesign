@@ -66,8 +66,15 @@ loaded tag as well as skipping manual views.
 
 `/conversion` is a legacy aggregate path, **not a completed lead or key event**.
 Privacy, unknown routes and nonproduction hosts are excluded. No form values,
-contact details, treatment reasons, click IDs or user IDs are sent. Formspree
-remains the lead source of truth; do not equate page visits with appointments.
+contact details, treatment reasons, click IDs or user IDs are sent. Do not
+equate page visits with appointments.
+
+The retired Formspree request form never fired `generate_lead`, `fbq`, or any
+other conversion event. Jarvis booking links now share one click handler that
+sends GA4 `book_online_click` with `{link_location, link_url, send_to}` when
+`gtag` exists, and `fbq('track','Schedule')` only if a Meta pixel is present.
+No Meta pixel ID is installed on this site. The handler no-ops if `gtag`/`fbq`
+are missing and never blocks opening the scheduler.
 
 Acquisition now preserves only recognized referral origins (no paths or query
 strings), and fixed allowlisted `utm_source` + `utm_medium` pairs. Both must be

@@ -113,13 +113,13 @@ export default async function ServiceRoute({ params }: Props) {
                     <ArrowRight className="size-4" aria-hidden="true" />
                   </a>
                 ) : (
-                  <BookingLink className="btn btn-primary h-12 px-5 text-base">
+                  <BookingLink location="service" className="btn btn-primary h-12 px-5 text-base">
                     Request an appointment
                     <ArrowRight className="size-4" aria-hidden="true" />
                   </BookingLink>
                 )}
                 {service.slug === "dental-emergencies" ? (
-                  <BookingLink className="btn btn-outline h-12 px-5 text-base">
+                  <BookingLink location="service" className="btn btn-outline h-12 px-5 text-base">
                     <Phone className="size-4" aria-hidden="true" />
                     Request a non-urgent visit
                   </BookingLink>
@@ -246,7 +246,7 @@ export default async function ServiceRoute({ params }: Props) {
                 ))}
               </div>
             </div>
-            <BookingLink className="btn btn-primary h-12 px-5">
+            <BookingLink location="service" className="btn btn-primary h-12 px-5">
               Request a visit
             </BookingLink>
           </div>

@@ -79,7 +79,7 @@ export default function DrNarodovichPage() {
               </p>
               <p className="mt-5 text-sm font-semibold text-brand-deep">{doctor.highlights}</p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <BookingLink className="btn btn-primary h-12 px-5 text-base">
+                <BookingLink location="meet_dr_narodovich" className="btn btn-primary h-12 px-5 text-base">
                   Request an appointment
                   <ArrowRight className="size-4" aria-hidden="true" />
                 </BookingLink>

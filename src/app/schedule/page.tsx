@@ -79,7 +79,7 @@ export default function SchedulePage() {
                   <p className="mt-3 text-sm leading-6 text-white/70">
                     Opens the Sacramento Dental Medicine scheduler in a new tab.
                   </p>
-                  <BookingLink className="btn btn-primary mt-6 h-12 w-full px-5 text-base">
+                  <BookingLink location="schedule_page" className="btn btn-primary mt-6 h-12 w-full px-5 text-base">
                     <CalendarDays className="size-5" aria-hidden="true" />
                     Book online
                   </BookingLink>

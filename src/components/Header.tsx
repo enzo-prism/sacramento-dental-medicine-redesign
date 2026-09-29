@@ -209,15 +209,13 @@ export function Header() {
             }`;
             if (isExternalHref(item.href)) {
               return (
-                <a
+                <BookingLink
                   key={item.href}
-                  href={item.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  location="header_nav"
                   className={className}
                 >
                   {item.label}
-                </a>
+                </BookingLink>
               );
             }
             return (
@@ -238,7 +236,7 @@ export function Header() {
             <Phone className="size-4" />
             {contact.phoneDisplay}
           </a>
-          <BookingLink className="btn btn-primary h-10 px-4 text-sm">
+          <BookingLink location="header" className="btn btn-primary h-10 px-4 text-sm">
             Book online
             <ArrowRight className="size-4" />
           </BookingLink>
@@ -288,17 +286,15 @@ export function Header() {
                 }`;
                 if (isExternalHref(item.href)) {
                   return (
-                    <a
+                    <BookingLink
                       key={item.href}
-                      href={item.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                      location="header_menu_nav"
                       onClick={() => setMenuOpen(false)}
                       className={className}
                     >
                       {item.label}
                       <ChevronRight className="size-4 text-ink-faint" />
-                    </a>
+                    </BookingLink>
                   );
                 }
                 return (
@@ -323,6 +319,7 @@ export function Header() {
                 {contact.phoneDisplay}
               </a>
               <BookingLink
+                location="header_menu"
                 onClick={() => setMenuOpen(false)}
                 className="btn btn-primary mt-2 h-12 w-full"
               >

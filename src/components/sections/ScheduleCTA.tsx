@@ -23,7 +23,7 @@ export function ScheduleCTA() {
           </div>
 
           <div className="flex flex-col gap-3 sm:flex-row lg:flex-col xl:flex-row">
-            <BookingLink className="btn btn-primary h-12 px-5 text-base">
+            <BookingLink location="schedule_cta" className="btn btn-primary h-12 px-5 text-base">
               <CalendarDays className="size-5" aria-hidden="true" />
               Schedule online
               <ArrowRight className="size-4" aria-hidden="true" />

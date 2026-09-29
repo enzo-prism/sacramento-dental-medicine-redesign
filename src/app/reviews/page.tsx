@@ -202,7 +202,7 @@ export default function ReviewsPage() {
               </p>
             </div>
             <div className="flex flex-col gap-3 sm:flex-row">
-              <BookingLink className="btn btn-primary h-12 px-5">
+              <BookingLink location="reviews" className="btn btn-primary h-12 px-5">
                 <CalendarDays className="size-4" aria-hidden="true" />
                 Book online
               </BookingLink>

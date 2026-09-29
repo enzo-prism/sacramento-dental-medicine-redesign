@@ -29,7 +29,7 @@ export function Footer() {
               every visit.
             </p>
             <div className="mt-6 flex flex-col gap-2.5 sm:flex-row">
-              <BookingLink className="btn btn-primary">
+              <BookingLink location="footer" className="btn btn-primary">
                 <CalendarDays className="size-4" />
                 Book online
               </BookingLink>
@@ -48,14 +48,12 @@ export function Footer() {
               {[...navItems, { label: "New patients", href: "/new-patients" }, { label: "Emergency dentist", href: "/dental-emergencies" }].map((item) => (
                 <li key={item.href}>
                   {isExternalHref(item.href) ? (
-                    <a
-                      href={item.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                    <BookingLink
+                      location="footer_nav"
                       className="inline-block py-2 text-white/70 transition hover:text-white"
                     >
                       {item.label}
-                    </a>
+                    </BookingLink>
                   ) : (
                     <Link
                       href={item.href}

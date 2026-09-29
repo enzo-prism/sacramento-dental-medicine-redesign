@@ -39,7 +39,7 @@ export function Intro() {
           </ScrollReveal>
 
           <ScrollReveal delay={120} className="mt-10 flex flex-wrap items-center gap-6">
-            <BookingLink className="btn-text">
+            <BookingLink location="intro" className="btn-text">
               Become a patient
             </BookingLink>
             <a href="#doctors" className="btn-text">

@@ -36,7 +36,7 @@ export function MobileCTA() {
         <Phone className="size-4" />
         Call
       </a>
-      <BookingLink className="mobile-cta-primary">
+      <BookingLink location="mobile_cta" className="mobile-cta-primary">
         <CalendarDays className="size-4" />
         Book online
       </BookingLink>

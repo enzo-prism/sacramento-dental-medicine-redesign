@@ -32,7 +32,7 @@ export function Hero() {
             data-mobile-cta-stop
             className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center"
           >
-            <BookingLink className="btn btn-primary h-12 px-5 text-base">
+            <BookingLink location="hero" className="btn btn-primary h-12 px-5 text-base">
               <CalendarDays className="size-5" />
               Book online
             </BookingLink>

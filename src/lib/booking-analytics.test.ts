@@ -5,6 +5,7 @@ import {
   BOOK_ONLINE_CLICK_EVENT,
   BOOK_ONLINE_LOCATIONS,
   META_SCHEDULE_EVENT,
+  isExternalHref,
   trackBookOnlineClick,
 } from "./booking-analytics.ts";
 
@@ -102,6 +103,12 @@ describe("book online click tracking", () => {
       },
     );
     assert.deepEqual(gtagCalls, []);
+  });
+
+  it("treats only http(s) hrefs as external booking destinations", () => {
+    assert.equal(isExternalHref(jarvis), true);
+    assert.equal(isExternalHref("/schedule"), false);
+    assert.equal(isExternalHref("/#visit"), false);
   });
 
   it("covers every placement the site uses", () => {

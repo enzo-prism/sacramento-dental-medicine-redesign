@@ -5,7 +5,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { ArrowRight, CalendarDays, ChevronRight, Menu, Phone, X } from "lucide-react";
-import { BookingLink, isExternalHref } from "@/components/BookingLink";
+import { BookingLink } from "@/components/BookingLink";
+import { isExternalHref } from "@/lib/booking-analytics";
 import { contact, imagery, navItems } from "@/data/site";
 
 const FOCUSABLE_SELECTOR = [

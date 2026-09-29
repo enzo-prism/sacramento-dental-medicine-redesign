@@ -24,6 +24,10 @@ export const BOOK_ONLINE_LOCATIONS = [
 
 export type BookOnlineLocation = (typeof BOOK_ONLINE_LOCATIONS)[number];
 
+export function isExternalHref(href: string) {
+  return href.startsWith("https://") || href.startsWith("http://");
+}
+
 const BOOK_ONLINE_LOCATION_SET = new Set<string>(BOOK_ONLINE_LOCATIONS);
 
 type AnalyticsGlobals = {

@@ -1,7 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { CalendarDays, Mail, MapPin, Phone } from "lucide-react";
-import { BookingLink, isExternalHref } from "@/components/BookingLink";
+import { BookingLink } from "@/components/BookingLink";
+import { isExternalHref } from "@/lib/booking-analytics";
 import { contact, hours, imagery, navItems } from "@/data/site";
 import { OfficeEmail } from "@/components/OfficeEmail";
 

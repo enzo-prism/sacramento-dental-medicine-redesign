@@ -14,7 +14,7 @@ const PUBLIC_PAGES: Record<string, { path: string; title: string; group: string 
   "/our-services": { path: "/our-services", title: "Care overview", group: "Care overview" },
   "/new-patients": { path: "/new-patients", title: "Visit information", group: "Visit information" },
   "/meet-dr-narodovich": { path: "/team", title: "Team", group: "Team" },
-  "/schedule": { path: "/conversion", title: "Contact page", group: "Contact page" },
+  "/schedule": { path: "/schedule", title: "Schedule", group: "Schedule" },
 };
 const TREATMENT_PATHS = new Set([
   "/dental-crowns", "/sedation-dentistry", "/orthodontics", "/invisalign",

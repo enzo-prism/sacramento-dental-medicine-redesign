@@ -5,6 +5,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { ArrowRight, CalendarDays, ChevronRight, Menu, Phone, X } from "lucide-react";
+import { BookingLink } from "@/components/BookingLink";
+import { isExternalHref } from "@/lib/booking-analytics";
 import { contact, imagery, navItems } from "@/data/site";
 
 const FOCUSABLE_SELECTOR = [
@@ -66,6 +68,7 @@ export function Header() {
   }, [pathname]);
 
   function isActive(href: string) {
+    if (isExternalHref(href)) return false;
     if (href.startsWith("/#")) return pathname === "/" && href === activeSectionHref;
     return href === pathname;
   }
@@ -202,14 +205,26 @@ export function Header() {
         <nav className="hidden items-center gap-1 text-sm font-medium text-ink-soft lg:flex">
           {navItems.map((item) => {
             const active = isActive(item.href);
+            const className = `rounded-lg px-3 py-2 transition hover:bg-wash hover:text-ink ${
+              active ? "bg-wash text-ink" : ""
+            }`;
+            if (isExternalHref(item.href)) {
+              return (
+                <BookingLink
+                  key={item.href}
+                  location="header"
+                  className={className}
+                >
+                  {item.label}
+                </BookingLink>
+              );
+            }
             return (
               <Link
                 key={item.href}
                 href={item.href}
                 aria-current={active ? (item.href.startsWith("/#") ? "location" : "page") : undefined}
-                className={`rounded-lg px-3 py-2 transition hover:bg-wash hover:text-ink ${
-                  active ? "bg-wash text-ink" : ""
-                }`}
+                className={className}
               >
                 {item.label}
               </Link>
@@ -222,10 +237,10 @@ export function Header() {
             <Phone className="size-4" />
             {contact.phoneDisplay}
           </a>
-          <Link href={contact.bookingHref} className="btn btn-primary h-10 px-4 text-sm">
+          <BookingLink location="header" className="btn btn-primary h-10 px-4 text-sm">
             Book online
             <ArrowRight className="size-4" />
-          </Link>
+          </BookingLink>
         </div>
 
         <button
@@ -267,15 +282,29 @@ export function Header() {
               </button>
               {navItems.map((item) => {
                 const active = isActive(item.href);
+                const className = `flex items-center justify-between rounded-xl px-4 py-3.5 text-base font-medium text-ink transition hover:bg-wash ${
+                  active ? "bg-wash" : ""
+                }`;
+                if (isExternalHref(item.href)) {
+                  return (
+                    <BookingLink
+                      key={item.href}
+                      location="header_mobile"
+                      onClick={() => setMenuOpen(false)}
+                      className={className}
+                    >
+                      {item.label}
+                      <ChevronRight className="size-4 text-ink-faint" />
+                    </BookingLink>
+                  );
+                }
                 return (
                   <Link
                     key={item.href}
                     href={item.href}
                     aria-current={active ? (item.href.startsWith("/#") ? "location" : "page") : undefined}
                     onClick={() => setMenuOpen(false)}
-                    className={`flex items-center justify-between rounded-xl px-4 py-3.5 text-base font-medium text-ink transition hover:bg-wash ${
-                      active ? "bg-wash" : ""
-                    }`}
+                    className={className}
                   >
                     {item.label}
                     <ChevronRight className="size-4 text-ink-faint" />
@@ -290,14 +319,14 @@ export function Header() {
                 <Phone className="size-4" />
                 {contact.phoneDisplay}
               </a>
-              <Link
-                href={contact.bookingHref}
+              <BookingLink
+                location="header_mobile"
                 onClick={() => setMenuOpen(false)}
                 className="btn btn-primary mt-2 h-12 w-full"
               >
                 <CalendarDays className="size-4" />
                 Book online
-              </Link>
+              </BookingLink>
             </nav>
           </div>
         </div>

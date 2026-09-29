@@ -404,7 +404,7 @@ export const servicePages: ServicePage[] = [
       },
     ],
     faqs: [
-      { question: "Should I use the online form for urgent dental pain?", answer: "Call (916) 727-6453 first for urgent dental pain or an injury. The online form is an appointment request reviewed during office hours, so it should not be used when you need immediate guidance." },
+      { question: "Should I book online for urgent dental pain?", answer: "Call (916) 727-6453 first for urgent dental pain or an injury. Online booking is for non-urgent visits and should not be used when you need immediate guidance." },
       { question: "Are you open evenings or weekends for emergencies?", answer: "The office is open until 7 PM on Wednesday and Thursday and is closed Saturday and Sunday. Call to check the earliest available visit; the practice does not advertise 24-hour emergency coverage." },
       {
         question: "What should I do for a dental emergency?",
@@ -461,7 +461,7 @@ export const servicePages: ServicePage[] = [
     },
     {
       "question": "What should I do if my tooth hurts now?",
-      "answer": "Call (916) 727-6453 to describe the problem and ask for the earliest available evaluation. Same-day visits are offered when possible; an online appointment request does not confirm a visit."
+      "answer": "Call (916) 727-6453 to describe the problem and ask for the earliest available evaluation. Same-day visits are offered when possible. For urgent pain, call first rather than booking online."
     }
   ],
   "relatedSlugs": [

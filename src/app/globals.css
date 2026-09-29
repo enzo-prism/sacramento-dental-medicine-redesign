@@ -447,7 +447,7 @@ html[data-menu-open="true"] .mobile-cta {
 }
 
 /* ==========================================================================
-   Scheduler
+   Overflow helpers
    ========================================================================== */
 .no-scrollbar {
   scrollbar-width: none;
@@ -455,59 +455,6 @@ html[data-menu-open="true"] .mobile-cta {
 }
 .no-scrollbar::-webkit-scrollbar {
   display: none;
-}
-
-.scheduler-card {
-  background: var(--card);
-  border: 1px solid var(--line);
-  border-radius: var(--r-card);
-  box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.7) inset,
-    0 20px 46px -30px rgba(13, 27, 46, 0.16);
-}
-.scheduler-sticky {
-  position: sticky;
-  bottom: 0;
-  border-top: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.94);
-  padding: 0.85rem 1.25rem calc(0.85rem + env(safe-area-inset-bottom));
-  backdrop-filter: blur(12px);
-}
-@media (min-width: 768px) {
-  .scheduler-sticky {
-    padding-inline: 1.5rem;
-  }
-}
-
-.step-panel {
-  animation: step-in 280ms var(--ease-out) both;
-}
-@keyframes step-in {
-  from {
-    opacity: 0;
-    transform: translate3d(0, 8px, 0);
-  }
-  to {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-  }
-}
-
-.option-tile {
-  transition:
-    border-color 200ms var(--ease-soft),
-    background-color 200ms var(--ease-soft),
-    box-shadow 200ms var(--ease-soft),
-    transform 200ms var(--ease-out);
-}
-.option-tile:active {
-  transform: scale(0.98);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .step-panel {
-    animation: none;
-  }
 }
 
 /* ==========================================================================
@@ -741,7 +688,7 @@ html[data-menu-open="true"] .mobile-cta {
   .btn:active, .btn:hover svg, .btn-text:hover svg { transform: none; }
 }
 @media (forced-colors: active) {
-  .btn, .detail-icon, .option-tile, .mobile-cta-primary { border: 1px solid ButtonText; }
+  .btn, .detail-icon, .mobile-cta-primary { border: 1px solid ButtonText; }
 }
 
 /* Keyboard users must never land in an invisible reveal wrapper. */

@@ -13,6 +13,7 @@ import {
   Sparkles,
   UsersRound,
 } from "lucide-react";
+import { BookingLink } from "@/components/BookingLink";
 import { Header } from "@/components/Header";
 import { MobileCTA } from "@/components/MobileCTA";
 import { ReviewStars } from "@/components/ReviewStars";
@@ -197,14 +198,14 @@ export default function ReviewsPage() {
                 Come see what patients are talking about.
               </h2>
               <p className="mt-3 max-w-xl text-sm leading-6 text-white/70">
-                Request a visit online, then the front desk will reach out to confirm the day and time.
+                Book a visit online, or call the office to talk through a time that works.
               </p>
             </div>
             <div className="flex flex-col gap-3 sm:flex-row">
-              <Link href={contact.bookingHref} className="btn btn-primary h-12 px-5">
+              <BookingLink location="reviews" className="btn btn-primary h-12 px-5">
                 <CalendarDays className="size-4" aria-hidden="true" />
                 Book online
-              </Link>
+              </BookingLink>
               <a href={contact.phoneHref} className="btn btn-ghost-light h-12 px-5">
                 Call {contact.phoneDisplay}
               </a>

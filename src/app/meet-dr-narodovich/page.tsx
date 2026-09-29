@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Check, Phone } from "lucide-react";
+import { BookingLink } from "@/components/BookingLink";
 import { Header } from "@/components/Header";
 import { MobileCTA } from "@/components/MobileCTA";
 import { Footer } from "@/components/sections/Footer";
@@ -78,10 +79,10 @@ export default function DrNarodovichPage() {
               </p>
               <p className="mt-5 text-sm font-semibold text-brand-deep">{doctor.highlights}</p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <Link href={contact.bookingHref} className="btn btn-primary h-12 px-5 text-base">
+                <BookingLink className="btn btn-primary h-12 px-5 text-base">
                   Request an appointment
                   <ArrowRight className="size-4" aria-hidden="true" />
-                </Link>
+                </BookingLink>
                 <a href={contact.phoneHref} className="btn btn-outline h-12 px-5 text-base">
                   <Phone className="size-4" aria-hidden="true" />
                   Call {contact.phoneDisplay}

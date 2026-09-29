@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { CalendarDays, Mail, MapPin, Phone } from "lucide-react";
+import { BookingLink, isExternalHref } from "@/components/BookingLink";
 import { contact, hours, imagery, navItems } from "@/data/site";
 import { OfficeEmail } from "@/components/OfficeEmail";
 
@@ -28,15 +29,10 @@ export function Footer() {
               every visit.
             </p>
             <div className="mt-6 flex flex-col gap-2.5 sm:flex-row">
-              <a
-                href={contact.jarvisBookingHref}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-primary"
-              >
+              <BookingLink className="btn btn-primary">
                 <CalendarDays className="size-4" />
                 Book online
-              </a>
+              </BookingLink>
               <a href={contact.phoneHref} className="btn btn-ghost-light">
                 <Phone className="size-4" />
                 {contact.phoneDisplay}
@@ -51,12 +47,23 @@ export function Footer() {
             <ul className="mt-4 space-y-2.5 text-sm">
               {[...navItems, { label: "New patients", href: "/new-patients" }, { label: "Emergency dentist", href: "/dental-emergencies" }].map((item) => (
                 <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    className="inline-block py-2 text-white/70 transition hover:text-white"
-                  >
-                    {item.label}
-                  </Link>
+                  {isExternalHref(item.href) ? (
+                    <a
+                      href={item.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-block py-2 text-white/70 transition hover:text-white"
+                    >
+                      {item.label}
+                    </a>
+                  ) : (
+                    <Link
+                      href={item.href}
+                      className="inline-block py-2 text-white/70 transition hover:text-white"
+                    >
+                      {item.label}
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>

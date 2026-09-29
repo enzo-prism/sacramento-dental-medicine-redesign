@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowRight, Check, Phone } from "lucide-react";
+import { BookingLink } from "@/components/BookingLink";
 import { Header } from "@/components/Header";
 import { MobileCTA } from "@/components/MobileCTA";
 import { Footer } from "@/components/sections/Footer";
@@ -106,14 +107,28 @@ export default async function ServiceRoute({ params }: Props) {
                 {service.intro}
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <Link href={service.slug === "dental-emergencies" ? contact.phoneHref : contact.bookingHref} className="btn btn-primary h-12 px-5 text-base">
-                  {service.slug === "dental-emergencies" ? `Call ${contact.phoneDisplay} first` : "Request an appointment"}
-                  <ArrowRight className="size-4" aria-hidden="true" />
-                </Link>
-                <a href={service.slug === "dental-emergencies" ? contact.bookingHref : contact.phoneHref} className="btn btn-outline h-12 px-5 text-base">
-                  <Phone className="size-4" aria-hidden="true" />
-                  {service.slug === "dental-emergencies" ? "Request a non-urgent visit" : `Call ${contact.phoneDisplay}`}
-                </a>
+                {service.slug === "dental-emergencies" ? (
+                  <a href={contact.phoneHref} className="btn btn-primary h-12 px-5 text-base">
+                    {`Call ${contact.phoneDisplay} first`}
+                    <ArrowRight className="size-4" aria-hidden="true" />
+                  </a>
+                ) : (
+                  <BookingLink className="btn btn-primary h-12 px-5 text-base">
+                    Request an appointment
+                    <ArrowRight className="size-4" aria-hidden="true" />
+                  </BookingLink>
+                )}
+                {service.slug === "dental-emergencies" ? (
+                  <BookingLink className="btn btn-outline h-12 px-5 text-base">
+                    <Phone className="size-4" aria-hidden="true" />
+                    Request a non-urgent visit
+                  </BookingLink>
+                ) : (
+                  <a href={contact.phoneHref} className="btn btn-outline h-12 px-5 text-base">
+                    <Phone className="size-4" aria-hidden="true" />
+                    {`Call ${contact.phoneDisplay}`}
+                  </a>
+                )}
               </div>
             </div>
 
@@ -211,7 +226,7 @@ export default async function ServiceRoute({ params }: Props) {
             </div>
             <div>
               <h2 className="font-display text-2xl font-semibold text-ink">Get to know your dental team</h2>
-              <p className="mt-4 text-sm leading-7 text-ink-soft">Meet Dr. Michael Narodovich and learn about the practice before requesting an appointment. Your dentist will explain which treatment fits your exam findings and goals.</p>
+              <p className="mt-4 text-sm leading-7 text-ink-soft">Meet Dr. Narodovich and learn about the practice before booking an appointment. Your dentist will explain which treatment fits your exam findings and goals.</p>
               <Link href="/meet-dr-narodovich" className="btn-text mt-5">Meet Dr. Narodovich</Link>
               {service.sources?.length ? <p className="mt-5 text-sm leading-7 text-ink-soft">Patient education: {service.sources.map((source, index) => <span key={source.url}>{index > 0 ? "; " : ""}<a className="underline underline-offset-4" href={source.url}>{source.label}</a></span>)}. General information; your treatment recommendations follow an exam.</p> : null}
             </div>
@@ -231,9 +246,9 @@ export default async function ServiceRoute({ params }: Props) {
                 ))}
               </div>
             </div>
-            <Link href={contact.bookingHref} className="btn btn-primary h-12 px-5">
+            <BookingLink className="btn btn-primary h-12 px-5">
               Request a visit
-            </Link>
+            </BookingLink>
           </div>
         </section>
       </main>

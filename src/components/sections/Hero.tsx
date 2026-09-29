@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { CalendarDays, MapPin, Phone } from "lucide-react";
+import { BookingLink } from "@/components/BookingLink";
 import { contact, imagery } from "@/data/site";
 
 export function Hero() {
@@ -31,15 +32,10 @@ export function Hero() {
             data-mobile-cta-stop
             className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center"
           >
-            <a
-              href={contact.jarvisBookingHref}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-primary h-12 px-5 text-base"
-            >
+            <BookingLink className="btn btn-primary h-12 px-5 text-base">
               <CalendarDays className="size-5" />
               Book online
-            </a>
+            </BookingLink>
             <a
               href={contact.phoneHref}
               className="btn btn-outline h-12 px-5 text-base"

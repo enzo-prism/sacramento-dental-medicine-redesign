@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { CalendarDays, Phone } from "lucide-react";
+import { BookingLink } from "@/components/BookingLink";
 import { contact } from "@/data/site";
 
 export function MobileCTA() {
@@ -35,15 +36,10 @@ export function MobileCTA() {
         <Phone className="size-4" />
         Call
       </a>
-      <a
-        href={contact.jarvisBookingHref}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="mobile-cta-primary"
-      >
+      <BookingLink className="mobile-cta-primary">
         <CalendarDays className="size-4" />
         Book online
-      </a>
+      </BookingLink>
     </nav>
   );
 }

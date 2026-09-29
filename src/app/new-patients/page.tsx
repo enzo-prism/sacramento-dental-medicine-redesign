@@ -1,6 +1,7 @@
 import { openGraphImages, twitterImages } from "@/lib/social-metadata";
 import type { Metadata } from "next";
 import Link from "next/link";
+import { BookingLink } from "@/components/BookingLink";
 import { Header } from "@/components/Header";
 import { MobileCTA } from "@/components/MobileCTA";
 import { Footer } from "@/components/sections/Footer";
@@ -10,7 +11,7 @@ import { OfficeEmail } from "@/components/OfficeEmail";
 import { pageGraph } from "@/lib/structured-data";
 
 const title = "New Patients in Antelope | Sacramento Dental Medicine";
-const description = "Plan your first dental visit in Antelope: what to bring, insurance and payment questions, office hours, directions, and how appointment requests work.";
+const description = "Plan your first dental visit in Antelope: what to bring, insurance and payment questions, office hours, directions, and how to book online.";
 export const metadata: Metadata = {
   title: { absolute: title }, description, alternates: { canonical: "/new-patients" },
   openGraph: {
@@ -29,8 +30,8 @@ export default function NewPatientsPage() {
           <nav aria-label="Breadcrumb" className="text-sm text-ink-soft"><Link href="/" className="hover:underline">Home</Link><span aria-hidden="true"> / </span><span aria-current="page">New patients</span></nav>
           <p className="eyebrow mt-8 text-brand-deep">Welcome to Sacramento Dental Medicine</p>
           <h1 className="mt-5 font-display text-4xl font-semibold tracking-tight text-ink sm:text-6xl">Your first dental visit in Antelope.</h1>
-          <p className="mt-6 max-w-3xl text-lg leading-8 text-ink-soft">We welcome new patients of all ages at {contact.addressLine1}, {contact.addressLine2}. Here is what to bring, how to check coverage, and what happens after you request a visit.</p>
-          <div className="mt-8 flex flex-wrap gap-4"><Link href={contact.bookingHref} className="btn btn-primary">Request your first visit</Link><a href={contact.phoneHref} className="btn btn-outline">Call {contact.phoneDisplay}</a></div>
+          <p className="mt-6 max-w-3xl text-lg leading-8 text-ink-soft">We welcome new patients of all ages at {contact.addressLine1}, {contact.addressLine2}. Here is what to bring, how to check coverage, and how to book your first visit.</p>
+          <div className="mt-8 flex flex-wrap gap-4"><BookingLink className="btn btn-primary">Request your first visit</BookingLink><a href={contact.phoneHref} className="btn btn-outline">Call {contact.phoneDisplay}</a></div>
         </div>
       </section>
       <section className="section bg-wash" aria-labelledby="first-visit-title">
@@ -47,7 +48,7 @@ export default function NewPatientsPage() {
       </section>
       <section className="section bg-wash" aria-labelledby="booking-title">
         <div className="container-x grid gap-10 md:grid-cols-2">
-          <div><h2 id="booking-title" className="font-display text-3xl font-semibold text-ink">Does an online request confirm my appointment?</h2><p className="mt-5 leading-8 text-ink-soft">No. Choose your visit type and preferred day and time, then enter your name and either a phone number or an email. The front desk follows up during office hours to confirm the exact appointment.</p><p className="mt-4 leading-8 text-ink-soft">For urgent tooth pain or an injury, call the office first. Same-day emergency visits depend on availability.</p><div className="mt-5 flex flex-wrap gap-5"><Link href="/schedule" className="btn-text">Request an appointment</Link><Link href="/dental-emergencies" className="btn-text">Emergency dental care</Link></div></div>
+          <div><h2 id="booking-title" className="font-display text-3xl font-semibold text-ink">How do I book a visit online?</h2><p className="mt-5 leading-8 text-ink-soft">Use Book online to open the practice scheduler and choose a visit. For urgent tooth pain or an injury, call the office first. Same-day emergency visits depend on availability.</p><div className="mt-5 flex flex-wrap gap-5"><BookingLink className="btn-text">Request an appointment</BookingLink><Link href="/dental-emergencies" className="btn-text">Emergency dental care</Link></div></div>
           <div><h2 className="font-display text-3xl font-semibold text-ink">Where are you, and when are you open?</h2><address className="mt-5 not-italic leading-8 text-ink-soft">{contact.practiceName}<br />{contact.addressLine1}<br />{contact.addressLine2}</address><div className="mt-3 flex flex-wrap gap-5"><a href={contact.emailHref} className="btn-text"><OfficeEmail /></a><a href={contact.mapsHref} className="btn-text">Get directions to the Antelope office</a></div><dl className="mt-6 space-y-2 text-sm text-ink-soft">{hours.map(({ day, time }) => <div key={day} className="flex justify-between gap-4"><dt>{day}</dt><dd>{time}</dd></div>)}</dl><p className="mt-4 text-sm leading-7 text-ink-soft">All hours are Pacific time. Wednesday and Thursday appointments extend to 7 PM.</p></div>
         </div>
       </section>

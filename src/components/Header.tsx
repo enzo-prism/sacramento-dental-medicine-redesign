@@ -212,7 +212,7 @@ export function Header() {
               return (
                 <BookingLink
                   key={item.href}
-                  location="header_nav"
+                  location="header"
                   className={className}
                 >
                   {item.label}
@@ -289,7 +289,7 @@ export function Header() {
                   return (
                     <BookingLink
                       key={item.href}
-                      location="header_menu_nav"
+                      location="header_mobile"
                       onClick={() => setMenuOpen(false)}
                       className={className}
                     >
@@ -320,7 +320,7 @@ export function Header() {
                 {contact.phoneDisplay}
               </a>
               <BookingLink
-                location="header_menu"
+                location="header_mobile"
                 onClick={() => setMenuOpen(false)}
                 className="btn btn-primary mt-2 h-12 w-full"
               >

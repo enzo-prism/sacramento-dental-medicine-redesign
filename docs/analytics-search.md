@@ -12,7 +12,7 @@ collected.
 `VERCEL_WEB_ANALYTICS_ENABLED=true`. The `beforeSend` boundary:
 
 - removes query strings and URL fragments;
-- reports `/schedule` as `/conversion`;
+- reports `/schedule` as `/schedule`;
 - keeps the public `/reviews` aggregate;
 - excludes `/privacy-practices`; and
 - never sends form values, contact details, treatment reasons, UTM values, or
@@ -61,20 +61,20 @@ loaded tag as well as skipping manual views.
 | Services directory | `/our-services` | Care overview |
 | New patients | `/new-patients` | Visit information |
 | Doctor biography | `/team` | Team |
-| Scheduling | `/conversion` | Contact page |
+| Scheduling | `/schedule` | Schedule |
 | Reviewed treatment pages | `/care` | Care information |
 
-`/conversion` is a legacy aggregate path, **not a completed lead or key event**.
+`/schedule` is reported as `/schedule`. The previous `/conversion` remap ends
+when this change ships — historical `/conversion` page views stop at merge.
 Privacy, unknown routes and nonproduction hosts are excluded. No form values,
 contact details, treatment reasons, click IDs or user IDs are sent. Do not
 equate page visits with appointments.
 
-The retired Formspree request form never fired `generate_lead`, `fbq`, or any
-other conversion event. Jarvis booking links now share one click handler that
-sends GA4 `book_online_click` with `{link_location, link_url, send_to}` when
-`gtag` exists, and `fbq('track','Schedule')` only if a Meta pixel is present.
-No Meta pixel ID is installed on this site. The handler no-ops if `gtag`/`fbq`
-are missing and never blocks opening the scheduler.
+The retired Formspree request form never fired `generate_lead` or other
+conversion events. Jarvis booking links share one click handler that sends GA4
+`book_online_click` with `{cta_location}` only when `gtag` exists. No URL, query
+string, or personal data is attached. The site has no Meta pixel; do not fire
+`fbq`. The handler no-ops if `gtag` is missing and never blocks the scheduler.
 
 Acquisition now preserves only recognized referral origins (no paths or query
 strings), and fixed allowlisted `utm_source` + `utm_medium` pairs. Both must be

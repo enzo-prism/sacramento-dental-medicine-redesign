@@ -17,7 +17,7 @@ describe("Google Analytics measurement boundary", () => {
     for (const host of ["localhost", "sacramento-dental-medicine-redesign.vercel.app", "sacramentodentalmedicine.com.evil.com"]) assert.equal(isGoogleAnalyticsProductionHostname(host), false);
   });
   it("distinguishes public page groups without retaining treatment names", () => {
-    assert.equal(sanitizeGoogleAnalyticsPath("/schedule/"), "/conversion");
+    assert.equal(sanitizeGoogleAnalyticsPath("/schedule/"), "/schedule");
     assert.equal(sanitizeGoogleAnalyticsPath("/reviews/?email=private#name"), "/reviews");
     assert.equal(sanitizeGoogleAnalyticsPath("/meet-dr-narodovich"), "/team");
     assert.equal(sanitizeGoogleAnalyticsPath("/new-patients"), "/new-patients");
@@ -43,6 +43,12 @@ describe("Google Analytics measurement boundary", () => {
     assert.equal(page?.page_location, "https://sacramentodentalmedicine.com/care");
     assert.equal(page?.page_title, "Care information | Sacramento Dental Medicine");
     assert.equal(page?.content_group, "Care information");
+  });
+  it("reports /schedule as /schedule, not the retired /conversion path", () => {
+    const page = googleAnalyticsPageParameters("/schedule", "");
+    assert.equal(page?.page_path, "/schedule");
+    assert.equal(page?.page_location, "https://sacramentodentalmedicine.com/schedule");
+    assert.equal(page?.content_group, "Schedule");
   });
 });
 

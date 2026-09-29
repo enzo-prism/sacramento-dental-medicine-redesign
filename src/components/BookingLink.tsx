@@ -22,7 +22,7 @@ export function BookingLink({
   ...props
 }: BookingLinkProps) {
   function handleClick(event: MouseEvent<HTMLAnchorElement>) {
-    trackBookOnlineClick(location, contact.bookingHref);
+    trackBookOnlineClick(location);
     onClick?.(event);
   }
 

@@ -11,14 +11,14 @@ function analyticsPath(pathname: string) {
   const normalized = normalizedPathname(pathname);
 
   if (PRIVATE_PATHS.has(normalized)) return null;
-  if (normalized === "/schedule") return "/conversion";
+  if (normalized === "/schedule") return "/schedule";
   if (normalized === "/reviews") return "/reviews";
   return "/";
 }
 
 /**
- * Keeps Vercel Web Analytics useful without retaining query strings or a
- * visitor's exact appointment path. Never add form values, treatment reasons,
+ * Keeps Vercel Web Analytics useful without retaining query strings or
+ * fragments. Never add form values, treatment reasons,
  * contact details, or attribution parameters to this event.
  */
 export function sanitizeVercelAnalyticsEvent(

@@ -50,7 +50,7 @@ export function Footer() {
                 <li key={item.href}>
                   {isExternalHref(item.href) ? (
                     <BookingLink
-                      location="footer_nav"
+                      location="footer"
                       className="inline-block py-2 text-white/70 transition hover:text-white"
                     >
                       {item.label}

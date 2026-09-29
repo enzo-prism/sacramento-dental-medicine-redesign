@@ -93,14 +93,13 @@ describe("Jarvis booking cutover", () => {
 
     for (const required of [
       "header",
-      "header_nav",
-      "header_menu",
-      "header_menu_nav",
+      "header_mobile",
       "hero",
       "mobile_cta",
       "footer",
-      "footer_nav",
       "schedule_page",
+      "reviews",
+      "service_page",
     ]) {
       assert.ok(locations.has(required), `missing BookingLink location ${required}`);
     }

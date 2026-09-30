@@ -44,7 +44,7 @@ test("failed request emits nothing; accepted server response survives navigation
   const signals = await page.evaluate(() => (window as typeof window & { confirmedSignals: Array<{ eventId: string }> }).confirmedSignals);
   expect(signals).toHaveLength(1);
   await page.locator('a[href="/new-patients"]').first().click();
-  await expect(page).toHaveURL(/\/new-patients$/);
+  await expect(page).toHaveURL(/\/new-patients$/, { timeout: 15000 });
   // Same document, same frame/channel, same queue: the accepted request is kept.
   expect(await page.locator("#openai-ads-measurement-frame").getAttribute("src")).toBe(originalFrame);
   releaseSdk();

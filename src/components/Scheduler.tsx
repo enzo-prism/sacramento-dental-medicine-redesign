@@ -17,7 +17,7 @@ import {
   Sunset,
   Zap,
 } from "lucide-react";
-import { OPENAI_LEAD_EVENT, UUID_V4 } from "@/lib/openai-measurement";
+import { OPENAI_LEAD_EVENT, UUID_V4, measurementClickSnapshot, measurementAllowed, measurementConsentEpoch } from "@/lib/openai-measurement";
 import { requestAppointment } from "@/app/actions";
 import { LeadAttributionHiddenFields } from "@/components/LeadAttributionFields";
 import {
@@ -207,11 +207,11 @@ function SchedulerForm({ onReset, focusOnMount }: { onReset: () => void; focusOn
   useEffect(() => {
     if (state.ok) successRef.current?.focus();
     const eventId = state.measurementEventId;
-    if (state.ok && eventId && UUID_V4.test(eventId) && !measured.current.has(eventId)) {
+    if (state.ok && state.measurementConsentEpoch && state.measurementConsentEpoch === measurementConsentEpoch() && eventId && UUID_V4.test(eventId) && !measured.current.has(eventId)) {
       measured.current.add(eventId);
-      window.dispatchEvent(new CustomEvent(OPENAI_LEAD_EVENT, { detail: { eventId } }));
+      window.dispatchEvent(new CustomEvent(OPENAI_LEAD_EVENT, { detail: { eventId, clickReference: state.measurementClickReference ?? "", consentEpoch: state.measurementConsentEpoch } }));
     }
-  }, [state.ok, state.measurementEventId]);
+  }, [state.ok, state.measurementEventId, state.measurementClickReference, state.measurementConsentEpoch]);
 
   useEffect(() => {
     if (state.ok || !state.message) return;
@@ -342,6 +342,20 @@ function SchedulerForm({ onReset, focusOnMount }: { onReset: () => void; focusOn
         className="relative"
         aria-busy={pending}
         onSubmit={(event) => {
+          // Capture consented ad attribution for this request, not a later
+          // mutable global reference at confirmation or SDK flush time.
+          const snapshot = measurementClickSnapshot();
+          const requestFields: Record<string, string> = {
+            _openai_click_reference: snapshot?.reference ?? "",
+            _openai_click_captured_at: snapshot ? String(snapshot.capturedAt) : "",
+            _openai_measurement_consent: measurementAllowed() ? "granted" : "denied",
+            _openai_consent_epoch: measurementConsentEpoch(),
+            _openai_submitted_at: String(Date.now()),
+          };
+          for (const [field, value] of Object.entries(requestFields)) {
+            const input = event.currentTarget.querySelector<HTMLInputElement>(`input[name="${field}"]`);
+            if (input) input.value = value;
+          }
           const attribution = refreshAttributionSnapshot();
           const form = event.currentTarget;
           for (const field of ATTRIBUTION_FIELD_NAMES) {
@@ -367,6 +381,11 @@ function SchedulerForm({ onReset, focusOnMount }: { onReset: () => void; focusOn
           }
         />
         <LeadAttributionHiddenFields />
+        <input type="hidden" name="_openai_click_reference" defaultValue="" />
+        <input type="hidden" name="_openai_click_captured_at" defaultValue="" />
+        <input type="hidden" name="_openai_measurement_consent" defaultValue="" />
+        <input type="hidden" name="_openai_consent_epoch" defaultValue="" />
+        <input type="hidden" name="_openai_submitted_at" defaultValue="" />
 
         <fieldset disabled={pending} className="contents">
         <div className="px-5 pb-5 pt-6 md:px-6 md:pb-6">

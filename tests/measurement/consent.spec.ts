@@ -23,7 +23,7 @@ test("SDK stays isolated and opt-in; only accepted UUID signals produce deduplic
   await expect(page.getByRole("button", { name: "Allow", exact: true })).toBeVisible();
   await expect(page.locator("#openai-ads-measurement-frame")).toHaveCount(0);
   await page.getByRole("button", { name: "Decline", exact: true }).click();
-  await page.evaluate(eventId => window.dispatchEvent(new CustomEvent("sdm:openai-lead", { detail: { eventId } })), id);
+  await page.evaluate(eventId => window.dispatchEvent(new CustomEvent("sdm:openai-lead", { detail: { eventId, clickReference: "original-click-reference", consentEpoch: localStorage.getItem("sdm_openai_measurement_epoch_v1") } })), id);
   await expect(page.locator("#openai-ads-measurement-frame")).toHaveCount(0);
   await page.goto("/privacy-practices");
   await page.getByRole("button", { name: "Advertising measurement settings" }).click();
@@ -36,7 +36,7 @@ test("SDK stays isolated and opt-in; only accepted UUID signals produce deduplic
     const form = document.createElement("form");
     form.innerHTML = '<input name="email" value="patient-sentinel@example.test"><input name="notes" value="medical-sentinel">';
     document.body.appendChild(form);
-    for (const value of ["invalid", eventId, eventId]) window.dispatchEvent(new CustomEvent("sdm:openai-lead", { detail: { eventId: value } }));
+    for (const value of ["invalid", eventId, eventId]) window.dispatchEvent(new CustomEvent("sdm:openai-lead", { detail: { eventId: value, clickReference: "original-click-reference", consentEpoch: localStorage.getItem("sdm_openai_measurement_epoch_v1") } }));
   }, id);
   await expect.poll(() => JSON.stringify(requests).includes(id)).toBe(true);
   const payloads = requests as Array<{ oppref?: string; user?: unknown; events?: Array<{ type: string; id: string; opt_out?: boolean }> }>;

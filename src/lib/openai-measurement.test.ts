@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { acceptedMeasurementEventId, isMeasurementTest, validClickReference, parseMeasurementClickRecord, OPENAI_CLICK_LIFETIME_MS } from "./openai-measurement.ts";
+import { acceptedMeasurementReference, acceptedMeasurementEventId, isMeasurementTest, validClickReference, parseMeasurementClickRecord, OPENAI_CLICK_LIFETIME_MS } from "./openai-measurement.ts";
 
 const id = "b65ee13a-1299-4e3a-9ccd-2cc692ae4f93";
 describe("accepted appointment measurement", () => {
@@ -41,4 +41,21 @@ describe("return-visit attribution expiry", () => {
       assert.equal(parseMeasurementClickRecord(JSON.stringify(value), now), null);
     }
   });
+});
+
+const snapshotTime = Date.parse("2026-09-01T12:00:00Z");
+it("validates the immutable request reference at the server boundary", () => {
+  assert.equal(acceptedMeasurementReference("original-ref", String(snapshotTime), "granted", String(snapshotTime + 1), snapshotTime + 1), "original-ref");
+  for (const [reference, timestamp, consent] of [
+    ["original-ref", String(snapshotTime), "denied"],
+    ["original-ref", String(snapshotTime + 2), "granted"],
+    ["original-ref", String(snapshotTime - OPENAI_CLICK_LIFETIME_MS), "granted"],
+    ["original-ref", "", "granted"], ["has space", String(snapshotTime), "granted"],
+  ]) assert.equal(acceptedMeasurementReference(reference, timestamp, consent, String(snapshotTime + 1), snapshotTime + 1), "");
+});
+
+it("retains a reference eligible at submission even when acceptance crosses its expiry", () => {
+  const submittedAt = snapshotTime + OPENAI_CLICK_LIFETIME_MS - 1;
+  assert.equal(acceptedMeasurementReference("original-ref", String(snapshotTime), "granted", String(submittedAt), submittedAt + 10000), "original-ref");
+  assert.equal(acceptedMeasurementReference("original-ref", String(snapshotTime), "granted", String(submittedAt + 1), submittedAt + 10000), "");
 });

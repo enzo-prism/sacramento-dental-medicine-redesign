@@ -25,7 +25,7 @@ test("a transient collector network failure retries the same lead UUID and origi
   await page.goto("/?oppref=original-retry-click");
   await page.getByRole("button", { name: "Allow", exact: true }).click();
   await expect(page.locator("#openai-ads-measurement-frame")).toHaveCount(1);
-  await page.evaluate(eventId => window.dispatchEvent(new CustomEvent("sdm:openai-lead", { detail: { eventId } })), id);
+  await page.evaluate(eventId => window.dispatchEvent(new CustomEvent("sdm:openai-lead", { detail: { eventId, clickReference: "original-retry-click", consentEpoch: localStorage.getItem("sdm_openai_measurement_epoch_v1") } })), id);
   await expect.poll(() => delivered.length, { timeout: 20000 }).toBe(1);
   expect(attempts.length).toBeGreaterThanOrEqual(2);
   expect(attempts.every(payload => payload.oppref === "original-retry-click")).toBe(true);

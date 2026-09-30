@@ -1,5 +1,6 @@
 /** This module never exposes appointment fields to the vendor SDK. */
 export const OPENAI_CONSENT_KEY = "sdm_openai_measurement_consent_v1";
+export const OPENAI_CONSENT_EPOCH_KEY = "sdm_openai_measurement_epoch_v1";
 export const OPENAI_CONSENT_EVENT = "sdm:openai-consent";
 export const OPENAI_SETTINGS_EVENT = "sdm:openai-settings";
 export const OPENAI_LEAD_EVENT = "sdm:openai-lead";
@@ -37,19 +38,32 @@ export function parseMeasurementClickRecord(raw: string | null, now = Date.now()
 
 let memoryChoice: MeasurementChoice = "";
 let storageUnavailable = false;
+let memoryEpoch = "";
 let memoryClick: MeasurementClickRecord | null = null;
+let memoryClickPersisted = false;
 let lastUrlReference = "";
 // A failed storage delete must never restore an old reference in this document.
 let clicksRevoked = false;
+export function consumeMeasurementClickUrl() {
+  const url = new URL(window.location.href);
+  if (!url.searchParams.has("oppref")) return;
+  url.searchParams.delete("oppref");
+  // Preserve Next's router state and every unrelated query parameter/hash.
+  window.history.replaceState(window.history.state, "", `${url.pathname}${url.search}${url.hash}`);
+}
 function clearPersistedClick() {
   try { window.localStorage.removeItem(OPENAI_CLICK_KEY); } catch { /* Unavailable storage. */ }
   try { window.sessionStorage.removeItem(OPENAI_CLICK_KEY); } catch { /* Remove old session-only records too. */ }
 }
 export function purgeMeasurementClick() {
+  memoryEpoch = "";
+  try { window.localStorage.removeItem(OPENAI_CONSENT_EPOCH_KEY); } catch { /* In-memory consent still applies. */ }
   memoryClick = null;
+  memoryClickPersisted = false;
   lastUrlReference = "";
   clicksRevoked = true;
   clearPersistedClick();
+  consumeMeasurementClickUrl();
 }
 function privacyRestricted() {
   return measurementChoice() === "denied" || navigator.doNotTrack === "1"
@@ -59,41 +73,107 @@ export function measurementClickReference() {
   if (privacyRestricted()) { purgeMeasurementClick(); return ""; }
   const now = Date.now();
   const current = validClickReference(new URLSearchParams(window.location.search).get("oppref"));
-  // A new actual URL identifier wins. Looking up the same memory/stored record
-  // does not extend its timestamp. No reference is written before permission.
+  const allowed = measurementAllowed();
+  let stored: MeasurementClickRecord | null = null;
+  let rejectedStoredReference = "";
+  let storeReadable = false;
+  if (allowed && !clicksRevoked) {
+    try {
+      const raw = window.localStorage.getItem(OPENAI_CLICK_KEY);
+      storeReadable = true;
+      stored = parseMeasurementClickRecord(raw, now);
+      if (!stored && raw) {
+        // A known expired/malformed click cannot be renewed by its stale URL.
+        const known = JSON.parse(raw) as { reference?: unknown } | null;
+        rejectedStoredReference = validClickReference(known?.reference);
+      }
+    } catch { /* Keep current-document memory when storage cannot be read. */ }
+  }
+  if (current && current === rejectedStoredReference) {
+    memoryClick = null;
+    memoryClickPersisted = false;
+    lastUrlReference = current;
+    clearPersistedClick();
+    consumeMeasurementClickUrl();
+    return "";
+  }
   if (current && current !== lastUrlReference) {
     lastUrlReference = current;
-    memoryClick = { version: 1, reference: current, capturedAt: now };
+    memoryClick = stored?.reference === current ? stored : { version: 1, reference: current, capturedAt: now };
+    memoryClickPersisted = stored?.reference === current;
     clicksRevoked = false;
+  } else if (allowed && storeReadable) {
+    // Shared first-party state wins on reads. A tab must not rewrite an older
+    // memory reference over another tab's new click or deletion/expiry.
+    memoryClick = stored ?? (memoryClickPersisted ? null : memoryClick);
+    memoryClickPersisted = Boolean(stored);
   }
-  if (memoryClick && !parseMeasurementClickRecord(JSON.stringify(memoryClick), now)) memoryClick = null;
-  if (!measurementAllowed()) { clearPersistedClick(); return memoryClick?.reference ?? ""; }
-  if (!memoryClick && !clicksRevoked) {
-    try { memoryClick = parseMeasurementClickRecord(window.localStorage.getItem(OPENAI_CLICK_KEY), now); }
-    catch { /* In-memory capture works when storage is blocked. */ }
+  if (memoryClick && !parseMeasurementClickRecord(JSON.stringify(memoryClick), now)) {
+    memoryClick = null;
+    memoryClickPersisted = false;
   }
+  if (!allowed) { clearPersistedClick(); return memoryClick?.reference ?? ""; }
   if (memoryClick) {
-    try { window.localStorage.setItem(OPENAI_CLICK_KEY, JSON.stringify(memoryClick)); }
-    catch { /* Keep the exact in-memory record without extending capture time. */ }
-  } else clearPersistedClick();
+    if (!memoryClickPersisted) {
+      try {
+        window.localStorage.setItem(OPENAI_CLICK_KEY, JSON.stringify(memoryClick));
+        memoryClickPersisted = true;
+      } catch { /* Preserve exact memory capture time; never extend it. */ }
+    }
+    consumeMeasurementClickUrl();
+  } else {
+    clearPersistedClick();
+    if (rejectedStoredReference) consumeMeasurementClickUrl();
+  }
   return memoryClick?.reference ?? "";
+}
+export function measurementClickSnapshot(): MeasurementClickRecord | null {
+  measurementClickReference();
+  return measurementAllowed() && memoryClick ? { ...memoryClick } : null;
+}
+export function acceptedMeasurementReference(reference: string, capturedAt: string, permission: string, submittedAt: string, now = Date.now()) {
+  const requestedAt = Number(submittedAt);
+  if (permission !== "granted" || !Number.isFinite(requestedAt) || requestedAt <= 0 || requestedAt > now + 60000) return "";
+  // Eligibility belongs to the request boundary, even when acceptance is delayed.
+  return parseMeasurementClickRecord(JSON.stringify({ version: 1, reference, capturedAt: Number(capturedAt) }), requestedAt)?.reference ?? "";
+}
+export function measurementConsentEpoch() {
+  if (!measurementAllowed()) return "";
+  if (storageUnavailable) return memoryEpoch;
+  try {
+    const epoch = window.localStorage.getItem(OPENAI_CONSENT_EPOCH_KEY) ?? "";
+    return UUID_V4.test(epoch) ? epoch : "";
+  } catch { return memoryEpoch; }
 }
 export function measurementChoice(): MeasurementChoice {
   if (typeof window === "undefined") return "";
   if (storageUnavailable) return memoryChoice;
   try {
     const value = window.localStorage.getItem(OPENAI_CONSENT_KEY);
+    // A stale readable grant is unsafe when this store cannot record withdrawal.
+    if (value === "granted") window.localStorage.setItem(OPENAI_CONSENT_KEY, value);
     return value === "granted" || value === "denied" ? value : "";
-  } catch { return memoryChoice; }
+  } catch { storageUnavailable = true; return memoryChoice; }
 }
 export function setMeasurementChoice(choice: Exclude<MeasurementChoice, "">) {
   memoryChoice = choice;
-  try { window.localStorage.setItem(OPENAI_CONSENT_KEY, choice); storageUnavailable = false; }
-  catch { storageUnavailable = true; }
+  memoryEpoch = choice === "granted" ? crypto.randomUUID() : "";
+  try {
+    if (memoryEpoch) window.localStorage.setItem(OPENAI_CONSENT_EPOCH_KEY, memoryEpoch);
+    else window.localStorage.removeItem(OPENAI_CONSENT_EPOCH_KEY);
+    window.localStorage.setItem(OPENAI_CONSENT_KEY, choice); storageUnavailable = false;
+  }
+  catch {
+    storageUnavailable = true;
+    if (choice === "denied") {
+      try { window.localStorage.removeItem(OPENAI_CONSENT_KEY); } catch { /* Current-document memory denial still wins. */ }
+      try { window.localStorage.removeItem(OPENAI_CONSENT_EPOCH_KEY); } catch { /* Best effort. */ }
+    }
+  }
   if (choice === "denied") purgeMeasurementClick();
   window.dispatchEvent(new Event(OPENAI_CONSENT_EVENT));
 }
-export function resetMemoryChoice() { storageUnavailable = false; memoryChoice = ""; }
+export function resetMemoryChoice() { storageUnavailable = false; memoryChoice = ""; memoryEpoch = ""; }
 export function measurementAllowed() {
   if (privacyRestricted()) { purgeMeasurementClick(); return false; }
   return measurementChoice() === "granted";

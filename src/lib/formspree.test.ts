@@ -69,6 +69,14 @@ describe("buildAppointmentFormspreePayload", () => {
   });
 });
 
+describe("measurement reconciliation", () => {
+  it("retains the random event ID privately without including appointment content in vendor events", () => {
+    const payload = buildAppointmentFormspreePayload(lead({ measurementEventId: "b65ee13a-1299-4e3a-9ccd-2cc692ae4f93" }));
+    assert.equal(payload.measurement_event_id, "b65ee13a-1299-4e3a-9ccd-2cc692ae4f93");
+    assert.equal(buildAppointmentFormspreePayload(lead()).measurement_event_id, undefined);
+  });
+});
+
 describe("buildFormspreeRequestInit", () => {
   it("sends JSON with the production referrer used by domain restriction", () => {
     const init = buildFormspreeRequestInit(

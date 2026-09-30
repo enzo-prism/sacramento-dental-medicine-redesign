@@ -25,6 +25,7 @@ import {
   resolveFormspreeEndpoint,
   type AppointmentLead,
 } from "@/lib/formspree";
+import { acceptedMeasurementEventId, isMeasurementTest } from "@/lib/openai-measurement";
 import { siteUrl } from "@/lib/site-url";
 
 const WEBHOOK_TIMEOUT_MS = 4_000;
@@ -111,7 +112,11 @@ export async function requestAppointment(
     };
   }
 
+  const eventId = crypto.randomUUID();
+  const isTest = isMeasurementTest(name, email, field(formData, "_codex_test"));
+  const measurementEventId = acceptedMeasurementEventId(true, isTest, eventId);
   const lead: AppointmentLead = {
+    measurementEventId,
     name,
     phone: phone ? formatUsPhone(phone) : "",
     email,
@@ -150,6 +155,7 @@ export async function requestAppointment(
 
   return {
     ok: true,
+    measurementEventId,
     message:
       "Your request was sent. We'll reach out during office hours to confirm a time.",
     errors: {},

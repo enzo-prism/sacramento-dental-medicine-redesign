@@ -17,6 +17,7 @@ import {
   Sunset,
   Zap,
 } from "lucide-react";
+import { OPENAI_LEAD_EVENT, UUID_V4 } from "@/lib/openai-measurement";
 import { requestAppointment } from "@/app/actions";
 import { LeadAttributionHiddenFields } from "@/components/LeadAttributionFields";
 import {
@@ -182,6 +183,7 @@ function SchedulerForm({ onReset, focusOnMount }: { onReset: () => void; focusOn
   const headingRef = useRef<HTMLHeadingElement>(null);
   const successRef = useRef<HTMLHeadingElement>(null);
   const firstRender = useRef(true);
+  const measured = useRef(new Set<string>());
 
   useEffect(() => {
     const refreshDays = () => setDays(buildDays(8));
@@ -204,7 +206,12 @@ function SchedulerForm({ onReset, focusOnMount }: { onReset: () => void; focusOn
 
   useEffect(() => {
     if (state.ok) successRef.current?.focus();
-  }, [state.ok]);
+    const eventId = state.measurementEventId;
+    if (state.ok && eventId && UUID_V4.test(eventId) && !measured.current.has(eventId)) {
+      measured.current.add(eventId);
+      window.dispatchEvent(new CustomEvent(OPENAI_LEAD_EVENT, { detail: { eventId } }));
+    }
+  }, [state.ok, state.measurementEventId]);
 
   useEffect(() => {
     if (state.ok || !state.message) return;

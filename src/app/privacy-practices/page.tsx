@@ -1,3 +1,4 @@
+import { OpenAIMeasurementSettings } from "@/components/OpenAIMeasurementChoice";
 import type { Metadata } from "next";
 import { ArrowUpRight, FileText } from "lucide-react";
 import { Footer } from "@/components/sections/Footer";
@@ -45,6 +46,11 @@ export default function PrivacyPracticesPage() {
                 Open privacy notice (PDF)
                 <ArrowUpRight aria-hidden="true" className="size-4" />
               </a>
+              <h2 className="mt-10 font-display text-2xl font-semibold">Website advertising measurement</h2>
+              <p className="mt-4 leading-8 text-ink-soft">
+                If you allow optional advertising measurement, OpenAI Ads receives a random event ID when the website accepts an appointment request, and an ad click reference when available. With your permission, this website stores the ad click reference and its original capture time in first-party browser storage for up to 30 days, so a later visit can be matched to the original ad click. Reading the stored reference does not extend that period; a new actual ad click replaces it. Withdrawal, Global Privacy Control or Do Not Track clears this stored reference. The measurement service also receives technical browser and network information. The OpenAI script runs in an isolated frame and cannot read your name, contact details, appointment selections or notes. These fields are not supplied to OpenAI. This signal measures a request, not a confirmed appointment. Declining does not affect scheduling. You can withdraw your choice here; Global Privacy Control and Do Not Track also prevent this measurement.
+              </p>
+              <OpenAIMeasurementSettings />
             </div>
           </div>
         </section>

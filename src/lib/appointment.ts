@@ -3,6 +3,7 @@
 
 export type AppointmentState = {
   ok: boolean;
+  measurementEventId?: string;
   message: string;
   errors: Partial<Record<"name" | "phone" | "email" | "notes" | "privacy", string>>;
 };

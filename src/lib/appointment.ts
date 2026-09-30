@@ -3,6 +3,9 @@
 
 export type AppointmentState = {
   ok: boolean;
+  measurementEventId?: string;
+  measurementClickReference?: string;
+  measurementConsentEpoch?: string;
   message: string;
   errors: Partial<Record<"name" | "phone" | "email" | "notes" | "privacy", string>>;
 };

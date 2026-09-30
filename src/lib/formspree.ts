@@ -22,6 +22,7 @@ export type AppointmentLead = {
   time: string;
   notes: string;
   receivedAt: string;
+  measurementEventId?: string;
   attribution: FirstTouchAttribution;
 };
 
@@ -62,6 +63,7 @@ export function buildAppointmentFormspreePayload(lead: AppointmentLead) {
       .filter(Boolean)
       .join("\n"),
   };
+  if (lead.measurementEventId) payload.measurement_event_id = lead.measurementEventId;
   if (lead.phone) payload.phone = lead.phone;
   if (lead.email) payload.email = lead.email;
   if (lead.notes) payload.notes = lead.notes;

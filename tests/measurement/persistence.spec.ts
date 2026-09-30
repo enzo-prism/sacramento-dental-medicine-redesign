@@ -97,11 +97,18 @@ test("withdrawal deletes the persistent reference, and a later untagged grant do
   await expect(page.locator("[data-openai-measurement-frame]")).toHaveCount(1);
   await page.goto("/privacy-practices");
   await page.getByRole("button", { name: "Advertising measurement settings" }).click();
+  await page.evaluate(() => Object.assign(window, { retiredMeasurementFrame: document.querySelector("[data-openai-measurement-frame]") }));
   await page.getByRole("button", { name: "Decline", exact: true }).click();
   expect(await page.evaluate(key => localStorage.getItem(key), CLICK_KEY)).toBeNull();
   await expect(page.locator("[data-openai-measurement-frame]")).toHaveCount(0);
   await page.getByRole("button", { name: "Advertising measurement settings" }).click();
   await page.getByRole("button", { name: "Allow", exact: true }).click();
+  await expect(page.locator("[data-openai-measurement-frame]")).toHaveCount(1);
+  expect(await page.locator("[data-openai-measurement-frame]").getAttribute("src")).not.toContain("oppref=");
+  // An already queued browser callback from the retired SDK must not recreate
+  // an unowned frame after withdrawal and a different grant epoch.
+  await page.evaluate(() => (window as typeof window & { retiredMeasurementFrame: HTMLIFrameElement }).retiredMeasurementFrame.dispatchEvent(new Event("error")));
+  await page.waitForTimeout(1200); // Real first retry backoff is one second.
   await expect(page.locator("[data-openai-measurement-frame]")).toHaveCount(1);
   expect(await page.locator("[data-openai-measurement-frame]").getAttribute("src")).not.toContain("oppref=");
 });

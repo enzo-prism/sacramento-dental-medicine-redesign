@@ -73,7 +73,7 @@ export const OpenAIAdsMeasurement = () => {
       if (allowed() && transport.attempts < 3) transport.retryTimer = window.setTimeout(() => initialize(transport), transport.attempts * 1000);
     };
     function initialize(transport: Transport) {
-      if (!allowed() || transport.frame || transport.attempts >= 3) return;
+      if (!allowed() || transports.get(transport.reference) !== transport || transport.frame || transport.attempts >= 3) return;
       transport.attempts++;
       transport.channel = crypto.randomUUID();
       const url = new URL("/measurement/openai.html", window.location.origin);

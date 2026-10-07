@@ -3,6 +3,7 @@ import { ArrowUpRight, BadgeCheck, Check, ClipboardList, Users, Wallet } from "l
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { SectionLabel } from "@/components/SectionLabel";
 import { FAQ } from "@/components/sections/FAQ";
+import { BookingLink } from "@/components/BookingLink";
 import { contact, newPatient } from "@/data/site";
 import { OfficeEmail } from "@/components/OfficeEmail";
 
@@ -47,10 +48,10 @@ export function NewPatients() {
               {newPatient.firstVisit}
             </p>
 
-            <a href={contact.bookingHref} className="btn-text mt-6 min-h-11 gap-2">
+            <BookingLink location="new_patients" className="btn-text mt-6 min-h-11 gap-2">
               Book your first visit
               <ArrowUpRight className="size-4 shrink-0" aria-hidden="true" />
-            </a>
+            </BookingLink>
             <Link href="/new-patients" className="btn-text mt-2 flex min-h-11 gap-2">
               <span>First-visit, insurance and payment questions</span>
               <ArrowUpRight className="size-4 shrink-0" aria-hidden="true" />

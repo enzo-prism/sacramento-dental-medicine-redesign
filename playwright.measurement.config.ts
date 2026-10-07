@@ -1,4 +1,6 @@
 import { defineConfig } from "@playwright/test";
+// Form-submission specs (submission.spec.ts, request-snapshots.spec.ts) were
+// removed: Jarvis has no on-site request-success path to fire lead_created.
 export default defineConfig({
   testDir: "./tests/measurement", workers: 1, retries: 0,
   use: { baseURL: "http://127.0.0.1:4191", browserName: "chromium", contextOptions: { reducedMotion: "reduce" } },

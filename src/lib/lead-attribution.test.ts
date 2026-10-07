@@ -101,7 +101,7 @@ describe("readAttributionFromFormData / payload", () => {
     assert.equal(attribution.utm_content, "1234567890");
 
     const payload = applyAttributionToPayload(
-      { name: "Pat", subject: "New appointment request from Pat" },
+      { name: "Pat", subject: "Lead from Pat" },
       attribution,
     );
     assert.equal(payload.ad_id, "1234567890");
@@ -109,7 +109,7 @@ describe("readAttributionFromFormData / payload", () => {
     assert.equal(payload.gclid, undefined);
   });
 
-  it("omits empty attribution keys from the Formspree payload", () => {
+  it("omits empty attribution keys from the payload", () => {
     const payload = applyAttributionToPayload({ name: "Pat" }, emptyAttribution());
     assert.deepEqual(payload, { name: "Pat" });
     assert.deepEqual(formatAttributionMessageLines(emptyAttribution()), []);

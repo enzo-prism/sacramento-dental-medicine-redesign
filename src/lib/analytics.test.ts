@@ -16,7 +16,7 @@ describe("sanitizeVercelAnalyticsEvent", () => {
     );
   });
 
-  it("groups the appointment route under a non-clinical conversion path", () => {
+  it("reports the schedule route as /schedule without query strings", () => {
     assert.deepEqual(
       sanitizeVercelAnalyticsEvent({
         type: "pageview",
@@ -24,7 +24,7 @@ describe("sanitizeVercelAnalyticsEvent", () => {
       }),
       {
         type: "pageview",
-        url: "https://sacramentodentalmedicine.com/conversion",
+        url: "https://sacramentodentalmedicine.com/schedule",
       },
     );
   });

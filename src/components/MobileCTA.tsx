@@ -1,8 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import { CalendarDays, Phone } from "lucide-react";
+import { BookingLink } from "@/components/BookingLink";
 import { contact } from "@/data/site";
 
 export function MobileCTA() {
@@ -36,10 +36,10 @@ export function MobileCTA() {
         <Phone className="size-4" />
         Call
       </a>
-      <Link href={contact.bookingHref} className="mobile-cta-primary">
+      <BookingLink location="mobile_cta" className="mobile-cta-primary">
         <CalendarDays className="size-4" />
         Book online
-      </Link>
+      </BookingLink>
     </nav>
   );
 }

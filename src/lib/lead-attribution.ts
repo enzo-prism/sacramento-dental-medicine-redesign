@@ -1,5 +1,5 @@
-// First-touch ad tags for appointment leads. Framework-neutral so capture,
-// hidden fields, and Formspree delivery share one parse/merge contract.
+// First-touch ad tags for public-page measurement. Framework-neutral so
+// capture and payload helpers share one parse/merge contract.
 
 export const UTM_FIELDS = [
   "utm_source",

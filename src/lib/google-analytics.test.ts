@@ -17,7 +17,7 @@ describe("Google Analytics measurement boundary", () => {
     for (const host of ["localhost", "sacramento-dental-medicine-redesign.vercel.app", "sacramentodentalmedicine.com.evil.com"]) assert.equal(isGoogleAnalyticsProductionHostname(host), false);
   });
   it("distinguishes public page groups without retaining treatment names", () => {
-    assert.equal(sanitizeGoogleAnalyticsPath("/schedule/"), "/conversion");
+    assert.equal(sanitizeGoogleAnalyticsPath("/schedule/"), "/schedule");
     assert.equal(sanitizeGoogleAnalyticsPath("/reviews/?email=private#name"), "/reviews");
     assert.equal(sanitizeGoogleAnalyticsPath("/meet-dr-narodovich"), "/team");
     assert.equal(sanitizeGoogleAnalyticsPath("/new-patients"), "/new-patients");
@@ -36,6 +36,7 @@ describe("Google Analytics measurement boundary", () => {
   });
   it("maps approved source/medium values and drops all free-form attribution", () => {
     assert.deepEqual(safeGoogleAnalyticsAcquisition("?utm_source=FB&utm_medium=paid-social&utm_campaign=private&utm_content=private&utm_term=private&gclid=private", ""), {page_referrer:"", campaign_source:"facebook", campaign_medium:"paid_social"});
+    assert.deepEqual(safeGoogleAnalyticsAcquisition("?utm_source=chatgpt&utm_medium=paid", ""), {page_referrer:"", campaign_source:"chatgpt.com", campaign_medium:"paid"});
     for (const search of ["?utm_source=patient@example.com&utm_medium=cpc", "?utm_source=google&utm_medium=private", "?utm_source=constructor&utm_medium=organic", "?utm_source=google"]) assert.deepEqual(safeGoogleAnalyticsAcquisition(search, ""), {page_referrer:""});
   });
   it("uses fixed safe titles and content groups instead of document titles", () => {
@@ -43,6 +44,12 @@ describe("Google Analytics measurement boundary", () => {
     assert.equal(page?.page_location, "https://sacramentodentalmedicine.com/care");
     assert.equal(page?.page_title, "Care information | Sacramento Dental Medicine");
     assert.equal(page?.content_group, "Care information");
+  });
+  it("reports /schedule as /schedule, not the retired /conversion path", () => {
+    const page = googleAnalyticsPageParameters("/schedule", "");
+    assert.equal(page?.page_path, "/schedule");
+    assert.equal(page?.page_location, "https://sacramentodentalmedicine.com/schedule");
+    assert.equal(page?.content_group, "Schedule");
   });
 });
 

@@ -27,7 +27,8 @@ test("consent-gated original click survives a new tab, expires on time, and is r
   const original = await page.evaluate(key => JSON.parse(localStorage.getItem(key)!), CLICK_KEY);
   expect(original.reference).toBe("original-click_123");
   expect(new URL(page.url()).searchParams.has("oppref")).toBe(false);
-  await page.locator('a[href="/schedule"]').first().click();
+  // Booking CTAs now open Jarvis; /schedule is still a public page for return-visit persistence.
+  await page.goto("/schedule");
   await expect(page).toHaveURL(/\/schedule$/);
   expect(await page.evaluate(key => JSON.parse(localStorage.getItem(key)!), CLICK_KEY)).toEqual(original);
   // Simulate a previously unconsumed landing URL, then perform a full reload.

@@ -1,5 +1,6 @@
 import Image from "next/image";
-import { contact, imagery, philosophy } from "@/data/site";
+import { BookingLink } from "@/components/BookingLink";
+import { imagery, philosophy } from "@/data/site";
 import { ScrollReveal } from "@/components/ScrollReveal";
 
 export function Intro() {
@@ -38,9 +39,9 @@ export function Intro() {
           </ScrollReveal>
 
           <ScrollReveal delay={120} className="mt-10 flex flex-wrap items-center gap-6">
-            <a href={contact.bookingHref} className="btn-text">
+            <BookingLink location="intro" className="btn-text">
               Become a patient
-            </a>
+            </BookingLink>
             <a href="#doctors" className="btn-text">
               Meet the doctors
             </a>

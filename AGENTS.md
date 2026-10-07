@@ -63,6 +63,53 @@ Optional `LEAD_WEBHOOK_URL` in `.env.local` / Vercel / Cloud Agent secrets is a
 second hop after Formspree succeeds. Do not claim the front desk received a lead
 unless Formspree accepted the POST.
 
+## Seasonal layer (October)
+
+Small, optional delight on top of the design system, never a re-theme. The
+current layer is Halloween (`halloween-2026`, October 1–31 on the practice's
+America/Los_Angeles calendar), configured in `src/lib/seasonal.ts`.
+
+- **Gating:** an inline `<head>` script (`SeasonScript`,
+  `src/components/Seasonal.tsx`) sets `<html data-sdm-season="halloween">`
+  before first paint while the season is in range, so it switches on and off
+  without a redeploy and never flashes or shifts layout. Every seasonal piece
+  carries `.sdm-season-only` (hidden by default), and all seasonal CSS (end of
+  `globals.css`) is keyed off that attribute. Set `activeSeason` to `null` to
+  ship no script at all. After October 31 the layer is inert on its own;
+  set `activeSeason` to `null` or point it at next year's theme.
+- **404 trap:** Next serves unmatched URLs as a client-rendered error shell,
+  so the server head script never runs there. `SeasonRuntime`
+  (`src/components/SeasonalClient.tsx`, mounted in the root layout) re-runs the
+  same script once when the attribute is missing, then swaps the favicon.
+- **Preview / opt-out:** `?season=halloween` previews it for the rest of the
+  tab session (even out of season), `?season=off` keeps it off in that
+  browser, `?season=auto` resets.
+- **Inventory:** Home hero gets a "Happy Halloween from Antelope" chip, a
+  candlelight underline that draws itself under "dread.", a harvest moon
+  rising behind the photo, three bats that lift off the moon once per session
+  (`HarvestBats`), and a ghost-tooth peeking out from behind the photo
+  (desktop). The Home scheduling night band gets a crescent moon and stars
+  that twinkle when scrolled into view. The footer gets a patch of
+  tooth-grin jack-o'-lanterns with a greeting (`FooterPumpkins`). The favicon
+  becomes a tooth-grin pumpkin (`public/seasonal/halloween-2026/icon.svg`),
+  and the 404 page shows a ghost-tooth in front of a harvest moon. Nothing
+  else changes.
+- **Never decorate** CTAs, the phone number, ratings or reviews, the
+  scheduler or `/schedule`, the Emergency band, `/dental-emergencies`,
+  `/privacy-practices`, or the mobile CTA bar. Those pages render
+  `<Footer seasonal={false} />`; `src/lib/seasonal.test.ts` guards this. Keep
+  the tone friendly for anxious patients: no skulls, gore, drills, jump
+  scares, decay imagery, cobwebs, or candy-shaming copy.
+- **Rules:** decorative art is `aria-hidden`, never shifts layout (absolutely
+  positioned, or in flow only when revealed before first paint), and animates
+  only `transform`/`opacity`. One-off motion stays under 5 seconds (WCAG
+  2.2.2) and is skipped for reduced motion and Save-Data
+  (`seasonalMotionAllowed`). The `--sdm-harvest-*` tokens are for seasonal
+  art only; ember stays the emergency color. Art is original hand-drawn SVG,
+  never AI or stock.
+- **Next year:** add a new `SeasonalTheme` id and dates plus a versioned
+  `public/seasonal/<id>/` folder.
+
 ## Commands
 
 ```bash

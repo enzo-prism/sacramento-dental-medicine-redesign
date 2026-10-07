@@ -237,7 +237,7 @@ export default async function ServiceRoute({ params }: Props) {
           </div>
         </section>
       </main>
-      <Footer />
+      <Footer seasonal={slug !== "dental-emergencies"} />
       <MobileCTA />
     </>
   );

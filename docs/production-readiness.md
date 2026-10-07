@@ -44,6 +44,11 @@ Home, Reviews, and Schedule must have no horizontal overflow. At minimum, verify
 9. Keyboard focus is visible; form controls have labels, autocomplete hints,
    input modes, inline status text, and reduced-motion behavior.
 
+10. In October (or with `?season=halloween`), the seasonal layer adds no
+    layout shift or horizontal overflow, bats are skipped for reduced motion,
+    `?season=off` removes every decoration, and `/schedule`,
+    `/dental-emergencies`, and `/privacy-practices` stay undecorated.
+
 Do not send a real appointment request during routine QA. A controlled
 Formspree delivery test is a separate, explicitly approved release action.
 

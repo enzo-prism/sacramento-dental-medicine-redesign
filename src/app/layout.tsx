@@ -8,6 +8,8 @@ import { SiteAnalytics } from "@/components/SiteAnalytics";
 import { contact, seo } from "@/data/site";
 import { isPreviewDeploy, siteUrl } from "@/lib/site-url";
 import { JsonLd } from "@/components/JsonLd";
+import { SeasonScript } from "@/components/Seasonal";
+import { SeasonRuntime } from "@/components/SeasonalClient";
 import { practiceGraph } from "@/lib/structured-data";
 import "./globals.css";
 
@@ -88,7 +90,12 @@ export default function RootLayout({
       lang="en"
       data-scroll-behavior="smooth"
       className={`${geistSans.variable} ${bricolage.variable} h-full antialiased`}
+      // The season script may set data-sdm-season before hydration.
+      suppressHydrationWarning
     >
+      <head>
+        <SeasonScript />
+      </head>
       <body className="min-h-full flex flex-col">
         <a
           href="#main"
@@ -102,6 +109,7 @@ export default function RootLayout({
         <GoogleAnalytics />
         <OpenAIAdsMeasurement />
         <OpenAIMeasurementChoice />
+        <SeasonRuntime />
         {analyticsEnabled ? <SiteAnalytics /> : null}
       </body>
     </html>

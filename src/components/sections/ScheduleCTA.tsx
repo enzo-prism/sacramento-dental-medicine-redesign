@@ -2,11 +2,13 @@ import Link from "next/link";
 import { ArrowRight, CalendarDays, Phone } from "lucide-react";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { contact } from "@/data/site";
+import { NightBandSky } from "@/components/Seasonal";
 
 export function ScheduleCTA() {
   return (
-    <section data-mobile-cta-stop className="night-band py-16 sm:py-20">
-      <div className="container-x">
+    <section data-mobile-cta-stop className="night-band relative overflow-hidden py-16 sm:py-20">
+      <NightBandSky />
+      <div className="container-x relative">
         <ScrollReveal
           variant="fade"
           className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center"

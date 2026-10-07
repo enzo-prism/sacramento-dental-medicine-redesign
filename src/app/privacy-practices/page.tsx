@@ -55,7 +55,7 @@ export default function PrivacyPracticesPage() {
           </div>
         </section>
       </main>
-      <Footer />
+      <Footer seasonal={false} />
     </>
   );
 }

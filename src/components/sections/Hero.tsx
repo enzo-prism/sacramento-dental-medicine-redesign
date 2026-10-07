@@ -1,6 +1,14 @@
 import Image from "next/image";
 import { CalendarDays, MapPin, Phone } from "lucide-react";
 import { contact, imagery } from "@/data/site";
+import {
+  HarvestMoon,
+  HeroGhost,
+  SeasonalGreeting,
+  SeasonalUnderline,
+  harvestMoonBox,
+} from "@/components/Seasonal";
+import { HarvestBats } from "@/components/SeasonalClient";
 
 export function Hero() {
   return (
@@ -11,6 +19,7 @@ export function Hero() {
     >
       <div className="container-x relative grid items-center gap-12 pb-16 sm:pb-20 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14 lg:pb-24">
         <div className="relative z-10 max-w-3xl">
+          <SeasonalGreeting />
           <p className="flex items-center gap-2 text-sm font-medium text-ink-faint">
             <MapPin className="size-4 shrink-0 text-brand-deep" aria-hidden="true" />
             Sacramento Dental Medicine · Antelope, CA
@@ -18,7 +27,13 @@ export function Hero() {
 
           <h1 className="mt-5 font-display text-[clamp(1.85rem,8vw,3.4rem)] font-semibold leading-[1.02] tracking-[-0.03em] text-ink text-balance lg:text-[clamp(2.6rem,4.4vw,3.6rem)]">
             A dentist visit{" "}
-            <span className="block text-brand-deep">you won&apos;t dread.</span>
+            <span className="block text-brand-deep">
+              you won&apos;t{" "}
+              <span className="relative inline-block">
+                dread.
+                <SeasonalUnderline />
+              </span>
+            </span>
           </h1>
 
           <p className="mt-6 max-w-xl text-pretty text-base leading-7 text-ink-soft md:text-lg md:leading-8">
@@ -50,6 +65,8 @@ export function Hero() {
             aria-hidden="true"
             className="absolute -inset-6 hidden rounded-[32px] bg-brand-tint/50 blur-2xl lg:block"
           />
+          <HarvestMoon />
+          <HeroGhost />
           <div className="relative h-full w-full lg:aspect-[4/3] lg:overflow-hidden lg:rounded-[22px] lg:shadow-xl">
             <Image
               src={imagery.hero}
@@ -62,6 +79,7 @@ export function Hero() {
             />
             <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-b from-canvas/20 via-canvas/80 to-canvas lg:hidden" />
           </div>
+          <HarvestBats className={harvestMoonBox} />
         </div>
       </div>
     </section>

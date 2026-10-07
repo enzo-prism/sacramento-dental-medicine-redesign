@@ -27,6 +27,11 @@ patients to book.
 - **SEO & a11y** — `Dentist` + `FAQPage` JSON-LD (XSS-sanitized), `sitemap.ts`,
   `robots.ts`, canonical URL, reduced-motion support, and keyboard-accessible
   controls.
+- **October seasonal layer** — a friendly Halloween layer (harvest moon,
+  bats, a ghost-tooth, tooth-grin pumpkins, starry night band, pumpkin
+  favicon, branded 404) that switches itself on October 1–31 Pacific and off
+  on November 1 with no redeploy. Preview with `?season=halloween`, opt out
+  with `?season=off`. See `AGENTS.md` "Seasonal layer (October)".
 
 ## Tech
 
@@ -58,6 +63,7 @@ src/
 ├── components/
 │   ├── Scheduler.tsx     # multi-step scheduling wizard ('use client')
 │   ├── Header.tsx, MobileCTA.tsx, SectionLabel.tsx, ScrollReveal.tsx
+│   ├── Seasonal.tsx, SeasonalClient.tsx  # October layer (date-gated art)
 │   └── sections/         # page order: Hero, ReviewProof, TrustBand, Emergency,
 │                          # Intro, Services, Technology, Doctors, Reviews,
 │                          # NewPatients (+ FAQ), ScheduleCTA, Footer
@@ -66,6 +72,7 @@ src/
 └── lib/
     ├── appointment.ts    # form state types + phone/email validation helpers
     ├── formspree.ts      # safe endpoint resolution + tested lead payload builder
+    ├── seasonal.ts       # season dates + pre-paint head script (tested)
     ├── social-image.tsx  # shared 1200×630 Home/Reviews/Schedule card renderer
     └── site-url.ts       # canonical/social origin resolver
 ```
@@ -218,6 +225,7 @@ Visual system lives in `src/app/globals.css`. Do not invent a second palette.
 - **Brand as atmosphere, navy as action.** Mid periwinkle (`--brand` `#6a8ece`) is for tints and dark-band accents. It fails WCAG AA on white — body type and pills use `--brand-deep` / `--brand-ink`. Ember is reserved for the emergency path.
 - **One night band per page.** Home uses a compact scheduling invitation; `/schedule` uses the night treatment around the focused form. Technology stays on the light canvas.
 - **Primary Book pills** live in the header, hero, scheduling invitation, footer, and mobile CTA bar. Every one routes to `/schedule`; other sections use text links.
+- **Seasonal art is a layer, not a palette.** The October layer uses its own `--sdm-harvest-*` tokens for illustration only and never touches CTAs, ratings, the scheduler, or emergency and privacy pages.
 - **Scheduler honesty.** Patients pick a day and a morning / afternoon / evening window. Copy says the front desk will reach out to confirm a specific time.
 
 ## Assets still needed

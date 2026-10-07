@@ -183,7 +183,7 @@ export default function SchedulePage() {
           </div>
         </section>
       </main>
-      <Footer />
+      <Footer seasonal={false} />
     </>
   );
 }

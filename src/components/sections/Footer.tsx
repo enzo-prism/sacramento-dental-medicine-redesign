@@ -3,8 +3,10 @@ import Link from "next/link";
 import { CalendarDays, Mail, MapPin, Phone } from "lucide-react";
 import { contact, hours, imagery, navItems } from "@/data/site";
 import { OfficeEmail } from "@/components/OfficeEmail";
+import { FooterPumpkins } from "@/components/Seasonal";
 
-export function Footer() {
+/** `seasonal={false}` keeps October decorations off sensitive pages. */
+export function Footer({ seasonal = true }: { seasonal?: boolean }) {
   return (
     <footer className="relative overflow-hidden border-t border-white/10 bg-night pb-24 text-white lg:pb-0">
       <div className="container-x relative py-16 md:py-20">
@@ -96,6 +98,8 @@ export function Footer() {
             </ul>
           </div>
         </div>
+
+        {seasonal ? <FooterPumpkins /> : null}
 
         <div className="mt-14 flex flex-col items-start justify-between gap-4 border-t border-white/10 pt-7 text-xs text-white/60 sm:flex-row sm:items-center">
           <p>

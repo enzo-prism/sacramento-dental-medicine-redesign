@@ -540,6 +540,12 @@ export const visitTypes: VisitType[] = [
   },
 ];
 
+// Coverage notice — Medi-Cal is not accepted. Do not invent plan names,
+// cash-discount percentages, or financing partners here.
+export const mediCalFaqQuestion = "Do you accept Medi-Cal?";
+export const mediCalSelfPayAnswer =
+  `We do not accept Medi-Cal (Denti-Cal). We welcome self-pay patients and offer cash-pay options. Call us at ${contact.phoneDisplay} to ask about pricing.`;
+
 // New patients — practical, high-intent info (coverage, payment, first visit)
 export const newPatient = {
   eyebrow: "New patients",
@@ -548,18 +554,24 @@ export const newPatient = {
     "Here's how coverage works, what to bring, and what actually happens in the chair.",
   billing: [
     {
-      title: "Confirm your coverage",
-      body: "One quick call to the front desk confirms whether your dental plan is accepted, before you ever sit down.",
+      title: "Insurance & Medi-Cal",
+      body: mediCalSelfPayAnswer,
     },
     {
       title: "Ask about payment options",
-      body: "Paying without insurance? Call, and the front desk will walk you through your options.",
+      body: "Paying without insurance? We welcome self-pay patients. Call, and the front desk will walk you through cash-pay options.",
     },
     {
       title: "New patients welcome",
       body: "Now accepting new patients of all ages, from Antelope and across Greater Sacramento.",
     },
   ],
+  insuranceHeading: "Insurance & Medi-Cal",
+  insuranceOtherPlans:
+    "For other dental plans, call with your plan information before your visit. The front desk can confirm whether your plan is accepted and help you understand coverage questions. Coverage and out-of-pocket costs depend on your plan and recommended care.",
+  selfPayHeading: "What if I do not have dental insurance?",
+  selfPayBody:
+    `We welcome self-pay patients and offer cash-pay options. Call us at ${contact.phoneDisplay} to ask about pricing. Treatment estimates depend on an exam and the care you need; request an explanation of costs before deciding on treatment.`,
   bring: [
     "Photo ID",
     "Dental insurance card (if you have one)",
@@ -575,6 +587,10 @@ export const faqs: { q: string; a: string }[] = [
   {
     q: "Are you accepting new patients?",
     a: "Yes. Sacramento Dental Medicine is welcoming new patients of all ages across Antelope and Greater Sacramento. Request a visit online or call the office, and we'll find a first appointment that fits your schedule.",
+  },
+  {
+    q: mediCalFaqQuestion,
+    a: mediCalSelfPayAnswer,
   },
   {
     q: "What should I expect at my first visit?",

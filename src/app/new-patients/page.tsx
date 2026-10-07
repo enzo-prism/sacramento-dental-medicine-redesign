@@ -5,7 +5,7 @@ import { Header } from "@/components/Header";
 import { MobileCTA } from "@/components/MobileCTA";
 import { Footer } from "@/components/sections/Footer";
 import { JsonLd } from "@/components/JsonLd";
-import { contact, hours, newPatient } from "@/data/site";
+import { contact, hours, mediCalFaqQuestion, mediCalSelfPayAnswer, newPatient } from "@/data/site";
 import { OfficeEmail } from "@/components/OfficeEmail";
 import { pageGraph } from "@/lib/structured-data";
 
@@ -21,7 +21,14 @@ export const metadata: Metadata = {
 
 export default function NewPatientsPage() {
   return <>
-    <JsonLd data={pageGraph("/new-patients", "New-patient guide")} />
+    <JsonLd data={pageGraph("/new-patients", "New-patient guide", [{
+      "@type": "FAQPage",
+      mainEntity: [{
+        "@type": "Question",
+        name: mediCalFaqQuestion,
+        acceptedAnswer: { "@type": "Answer", text: mediCalSelfPayAnswer },
+      }],
+    }])} />
     <Header />
     <main id="main" className="flex-1">
       <section className="pb-16 pt-32 lg:pt-40">
@@ -39,10 +46,18 @@ export default function NewPatientsPage() {
           <div className="surface-card p-7"><h2 className="font-display text-2xl font-semibold text-ink">What should I bring?</h2><ul className="mt-5 list-disc space-y-3 pl-5 text-ink-soft">{newPatient.bring.map((item) => <li key={item}>{item}</li>)}</ul></div>
         </div>
       </section>
-      <section className="section bg-white" aria-labelledby="coverage-title">
+      <section id="insurance" className="section bg-white" aria-labelledby="coverage-title">
         <div className="container-x grid gap-10 md:grid-cols-2">
-          <div><h2 id="coverage-title" className="font-display text-3xl font-semibold text-ink">Do you accept my insurance?</h2><p className="mt-5 leading-8 text-ink-soft">Call {contact.phoneDisplay} with your plan information before your visit. The front desk can confirm whether your dental plan is accepted and help you understand coverage questions. Coverage and out-of-pocket costs depend on your plan and recommended care.</p></div>
-          <div><h2 className="font-display text-3xl font-semibold text-ink">What if I do not have dental insurance?</h2><p className="mt-5 leading-8 text-ink-soft">Ask the front desk about current payment options and the cost of an initial visit. Treatment estimates depend on an exam and the care you need; request an explanation of costs before deciding on treatment.</p></div>
+          <div>
+            <h2 id="coverage-title" className="font-display text-3xl font-semibold text-ink">{newPatient.insuranceHeading}</h2>
+            <h3 id="medi-cal" className="mt-5 font-display text-xl font-medium text-ink">{mediCalFaqQuestion}</h3>
+            <p className="mt-3 leading-8 text-ink-soft">{mediCalSelfPayAnswer}</p>
+            <p className="mt-4 leading-8 text-ink-soft">{newPatient.insuranceOtherPlans}</p>
+          </div>
+          <div>
+            <h2 className="font-display text-3xl font-semibold text-ink">{newPatient.selfPayHeading}</h2>
+            <p className="mt-5 leading-8 text-ink-soft">{newPatient.selfPayBody}</p>
+          </div>
         </div>
       </section>
       <section className="section bg-wash" aria-labelledby="booking-title">

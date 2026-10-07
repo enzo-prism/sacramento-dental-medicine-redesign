@@ -544,7 +544,7 @@ export const visitTypes: VisitType[] = [
 // cash-discount percentages, or financing partners here.
 export const mediCalFaqQuestion = "Do you accept Medi-Cal?";
 export const mediCalSelfPayAnswer =
-  `We do not accept Medi-Cal (Denti-Cal). We welcome self-pay patients and offer cash-pay options. Call us at ${contact.phoneDisplay} to ask about pricing.`;
+  `Unfortunately, we don't accept Medi-Cal (Denti-Cal), but we do offer discounted rates for patients who pay cash. Call us at ${contact.phoneDisplay} to ask about pricing.`;
 
 // New patients — practical, high-intent info (coverage, payment, first visit)
 export const newPatient = {
@@ -559,7 +559,7 @@ export const newPatient = {
     },
     {
       title: "Ask about payment options",
-      body: "Paying without insurance? We welcome self-pay patients. Call, and the front desk will walk you through cash-pay options.",
+      body: "Paying without insurance? We offer discounted rates for patients who pay cash. Call, and the front desk will walk you through pricing.",
     },
     {
       title: "New patients welcome",
@@ -571,7 +571,7 @@ export const newPatient = {
     "For other dental plans, call with your plan information before your visit. The front desk can confirm whether your plan is accepted and help you understand coverage questions. Coverage and out-of-pocket costs depend on your plan and recommended care.",
   selfPayHeading: "What if I do not have dental insurance?",
   selfPayBody:
-    `We welcome self-pay patients and offer cash-pay options. Call us at ${contact.phoneDisplay} to ask about pricing. Treatment estimates depend on an exam and the care you need; request an explanation of costs before deciding on treatment.`,
+    `We offer discounted rates for patients who pay cash. Call us at ${contact.phoneDisplay} to ask about pricing. Treatment estimates depend on an exam and the care you need; request an explanation of costs before deciding on treatment.`,
   bring: [
     "Photo ID",
     "Dental insurance card (if you have one)",

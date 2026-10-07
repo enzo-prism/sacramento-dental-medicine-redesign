@@ -21,9 +21,16 @@ describe("Medi-Cal and self-pay copy", () => {
     assert.equal(newPatient.billing[0]?.body, mediCalSelfPayAnswer);
   });
 
-  it("says Medi-Cal is not accepted and points to self-pay without inventing offers", () => {
-    assert.match(mediCalSelfPayAnswer, /We do not accept Medi-Cal \(Denti-Cal\)\./);
-    assert.match(mediCalSelfPayAnswer, /We welcome self-pay patients and offer cash-pay options/);
+  it("says Medi-Cal is not accepted and points to discounted cash rates without inventing offers", () => {
+    assert.equal(
+      mediCalSelfPayAnswer,
+      "Unfortunately, we don't accept Medi-Cal (Denti-Cal), but we do offer discounted rates for patients who pay cash. Call us at (916) 727-6453 to ask about pricing.",
+    );
+    assert.match(newPatient.selfPayBody, /discounted rates for patients who pay cash/);
+    assert.match(newPatient.billing[1]?.body ?? "", /discounted rates for patients who pay cash/);
+    assert.doesNotMatch(mediCalSelfPayAnswer, /cash-pay options/i);
+    assert.doesNotMatch(newPatient.selfPayBody, /cash-pay options/i);
+    assert.doesNotMatch(newPatient.billing[1]?.body ?? "", /cash-pay options/i);
     assert.match(mediCalSelfPayAnswer, new RegExp(contact.phoneDisplay.replace(/[()]/g, "\\$&")));
     assert.doesNotMatch(mediCalSelfPayAnswer, inventedOffers);
     assert.doesNotMatch(newPatient.selfPayBody, inventedOffers);

@@ -59,7 +59,7 @@ const SOURCE_LABELS: Record<string, string> = {
 };
 const MEDIUM_LABELS: Record<string, string> = {
   cpc: "cpc", ppc: "cpc", paid_search: "cpc", paid_social: "paid_social",
-  "paid-social": "paid_social", social: "social", organic_social: "social",
+  "paid-social": "paid_social", paid: "paid", social: "social", organic_social: "social",
   organic: "organic", referral: "referral", email: "email", sms: "sms",
 };
 const REFERRER_HOSTS = new Map([

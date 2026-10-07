@@ -36,6 +36,7 @@ describe("Google Analytics measurement boundary", () => {
   });
   it("maps approved source/medium values and drops all free-form attribution", () => {
     assert.deepEqual(safeGoogleAnalyticsAcquisition("?utm_source=FB&utm_medium=paid-social&utm_campaign=private&utm_content=private&utm_term=private&gclid=private", ""), {page_referrer:"", campaign_source:"facebook", campaign_medium:"paid_social"});
+    assert.deepEqual(safeGoogleAnalyticsAcquisition("?utm_source=chatgpt&utm_medium=paid", ""), {page_referrer:"", campaign_source:"chatgpt.com", campaign_medium:"paid"});
     for (const search of ["?utm_source=patient@example.com&utm_medium=cpc", "?utm_source=google&utm_medium=private", "?utm_source=constructor&utm_medium=organic", "?utm_source=google"]) assert.deepEqual(safeGoogleAnalyticsAcquisition(search, ""), {page_referrer:""});
   });
   it("uses fixed safe titles and content groups instead of document titles", () => {

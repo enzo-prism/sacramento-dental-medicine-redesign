@@ -33,6 +33,12 @@ describe("parseAdIdFromUtmContent", () => {
 });
 
 describe("parseAttributionFromSearch", () => {
+  it("does not capture or forward OpenAI references through the generic first-touch metadata helper", () => {
+    const touch = parseAttributionFromSearch("?oppref=unconsented-click&patient=private&email=fixture%40patient.invalid");
+    assert.deepEqual(touch, emptyAttribution());
+    const payload = applyAttributionToPayload({ form_type: "appointment_request" }, touch);
+    assert.deepEqual(payload, { form_type: "appointment_request" });
+  });
   it("captures first-touch UTMs, click IDs, and parsed ad_id", () => {
     assert.deepEqual(
       parseAttributionFromSearch(

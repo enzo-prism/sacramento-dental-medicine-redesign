@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Bricolage_Grotesque, Geist } from "next/font/google";
+import { OpenAIAdsMeasurement } from "@/components/OpenAIAdsMeasurement";
+import { OpenAIMeasurementChoice } from "@/components/OpenAIMeasurementChoice";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { LeadAttributionCapture } from "@/components/LeadAttributionCapture";
 import { SiteAnalytics } from "@/components/SiteAnalytics";
@@ -98,6 +100,8 @@ export default function RootLayout({
         <LeadAttributionCapture />
         {children}
         <GoogleAnalytics />
+        <OpenAIAdsMeasurement />
+        <OpenAIMeasurementChoice />
         {analyticsEnabled ? <SiteAnalytics /> : null}
       </body>
     </html>

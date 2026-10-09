@@ -16,11 +16,10 @@ export function ScheduleCTA() {
           <div>
             <p className="eyebrow text-[#d5e1f4]">Ready when you are</p>
             <h2 className="mt-5 max-w-2xl font-display text-balance text-[clamp(2rem,4.2vw,3.1rem)] font-semibold leading-[1.06] tracking-[-0.02em] text-white">
-              Request an appointment on your own time.
+              Book a visit on your own time.
             </h2>
             <p className="mt-4 max-w-2xl text-pretty text-base leading-7 text-white/70 md:text-lg md:leading-8">
-              Choose what you need and a preferred day and time. The front desk
-              will reach out during office hours to confirm the details.
+              Use the online scheduler, or call the office during office hours.
             </p>
           </div>
 

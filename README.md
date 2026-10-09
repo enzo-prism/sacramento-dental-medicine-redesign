@@ -6,13 +6,8 @@ patients to book.
 
 ## Highlights
 
-- **Dedicated scheduling page** — `/schedule` keeps the appointment journey
-  focused and gives the multi-step scheduler room to work on every device. The
-  wizard covers visit type → day & time of day → how we can reach you, and the
-  front desk confirms a specific time.
-- **Native lead capture** — a Server Action validates the request (name, plus a
-  phone number or an email — at least one) and POSTs JSON to Formspree. Optional
-  `LEAD_WEBHOOK_URL` is a second hop.
+- **Dedicated scheduling page** — `/schedule` embeds Jarvis online booking and
+  shows the office phone and email beside or below it.
 - **Deep review evidence** — a dedicated responsive reviews page based on all
   632 Google ratings and 428 written reviews, with a verified distribution,
   overlapping theme analysis, short attributed excerpts, and a link to the
@@ -56,22 +51,20 @@ src/
 │   ├── opengraph-image.tsx, twitter-image.tsx
 │   ├── reviews/           # review page + route-specific social cards
 │   ├── schedule/          # dedicated appointment page + route metadata
-│   ├── actions.ts        # 'use server' appointment-request handler
 │   ├── sitemap.ts        # generated sitemap
 │   ├── robots.ts         # generated robots.txt
 │   └── globals.css        # design system (tokens, components, motion)
 ├── components/
-│   ├── Scheduler.tsx     # multi-step scheduling wizard ('use client')
+│   ├── ScheduleOfficeContacts.tsx  # /schedule phone + email with analytics
 │   ├── Header.tsx, MobileCTA.tsx, SectionLabel.tsx, ScrollReveal.tsx
 │   ├── Seasonal.tsx, SeasonalClient.tsx  # October layer (date-gated art)
 │   └── sections/         # page order: Hero, ReviewProof, TrustBand, Emergency,
 │                          # Intro, Services, Technology, Doctors, Reviews,
 │                          # NewPatients (+ FAQ), ScheduleCTA, Footer
-├── data/site.ts          # copy, hours, services, visit types, reviews,
+├── data/site.ts          # copy, hours, services, reviews,
 │                          # schema.org data, seo title/description
 └── lib/
-    ├── appointment.ts    # form state types + phone/email validation helpers
-    ├── formspree.ts      # safe endpoint resolution + tested lead payload builder
+    ├── analytics.ts      # Vercel path sanitization + custom event allowlist
     ├── seasonal.ts       # season dates + pre-paint head script (tested)
     ├── social-image.tsx  # shared 1200×630 Home/Reviews/Schedule card renderer
     └── site-url.ts       # canonical/social origin resolver
@@ -124,43 +117,16 @@ A few production values still need periodic confirmation:
 
 | What | Where | Notes |
 | --- | --- | --- |
-| Booking URL | `contact.bookingHref` | Currently `/schedule` (the dedicated on-site scheduler). Swap in the practice-specific Dentrix Ascend deep link when provided — the bare portal domain doesn't identify the practice. |
+| Booking URL | `contact.bookingHref` | `/schedule` embeds Jarvis online booking plus the office phone and email. |
 | Saturday availability | `officeHours` | The contact page says closed; confirm whether advance appointments are offered. |
 | Reviews links | `socialProof` | The internal page lives at `/reviews`; the external link opens the verified Google Maps review panel. |
 
-### Scheduler backend
+### Online booking
 
-The scheduler posts to the `requestAppointment` Server Action
-(`src/app/actions.ts`), which validates the request and POSTs JSON to
-**Formspree** (`https://formspree.io/f/xvkpdvyz`, overridable with
-`FORMSPREE_ENDPOINT`). Shared validation lives in `src/lib/appointment.ts`.
-The server independently validates the selected visit type, Sacramento-local
-future business date, 40-day booking horizon, and exact office-hours window;
-hidden browser fields are never treated as trusted input.
-
-Required fields:
-
-- **Name**
-- **Phone or email** — at least one usable contact method. Filling both is
-  fine; leaving both empty is not. Incomplete extras still error (short phone,
-  malformed email).
-- **Privacy confirmation** — visitors must acknowledge that the request contains
-  no sensitive health, insurance, or payment information.
-
-Confirm in the Formspree dashboard that **email is not marked required**. Empty
-phone and email are omitted from the JSON payload so phone-only requests do not
-400. To have leads reach the front desk directly, add
-**`office@sacramentodentalmedicine.com`** as a notification recipient in the
-Formspree dashboard (the site does not send `_cc`). The server forwards the current runtime host or origin when
-posting to Formspree so production-domain restriction remains compatible without
-letting preview or local traffic impersonate the live site automatically.
-Formspree delivery has a bounded timeout. Optional: set
-**`LEAD_WEBHOOK_URL`** for a non-blocking second hop after Formspree succeeds;
-that optional delivery cannot reverse the accepted Formspree response.
-
-After form or Formspree-account changes, run a controlled synthetic delivery
-test and confirm it reaches the intended front desk. A successful on-site
-“Request sent” only means Formspree accepted the POST — not that a visit is booked.
+`/schedule` embeds the practice Jarvis scheduler and shows the office phone
+and email beside or below it. Those two links fire allowlisted analytics
+events (`Schedule Phone Click`, `Schedule Email Click`) with no contact
+values attached.
 
 ## Local development
 
@@ -223,10 +189,10 @@ fixed-issue history, browser evidence, and final release-gate result.
 Visual system lives in `src/app/globals.css`. Do not invent a second palette.
 
 - **Brand as atmosphere, navy as action.** Mid periwinkle (`--brand` `#6a8ece`) is for tints and dark-band accents. It fails WCAG AA on white — body type and pills use `--brand-deep` / `--brand-ink`. Ember is reserved for the emergency path.
-- **One night band per page.** Home uses a compact scheduling invitation; `/schedule` uses the night treatment around the focused form. Technology stays on the light canvas.
+- **One night band per page.** Home uses a compact scheduling invitation; `/schedule` uses the night treatment around Jarvis booking. Technology stays on the light canvas.
 - **Primary Book pills** live in the header, hero, scheduling invitation, footer, and mobile CTA bar. Every one routes to `/schedule`; other sections use text links.
 - **Seasonal art is a layer, not a palette.** The October layer uses its own `--sdm-harvest-*` tokens for illustration only and never touches CTAs, ratings, the scheduler, or emergency and privacy pages.
-- **Scheduler honesty.** Patients pick a day and a morning / afternoon / evening window. Copy says the front desk will reach out to confirm a specific time.
+- **Booking honesty.** `/schedule` is Jarvis online booking plus a clear call or email path. Do not add a second request form.
 
 ## Assets still needed
 

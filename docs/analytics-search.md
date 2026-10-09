@@ -17,6 +17,9 @@ collected.
 - excludes `/privacy-practices`; and
 - never sends form values, contact details, treatment reasons, UTM values, or
   click IDs as custom events.
+- allowlisted `/schedule` contact clicks only: `Schedule Phone Click` and
+  `Schedule Email Click`. These fire from Vercel Analytics `track` and GA/gtag
+  with no properties.
 
 The Vercel project currently has an analytics resource ID, but its Web Analytics
 feature is disabled. Vercel CLI classifies enabling it on this Pro team as a
@@ -66,8 +69,15 @@ loaded tag as well as skipping manual views.
 
 `/conversion` is a legacy aggregate path, **not a completed lead or key event**.
 Privacy, unknown routes and nonproduction hosts are excluded. No form values,
-contact details, treatment reasons, click IDs or user IDs are sent. Formspree
-remains the lead source of truth; do not equate page visits with appointments.
+contact details, treatment reasons, click IDs or user IDs are sent. Do not
+equate page visits with appointments.
+
+Allowlisted custom events on `/schedule` (no parameters):
+
+| Event | Trigger |
+| --- | --- |
+| `Schedule Phone Click` | The office `tel:` link beside/below Jarvis |
+| `Schedule Email Click` | The office `mailto:` link beside/below Jarvis |
 
 Acquisition now preserves only recognized referral origins (no paths or query
 strings), and fixed allowlisted `utm_source` + `utm_medium` pairs. Both must be

@@ -254,7 +254,7 @@ export function createScheduleSocialImage() {
               lineHeight: 1.35,
             }}
           >
-            Request a preferred day and time in about a minute. No account needed.
+            Book online, or call the Antelope office.
           </div>
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 14 }}>

@@ -1,6 +1,13 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { sanitizeVercelAnalyticsEvent } from "./analytics.ts";
+import {
+  SCHEDULE_EMAIL_CLICK,
+  SCHEDULE_PHONE_CLICK,
+  isAllowedCustomAnalyticsEvent,
+  sanitizeVercelAnalyticsEvent,
+  scheduleContactEventName,
+} from "./analytics.ts";
+import { trackAllowedCustomEvent } from "./track-event.ts";
 
 describe("sanitizeVercelAnalyticsEvent", () => {
   it("removes query strings and fragments", () => {
@@ -46,3 +53,37 @@ describe("sanitizeVercelAnalyticsEvent", () => {
     );
   });
 });
+
+describe("custom schedule contact events", () => {
+  it("allowlists only the phone and email click names", () => {
+    assert.equal(scheduleContactEventName("phone"), SCHEDULE_PHONE_CLICK);
+    assert.equal(scheduleContactEventName("email"), SCHEDULE_EMAIL_CLICK);
+    assert.equal(isAllowedCustomAnalyticsEvent(SCHEDULE_PHONE_CLICK), true);
+    assert.equal(isAllowedCustomAnalyticsEvent(SCHEDULE_EMAIL_CLICK), true);
+    assert.equal(isAllowedCustomAnalyticsEvent("Lead Submit"), false);
+  });
+
+  it("tracks allowlisted events with no properties or PII", () => {
+    const vercel: string[] = [];
+    const google: string[] = [];
+    assert.equal(
+      trackAllowedCustomEvent(SCHEDULE_PHONE_CLICK, {
+        vercelTrack: (name) => vercel.push(name),
+        googleEvent: (name) => google.push(name),
+      }),
+      true,
+    );
+    assert.equal(
+      trackAllowedCustomEvent("patient@example.com", {
+        vercelTrack: (name) => vercel.push(name),
+        googleEvent: (name) => google.push(name),
+      }),
+      false,
+    );
+    assert.deepEqual(vercel, [SCHEDULE_PHONE_CLICK]);
+    assert.deepEqual(google, [SCHEDULE_PHONE_CLICK]);
+    assert.ok(!JSON.stringify({ vercel, google }).includes("@"));
+    assert.ok(!JSON.stringify({ vercel, google }).includes("916"));
+  });
+});
+

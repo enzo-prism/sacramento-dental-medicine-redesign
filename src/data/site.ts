@@ -3,22 +3,16 @@ import {
   Boxes,
   CalendarClock,
   Droplets,
-  Ellipsis,
   HeartPulse,
   type LucideIcon,
   Microscope,
   ShieldCheck,
-  Smile,
   SmilePlus,
   Sparkles,
   Stethoscope,
   Syringe,
-  UserPlus,
   Waves,
 } from "lucide-react";
-
-// Public Formspree form — appointment requests POST here from the Server Action.
-export const formspreeEndpoint = "https://formspree.io/f/xvkpdvyz";
 
 /** Official custom domain. Do not attach DNS from this repo. */
 export const productionDomain = "https://sacramentodentalmedicine.com";
@@ -44,10 +38,7 @@ export const contact = {
   // Confirmed 2026-09-23 RDA+Enzo client sync. Do not invent extra mailboxes.
   email: "office@sacramentodentalmedicine.com",
   emailHref: "mailto:office@sacramentodentalmedicine.com",
-  // All booking CTAs route to the dedicated on-site scheduling page, which
-  // captures leads natively. When the practice provides its Dentrix Ascend
-  // deep link, point this at it instead — the bare bookit.dentrixascend.com
-  // domain lands on a generic portal that doesn't identify the practice.
+  // All booking CTAs route to /schedule, which embeds Jarvis online booking.
   bookingHref: "/schedule",
   addressLine1: "4320 Elverta Rd #3",
   addressLine2: "Antelope, CA 95843",
@@ -494,51 +485,6 @@ export const officeHours: Record<number, { open: number; close: number } | null>
   5: { open: 8 * 60, close: 14 * 60 }, // Fri 8:00–2:00
   6: null, // Saturday — closed
 };
-
-// Scheduler offers morning / afternoon / evening windows inside office hours
-// rather than 30-minute slots that look like live inventory.
-
-export type VisitType = {
-  id: string;
-  label: string;
-  blurb: string;
-  icon: LucideIcon;
-  urgent?: boolean;
-};
-
-export const visitTypes: VisitType[] = [
-  {
-    id: "new-patient",
-    label: "New patient exam",
-    blurb: "Exam, X-rays & a gentle cleaning",
-    icon: UserPlus,
-  },
-  {
-    id: "checkup",
-    label: "Cleaning & checkup",
-    blurb: "Routine preventive care",
-    icon: Smile,
-  },
-  {
-    id: "cosmetic",
-    label: "Cosmetic consult",
-    blurb: "Whitening, veneers, Invisalign",
-    icon: Sparkles,
-  },
-  {
-    id: "emergency",
-    label: "Pain or emergency",
-    blurb: "Call for the earliest available visit",
-    icon: HeartPulse,
-    urgent: true,
-  },
-  {
-    id: "other",
-    label: "Something else",
-    blurb: "Tell us what you need",
-    icon: Ellipsis,
-  },
-];
 
 // New patients — practical, high-intent info (coverage, payment, first visit)
 export const newPatient = {

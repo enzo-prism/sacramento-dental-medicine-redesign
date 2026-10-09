@@ -5,16 +5,14 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowLeft,
-  CheckCircle2,
   Clock3,
   Mail,
   MapPin,
   Navigation,
   Phone,
-  ShieldCheck,
 } from "lucide-react";
 import { Header } from "@/components/Header";
-import { Scheduler } from "@/components/Scheduler";
+import { ScheduleOfficeContacts } from "@/components/ScheduleOfficeContacts";
 import { ScheduleRouteStart } from "@/components/ScheduleRouteStart";
 import { Footer } from "@/components/sections/Footer";
 import { contact, hours, officePhotos } from "@/data/site";
@@ -28,12 +26,12 @@ export const metadata: Metadata = {
     absolute: "Schedule a Dentist Appointment | Sacramento Dental Medicine",
   },
   description:
-    "Request an appointment with Sacramento Dental Medicine in Antelope. Choose a visit type and preferred time, then provide a phone number or email.",
+    "Book an appointment with Sacramento Dental Medicine in Antelope, or call or email the office.",
   alternates: { canonical: "/schedule" },
   openGraph: {
     title: "Schedule with Sacramento Dental Medicine",
     description:
-      "Request a dental visit in about a minute. Choose your preferred day and time, and the front desk will confirm the details.",
+      "Book a dental visit online, or reach the Antelope office by phone or email.",
     type: "website",
     locale: "en_US",
     url: "/schedule",
@@ -43,32 +41,14 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Schedule with Sacramento Dental Medicine",
     description:
-      "Request a dental visit in about a minute. The front desk will confirm the details.",
+      "Book a dental visit online, or reach the Antelope office by phone or email.",
   },
 };
-
-const assurances = [
-  {
-    icon: Clock3,
-    title: "About a minute",
-    body: "Three short steps, with no account to create.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "One contact method",
-    body: "Enter a phone number or an email. You do not need both.",
-  },
-  {
-    icon: CheckCircle2,
-    title: "Confirmed by a person",
-    body: "The front desk will contact you to confirm the exact time.",
-  },
-];
 
 export default function SchedulePage() {
   return (
     <>
-      <JsonLd data={pageGraph("/schedule", "Request a dental appointment", [], "ContactPage")} />
+      <JsonLd data={pageGraph("/schedule", "Book a dental appointment", [], "ContactPage")} />
       <ScheduleRouteStart />
       <Header />
       <main id="main" className="flex-1">
@@ -80,8 +60,17 @@ export default function SchedulePage() {
               Back to the website
             </Link>
 
-            <div className="mt-7 grid gap-9 lg:grid-cols-[0.88fr_1.12fr] lg:items-start lg:gap-x-14 lg:gap-y-8 xl:gap-x-20">
-              <div className="scheduler-card min-w-0 overflow-hidden lg:col-span-2">
+            <p className="eyebrow mt-7 text-[#d5e1f4]">Book an appointment</p>
+            <h1 className="mt-5 max-w-2xl font-display text-balance text-[clamp(2.45rem,6vw,4.6rem)] font-semibold leading-[0.98] tracking-[-0.05em] text-white">
+              Let&apos;s find a visit that works.
+            </h1>
+            <p className="mt-6 max-w-xl text-pretty text-base leading-7 text-white/70 md:text-lg md:leading-8">
+              Use the scheduler below, or call or email the office during office
+              hours.
+            </p>
+
+            <div className="mt-10 grid gap-5 lg:grid-cols-[minmax(0,1fr)_20rem] lg:items-start">
+              <div className="scheduler-card min-w-0 overflow-hidden">
                 <iframe
                   src={JARVIS_SCHEDULE_EMBED_SRC}
                   title="Book an appointment at Sacramento Dental Medicine"
@@ -89,57 +78,21 @@ export default function SchedulePage() {
                   className="block w-full min-h-[70rem] border-0 md:min-h-[600px]"
                 />
               </div>
+              <ScheduleOfficeContacts />
+            </div>
 
-              <div className="min-w-0 lg:col-start-1 lg:row-start-2">
-                <p className="eyebrow text-[#d5e1f4]">Request an appointment</p>
-                <h1 className="mt-5 max-w-2xl font-display text-balance text-[clamp(2.45rem,6vw,4.6rem)] font-semibold leading-[0.98] tracking-[-0.05em] text-white">
-                  Let&apos;s find a visit that works.
-                </h1>
-                <p className="mt-6 max-w-xl text-pretty text-base leading-7 text-white/70 md:text-lg md:leading-8">
-                  Tell us what you need and when you&apos;d like to come in. This
-                  is a request, not a confirmed appointment; the front desk will
-                  follow up during office hours.
-                </p>
-
-              </div>
-
-              <div className="min-w-0 lg:sticky lg:top-28 lg:col-start-2 lg:row-span-2 lg:row-start-2">
-                <Scheduler />
-              </div>
-
-              <div className="min-w-0 lg:col-start-1 lg:row-start-3">
-                <ul className="grid gap-3" aria-label="What to expect">
-                  {assurances.map((item) => (
-                    <li key={item.title} className="surface-night-card flex gap-3.5 p-4">
-                      <span className="orb-night grid size-10 shrink-0 place-items-center rounded-xl">
-                        <item.icon className="size-4.5" strokeWidth={1.8} aria-hidden="true" />
-                      </span>
-                      <span>
-                        <span className="block font-display text-base font-medium text-white">
-                          {item.title}
-                        </span>
-                        <span className="mt-0.5 block text-sm leading-6 text-white/62">
-                          {item.body}
-                        </span>
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-
-                <div className="mt-5 rounded-[20px] border border-ember/35 bg-ember/10 p-5">
-                  <p className="font-display text-lg font-medium text-white">
-                    In pain or dealing with a dental emergency?
-                  </p>
-                  <p className="mt-2 text-sm leading-6 text-white/68">
-                    Calling is the fastest way to reach the team and ask about
-                    the earliest available visit.
-                  </p>
-                  <a href={contact.phoneHref} className="btn btn-ember mt-4 h-11 px-4">
-                    <Phone className="size-4" aria-hidden="true" />
-                    Call {contact.phoneDisplay}
-                  </a>
-                </div>
-              </div>
+            <div className="mt-5 rounded-[20px] border border-ember/35 bg-ember/10 p-5">
+              <p className="font-display text-lg font-medium text-white">
+                In pain or dealing with a dental emergency?
+              </p>
+              <p className="mt-2 text-sm leading-6 text-white/68">
+                Calling is the fastest way to reach the team and ask about
+                the earliest available visit.
+              </p>
+              <a href={contact.phoneHref} className="btn btn-ember mt-4 h-11 px-4">
+                <Phone className="size-4" aria-hidden="true" />
+                Call {contact.phoneDisplay}
+              </a>
             </div>
 
             <div className="mt-14 grid gap-5 border-t border-white/10 pt-10 lg:mt-20 lg:grid-cols-2 lg:gap-8">

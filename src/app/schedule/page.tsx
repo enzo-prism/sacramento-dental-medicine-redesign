@@ -20,6 +20,9 @@ import { Footer } from "@/components/sections/Footer";
 import { contact, hours, officePhotos } from "@/data/site";
 import { OfficeEmail } from "@/components/OfficeEmail";
 
+const JARVIS_SCHEDULE_EMBED_SRC =
+  "https://schedule.jarvisanalytics.com/frame?eoid=9251&elid=9000000000334";
+
 export const metadata: Metadata = {
   title: {
     absolute: "Schedule a Dentist Appointment | Sacramento Dental Medicine",
@@ -78,7 +81,16 @@ export default function SchedulePage() {
             </Link>
 
             <div className="mt-7 grid gap-9 lg:grid-cols-[0.88fr_1.12fr] lg:items-start lg:gap-x-14 lg:gap-y-8 xl:gap-x-20">
-              <div className="min-w-0 lg:col-start-1 lg:row-start-1">
+              <div className="scheduler-card min-w-0 overflow-hidden lg:col-span-2">
+                <iframe
+                  src={JARVIS_SCHEDULE_EMBED_SRC}
+                  title="Book an appointment at Sacramento Dental Medicine"
+                  loading="lazy"
+                  className="block w-full min-h-[70rem] border-0 md:min-h-[600px]"
+                />
+              </div>
+
+              <div className="min-w-0 lg:col-start-1 lg:row-start-2">
                 <p className="eyebrow text-[#d5e1f4]">Request an appointment</p>
                 <h1 className="mt-5 max-w-2xl font-display text-balance text-[clamp(2.45rem,6vw,4.6rem)] font-semibold leading-[0.98] tracking-[-0.05em] text-white">
                   Let&apos;s find a visit that works.
@@ -91,11 +103,11 @@ export default function SchedulePage() {
 
               </div>
 
-              <div className="min-w-0 lg:sticky lg:top-28 lg:col-start-2 lg:row-span-2 lg:row-start-1">
+              <div className="min-w-0 lg:sticky lg:top-28 lg:col-start-2 lg:row-span-2 lg:row-start-2">
                 <Scheduler />
               </div>
 
-              <div className="min-w-0 lg:col-start-1 lg:row-start-2">
+              <div className="min-w-0 lg:col-start-1 lg:row-start-3">
                 <ul className="grid gap-3" aria-label="What to expect">
                   {assurances.map((item) => (
                     <li key={item.title} className="surface-night-card flex gap-3.5 p-4">

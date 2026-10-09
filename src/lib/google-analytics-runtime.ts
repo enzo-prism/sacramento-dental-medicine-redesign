@@ -1,3 +1,4 @@
+import { isAllowedCustomAnalyticsEvent } from "./analytics.ts";
 import {
   GOOGLE_ANALYTICS_MEASUREMENT_ID,
   GOOGLE_ANALYTICS_ORIGIN,
@@ -52,6 +53,10 @@ export function createGoogleAnalyticsController(env: AnalyticsEnvironment) {
       }
       env.send("event", "page_view", { ...page, send_to: GOOGLE_ANALYTICS_MEASUREMENT_ID });
       previousLocation = page.page_location;
+    },
+    event(name: string) {
+      if (!isAllowedCustomAnalyticsEvent(name) || !initialized) return;
+      env.send("event", name, { send_to: GOOGLE_ANALYTICS_MEASUREMENT_ID });
     },
   };
 }

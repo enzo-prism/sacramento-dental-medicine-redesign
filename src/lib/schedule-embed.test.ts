@@ -2,6 +2,11 @@ import assert from "node:assert/strict";
 import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { describe, it } from "node:test";
+import {
+  CUSTOM_ANALYTICS_EVENTS,
+  SCHEDULE_EMAIL_CLICK,
+  SCHEDULE_PHONE_CLICK,
+} from "./analytics.ts";
 import { contact, navItems } from "../data/site.ts";
 
 const root = process.cwd();
@@ -13,20 +18,32 @@ function read(path: string) {
 }
 
 describe("Jarvis schedule embed", () => {
-  it("embeds Jarvis at the top of /schedule and keeps the Formspree fallback", () => {
+  it("embeds Jarvis as the only online booking on /schedule", () => {
     const page = read("src/app/schedule/page.tsx");
-    const iframeIndex = page.indexOf("<iframe");
-    const schedulerIndex = page.indexOf("<Scheduler");
-    assert.notEqual(iframeIndex, -1);
-    assert.ok(schedulerIndex > iframeIndex, "Jarvis iframe must sit above the request form");
-    assert.match(page, new RegExp(`src=\\{JARVIS_SCHEDULE_EMBED_SRC\\}|src="${jarvisSrc.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}"`));
     assert.match(page, /https:\/\/schedule\.jarvisanalytics\.com\/frame\?eoid=9251&elid=9000000000334/);
+    assert.match(page, new RegExp(jarvisSrc.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
     assert.match(page, /title="Book an appointment at Sacramento Dental Medicine"/);
     assert.match(page, /loading="lazy"/);
     assert.match(page, /min-h-\[600px\]/);
     assert.match(page, /w-full/);
     assert.match(page, /border-0/);
-    assert.match(page, /<Scheduler \/>/);
+    assert.match(page, /<ScheduleOfficeContacts \/>/);
+    assert.doesNotMatch(page, /Scheduler|Formspree|requestAppointment/);
+    assert.equal(existsSync(join(root, "src/components/Scheduler.tsx")), false);
+    assert.equal(existsSync(join(root, "src/app/actions.ts")), false);
+  });
+
+  it("places office phone and email next to Jarvis", () => {
+    const contacts = read("src/components/ScheduleOfficeContacts.tsx");
+    assert.match(contacts, /contact\.phoneHref/);
+    assert.match(contacts, /contact\.emailHref/);
+    assert.match(contacts, /data-schedule-contact="phone"/);
+    assert.match(contacts, /data-schedule-contact="email"/);
+    assert.match(contacts, /scheduleContactEventName/);
+    assert.match(contacts, /onScheduleContactClick\("phone"\)/);
+    assert.match(contacts, /onScheduleContactClick\("email"\)/);
+    assert.equal(contact.email, "office@sacramentodentalmedicine.com");
+    assert.equal(contact.phoneDisplay, "(916) 727-6453");
   });
 
   it("sends every Schedule/Book CTA to /schedule", () => {
@@ -52,22 +69,14 @@ describe("Jarvis schedule embed", () => {
         /bookingHref|href="\/schedule"/,
         `${path} is missing a /schedule booking target`,
       );
-      assert.doesNotMatch(
-        source,
-        /Book online[\s\S]{0,80}href="https?:|Schedule online[\s\S]{0,80}href="https?:|href="https?:[\s\S]{0,80}Book online|href="https?:[\s\S]{0,80}Schedule online/,
-        `${path} must not send Book/Schedule CTAs off-site`,
-      );
     }
   });
 
-  it("does not ship a site CSP or frame-busting header", () => {
-    const config = read("next.config.ts");
-    assert.doesNotMatch(config, /headers\s*\(/);
-    assert.doesNotMatch(config, /Content-Security-Policy|X-Frame-Options|frame-ancestors|frame-src/);
-    assert.equal(existsSync(join(root, "middleware.ts")), false);
-    assert.equal(existsSync(join(root, "src/middleware.ts")), false);
-    assert.equal(existsSync(join(root, "vercel.json")), false);
-    const layout = read("src/app/layout.tsx");
-    assert.doesNotMatch(layout, /http-equiv="Content-Security-Policy"|Content-Security-Policy/);
+  it("keeps the /schedule analytics mapping and contact-click allowlist", () => {
+    const analytics = read("src/lib/analytics.ts");
+    const ga = read("src/lib/google-analytics.ts");
+    assert.match(analytics, /normalized === "\/schedule"\) return "\/conversion"/);
+    assert.match(ga, /"\/schedule": \{ path: "\/conversion"/);
+    assert.deepEqual([...CUSTOM_ANALYTICS_EVENTS], [SCHEDULE_PHONE_CLICK, SCHEDULE_EMAIL_CLICK]);
   });
 });

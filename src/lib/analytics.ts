@@ -2,6 +2,38 @@ import type { BeforeSendEvent } from "@vercel/analytics/next";
 
 const PRIVATE_PATHS = new Set(["/privacy-practices"]);
 
+export const SCHEDULE_PHONE_CLICK = "Schedule Phone Click";
+export const SCHEDULE_EMAIL_CLICK = "Schedule Email Click";
+
+export const CUSTOM_ANALYTICS_EVENTS = [
+  SCHEDULE_PHONE_CLICK,
+  SCHEDULE_EMAIL_CLICK,
+] as const;
+
+export type CustomAnalyticsEvent = (typeof CUSTOM_ANALYTICS_EVENTS)[number];
+export type ScheduleContactKind = "phone" | "email";
+
+export function isAllowedCustomAnalyticsEvent(
+  name: string,
+): name is CustomAnalyticsEvent {
+  return (CUSTOM_ANALYTICS_EVENTS as readonly string[]).includes(name);
+}
+
+export function scheduleContactEventName(
+  kind: ScheduleContactKind,
+): CustomAnalyticsEvent {
+  switch (kind) {
+    case "phone":
+      return SCHEDULE_PHONE_CLICK;
+    case "email":
+      return SCHEDULE_EMAIL_CLICK;
+    default: {
+      const _exhaustive: never = kind;
+      return _exhaustive;
+    }
+  }
+}
+
 function normalizedPathname(pathname: string) {
   if (pathname === "/") return pathname;
   return pathname.replace(/\/+$/, "") || "/";

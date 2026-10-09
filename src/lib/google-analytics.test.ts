@@ -87,6 +87,19 @@ describe("Google Analytics lifecycle", () => {
     controller.page("/", "", "", true);
     assert.deepEqual(calls, [["disabled",true],["disabled",true]]);
   });
+  it("sends allowlisted custom events without extra parameters", () => {
+    const {calls,controller} = harness();
+    controller.event("Schedule Phone Click");
+    controller.page("/schedule", "", "");
+    controller.event("Schedule Phone Click");
+    controller.event("Schedule Email Click");
+    controller.event("Lead Submit");
+    const custom = calls.filter(([command,event]) => command === "event" && event !== "page_view");
+    assert.deepEqual(custom, [
+      ["event", "Schedule Phone Click", { send_to: GOOGLE_ANALYTICS_MEASUREMENT_ID }],
+      ["event", "Schedule Email Click", { send_to: GOOGLE_ANALYTICS_MEASUREMENT_ID }],
+    ]);
+  });
   it("keeps initial acquisition through SPA navigation without replaying raw tags", () => {
     const {calls,controller} = harness();
     controller.page("/", "?utm_source=google&utm_medium=cpc", "");

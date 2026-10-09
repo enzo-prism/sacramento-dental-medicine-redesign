@@ -20,9 +20,7 @@ Sibling practice site: `enzo-prism/waikiki-dental`. Do not mix copy, phone numbe
 
 - Content, hours, services, doctors, reviews, schema: `src/data/site.ts`
 - Design tokens: `src/app/globals.css`
-- Appointment Server Action: `src/app/actions.ts`
-- Scheduler UI: `src/components/Scheduler.tsx`
-- Contact validation helpers: `src/lib/appointment.ts`
+- Online booking: Jarvis iframe plus office phone/email on `/schedule`
 - Home title, description, and social copy: `seo` in `src/data/site.ts`
 - Reviews metadata: `src/app/reviews/page.tsx` (derived from `socialProof`)
 - Social-card layout: `src/lib/social-image.tsx`
@@ -54,14 +52,12 @@ emergency visits are guaranteed.
 
 ## Scheduler
 
-Name is required. A phone number **or** an email is enough — at least one, not
-both. Keep email **optional** in the Formspree dashboard or phone-only requests
-will 400. Endpoint: `formspreeEndpoint` in `src/data/site.ts`
-(`https://formspree.io/f/xvkpdvyz`), overridable with `FORMSPREE_ENDPOINT`.
-
-Optional `LEAD_WEBHOOK_URL` in `.env.local` / Vercel / Cloud Agent secrets is a
-second hop after Formspree succeeds. Do not claim the front desk received a lead
-unless Formspree accepted the POST.
+`/schedule` embeds Jarvis
+(`https://schedule.jarvisanalytics.com/frame?eoid=9251&elid=9000000000334`)
+as the only online booking. Directly beside/below it, show the office phone
+(`contact.phoneHref`) and the verified front-desk email (`contact.emailHref`).
+Do not add a second request form. Phone and email clicks fire allowlisted
+custom events (`Schedule Phone Click`, `Schedule Email Click`) with no PII.
 
 ## Seasonal layer (October)
 
@@ -124,12 +120,10 @@ python3 scripts/generate-seo-assets.py  # only after changing the practice mark 
 ## Cursor Cloud specific instructions
 
 - Install is `npm ci`. Dev server is already started in the `dev` terminal on port 3000.
-- After UI or content changes, run `npm run lint`, `npm test`, and `npm run build`. Open http://localhost:3000 and click through Home, the scheduler (`#visit`), Emergency, Doctors, and New Patients (FAQ lives there).
-- Scheduler contact step: name plus phone **or** email. Confirm submit stays disabled with neither, and enables with either one alone.
-- Do **not** treat a successful form submit as practice delivery unless Formspree (or `LEAD_WEBHOOK_URL`) accepted the request and the user asked for a controlled test.
+- After UI or content changes, run `npm run lint`, `npm test`, and `npm run build`. Open http://localhost:3000 and click through Home, `/schedule`, Emergency, Doctors, and New Patients (FAQ lives there).
+- `/schedule` should show the Jarvis iframe and the office phone/email, with no Formspree request form.
 - Preserve `sacramentodentalmedicine.com` as the canonical production domain and verify it after every release.
 - Positioning: grow new-patient volume via search, phone, and simple lead capture. Keep booking friction low.
 - Design: tokens in `src/app/globals.css` only. Periwinkle is atmosphere; navy is action. Ember is emergencies. Keep a single night band (Visit). Primary Book pills: header, hero, Visit, footer, mobile bar.
 - Hero / waiting / still-life images are atmospheric stand-ins, not the Elverta office. Do not write alt text or copy that claims they are the practice's rooms.
 - `officePhotos` in `src/data/site.ts` are real Elverta Road interiors and the storefront (`/images/office-*.webp`). Keep those alts honest (office rooms, not patients).
-- If `LEAD_WEBHOOK_URL` is missing, the site still runs. Add it only as a Cloud Agents **runtime secret**, never in git.

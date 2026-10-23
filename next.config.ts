@@ -89,6 +89,11 @@ const nextConfig: NextConfig = {
         destination: "/meet-dr-narodovich",
         permanent: true,
       },
+      {
+        source: "/wisdom-teeth-removal-sacramento/",
+        destination: "/wisdom-teeth-removal-sacramento",
+        permanent: true,
+      },
       ...restoredServiceRoutes.map((slug) => ({
         source: `/${slug}/`,
         destination: `/${slug}`,

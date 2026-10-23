@@ -5,7 +5,13 @@ import { useEffect, useState } from "react";
 import { CalendarDays, Phone } from "lucide-react";
 import { contact } from "@/data/site";
 
-export function MobileCTA() {
+export function MobileCTA({
+  bookHref = contact.bookingHref,
+  bookLabel = "Book online",
+}: {
+  bookHref?: string;
+  bookLabel?: string;
+}) {
   const [hidden, setHidden] = useState(false);
 
   useEffect(() => {
@@ -36,9 +42,9 @@ export function MobileCTA() {
         <Phone className="size-4" />
         Call
       </a>
-      <Link href={contact.bookingHref} className="mobile-cta-primary">
+      <Link href={bookHref} className="mobile-cta-primary">
         <CalendarDays className="size-4" />
-        Book online
+        {bookLabel}
       </Link>
     </nav>
   );

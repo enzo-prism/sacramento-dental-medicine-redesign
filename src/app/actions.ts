@@ -1,0 +1,201 @@
+"use server";
+
+import { headers } from "next/headers";
+import { after } from "next/server";
+import { contact, formspreeEndpoint } from "@/data/site";
+import {
+  APPOINTMENT_FIELD_LIMITS,
+  contactFieldErrors,
+  formatUsPhone,
+  type AppointmentState,
+} from "@/lib/appointment";
+import { readAttributionFromFormData } from "@/lib/lead-attribution";
+import {
+  acceptedFormspreeResponse,
+  buildAppointmentFormspreePayload,
+  buildFormspreeRequestInit,
+  resolveFormspreeReferer,
+  resolveFormspreeEndpoint,
+  type AppointmentLead,
+} from "@/lib/formspree";
+import {
+  UUID_V4,
+  acceptedMeasurementEventId,
+  acceptedMeasurementReference,
+  isMeasurementTest,
+} from "@/lib/openai-measurement";
+import { siteUrl } from "@/lib/site-url";
+
+const WEBHOOK_TIMEOUT_MS = 4_000;
+const LANDING_VISIT_TYPE = "Wisdom teeth evaluation";
+
+function field(formData: FormData, key: string): string {
+  const value = formData.get(key);
+  return typeof value === "string" ? value.trim() : "";
+}
+
+/**
+ * Appointment-request handler used by the wisdom-teeth landing form.
+ * `/schedule` stays Jarvis-only. Server Functions are reachable via direct
+ * POST, so all input is treated as untrusted.
+ */
+export async function requestAppointment(
+  _prevState: AppointmentState,
+  formData: FormData,
+): Promise<AppointmentState> {
+  // Honeypot: real users never fill this. Pretend success on bots.
+  if (field(formData, "_gotcha")) {
+    return { ok: true, message: "Thanks — we'll be in touch shortly.", errors: {} };
+  }
+
+  const name = field(formData, "name");
+  const phone = field(formData, "phone");
+  const email = field(formData, "email");
+  const visitType = field(formData, "visitType") || LANDING_VISIT_TYPE;
+  const notes = field(formData, "notes");
+  const privacyConsent = field(formData, "privacyConsent");
+
+  if (visitType !== LANDING_VISIT_TYPE) {
+    return {
+      ok: false,
+      message: "Please request a wisdom teeth evaluation from this page.",
+      errors: {},
+    };
+  }
+
+  const errors: AppointmentState["errors"] = {
+    ...contactFieldErrors(phone, email),
+  };
+  if (name.length < 2) errors.name = "Please enter your name.";
+  else if (name.length > APPOINTMENT_FIELD_LIMITS.name) {
+    errors.name = "Please keep your name under 120 characters.";
+  }
+  if (phone.length > APPOINTMENT_FIELD_LIMITS.phone) {
+    errors.phone = "Please enter a shorter phone number.";
+  }
+  if (email.length > APPOINTMENT_FIELD_LIMITS.email) {
+    errors.email = "Please keep your email under 254 characters.";
+  }
+  if (notes.length > APPOINTMENT_FIELD_LIMITS.notes) {
+    errors.notes = "Please keep your note under 500 characters.";
+  }
+  if (privacyConsent !== "confirmed") {
+    errors.privacy = "Please confirm that your message does not include sensitive health or payment information.";
+  }
+
+  if (Object.keys(errors).length > 0) {
+    return {
+      ok: false,
+      message: "Please fix the highlighted fields and try again.",
+      errors,
+    };
+  }
+
+  const eventId = crypto.randomUUID();
+  const isTest = isMeasurementTest(name, email, field(formData, "_codex_test"));
+  const measurementEventId = acceptedMeasurementEventId(true, isTest, eventId);
+  const measurementClickReference = acceptedMeasurementReference(
+    field(formData, "_openai_click_reference"),
+    field(formData, "_openai_click_captured_at"),
+    field(formData, "_openai_measurement_consent"),
+    field(formData, "_openai_submitted_at"),
+  );
+  const consentEpoch = field(formData, "_openai_consent_epoch");
+  const lead: AppointmentLead = {
+    measurementEventId,
+    name,
+    phone: phone ? formatUsPhone(phone) : "",
+    email,
+    visitType,
+    date: "",
+    dateLabel: "",
+    time: "",
+    notes,
+    receivedAt: new Date().toISOString(),
+    attribution: readAttributionFromFormData(formData),
+  };
+  const formspreeReferer = resolveFormspreeReferer(
+    await headers(),
+    siteUrl,
+    "/wisdom-teeth-removal-sacramento/",
+  );
+
+  try {
+    await deliverToFormspree(lead, formspreeReferer);
+  } catch (err) {
+    console.error("[appointment] Formspree delivery failed", err);
+    return {
+      ok: false,
+      message: `Something went wrong on our end. Please call us at ${contact.phoneDisplay} or email ${contact.email}.`,
+      errors: {},
+    };
+  }
+
+  const webhook = process.env.LEAD_WEBHOOK_URL;
+  if (webhook) {
+    try {
+      after(() => deliverToWebhook(webhook, lead));
+    } catch (err) {
+      console.error("[appointment] could not schedule extra webhook", err);
+    }
+  }
+
+  return {
+    ok: true,
+    measurementEventId,
+    measurementClickReference: measurementEventId ? measurementClickReference : undefined,
+    measurementConsentEpoch: measurementEventId && UUID_V4.test(consentEpoch) ? consentEpoch : undefined,
+    message:
+      "Your request was sent. We'll reach out during office hours to confirm a time.",
+    errors: {},
+  };
+}
+
+function formspreeErrorMessage(body: unknown, status: number): string {
+  if (body && typeof body === "object") {
+    if ("errors" in body && Array.isArray((body as { errors: unknown }).errors)) {
+      const parts = (body as { errors: { message?: string }[] }).errors
+        .map((e) => e.message)
+        .filter(Boolean);
+      if (parts.length) return parts.join("; ");
+    }
+    if ("error" in body && (body as { error: unknown }).error) {
+      return String((body as { error: unknown }).error);
+    }
+  }
+  return `HTTP ${status}`;
+}
+
+async function deliverToFormspree(lead: AppointmentLead, referer: string): Promise<void> {
+  const endpoint = resolveFormspreeEndpoint(process.env.FORMSPREE_ENDPOINT, formspreeEndpoint);
+  const payload = buildAppointmentFormspreePayload(lead);
+
+  const res = await fetch(
+    endpoint,
+    buildFormspreeRequestInit(payload, referer),
+  );
+
+  let body: unknown;
+  try {
+    body = await res.json();
+  } catch {
+    body = undefined;
+  }
+  if (!acceptedFormspreeResponse(res.ok, body)) {
+    throw new Error(`Formspree rejected the lead: ${formspreeErrorMessage(body, res.status)}`);
+  }
+}
+
+async function deliverToWebhook(webhook: string, lead: AppointmentLead): Promise<void> {
+  try {
+    const res = await fetch(webhook, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(lead),
+      signal: AbortSignal.timeout(WEBHOOK_TIMEOUT_MS),
+    });
+    if (!res.ok) console.error("[appointment] extra webhook returned", res.status);
+  } catch (err) {
+    console.error("[appointment] extra webhook failed", err);
+  }
+}

@@ -15,6 +15,7 @@ const PUBLIC_PAGES: Record<string, { path: string; title: string; group: string 
   "/new-patients": { path: "/new-patients", title: "Visit information", group: "Visit information" },
   "/meet-dr-narodovich": { path: "/team", title: "Team", group: "Team" },
   "/schedule": { path: "/conversion", title: "Contact page", group: "Contact page" },
+  "/wisdom-teeth-removal-sacramento": { path: "/campaign", title: "Campaign landing", group: "Campaign landing" },
 };
 const TREATMENT_PATHS = new Set([
   "/dental-crowns", "/sedation-dentistry", "/orthodontics", "/invisalign",

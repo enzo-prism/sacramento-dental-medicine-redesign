@@ -1,4 +1,26 @@
+import { isGoogleAnalyticsProductionHostname } from "./google-analytics.ts";
+
 /** This module never exposes appointment fields to the vendor SDK. */
+
+/** Public Ads Manager pixel for SDM ChatGPT ads. Env override wins. */
+export const OPENAI_ADS_PIXEL_ID_DEFAULT = "YWA2U3Z6abzG5ipuKrBkKb";
+
+/**
+ * Resolves the OpenAI Ads pixel ID.
+ * `NEXT_PUBLIC_OPENAI_ADS_PIXEL_ID` wins when it is a well-formed public ID.
+ * Production falls back to the Ads Manager pixel so measurement cannot
+ * silently disable itself if the env var is missing.
+ */
+export function openaiAdsPixelId(
+  envValue = process.env.NEXT_PUBLIC_OPENAI_ADS_PIXEL_ID,
+  hostname = typeof window === "undefined" ? "" : window.location.hostname,
+) {
+  const fromEnv = envValue?.trim() ?? "";
+  if (/^[a-zA-Z0-9_-]{1,128}$/.test(fromEnv)) return fromEnv;
+  if (hostname && !isGoogleAnalyticsProductionHostname(hostname)) return "";
+  return OPENAI_ADS_PIXEL_ID_DEFAULT;
+}
+
 export const OPENAI_CONSENT_KEY = "sdm_openai_measurement_consent_v1";
 export const OPENAI_CONSENT_EPOCH_KEY = "sdm_openai_measurement_epoch_v1";
 export const OPENAI_CONSENT_EVENT = "sdm:openai-consent";

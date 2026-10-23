@@ -4,10 +4,14 @@ const PRIVATE_PATHS = new Set(["/privacy-practices"]);
 
 export const SCHEDULE_PHONE_CLICK = "Schedule Phone Click";
 export const SCHEDULE_EMAIL_CLICK = "Schedule Email Click";
+export const GENERATE_LEAD = "generate_lead";
+export const CLICK_TO_CALL = "click_to_call";
 
 export const CUSTOM_ANALYTICS_EVENTS = [
   SCHEDULE_PHONE_CLICK,
   SCHEDULE_EMAIL_CLICK,
+  GENERATE_LEAD,
+  CLICK_TO_CALL,
 ] as const;
 
 export type CustomAnalyticsEvent = (typeof CUSTOM_ANALYTICS_EVENTS)[number];
@@ -44,6 +48,7 @@ function analyticsPath(pathname: string) {
 
   if (PRIVATE_PATHS.has(normalized)) return null;
   if (normalized === "/schedule") return "/conversion";
+  if (normalized === "/wisdom-teeth-removal-sacramento") return "/campaign";
   if (normalized === "/reviews") return "/reviews";
   return "/";
 }

@@ -12,15 +12,35 @@ describe("wisdom teeth landing content", () => {
       "utf8",
     );
     const sitemap = readFileSync(join(process.cwd(), "src/app/sitemap.ts"), "utf8");
-    assert.equal(page.includes("noindex"), false);
-    assert.match(sitemap, /wisdom-teeth-removal-sacramento/);
+    assert.match(page, /robots:\s*\{\s*index:\s*false,\s*follow:\s*true\s*\}/);
+    assert.doesNotMatch(sitemap, /wisdom-teeth-removal-sacramento/);
+    assert.doesNotMatch(sitemap, /2026-10-23/);
     assert.match(wisdomTeethLanding.h1, /Wisdom teeth removal in Sacramento/);
-    assert.ok(wisdomTeethLanding.cities.includes("Rio Linda"));
+    assert.deepEqual(contact.serviceArea, [
+      "Antelope",
+      "Sacramento",
+      "Roseville",
+      "Citrus Heights",
+      "North Highlands",
+      "Folsom",
+    ]);
+    assert.equal(contact.serviceArea.includes("Rio Linda"), false);
+    assert.match(page, /contact\.serviceArea/);
     assert.ok(wisdomTeethLanding.intro.includes(contact.addressLine1));
     assert.equal(wisdomTeethLanding.officeLine, `${contact.addressLine1}, ${contact.addressLine2}`);
     assert.equal(formspreeEndpoint, "https://formspree.io/f/xvkpdvyz");
     const blob = JSON.stringify(wisdomTeethLanding);
     assert.doesNotMatch(blob, /CareCredit|Medi-Cal|\$\d/);
     assert.match(blob, /call the front desk/i);
+  });
+
+  it("blocks every non-mocked measurement-server fetch including LEAD_WEBHOOK_URL", () => {
+    const fixture = readFileSync(
+      join(process.cwd(), "tests/measurement/server-fetch-fixture.mjs"),
+      "utf8",
+    );
+    assert.match(fixture, /LEAD_WEBHOOK_URL/);
+    assert.match(fixture, /Unmocked fetch blocked/);
+    assert.doesNotMatch(fixture, /originalFetch\s*\(/);
   });
 });

@@ -39,7 +39,7 @@ describe("search content integrity", () => {
       "platelet-rich-fibrin",
     ]);
   });
-  it("publishes an indexable Sacramento wisdom-teeth landing with FAQ copy", () => {
+  it("publishes a noindex Sacramento wisdom-teeth landing with FAQ copy", () => {
     assert.equal(wisdomTeethLanding.slug, "wisdom-teeth-removal-sacramento");
     assert.match(wisdomTeethLanding.h1, /Wisdom teeth removal in Sacramento/);
     assert.ok(wisdomTeethLanding.faqs.length >= 4);

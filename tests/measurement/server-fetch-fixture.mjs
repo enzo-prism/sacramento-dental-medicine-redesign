@@ -1,6 +1,7 @@
-// Loaded only by Playwright's local development server. Every Formspree POST
-// is intercepted before transport; this is never deployed or imported by app code.
-const originalFetch = globalThis.fetch;
+// Loaded only by Playwright's local development server. Every outbound
+// fetch is intercepted; this is never deployed or imported by app code.
+// Formspree is stubbed. Everything else — including LEAD_WEBHOOK_URL —
+// is rejected so measurement specs cannot leak to the network.
 globalThis.fetch = async (input, init) => {
   const url = new URL(typeof input === "string" || input instanceof URL ? input : input.url);
   if (url.hostname === "formspree.io") {
@@ -10,5 +11,5 @@ globalThis.fetch = async (input, init) => {
       status: accepted ? 200 : 400, headers: { "Content-Type": "application/json" },
     });
   }
-  return originalFetch(input, init);
+  throw new Error(`Unmocked fetch blocked: ${url.href}`);
 };

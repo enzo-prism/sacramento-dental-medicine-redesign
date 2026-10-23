@@ -11,6 +11,7 @@ import {
 } from "@/lib/appointment";
 import { readAttributionFromFormData } from "@/lib/lead-attribution";
 import {
+  acceptedFormspreeResponse,
   buildAppointmentFormspreePayload,
   buildFormspreeRequestInit,
   resolveFormspreeReferer,
@@ -174,8 +175,13 @@ async function deliverToFormspree(lead: AppointmentLead, referer: string): Promi
     buildFormspreeRequestInit(payload, referer),
   );
 
-  const body: unknown = await res.json().catch(() => null);
-  if (!res.ok) {
+  let body: unknown;
+  try {
+    body = await res.json();
+  } catch {
+    body = undefined;
+  }
+  if (!acceptedFormspreeResponse(res.ok, body)) {
     throw new Error(`Formspree rejected the lead: ${formspreeErrorMessage(body, res.status)}`);
   }
 }

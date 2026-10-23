@@ -32,14 +32,6 @@ export const wisdomTeethLanding = {
     "Local numbing is part of extraction care. The practice also uses computer-controlled numbing (The Wand). Tell the team about anxiety or comfort concerns so they can explain the options that may be appropriate for your health and the procedure. A dentist must review your medical history before confirming whether sedation is appropriate — do not assume a particular medication or method is offered.",
   coverage:
     "Call the front desk with your plan information to confirm whether your dental plan is accepted and to ask about current payment options. Estimates depend on the exam and the care you need. This page does not list insurance plans, financing products, or prices.",
-  cities: [
-    "Sacramento",
-    "Antelope",
-    "Roseville",
-    "Citrus Heights",
-    "North Highlands",
-    "Rio Linda",
-  ] as const,
   officeLine: `${contact.addressLine1}, ${contact.addressLine2}`,
   faqs: [
     {

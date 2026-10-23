@@ -109,6 +109,11 @@ export function resolveFormspreeReferer(
   return `${fallbackOrigin.replace(/\/$/, "")}${path}`;
 }
 
+/** HTTP 2xx is not enough — a non-JSON body means the lead was not confirmed. */
+export function acceptedFormspreeResponse(ok: boolean, body: unknown): boolean {
+  return ok && body !== undefined && body !== null && typeof body === "object";
+}
+
 export function buildFormspreeRequestInit(
   payload: Record<string, string>,
   referer: string,

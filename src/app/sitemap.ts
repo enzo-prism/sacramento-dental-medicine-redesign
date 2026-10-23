@@ -29,12 +29,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.8,
     },
-    {
-      url: `${siteUrl}/wisdom-teeth-removal-sacramento`,
-      lastModified: new Date("2026-10-23"),
-      changeFrequency: "monthly",
-      priority: 0.9,
-    },
   ];
 
   const serviceRoutes: MetadataRoute.Sitemap = servicePages.map(({ slug }) => ({

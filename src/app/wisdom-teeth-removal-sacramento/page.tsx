@@ -35,6 +35,7 @@ export const metadata: Metadata = {
     title: wisdomTeethLanding.h1,
     description: wisdomTeethLanding.description,
   },
+  robots: { index: false, follow: true },
 };
 
 export default function WisdomTeethRemovalSacramentoPage() {
@@ -48,7 +49,7 @@ export default function WisdomTeethRemovalSacramentoPage() {
             name: "Wisdom teeth removal",
             description: wisdomTeethLanding.intro,
             url: `${siteUrl}${path}`,
-            areaServed: [...wisdomTeethLanding.cities],
+            areaServed: [...contact.serviceArea],
             provider: { "@id": practiceId },
           },
           {
@@ -205,7 +206,7 @@ export default function WisdomTeethRemovalSacramentoPage() {
                 a visit from your city is a good fit.
               </p>
               <ul className="mt-6 flex flex-wrap gap-2">
-                {wisdomTeethLanding.cities.map((city) => (
+                {contact.serviceArea.map((city) => (
                   <li
                     key={city}
                     className="rounded-full border border-line bg-white px-3.5 py-1.5 text-sm font-medium text-ink"

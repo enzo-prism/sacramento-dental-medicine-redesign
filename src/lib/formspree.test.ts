@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { emptyAttribution } from "./lead-attribution.ts";
 import {
+  acceptedFormspreeResponse,
   buildAppointmentFormspreePayload,
   buildFormspreeRequestInit,
   resolveFormspreeReferer,
@@ -68,6 +69,17 @@ describe("resolveFormspreeReferer", () => {
       "https://sacramentodentalmedicine.com",
     );
     assert.equal(referer, "https://sacramentodentalmedicine.com/wisdom-teeth-removal-sacramento/");
+  });
+});
+
+describe("acceptedFormspreeResponse", () => {
+  it("treats HTTP 200 with a non-JSON body as failure", () => {
+    assert.equal(acceptedFormspreeResponse(true, { ok: true }), true);
+    assert.equal(acceptedFormspreeResponse(true, undefined), false);
+    assert.equal(acceptedFormspreeResponse(true, null), false);
+    assert.equal(acceptedFormspreeResponse(true, "<html>ok</html>"), false);
+    assert.equal(acceptedFormspreeResponse(false, { ok: true }), false);
+    assert.equal(acceptedFormspreeResponse(false, undefined), false);
   });
 });
 

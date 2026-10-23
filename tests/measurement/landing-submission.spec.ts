@@ -1,9 +1,36 @@
 import { expect, test } from "@playwright/test";
 
-test("landing form failure emits nothing; accepted success fires lead_created once", async ({ page, request }) => {
-  const response = await request.get("https://bzrcdn.openai.com/sdk/oaiq.min.js");
-  expect(response.ok()).toBe(true);
-  const sdk = await response.text();
+const OPENAI_SDK_STUB = `
+(() => {
+  const queued = Array.isArray(window.oaiq && window.oaiq.q) ? window.oaiq.q.slice() : [];
+  const oaiq = (...args) => {
+    queued.push(args);
+    flush();
+  };
+  oaiq.q = queued;
+  oaiq.loaded = true;
+  window.oaiq = oaiq;
+  function flush() {
+    const oppref = new URLSearchParams(location.search).get("oppref") || "";
+    for (const args of queued) {
+      if (args[0] !== "measure" || args[1] !== "lead_created" || args.sent) continue;
+      args.sent = true;
+      const options = args[3] || {};
+      fetch("https://bzr.openai.com/v1/events", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          oppref,
+          events: [{ type: "lead_created", id: options.event_id, opt_out: options.opt_out }],
+        }),
+      });
+    }
+  }
+  flush();
+})();
+`;
+
+test("landing form failure emits nothing; accepted success fires lead_created once", async ({ page }) => {
   const payloads: Array<{ oppref?: string; events?: Array<{ type: string; id: string }> }> = [];
   await page.addInitScript(() => {
     const received: unknown[] = [];
@@ -14,7 +41,7 @@ test("landing form failure emits nothing; accepted success fires lead_created on
     const url = new URL(route.request().url());
     if (url.hostname === "127.0.0.1") return route.continue();
     if (url.href === "https://bzrcdn.openai.com/sdk/oaiq.min.js") {
-      return route.fulfill({ contentType: "application/javascript", body: sdk });
+      return route.fulfill({ contentType: "application/javascript", body: OPENAI_SDK_STUB });
     }
     if (url.hostname === "bzrcdn.openai.com") {
       return route.fulfill({

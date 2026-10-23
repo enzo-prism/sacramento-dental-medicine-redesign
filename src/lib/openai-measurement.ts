@@ -35,6 +35,17 @@ export function validClickReference(value: unknown): string {
     && !/[\u0000-\u0020\u007f]/.test(value) ? value : "";
 }
 
+function hasOpenAITrackingSource(params: URLSearchParams) {
+  return /^(chatgpt|openai)$/i.test((params.get("utm_source") ?? "").trim());
+}
+
+/** Ads Manager reserves the oppref query key; its macro can use click_id. */
+export function measurementUrlClickReference(search: string) {
+  const params = new URLSearchParams(search);
+  return validClickReference(params.get("oppref"))
+    || (hasOpenAITrackingSource(params) ? validClickReference(params.get("click_id")) : "");
+}
+
 export function isMeasurementTest(name: string, email: string, explicit = "") {
   return explicit === "true" || /^(?:codex tracking test|sdm launch test)\b/i.test(name)
     || /@(?:example\.(?:com|org|net)|test\.invalid)$/i.test(email);
@@ -68,8 +79,10 @@ let lastUrlReference = "";
 let clicksRevoked = false;
 export function consumeMeasurementClickUrl() {
   const url = new URL(window.location.href);
-  if (!url.searchParams.has("oppref")) return;
+  const hasAlias = hasOpenAITrackingSource(url.searchParams) && url.searchParams.has("click_id");
+  if (!url.searchParams.has("oppref") && !hasAlias) return;
   url.searchParams.delete("oppref");
+  if (hasAlias) url.searchParams.delete("click_id");
   // Preserve Next's router state and every unrelated query parameter/hash.
   window.history.replaceState(window.history.state, "", `${url.pathname}${url.search}${url.hash}`);
 }
@@ -94,7 +107,7 @@ function privacyRestricted() {
 export function measurementClickReference() {
   if (privacyRestricted()) { purgeMeasurementClick(); return ""; }
   const now = Date.now();
-  const current = validClickReference(new URLSearchParams(window.location.search).get("oppref"));
+  const current = measurementUrlClickReference(window.location.search);
   const allowed = measurementAllowed();
   let stored: MeasurementClickRecord | null = null;
   let rejectedStoredReference = "";

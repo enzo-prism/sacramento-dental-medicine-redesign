@@ -86,7 +86,15 @@ Accepted landing-page leads also dispatch `sdm:openai-lead`, which the existing
 sandboxed `/measurement/openai.html` iframe turns into OpenAI `lead_created`.
 The public pixel ID is `NEXT_PUBLIC_OPENAI_ADS_PIXEL_ID`, falling back to
 `YWA2U3Z6abzG5ipuKrBkKb` on production. Measurement is consent-gated (opt-in).
-Ad URLs should include `&oppref={oppref}` so the click reference can be stored
+Ad-group tracking should include `&click_id={oppref}` alongside
+`utm_source=chatgpt`. Ads Manager reserves the `oppref` query key and rejects
+`oppref={oppref}`. The website accepts the documented custom-key macro as
+an alias only for `chatgpt` or `openai` traffic, while retaining native
+`oppref` support. Both forms enter the same consent, expiry and URL-cleanup
+path, and the isolated measurement frame receives the original reference as
+`oppref`. Unrelated `click_id` values are not treated as OpenAI attribution.
+See [OpenAI tracking parameters](https://developers.openai.com/ads/campaign-management#tracking-parameters).
+This lets the click reference be stored
 for up to 30 days in first-party `localStorage`.
 
 Acquisition now preserves only recognized referral origins (no paths or query

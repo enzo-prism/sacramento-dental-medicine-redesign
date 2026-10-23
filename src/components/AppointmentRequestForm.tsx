@@ -69,7 +69,10 @@ export function AppointmentRequestForm() {
     requestAppointment,
     initialAppointmentState,
   );
+  const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [notes, setNotes] = useState("");
   const [privacyConfirmed, setPrivacyConfirmed] = useState(false);
   const successRef = useRef<HTMLHeadingElement>(null);
   const measured = useRef(new Set<string>());
@@ -124,6 +127,7 @@ export function AppointmentRequestForm() {
         action={formAction}
         className="mt-6 grid gap-4"
         aria-busy={pending}
+        onReset={(event) => event.preventDefault()}
         onSubmit={(event) => {
           const snapshot = measurementClickSnapshot();
           const requestFields: Record<string, string> = {
@@ -161,6 +165,8 @@ export function AppointmentRequestForm() {
             label="Your name"
             name="name"
             autoComplete="name"
+            value={name}
+            onChange={(event) => setName(event.target.value)}
             maxLength={APPOINTMENT_FIELD_LIMITS.name}
             error={state.errors.name}
           />
@@ -196,6 +202,8 @@ export function AppointmentRequestForm() {
                 inputMode="email"
                 autoComplete="email"
                 spellCheck={false}
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
                 maxLength={APPOINTMENT_FIELD_LIMITS.email}
                 error={state.errors.email}
               />
@@ -212,6 +220,8 @@ export function AppointmentRequestForm() {
               name="notes"
               rows={2}
               maxLength={APPOINTMENT_FIELD_LIMITS.notes}
+              value={notes}
+              onChange={(event) => setNotes(event.target.value)}
               placeholder="Scheduling context or a general question"
               aria-invalid={state.errors.notes ? true : undefined}
               aria-describedby={state.errors.notes ? "notes-error" : "notes-privacy-help"}

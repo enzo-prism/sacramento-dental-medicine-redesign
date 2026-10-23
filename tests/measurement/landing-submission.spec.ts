@@ -42,6 +42,8 @@ test("landing form failure emits nothing; accepted success fires lead_created on
   expect(await page.evaluate(() => (window as typeof window & { confirmedSignals: unknown[] }).confirmedSignals)).toEqual([]);
 
   await page.getByLabel("Your name", { exact: true }).fill("Local Success Fixture");
+  await page.getByLabel("Email", { exact: true }).fill("fixture@patient.invalid");
+  await page.locator("#appointment-privacy").check();
   await page.getByRole("button", { name: "Request this visit" }).click();
   await expect(page.getByRole("heading", { name: "Request sent", exact: true })).toBeVisible();
   const signals = await page.evaluate(() => (window as typeof window & { confirmedSignals: Array<{ eventId: string }> }).confirmedSignals);

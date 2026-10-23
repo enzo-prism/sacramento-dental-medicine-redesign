@@ -1,8 +1,21 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { acceptedMeasurementReference, acceptedMeasurementEventId, isMeasurementTest, validClickReference, parseMeasurementClickRecord, OPENAI_CLICK_LIFETIME_MS, OPENAI_ADS_PIXEL_ID_DEFAULT, openaiAdsPixelId } from "./openai-measurement.ts";
+import { acceptedMeasurementReference, acceptedMeasurementEventId, isMeasurementTest, validClickReference, measurementUrlClickReference, parseMeasurementClickRecord, OPENAI_CLICK_LIFETIME_MS, OPENAI_ADS_PIXEL_ID_DEFAULT, openaiAdsPixelId } from "./openai-measurement.ts";
 
 const id = "b65ee13a-1299-4e3a-9ccd-2cc692ae4f93";
+describe("OpenAI URL click references", () => {
+  it("accepts the approved click_id macro only on OpenAI-tagged visits", () => {
+    assert.equal(measurementUrlClickReference("?utm_source=chatgpt&click_id=exact-Reference_123"), "exact-Reference_123");
+    assert.equal(measurementUrlClickReference("?utm_source=OpenAI&click_id=exact-Reference_123"), "exact-Reference_123");
+    for (const search of ["?click_id=unrelated", "?utm_source=google&click_id=unrelated", "?utm_source=chatgpt&click_id=has%20space"]) {
+      assert.equal(measurementUrlClickReference(search), "");
+    }
+  });
+  it("preserves native oppref support and gives it precedence over the alias", () => {
+    assert.equal(measurementUrlClickReference("?oppref=native-Reference"), "native-Reference");
+    assert.equal(measurementUrlClickReference("?oppref=native-Reference&utm_source=chatgpt&click_id=other"), "native-Reference");
+  });
+});
 describe("accepted appointment measurement", () => {
   it("never identifies failed, honeypot or test responses as acquisition conversions", () => {
     assert.equal(acceptedMeasurementEventId(false, false, id), undefined);

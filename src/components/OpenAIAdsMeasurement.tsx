@@ -6,6 +6,7 @@ import { isGoogleAnalyticsProductionHostname } from "@/lib/google-analytics";
 import {
   OPENAI_LEAD_EVENT, OPENAI_CONSENT_EVENT, OPENAI_CONSENT_KEY, OPENAI_CONSENT_EPOCH_KEY,
   measurementAllowed, measurementConsentEpoch, resetMemoryChoice, measurementClickReference, validClickReference, UUID_V4,
+  openaiAdsPixelId,
 } from "@/lib/openai-measurement";
 
 type Transport = {
@@ -27,7 +28,7 @@ export const OpenAIAdsMeasurement = () => {
   // Each request's immutable reference gets its own isolated SDK transport;
   // expiry/new clicks never reattribute a previously accepted pending request.
   useEffect(() => {
-    const pixelId = process.env.NEXT_PUBLIC_OPENAI_ADS_PIXEL_ID?.trim() ?? "";
+    const pixelId = openaiAdsPixelId();
     if (!/^[a-zA-Z0-9_-]{1,128}$/.test(pixelId)
       || !(isGoogleAnalyticsProductionHostname(window.location.hostname)
         || (["localhost", "127.0.0.1"].includes(window.location.hostname) && pixelId === "playwright-test-pixel"))) return;

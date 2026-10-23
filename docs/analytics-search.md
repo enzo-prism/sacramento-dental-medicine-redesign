@@ -65,6 +65,7 @@ loaded tag as well as skipping manual views.
 | New patients | `/new-patients` | Visit information |
 | Doctor biography | `/team` | Team |
 | Scheduling | `/conversion` | Contact page |
+| Wisdom-teeth paid landing | `/campaign` | Campaign landing |
 | Reviewed treatment pages | `/care` | Care information |
 
 `/conversion` is a legacy aggregate path, **not a completed lead or key event**.
@@ -72,12 +73,21 @@ Privacy, unknown routes and nonproduction hosts are excluded. No form values,
 contact details, treatment reasons, click IDs or user IDs are sent. Do not
 equate page visits with appointments.
 
-Allowlisted custom events on `/schedule` (no parameters):
+Allowlisted custom events (no parameters):
 
 | Event | Trigger |
 | --- | --- |
 | `Schedule Phone Click` | The office `tel:` link beside/below Jarvis |
 | `Schedule Email Click` | The office `mailto:` link beside/below Jarvis |
+| `generate_lead` | Accepted landing-page appointment request (Formspree success) |
+| `click_to_call` | A `tel:` click on the wisdom-teeth landing page |
+
+Accepted landing-page leads also dispatch `sdm:openai-lead`, which the existing
+sandboxed `/measurement/openai.html` iframe turns into OpenAI `lead_created`.
+The public pixel ID is `NEXT_PUBLIC_OPENAI_ADS_PIXEL_ID`, falling back to
+`YWA2U3Z6abzG5ipuKrBkKb` on production. Measurement is consent-gated (opt-in).
+Ad URLs should include `&oppref={oppref}` so the click reference can be stored
+for up to 30 days in first-party `localStorage`.
 
 Acquisition now preserves only recognized referral origins (no paths or query
 strings), and fixed allowlisted `utm_source` + `utm_medium` pairs. Both must be

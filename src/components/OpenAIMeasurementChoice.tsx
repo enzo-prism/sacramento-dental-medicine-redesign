@@ -4,6 +4,7 @@ import { useEffect, useState, useSyncExternalStore } from "react";
 import {
   measurementChoice, OPENAI_CONSENT_EVENT, OPENAI_SETTINGS_EVENT,
   OPENAI_CONSENT_KEY, resetMemoryChoice, setMeasurementChoice,
+  openaiAdsPixelId,
 } from "@/lib/openai-measurement";
 
 function subscribe(listener: () => void) {
@@ -27,7 +28,7 @@ export function OpenAIMeasurementChoice() {
     window.addEventListener(OPENAI_SETTINGS_EVENT, open);
     return () => window.removeEventListener(OPENAI_SETTINGS_EVENT, open);
   }, []);
-  if (!process.env.NEXT_PUBLIC_OPENAI_ADS_PIXEL_ID || !mounted || (choice && !editing)) return null;
+  if (!openaiAdsPixelId() || !mounted || (choice && !editing)) return null;
   const choose = (value: "granted" | "denied") => { setMeasurementChoice(value); setEditing(false); };
   return (
     <section aria-label="Advertising measurement choice" className="fixed bottom-24 left-4 right-4 z-50 max-w-md rounded-2xl border border-line bg-white p-5 text-sm text-ink shadow-lg lg:bottom-6">

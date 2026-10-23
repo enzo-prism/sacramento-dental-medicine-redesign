@@ -17,6 +17,9 @@ import {
 /** Official custom domain. Do not attach DNS from this repo. */
 export const productionDomain = "https://sacramentodentalmedicine.com";
 
+/** Appointment requests from the wisdom-teeth landing form POST here. */
+export const formspreeEndpoint = "https://formspree.io/f/xvkpdvyz";
+
 export const seo = {
   title: "Antelope, CA Dentist | Sacramento Dental Medicine",
   description:

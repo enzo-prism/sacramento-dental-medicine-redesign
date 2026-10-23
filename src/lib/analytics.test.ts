@@ -1,6 +1,8 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import {
+  CLICK_TO_CALL,
+  GENERATE_LEAD,
   SCHEDULE_EMAIL_CLICK,
   SCHEDULE_PHONE_CLICK,
   isAllowedCustomAnalyticsEvent,
@@ -19,6 +21,19 @@ describe("sanitizeVercelAnalyticsEvent", () => {
       {
         type: "pageview",
         url: "https://sacramentodentalmedicine.com/reviews",
+      },
+    );
+  });
+
+  it("groups the paid wisdom-teeth landing under a non-clinical campaign path", () => {
+    assert.deepEqual(
+      sanitizeVercelAnalyticsEvent({
+        type: "pageview",
+        url: "https://sacramentodentalmedicine.com/wisdom-teeth-removal-sacramento/?utm_source=chatgpt",
+      }),
+      {
+        type: "pageview",
+        url: "https://sacramentodentalmedicine.com/campaign",
       },
     );
   });
@@ -55,11 +70,13 @@ describe("sanitizeVercelAnalyticsEvent", () => {
 });
 
 describe("custom schedule contact events", () => {
-  it("allowlists only the phone and email click names", () => {
+  it("allowlists schedule clicks plus landing-page conversion events", () => {
     assert.equal(scheduleContactEventName("phone"), SCHEDULE_PHONE_CLICK);
     assert.equal(scheduleContactEventName("email"), SCHEDULE_EMAIL_CLICK);
     assert.equal(isAllowedCustomAnalyticsEvent(SCHEDULE_PHONE_CLICK), true);
     assert.equal(isAllowedCustomAnalyticsEvent(SCHEDULE_EMAIL_CLICK), true);
+    assert.equal(isAllowedCustomAnalyticsEvent(GENERATE_LEAD), true);
+    assert.equal(isAllowedCustomAnalyticsEvent(CLICK_TO_CALL), true);
     assert.equal(isAllowedCustomAnalyticsEvent("Lead Submit"), false);
   });
 

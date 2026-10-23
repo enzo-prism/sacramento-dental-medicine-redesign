@@ -18,6 +18,7 @@ describe("Google Analytics measurement boundary", () => {
   });
   it("distinguishes public page groups without retaining treatment names", () => {
     assert.equal(sanitizeGoogleAnalyticsPath("/schedule/"), "/conversion");
+    assert.equal(sanitizeGoogleAnalyticsPath("/wisdom-teeth-removal-sacramento/"), "/campaign");
     assert.equal(sanitizeGoogleAnalyticsPath("/reviews/?email=private#name"), "/reviews");
     assert.equal(sanitizeGoogleAnalyticsPath("/meet-dr-narodovich"), "/team");
     assert.equal(sanitizeGoogleAnalyticsPath("/new-patients"), "/new-patients");
@@ -93,11 +94,15 @@ describe("Google Analytics lifecycle", () => {
     controller.page("/schedule", "", "");
     controller.event("Schedule Phone Click");
     controller.event("Schedule Email Click");
+    controller.event("generate_lead");
+    controller.event("click_to_call");
     controller.event("Lead Submit");
     const custom = calls.filter(([command,event]) => command === "event" && event !== "page_view");
     assert.deepEqual(custom, [
       ["event", "Schedule Phone Click", { send_to: GOOGLE_ANALYTICS_MEASUREMENT_ID }],
       ["event", "Schedule Email Click", { send_to: GOOGLE_ANALYTICS_MEASUREMENT_ID }],
+      ["event", "generate_lead", { send_to: GOOGLE_ANALYTICS_MEASUREMENT_ID }],
+      ["event", "click_to_call", { send_to: GOOGLE_ANALYTICS_MEASUREMENT_ID }],
     ]);
   });
   it("keeps initial acquisition through SPA navigation without replaying raw tags", () => {

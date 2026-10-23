@@ -142,8 +142,9 @@ describe("seasonal layer boundaries", () => {
     const read = (path: string) => readFileSync(join(process.cwd(), path), "utf8");
     assert.match(read("src/app/schedule/page.tsx"), /<Footer seasonal=\{false\} \/>/);
     assert.match(read("src/app/privacy-practices/page.tsx"), /<Footer seasonal=\{false\} \/>/);
+    assert.match(read("src/app/wisdom-teeth-removal-sacramento/page.tsx"), /<Footer seasonal=\{false\} \/>/);
     assert.match(read("src/app/[service]/page.tsx"), /seasonal=\{slug !== "dental-emergencies"\}/);
-    for (const path of ["src/app/schedule/page.tsx", "src/components/ScheduleOfficeContacts.tsx", "src/components/sections/Emergency.tsx", "src/components/MobileCTA.tsx"]) {
+    for (const path of ["src/app/schedule/page.tsx", "src/app/wisdom-teeth-removal-sacramento/page.tsx", "src/components/ScheduleOfficeContacts.tsx", "src/components/sections/Emergency.tsx", "src/components/MobileCTA.tsx"]) {
       assert.doesNotMatch(read(path), /Seasonal|sdm-season/, `${path} must stay undecorated`);
     }
   });

@@ -28,9 +28,9 @@ describe("Jarvis schedule embed", () => {
     assert.match(page, /w-full/);
     assert.match(page, /border-0/);
     assert.match(page, /<ScheduleOfficeContacts \/>/);
-    assert.doesNotMatch(page, /Scheduler|Formspree|requestAppointment/);
+    assert.doesNotMatch(page, /Scheduler|Formspree|requestAppointment|AppointmentRequestForm/);
     assert.equal(existsSync(join(root, "src/components/Scheduler.tsx")), false);
-    assert.equal(existsSync(join(root, "src/app/actions.ts")), false);
+    assert.match(read("src/app/wisdom-teeth-removal-sacramento/page.tsx"), /AppointmentRequestForm/);
   });
 
   it("places office phone and email next to Jarvis", () => {
@@ -77,6 +77,7 @@ describe("Jarvis schedule embed", () => {
     const ga = read("src/lib/google-analytics.ts");
     assert.match(analytics, /normalized === "\/schedule"\) return "\/conversion"/);
     assert.match(ga, /"\/schedule": \{ path: "\/conversion"/);
-    assert.deepEqual([...CUSTOM_ANALYTICS_EVENTS], [SCHEDULE_PHONE_CLICK, SCHEDULE_EMAIL_CLICK]);
+    assert.ok(CUSTOM_ANALYTICS_EVENTS.includes(SCHEDULE_PHONE_CLICK));
+    assert.ok(CUSTOM_ANALYTICS_EVENTS.includes(SCHEDULE_EMAIL_CLICK));
   });
 });

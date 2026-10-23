@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { acceptedMeasurementReference, acceptedMeasurementEventId, isMeasurementTest, validClickReference, parseMeasurementClickRecord, OPENAI_CLICK_LIFETIME_MS } from "./openai-measurement.ts";
+import { acceptedMeasurementReference, acceptedMeasurementEventId, isMeasurementTest, validClickReference, parseMeasurementClickRecord, OPENAI_CLICK_LIFETIME_MS, OPENAI_ADS_PIXEL_ID_DEFAULT, openaiAdsPixelId } from "./openai-measurement.ts";
 
 const id = "b65ee13a-1299-4e3a-9ccd-2cc692ae4f93";
 describe("accepted appointment measurement", () => {
@@ -52,6 +52,15 @@ it("validates the immutable request reference at the server boundary", () => {
     ["original-ref", String(snapshotTime - OPENAI_CLICK_LIFETIME_MS), "granted"],
     ["original-ref", "", "granted"], ["has space", String(snapshotTime), "granted"],
   ]) assert.equal(acceptedMeasurementReference(reference, timestamp, consent, String(snapshotTime + 1), snapshotTime + 1), "");
+});
+
+describe("openaiAdsPixelId", () => {
+  it("prefers a well-formed env value and falls back to the Ads Manager pixel on production", () => {
+    assert.equal(openaiAdsPixelId("playwright-test-pixel", "localhost"), "playwright-test-pixel");
+    assert.equal(openaiAdsPixelId("", "localhost"), "");
+    assert.equal(openaiAdsPixelId("   ", "sacramentodentalmedicine.com"), OPENAI_ADS_PIXEL_ID_DEFAULT);
+    assert.equal(OPENAI_ADS_PIXEL_ID_DEFAULT, "YWA2U3Z6abzG5ipuKrBkKb");
+  });
 });
 
 it("retains a reference eligible at submission even when acceptance crosses its expiry", () => {

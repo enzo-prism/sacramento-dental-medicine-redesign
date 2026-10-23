@@ -3,6 +3,7 @@ import { describe, it } from "node:test";
 import { serializeJsonLd } from "./json-ld.ts";
 import { highlightedServiceSlugs, servicePages } from "../data/service-pages.ts";
 import { contact, officeHours, structuredData } from "../data/site.ts";
+import { wisdomTeethLanding } from "../data/wisdom-teeth-landing.ts";
 
 describe("search content integrity", () => {
   it("escapes script-breakout content while preserving valid JSON", () => {
@@ -38,6 +39,13 @@ describe("search content integrity", () => {
       "platelet-rich-fibrin",
     ]);
   });
+  it("publishes an indexable Sacramento wisdom-teeth landing with FAQ copy", () => {
+    assert.equal(wisdomTeethLanding.slug, "wisdom-teeth-removal-sacramento");
+    assert.match(wisdomTeethLanding.h1, /Wisdom teeth removal in Sacramento/);
+    assert.ok(wisdomTeethLanding.faqs.length >= 4);
+    assert.equal(new Set(wisdomTeethLanding.faqs.map((faq) => faq.question)).size, wisdomTeethLanding.faqs.length);
+  });
+
   it("keeps practice schema truthful and consistent with scheduling hours", () => {
     assert.ok(!("aggregateRating" in structuredData));
     assert.ok(structuredData.image.endsWith("/images/office-exterior.webp"));

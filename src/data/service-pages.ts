@@ -13,6 +13,11 @@ export type ServicePage = {
   sources?: { label: string; url: string }[];
 };
 
+export const serviceJsonLdTypes: Record<string, string> = {
+  "dental-implants": "Dental implants",
+  "wisdom-teeth": "Wisdom teeth",
+};
+
 export const servicePages: ServicePage[] = [
   {
     slug: "our-services",
@@ -291,7 +296,7 @@ export const servicePages: ServicePage[] = [
     description:
       "Explore dental implant treatment at Sacramento Dental Medicine in Antelope, serving Sacramento-area patients. Call (916) 727-6453 or request a visit.",
     intro:
-      "A dental implant replaces a missing tooth from the root up and can support a natural-looking restoration. The planning visit evaluates your teeth, gums, and bone so the team can explain whether implant treatment fits your needs. Meet Dr. Michael Narodovich to learn about the practice before requesting an appointment.",
+      "A dental implant replaces a missing tooth from the root up and can support a natural-looking restoration. The planning visit evaluates your teeth, gums, and bone so the team can explain whether implant treatment fits your needs.",
     benefits: [
       "Replace a missing tooth from the root up",
       "Support comfortable chewing",
@@ -324,11 +329,6 @@ export const servicePages: ServicePage[] = [
         question: "Can an implant replace one missing tooth?",
         answer:
           "Yes. Dental implants can be used to replace a single missing tooth, while other implant-supported options may be considered for several missing teeth.",
-      },
-      {
-        question: "How long does dental implant treatment take?",
-        answer:
-          "Implant treatment involves planning, placement, healing, and the final restoration. Healing time and any preparatory care vary, so the dentist explains your sequence before you start. A specific timeline is not promised.",
       },
       {
         question: "What if I need bone support for an implant?",
@@ -542,29 +542,19 @@ export const servicePages: ServicePage[] = [
       {
         question: "What should I do if a wisdom tooth hurts now?",
         answer:
-          "Call (916) 727-6453 to describe the pain or swelling and ask about the earliest available evaluation. Same-day visits are offered when possible.",
+          "Call (916) 727-6453 to describe the pain or swelling and ask about the earliest available evaluation. Same-day visits are offered when possible. See Dental emergencies for urgent pain or swelling.",
+        links: [{ href: "/dental-emergencies", label: "Dental emergencies" }],
       },
       {
         question: "Will I be numb for wisdom teeth removal?",
         answer:
-          "Local numbing is part of extraction care. Tell the team about anxiety or comfort concerns so they can explain the options that may be appropriate for your health and the procedure.",
+          "Local numbing is part of extraction care. Tell the team about anxiety or comfort concerns so they can explain the options that may be appropriate for your health and the procedure. Learn more about sedation dentistry options.",
+        links: [{ href: "/sedation-dentistry", label: "sedation dentistry" }],
       },
       {
         question: "What is recovery like after wisdom teeth removal?",
         answer:
-          "If removal is recommended, the team explains what to expect and how to care for the area afterward. You leave with after-care instructions. Healing varies by person and procedure, and no specific recovery time is promised.",
-      },
-      {
-        question: "Is sedation available for wisdom teeth removal?",
-        answer:
-          "Local numbing is part of extraction care. Tell the team about anxiety or comfort concerns so they can explain the options that may be appropriate. A dentist must review your medical history and planned treatment before confirming whether sedation is appropriate. Learn more about sedation dentistry options.",
-        links: [{ href: "/sedation-dentistry", label: "sedation dentistry" }],
-      },
-      {
-        question: "When is a wisdom tooth urgent?",
-        answer:
-          "Call (916) 727-6453 for wisdom-tooth pain or swelling and ask about the earliest available evaluation. Same-day visits are offered when possible. For uncontrolled bleeding, trouble breathing, or a life-threatening injury, call 911. See Dental emergencies for urgent pain or swelling.",
-        links: [{ href: "/dental-emergencies", label: "Dental emergencies" }],
+          "If removal is recommended, the team explains what to expect, comfort options, and how to care for the area afterward.",
       },
     ],
     sources: [

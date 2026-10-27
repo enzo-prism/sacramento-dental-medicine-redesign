@@ -33,7 +33,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const serviceRoutes: MetadataRoute.Sitemap = servicePages.map(({ slug }) => ({
     url: `${siteUrl}/${slug}`,
-    lastModified: new Date("2026-10-27"),
+    lastModified: new Date(
+      slug === "dental-implants" || slug === "wisdom-teeth" ? "2026-10-27" : "2026-09-06",
+    ),
     changeFrequency: "monthly",
     priority: 0.8,
   }));

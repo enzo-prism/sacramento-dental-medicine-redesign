@@ -7,9 +7,11 @@ import { Header } from "@/components/Header";
 import { MobileCTA } from "@/components/MobileCTA";
 import { Footer } from "@/components/sections/Footer";
 import { contact } from "@/data/site";
+import { FaqAnswer } from "@/components/FaqAnswer";
 import { OfficeEmail } from "@/components/OfficeEmail";
 import {
   highlightedServiceSlugs,
+  serviceJsonLdTypes,
   servicePageBySlug,
   servicePages,
   type ServicePage,
@@ -21,40 +23,6 @@ import { pageGraph, serviceJsonLd } from "@/lib/structured-data";
 type Props = {
   params: Promise<{ service: string }>;
 };
-
-function FaqAnswer({
-  answer,
-  links,
-}: {
-  answer: string;
-  links?: { href: string; label: string }[];
-}) {
-  if (!links?.length) {
-    return <p className="mt-3 text-sm leading-7 text-ink-soft">{answer}</p>;
-  }
-
-  const hrefByLabel = new Map(links.map((link) => [link.label, link.href]));
-  const pattern = new RegExp(
-    `(${links.map((link) => link.label.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|")})`,
-  );
-  const parts = answer.split(pattern);
-
-  return (
-    <p className="mt-3 text-sm leading-7 text-ink-soft">
-      {parts.map((part, index) => {
-        const href = hrefByLabel.get(part);
-        if (!href) {
-          return <span key={`${part}-${index}`}>{part}</span>;
-        }
-        return (
-          <Link key={`${href}-${index}`} href={href} className="underline underline-offset-4">
-            {part}
-          </Link>
-        );
-      })}
-    </p>
-  );
-}
 
 export function generateStaticParams() {
   return servicePages.map(({ slug }) => ({ service: slug }));
@@ -106,7 +74,7 @@ export default async function ServiceRoute({ params }: Props) {
           itemListElement: servicePages.filter((item) => item.slug !== "our-services").map((item, index) => ({
             "@type": "ListItem", position: index + 1, name: item.navLabel, url: `${siteUrl}/${item.slug}`,
           })),
-        }] : [serviceJsonLd(`/${service.slug}`, service.navLabel, service.intro, service.navLabel)]),
+        }] : [serviceJsonLd(`/${service.slug}`, service.navLabel, service.intro, serviceJsonLdTypes[service.slug])]),
         {
           "@type": "FAQPage", "@id": `${siteUrl}/${service.slug}#faq`,
           mainEntity: service.faqs.map(({ question, answer }) => ({
@@ -178,7 +146,7 @@ export default async function ServiceRoute({ params }: Props) {
           <section className="section bg-wash" aria-labelledby="care-directory-title">
             <div className="container-x">
               <h2 id="care-directory-title" className="font-display text-3xl font-semibold text-ink">Find the care you need</h2>
-              <div className="mt-8 grid gap-4 sm:grid-cols-3">
+              <div className="mt-8 grid gap-4 sm:grid-cols-2">
                 {highlightedServiceSlugs
                   .map((slug) => servicePageBySlug.get(slug))
                   .filter((item): item is ServicePage => Boolean(item))

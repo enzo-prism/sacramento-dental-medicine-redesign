@@ -82,7 +82,7 @@ export const wisdomTeethLanding = {
     {
       question: "Is sedation available for wisdom teeth removal?",
       answer:
-        "Local numbing is part of extraction care. Tell the team about anxiety or comfort concerns so they can explain the options that may be appropriate. A dentist must review your medical history and planned treatment before confirming whether sedation is appropriate. Learn more about sedation dentistry.",
+        "Local numbing is part of extraction care. Tell the team about anxiety or comfort concerns so they can explain the options that may be appropriate. A dentist must review your medical history and planned treatment before confirming whether sedation is appropriate. Learn more about sedation dentistry options.",
       links: [{ href: "/sedation-dentistry", label: "sedation dentistry" }],
     },
     {

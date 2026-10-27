@@ -7,8 +7,9 @@ export type ServicePage = {
   intro: string;
   benefits: string[];
   steps: { title: string; body: string }[];
-  faqs: { question: string; answer: string }[];
+  faqs: { question: string; answer: string; links?: { href: string; label: string }[] }[];
   relatedSlugs: string[];
+  nearbyLinks?: { href: string; label: string }[];
   sources?: { label: string; url: string }[];
 };
 
@@ -288,9 +289,9 @@ export const servicePages: ServicePage[] = [
     navLabel: "Dental implants",
     eyebrow: "Tooth replacement",
     description:
-      "Explore dental implant treatment at Sacramento Dental Medicine in Antelope, serving Sacramento-area patients with missing teeth.",
+      "Explore dental implant treatment at Sacramento Dental Medicine in Antelope, serving Sacramento-area patients. Call (916) 727-6453 or request a visit.",
     intro:
-      "A dental implant replaces a missing tooth from the root up and can support a natural-looking restoration. The planning visit evaluates your teeth, gums, and bone so the team can explain whether implant treatment fits your needs.",
+      "A dental implant replaces a missing tooth from the root up and can support a natural-looking restoration. The planning visit evaluates your teeth, gums, and bone so the team can explain whether implant treatment fits your needs. Meet Dr. Michael Narodovich to learn about the practice before requesting an appointment.",
     benefits: [
       "Replace a missing tooth from the root up",
       "Support comfortable chewing",
@@ -324,9 +325,31 @@ export const servicePages: ServicePage[] = [
         answer:
           "Yes. Dental implants can be used to replace a single missing tooth, while other implant-supported options may be considered for several missing teeth.",
       },
+      {
+        question: "How long does dental implant treatment take?",
+        answer:
+          "Implant treatment involves planning, placement, healing, and the final restoration. Healing time and any preparatory care vary, so the dentist explains your sequence before you start. A specific timeline is not promised.",
+      },
+      {
+        question: "What if I need bone support for an implant?",
+        answer:
+          "The exam and planning visit evaluate bone and gum health. Grafting needs are reviewed case by case, and PRF or grafting may be recommended when extra support could help the site. See PRF & grafting for how that conversation works.",
+        links: [{ href: "/platelet-rich-fibrin", label: "PRF & grafting" }],
+      },
+      {
+        question: "Can I be sedated for dental implant treatment?",
+        answer:
+          "Tell the team if dental anxiety is part of your concern. A dentist must review your medical history and planned treatment before confirming whether sedation is appropriate. Do not assume a particular medication or method is offered. Read more about sedation dentistry.",
+        links: [{ href: "/sedation-dentistry", label: "sedation dentistry" }],
+      },
     ],
     sources: [{"label": "ADA: Implants", "url": "https://www.mouthhealthy.org/all-topics-a-z/implants"}],
-    relatedSlugs: ["tooth-extractions", "platelet-rich-fibrin"],
+    relatedSlugs: ["tooth-extractions", "platelet-rich-fibrin", "sedation-dentistry", "wisdom-teeth"],
+    nearbyLinks: [
+      { href: "/sedation-dentistry", label: "Comfort & sedation" },
+      { href: "/wisdom-teeth", label: "Wisdom teeth" },
+      { href: "/meet-dr-narodovich", label: "Meet Dr. Narodovich" },
+    ],
   },
   {
     slug: "gum-disease-treatment",
@@ -482,7 +505,7 @@ export const servicePages: ServicePage[] = [
     navLabel: "Wisdom teeth",
     eyebrow: "Oral surgery",
     description:
-      "Get a wisdom teeth evaluation or removal at Sacramento Dental Medicine in Antelope, serving the greater Sacramento area.",
+      "Get a wisdom teeth evaluation or removal at Sacramento Dental Medicine in Antelope, serving the Sacramento area. Call (916) 727-6453 or request a visit.",
     intro:
       "Wisdom teeth can stay quiet for years or start to crowd, inflame, or decay. Sacramento Dental Medicine evaluates them in-house and handles removal when that is the healthier next step. An exam and imaging show whether the teeth should be watched, treated, or removed, and whether a specialist should be involved.",
     benefits: [
@@ -526,6 +549,23 @@ export const servicePages: ServicePage[] = [
         answer:
           "Local numbing is part of extraction care. Tell the team about anxiety or comfort concerns so they can explain the options that may be appropriate for your health and the procedure.",
       },
+      {
+        question: "What is recovery like after wisdom teeth removal?",
+        answer:
+          "If removal is recommended, the team explains what to expect and how to care for the area afterward. You leave with after-care instructions. Healing varies by person and procedure, and no specific recovery time is promised.",
+      },
+      {
+        question: "Is sedation available for wisdom teeth removal?",
+        answer:
+          "Local numbing is part of extraction care. Tell the team about anxiety or comfort concerns so they can explain the options that may be appropriate. A dentist must review your medical history and planned treatment before confirming whether sedation is appropriate. Learn more about sedation dentistry.",
+        links: [{ href: "/sedation-dentistry", label: "sedation dentistry" }],
+      },
+      {
+        question: "When is a wisdom tooth urgent?",
+        answer:
+          "Call (916) 727-6453 for wisdom-tooth pain or swelling and ask about the earliest available evaluation. Same-day visits are offered when possible. For uncontrolled bleeding, trouble breathing, or a life-threatening injury, call 911. See Dental emergencies for urgent pain or swelling.",
+        links: [{ href: "/dental-emergencies", label: "Dental emergencies" }],
+      },
     ],
     sources: [
       {
@@ -533,7 +573,7 @@ export const servicePages: ServicePage[] = [
         url: "https://www.mouthhealthy.org/all-topics-a-z/wisdom-teeth",
       },
     ],
-    relatedSlugs: ["tooth-extractions", "sedation-dentistry", "platelet-rich-fibrin"],
+    relatedSlugs: ["tooth-extractions", "sedation-dentistry", "platelet-rich-fibrin", "dental-emergencies"],
   },
   {
     slug: "platelet-rich-fibrin",
@@ -594,6 +634,7 @@ export const highlightedServiceSlugs = [
   "root-canal-therapy",
   "wisdom-teeth",
   "platelet-rich-fibrin",
+  "dental-implants",
 ] as const;
 
 export const servicePageBySlug = new Map(

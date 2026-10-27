@@ -5,10 +5,21 @@ export const practiceId = structuredData["@id"];
 const websiteId = `${siteUrl}/#website`;
 
 // Every route refers to one practice. Its image is the actual office exterior.
+// Oral surgery is a listed in-house service category (extractions, wisdom
+// teeth, PRF). Implants stay under restorative care; no implant specialty
+// is claimed on the public site.
+export const practiceMedicalSpecialty = [
+  ...structuredData.medicalSpecialty,
+  "Oral Surgery",
+] as const;
+
 export const practiceGraph = {
   "@context": "https://schema.org",
   "@graph": [
-    structuredData,
+    {
+      ...structuredData,
+      medicalSpecialty: [...practiceMedicalSpecialty],
+    },
     {
       "@type": "WebSite", "@id": websiteId, url: siteUrl,
       name: contact.practiceName, inLanguage: "en-US",
@@ -16,6 +27,24 @@ export const practiceGraph = {
     },
   ],
 };
+
+export function serviceJsonLd(
+  path: string,
+  name: string,
+  description: string,
+  serviceType: string,
+) {
+  return {
+    "@type": "Service",
+    "@id": `${siteUrl}${path}#service`,
+    name,
+    description,
+    url: `${siteUrl}${path}`,
+    serviceType,
+    areaServed: [...contact.serviceArea],
+    provider: { "@id": practiceId },
+  };
+}
 
 export function pageGraph(
   path: string,

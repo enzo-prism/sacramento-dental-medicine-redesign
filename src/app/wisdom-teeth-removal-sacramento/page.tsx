@@ -11,10 +11,44 @@ import { Footer } from "@/components/sections/Footer";
 import { contact, hours, officePhotos, socialProof } from "@/data/site";
 import { wisdomTeethLanding } from "@/data/wisdom-teeth-landing";
 import { openGraphImages, twitterImages } from "@/lib/social-metadata";
-import { pageGraph, practiceId } from "@/lib/structured-data";
+import { pageGraph, serviceJsonLd } from "@/lib/structured-data";
 import { siteUrl } from "@/lib/site-url";
 
 const path = `/${wisdomTeethLanding.slug}`;
+
+function FaqAnswer({
+  answer,
+  links,
+}: {
+  answer: string;
+  links?: { href: string; label: string }[];
+}) {
+  if (!links?.length) {
+    return <p className="mt-3 text-sm leading-7 text-ink-soft">{answer}</p>;
+  }
+
+  const hrefByLabel = new Map(links.map((link) => [link.label, link.href]));
+  const pattern = new RegExp(
+    `(${links.map((link) => link.label.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|")})`,
+  );
+  const parts = answer.split(pattern);
+
+  return (
+    <p className="mt-3 text-sm leading-7 text-ink-soft">
+      {parts.map((part, index) => {
+        const href = hrefByLabel.get(part);
+        if (!href) {
+          return <span key={`${part}-${index}`}>{part}</span>;
+        }
+        return (
+          <Link key={`${href}-${index}`} href={href} className="underline underline-offset-4">
+            {part}
+          </Link>
+        );
+      })}
+    </p>
+  );
+}
 
 export const metadata: Metadata = {
   title: { absolute: wisdomTeethLanding.title },
@@ -43,15 +77,12 @@ export default function WisdomTeethRemovalSacramentoPage() {
     <>
       <JsonLd
         data={pageGraph(path, wisdomTeethLanding.h1, [
-          {
-            "@type": "Service",
-            "@id": `${siteUrl}${path}#service`,
-            name: "Wisdom teeth removal",
-            description: wisdomTeethLanding.intro,
-            url: `${siteUrl}${path}`,
-            areaServed: [...contact.serviceArea],
-            provider: { "@id": practiceId },
-          },
+          serviceJsonLd(
+            path,
+            "Wisdom teeth removal",
+            wisdomTeethLanding.intro,
+            "Wisdom teeth removal",
+          ),
           {
             "@type": "FAQPage",
             "@id": `${siteUrl}${path}#faq`,
@@ -86,6 +117,18 @@ export default function WisdomTeethRemovalSacramentoPage() {
               </h1>
               <p className="mt-6 max-w-2xl text-pretty text-base leading-7 text-ink-soft md:text-lg md:leading-8">
                 {wisdomTeethLanding.intro}
+              </p>
+              <p className="mt-4 text-sm leading-7 text-ink-soft">
+                More about{" "}
+                {wisdomTeethLanding.relatedLinks.map((link, index) => (
+                  <span key={link.href}>
+                    {index > 0 ? " and " : ""}
+                    <Link href={link.href} className="underline underline-offset-4">
+                      {link.label.toLowerCase()}
+                    </Link>
+                  </span>
+                ))}{" "}
+                at this office.
               </p>
               <p className="mt-4 text-sm font-medium text-ink">
                 {socialProof.rating} stars from {socialProof.totalReviews} Google reviews
@@ -127,7 +170,11 @@ export default function WisdomTeethRemovalSacramentoPage() {
                 Symptoms that are worth an exam.
               </h2>
               <p className="mt-5 text-sm leading-7 text-ink-soft md:text-base">
-                {wisdomTeethLanding.whenToCall}
+                {wisdomTeethLanding.whenToCall}{" "}
+                <Link href="/dental-emergencies" className="underline underline-offset-4">
+                  Dental emergencies
+                </Link>
+                {" "}are handled by calling the office first.
               </p>
             </div>
             <ul className="grid gap-4">
@@ -293,7 +340,7 @@ export default function WisdomTeethRemovalSacramentoPage() {
                   <h3 className="font-display text-xl font-semibold text-ink">
                     {faq.question}
                   </h3>
-                  <p className="mt-3 text-sm leading-7 text-ink-soft">{faq.answer}</p>
+                  <FaqAnswer answer={faq.answer} links={faq.links} />
                 </article>
               ))}
             </div>
@@ -303,8 +350,16 @@ export default function WisdomTeethRemovalSacramentoPage() {
         <section className="bg-night text-white">
           <div className="container-x grid gap-8 py-14 sm:py-16 lg:grid-cols-[1fr_auto] lg:items-center">
             <div>
-              <p className="text-sm font-semibold text-[#d5e1f4]">Ready to get checked?</p>
-              <p className="mt-3 max-w-xl text-pretty text-lg leading-7 text-white/75">
+              <p className="text-sm font-semibold text-[#d5e1f4]">Related care</p>
+              <div className="mt-3 flex flex-wrap gap-x-6 gap-y-3">
+                {wisdomTeethLanding.relatedLinks.map((link) => (
+                  <Link key={link.href} href={link.href} className="btn-text-light">
+                    {link.label}
+                    <ArrowRight className="size-4" aria-hidden="true" />
+                  </Link>
+                ))}
+              </div>
+              <p className="mt-4 max-w-xl text-pretty text-lg leading-7 text-white/75">
                 Call the Antelope office or request a wisdom teeth evaluation.
                 We will confirm a time during office hours.
               </p>

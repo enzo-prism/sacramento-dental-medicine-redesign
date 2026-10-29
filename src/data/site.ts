@@ -490,6 +490,8 @@ export const officeHours: Record<number, { open: number; close: number } | null>
 };
 
 // New patients — practical, high-intent info (coverage, payment, first visit)
+export const mediCalNotice = "We do not accept Medi-Cal.";
+
 export const newPatient = {
   eyebrow: "New patients",
   title: "Your first visit, without the unknowns.",
@@ -498,7 +500,7 @@ export const newPatient = {
   billing: [
     {
       title: "Confirm your coverage",
-      body: "One quick call to the front desk confirms whether your dental plan is accepted, before you ever sit down.",
+      body: `${mediCalNotice} For other dental plans, call the front desk to confirm whether your plan is accepted before your visit.`,
     },
     {
       title: "Ask about payment options",
@@ -532,6 +534,10 @@ export const faqs: { q: string; a: string }[] = [
   {
     q: "Do you handle dental emergencies?",
     a: "Yes. If you're in pain or have had a dental accident, call (916) 727-6453 right away. We'll tell you what to do immediately and do everything possible to see you the same day.",
+  },
+  {
+    q: "Do you accept Medi-Cal?",
+    a: mediCalNotice,
   },
   {
     q: "Do you offer financing or payment plans?",

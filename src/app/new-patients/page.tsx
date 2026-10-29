@@ -5,7 +5,7 @@ import { Header } from "@/components/Header";
 import { MobileCTA } from "@/components/MobileCTA";
 import { Footer } from "@/components/sections/Footer";
 import { JsonLd } from "@/components/JsonLd";
-import { contact, hours, newPatient } from "@/data/site";
+import { contact, hours, mediCalNotice, newPatient } from "@/data/site";
 import { OfficeEmail } from "@/components/OfficeEmail";
 import { pageGraph } from "@/lib/structured-data";
 
@@ -41,7 +41,7 @@ export default function NewPatientsPage() {
       </section>
       <section className="section bg-white" aria-labelledby="coverage-title">
         <div className="container-x grid gap-10 md:grid-cols-2">
-          <div><h2 id="coverage-title" className="font-display text-3xl font-semibold text-ink">Do you accept my insurance?</h2><p className="mt-5 leading-8 text-ink-soft">Call {contact.phoneDisplay} with your plan information before your visit. The front desk can confirm whether your dental plan is accepted and help you understand coverage questions. Coverage and out-of-pocket costs depend on your plan and recommended care.</p></div>
+          <div><h2 id="coverage-title" className="font-display text-3xl font-semibold text-ink">Insurance &amp; Medi-Cal</h2><p className="mt-5 leading-8 text-ink-soft">{mediCalNotice}</p><p className="mt-4 leading-8 text-ink-soft">For other dental plans, call {contact.phoneDisplay} with your plan information before your visit. The front desk can confirm whether your dental plan is accepted and help you understand coverage questions. Coverage and out-of-pocket costs depend on your plan and recommended care.</p></div>
           <div><h2 className="font-display text-3xl font-semibold text-ink">What if I do not have dental insurance?</h2><p className="mt-5 leading-8 text-ink-soft">Ask the front desk about current payment options and the cost of an initial visit. Treatment estimates depend on an exam and the care you need; request an explanation of costs before deciding on treatment.</p></div>
         </div>
       </section>

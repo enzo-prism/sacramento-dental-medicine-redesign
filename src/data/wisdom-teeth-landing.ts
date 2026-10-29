@@ -9,6 +9,12 @@ if (!wisdomTeeth) {
 
 export const WISDOM_TEETH_LANDING_PATH = "/wisdom-teeth-removal-sacramento";
 
+type LandingFaq = {
+  question: string;
+  answer: string;
+  links?: { href: string; label: string }[];
+};
+
 export const wisdomTeethLanding = {
   slug: WISDOM_TEETH_LANDING_PATH.slice(1),
   title: "Wisdom Teeth Removal in Sacramento | Sacramento Dental Medicine",
@@ -33,6 +39,10 @@ export const wisdomTeethLanding = {
   coverage:
     "Call the front desk with your plan information to confirm whether your dental plan is accepted and to ask about current payment options. Estimates depend on the exam and the care you need. This page does not list insurance plans, financing products, or prices.",
   officeLine: `${contact.addressLine1}, ${contact.addressLine2}`,
+  relatedLinks: [
+    { href: "/wisdom-teeth", label: "Wisdom teeth" },
+    { href: "/tooth-extractions", label: "Tooth extractions" },
+  ],
   faqs: [
     {
       question: "Do all wisdom teeth need to be removed?",
@@ -47,12 +57,14 @@ export const wisdomTeethLanding = {
     {
       question: "What should I do if a wisdom tooth hurts now?",
       answer:
-        "Call (916) 727-6453 to describe the pain or swelling and ask about the earliest available evaluation. Same-day visits are offered when possible. An online request is reviewed during office hours and does not confirm a visit.",
+        "Call (916) 727-6453 to describe the pain or swelling and ask about the earliest available evaluation. Same-day visits are offered when possible. An online request is reviewed during office hours and does not confirm a visit. See Dental emergencies for urgent pain or swelling.",
+      links: [{ href: "/dental-emergencies", label: "Dental emergencies" }],
     },
     {
       question: "Will I be numb for wisdom teeth removal?",
       answer:
-        "Local numbing is part of extraction care. Tell the team about anxiety or comfort concerns so they can explain the options that may be appropriate for your health and the procedure.",
+        "Local numbing is part of extraction care. Tell the team about anxiety or comfort concerns so they can explain the options that may be appropriate for your health and the procedure. Learn more about sedation dentistry options.",
+      links: [{ href: "/sedation-dentistry", label: "sedation dentistry" }],
     },
     {
       question: "Do you see patients from Sacramento, Roseville, and nearby cities?",
@@ -64,6 +76,11 @@ export const wisdomTeethLanding = {
       answer:
         "Call (916) 727-6453, use the request form on this page, or book online on the schedule page. The request is not a confirmed appointment until the office reaches you during office hours.",
     },
-  ],
+    {
+      question: "What is recovery like after wisdom teeth removal?",
+      answer:
+        "If removal is recommended, the team explains what to expect, comfort options, and how to care for the area afterward.",
+    },
+  ] satisfies LandingFaq[],
   source: wisdomTeeth.sources?.[0],
 };

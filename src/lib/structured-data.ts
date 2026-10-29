@@ -17,6 +17,24 @@ export const practiceGraph = {
   ],
 };
 
+export function serviceJsonLd(
+  path: string,
+  name: string,
+  description: string,
+  serviceType?: string,
+) {
+  return {
+    "@type": "Service",
+    "@id": `${siteUrl}${path}#service`,
+    name,
+    description,
+    url: `${siteUrl}${path}`,
+    ...(serviceType ? { serviceType } : {}),
+    areaServed: [...contact.serviceArea],
+    provider: { "@id": practiceId },
+  };
+}
+
 export function pageGraph(
   path: string,
   name: string,

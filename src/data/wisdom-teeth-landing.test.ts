@@ -15,6 +15,13 @@ describe("wisdom teeth landing content", () => {
     assert.match(page, /robots:\s*\{\s*index:\s*false,\s*follow:\s*true\s*\}/);
     assert.doesNotMatch(sitemap, /wisdom-teeth-removal-sacramento/);
     assert.doesNotMatch(sitemap, /2026-10-23/);
+    assert.match(sitemap, /2026-10-27/);
+    assert.match(page, /Ready to get checked\?/);
+    assert.match(page, /relatedLinks/);
+    assert.deepEqual(
+      wisdomTeethLanding.relatedLinks.map((link) => link.href),
+      ["/wisdom-teeth", "/tooth-extractions"],
+    );
     assert.match(wisdomTeethLanding.h1, /Wisdom teeth removal in Sacramento/);
     assert.deepEqual(contact.serviceArea, [
       "Antelope",

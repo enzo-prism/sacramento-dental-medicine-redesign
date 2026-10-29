@@ -7,16 +7,18 @@ import { Header } from "@/components/Header";
 import { MobileCTA } from "@/components/MobileCTA";
 import { Footer } from "@/components/sections/Footer";
 import { contact } from "@/data/site";
+import { FaqAnswer } from "@/components/FaqAnswer";
 import { OfficeEmail } from "@/components/OfficeEmail";
 import {
   highlightedServiceSlugs,
+  serviceJsonLdTypes,
   servicePageBySlug,
   servicePages,
   type ServicePage,
 } from "@/data/service-pages";
 import { siteUrl } from "@/lib/site-url";
 import { JsonLd } from "@/components/JsonLd";
-import { pageGraph, practiceId } from "@/lib/structured-data";
+import { pageGraph, serviceJsonLd } from "@/lib/structured-data";
 
 type Props = {
   params: Promise<{ service: string }>;
@@ -72,11 +74,7 @@ export default async function ServiceRoute({ params }: Props) {
           itemListElement: servicePages.filter((item) => item.slug !== "our-services").map((item, index) => ({
             "@type": "ListItem", position: index + 1, name: item.navLabel, url: `${siteUrl}/${item.slug}`,
           })),
-        }] : [{
-          "@type": "Service", "@id": `${siteUrl}/${service.slug}#service`,
-          name: service.navLabel, description: service.intro, url: `${siteUrl}/${service.slug}`,
-          areaServed: contact.serviceArea, provider: { "@id": practiceId },
-        }]),
+        }] : [serviceJsonLd(`/${service.slug}`, service.navLabel, service.intro, serviceJsonLdTypes[service.slug])]),
         {
           "@type": "FAQPage", "@id": `${siteUrl}/${service.slug}#faq`,
           mainEntity: service.faqs.map(({ question, answer }) => ({
@@ -105,6 +103,15 @@ export default async function ServiceRoute({ params }: Props) {
               <p className="mt-6 max-w-2xl text-pretty text-base leading-7 text-ink-soft md:text-lg md:leading-8">
                 {service.intro}
               </p>
+              {service.nearbyLinks?.length ? (
+                <p className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-sm font-medium text-ink">
+                  {service.nearbyLinks.map((link) => (
+                    <Link key={link.href} href={link.href} className="btn-text">
+                      {link.label}
+                    </Link>
+                  ))}
+                </p>
+              ) : null}
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <Link href={service.slug === "dental-emergencies" ? contact.phoneHref : contact.bookingHref} className="btn btn-primary h-12 px-5 text-base">
                   {service.slug === "dental-emergencies" ? `Call ${contact.phoneDisplay} first` : "Request an appointment"}
@@ -139,7 +146,7 @@ export default async function ServiceRoute({ params }: Props) {
           <section className="section bg-wash" aria-labelledby="care-directory-title">
             <div className="container-x">
               <h2 id="care-directory-title" className="font-display text-3xl font-semibold text-ink">Find the care you need</h2>
-              <div className="mt-8 grid gap-4 sm:grid-cols-3">
+              <div className="mt-8 grid gap-4 sm:grid-cols-2">
                 {highlightedServiceSlugs
                   .map((slug) => servicePageBySlug.get(slug))
                   .filter((item): item is ServicePage => Boolean(item))
@@ -195,7 +202,7 @@ export default async function ServiceRoute({ params }: Props) {
               {service.faqs.map((faq, index) => (
                 <article id={`question-${index + 1}`} key={faq.question} className="py-6 first:pt-0 last:pb-0">
                   <h3 className="font-display text-xl font-semibold text-ink">{faq.question}</h3>
-                  <p className="mt-3 text-sm leading-7 text-ink-soft">{faq.answer}</p>
+                  <FaqAnswer answer={faq.answer} links={faq.links} />
                 </article>
               ))}
             </div>

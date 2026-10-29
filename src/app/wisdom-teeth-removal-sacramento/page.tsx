@@ -11,6 +11,7 @@ import { Footer } from "@/components/sections/Footer";
 import { contact, hours, officePhotos, socialProof } from "@/data/site";
 import { wisdomTeethLanding } from "@/data/wisdom-teeth-landing";
 import { openGraphImages, twitterImages } from "@/lib/social-metadata";
+import { FaqAnswer } from "@/components/FaqAnswer";
 import { pageGraph, practiceId } from "@/lib/structured-data";
 import { siteUrl } from "@/lib/site-url";
 
@@ -86,6 +87,18 @@ export default function WisdomTeethRemovalSacramentoPage() {
               </h1>
               <p className="mt-6 max-w-2xl text-pretty text-base leading-7 text-ink-soft md:text-lg md:leading-8">
                 {wisdomTeethLanding.intro}
+              </p>
+              <p className="mt-4 text-sm leading-7 text-ink-soft">
+                More about{" "}
+                {wisdomTeethLanding.relatedLinks.map((link, index) => (
+                  <span key={link.href}>
+                    {index > 0 ? " and " : ""}
+                    <Link href={link.href} className="underline underline-offset-4">
+                      {link.label.toLowerCase()}
+                    </Link>
+                  </span>
+                ))}{" "}
+                at this office.
               </p>
               <p className="mt-4 text-sm font-medium text-ink">
                 {socialProof.rating} stars from {socialProof.totalReviews} Google reviews
@@ -293,7 +306,7 @@ export default function WisdomTeethRemovalSacramentoPage() {
                   <h3 className="font-display text-xl font-semibold text-ink">
                     {faq.question}
                   </h3>
-                  <p className="mt-3 text-sm leading-7 text-ink-soft">{faq.answer}</p>
+                  <FaqAnswer answer={faq.answer} links={faq.links} />
                 </article>
               ))}
             </div>

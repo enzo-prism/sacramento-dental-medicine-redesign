@@ -1,16 +1,20 @@
 "use client";
 
 import { useEffect } from "react";
-import { recordClickToCall } from "@/lib/conversion";
+import { recordContactClick } from "@/lib/conversion";
 
-/** Tracks `tel:` clicks on this document as `click_to_call`. No PII. */
+/**
+ * Site-wide: tracks `tel:` clicks as `click_to_call` and `mailto:` clicks as
+ * `click_to_email`. Mounted once in the root layout. No PII.
+ */
 export function ConversionClickTracker() {
   useEffect(() => {
     const onClick = (event: MouseEvent) => {
       const target = event.target;
       if (!(target instanceof Element)) return;
-      if (!target.closest("a[href^='tel:']")) return;
-      recordClickToCall();
+      const link = target.closest("a[href^='tel:'], a[href^='mailto:']");
+      if (!link) return;
+      recordContactClick(link.getAttribute("href"));
     };
     document.addEventListener("click", onClick);
     return () => document.removeEventListener("click", onClick);

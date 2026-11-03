@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Check, Clock3, MapPin, Phone } from "lucide-react";
 import { AppointmentRequestForm } from "@/components/AppointmentRequestForm";
-import { ConversionClickTracker } from "@/components/ConversionClickTracker";
 import { Header } from "@/components/Header";
 import { JsonLd } from "@/components/JsonLd";
 import { MobileCTA } from "@/components/MobileCTA";
@@ -64,7 +63,6 @@ export default function WisdomTeethRemovalSacramentoPage() {
           },
         ])}
       />
-      <ConversionClickTracker />
       <Header />
       <main id="main" className="flex-1">
         <section className="relative overflow-hidden pb-16 pt-32 sm:pb-20 lg:pb-24 lg:pt-40">

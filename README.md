@@ -126,7 +126,9 @@ A few production values still need periodic confirmation:
 `/schedule` embeds the practice Jarvis scheduler and shows the office phone
 and email beside or below it. Those two links fire allowlisted analytics
 events (`Schedule Phone Click`, `Schedule Email Click`) with no contact
-values attached.
+values attached. Every phone and email link on the site also fires
+`click_to_call` or `click_to_email`, and the first interaction with the Jarvis
+frame fires `jarvis_booking_start`. See `docs/analytics-search.md`.
 
 ## Local development
 

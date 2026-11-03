@@ -3,8 +3,14 @@ import { describe, it } from "node:test";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { serializeJsonLd } from "./json-ld.ts";
-import { highlightedServiceSlugs, serviceJsonLdTypes, servicePages } from "../data/service-pages.ts";
-import { contact, officeHours, structuredData } from "../data/site.ts";
+import {
+  highlightedServiceSlugs,
+  serviceJsonLdTypes,
+  servicePageBySlug,
+  servicePages,
+  serviceSearchCopy,
+} from "../data/service-pages.ts";
+import { contact, mediCalNotice, officeHours, structuredData } from "../data/site.ts";
 import { wisdomTeethLanding } from "../data/wisdom-teeth-landing.ts";
 
 function faqsToJsonLd(faqs: { question: string; answer: string }[]) {
@@ -27,6 +33,9 @@ describe("search content integrity", () => {
     assert.equal(slugs.size, servicePages.length);
     assert.equal(new Set(servicePages.map(({ title }) => title)).size, servicePages.length);
     assert.equal(new Set(servicePages.map(({ description }) => description)).size, servicePages.length);
+    const listings = servicePages.map(serviceSearchCopy);
+    assert.equal(new Set(listings.map(({ title }) => title)).size, servicePages.length);
+    assert.equal(new Set(listings.map(({ description }) => description)).size, servicePages.length);
     for (const service of servicePages) {
       assert.match(service.slug, /^[a-z]+(?:-[a-z]+)*$/);
       assert.equal(new Set(service.faqs.map(({ question }) => question)).size, service.faqs.length);
@@ -66,6 +75,58 @@ describe("search content integrity", () => {
       assert.ok(page.description.length >= 140 && page.description.length <= 155, page.description);
       assert.match(page.description, /\(916\) 727-6453|request a visit/i);
     }
+  });
+
+  it("answers timing, cost, and fit in the four November search listings", () => {
+    const expected = {
+      "dental-emergencies": {
+        title: "Emergency Dentist Sacramento | Same-Day When Possible",
+        description:
+          "Tooth pain, swelling or a broken tooth? Call (916) 727-6453 for a same-day visit when possible. Open weekdays, until 7 PM Wed and Thu, in Antelope.",
+      },
+      invisalign: {
+        title: "Invisalign in Sacramento & Antelope | Is It Right for You?",
+        description:
+          "Find out if Invisalign clear aligners fit your teeth and bite at an evaluation in Antelope. Get a cost estimate based on your plan and dental benefits.",
+      },
+      "dental-crowns": {
+        title: "Dental Crowns Sacramento & Antelope | Cracked Tooth Repair",
+        description:
+          "Cracked or worn tooth? Get a crown exam in Antelope and an estimate based on your tooth and insurance. Book online or call (916) 727-6453.",
+      },
+      "sedation-dentistry": {
+        title: "Sedation Dentistry Sacramento | Care for Anxious Patients",
+        description:
+          "Nervous about the dentist? Dr. Michael Narodovich offers gentle, judgment-free care in Antelope. Call (916) 727-6453 to ask about sedation options.",
+      },
+    };
+    for (const [slug, listing] of Object.entries(expected)) {
+      const page = servicePageBySlug.get(slug);
+      assert.ok(page, slug);
+      assert.deepEqual(serviceSearchCopy(page), listing);
+      assert.ok(listing.title.length <= 60, listing.title);
+      assert.ok(listing.description.length >= 120 && listing.description.length <= 155, listing.description);
+      assert.doesNotMatch(`${listing.title} ${listing.description}`, /\u2014|\$|\d+%|(?<!-)\bfree\b|guarantee|24\/7|24-hour|CareCredit|financing|discount|Medi-Cal/i);
+      assert.match(listing.description, /Antelope/);
+      // On-page H1 and directory-card copy stay as they were.
+      assert.notEqual(page.title, listing.title);
+      assert.notEqual(page.description, listing.description);
+    }
+    // Every claim traces to repo facts.
+    const phone = contact.phoneDisplay;
+    assert.ok(expected["dental-emergencies"].description.includes(phone));
+    const emergency = servicePageBySlug.get("dental-emergencies");
+    assert.ok(emergency?.faqs.some((faq) => /same-day emergency visits when possible/.test(faq.answer)));
+    assert.equal(officeHours[0], null);
+    assert.equal(officeHours[6], null);
+    for (const day of [1, 2, 3, 4, 5]) assert.ok(officeHours[day]);
+    assert.equal(officeHours[3]?.close, 19 * 60);
+    assert.equal(officeHours[4]?.close, 19 * 60);
+    assert.ok(servicePageBySlug.get("invisalign")?.faqs.some((faq) => /plan and your dental benefits/.test(faq.answer)));
+    assert.ok(servicePageBySlug.get("dental-crowns")?.faqs.some((faq) => /insurance benefits/.test(faq.answer)));
+    assert.ok(servicePageBySlug.get("dental-crowns")?.faqs.some((faq) => /cracked, badly worn, heavily filled/.test(faq.answer)));
+    assert.ok(servicePageBySlug.get("sedation-dentistry")?.faqs.some((faq) => /ask which options are currently available/.test(faq.answer)));
+    assert.equal(mediCalNotice, "We do not accept Medi-Cal.");
   });
 
   it("adds only new on-site implant and wisdom-teeth FAQs", () => {
@@ -149,12 +210,19 @@ describe("search content integrity", () => {
     assert.deepEqual(structuredData.medicalSpecialty, ["Dentistry", "Cosmetic Dentistry", "Endodontics"]);
   });
 
-  it("stamps sitemap dates only for the two changed service pages", () => {
+  it("stamps sitemap dates only for service pages whose content or listing changed", () => {
     const sitemap = readFileSync(join(process.cwd(), "src/app/sitemap.ts"), "utf8");
-    assert.match(
-      sitemap,
-      /slug === "dental-implants" \|\| slug === "wisdom-teeth" \? "2026-10-27" : "2026-09-06"/,
-    );
+    const stamped = [...sitemap.matchAll(/^\s+"([a-z-]+)": "(\d{4}-\d{2}-\d{2})",$/gm)]
+      .map(([, slug, date]) => [slug, date]);
+    assert.deepEqual(Object.fromEntries(stamped), {
+      "dental-implants": "2026-10-27",
+      "wisdom-teeth": "2026-10-27",
+      "dental-emergencies": "2026-11-03",
+      "invisalign": "2026-11-03",
+      "dental-crowns": "2026-11-03",
+      "sedation-dentistry": "2026-11-03",
+    });
+    assert.match(sitemap, /serviceLastModified\[slug\] \?\? "2026-09-06"/);
     assert.doesNotMatch(sitemap, /wisdom-teeth-removal-sacramento/);
     assert.deepEqual(
       wisdomTeethLanding.relatedLinks.map((link) => link.href),

@@ -96,6 +96,8 @@ describe("Google Analytics lifecycle", () => {
     controller.event("Schedule Email Click");
     controller.event("generate_lead");
     controller.event("click_to_call");
+    controller.event("click_to_email");
+    controller.event("jarvis_booking_start");
     controller.event("Lead Submit");
     const custom = calls.filter(([command,event]) => command === "event" && event !== "page_view");
     assert.deepEqual(custom, [
@@ -103,6 +105,8 @@ describe("Google Analytics lifecycle", () => {
       ["event", "Schedule Email Click", { send_to: GOOGLE_ANALYTICS_MEASUREMENT_ID }],
       ["event", "generate_lead", { send_to: GOOGLE_ANALYTICS_MEASUREMENT_ID }],
       ["event", "click_to_call", { send_to: GOOGLE_ANALYTICS_MEASUREMENT_ID }],
+      ["event", "click_to_email", { send_to: GOOGLE_ANALYTICS_MEASUREMENT_ID }],
+      ["event", "jarvis_booking_start", { send_to: GOOGLE_ANALYTICS_MEASUREMENT_ID }],
     ]);
   });
   it("keeps initial acquisition through SPA navigation without replaying raw tags", () => {

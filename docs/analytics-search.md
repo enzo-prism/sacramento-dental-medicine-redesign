@@ -17,9 +17,8 @@ collected.
 - excludes `/privacy-practices`; and
 - never sends form values, contact details, treatment reasons, UTM values, or
   click IDs as custom events.
-- allowlisted `/schedule` contact clicks only: `Schedule Phone Click` and
-  `Schedule Email Click`. These fire from Vercel Analytics `track` and GA/gtag
-  with no properties.
+- allowlisted custom events only (see the table under Google Analytics 4).
+  These fire from Vercel Analytics `track` and GA/gtag with no properties.
 
 The Vercel project currently has an analytics resource ID, but its Web Analytics
 feature is disabled. Vercel CLI classifies enabling it on this Pro team as a
@@ -77,10 +76,23 @@ Allowlisted custom events (no parameters):
 
 | Event | Trigger |
 | --- | --- |
-| `Schedule Phone Click` | The office `tel:` link beside/below Jarvis |
-| `Schedule Email Click` | The office `mailto:` link beside/below Jarvis |
+| `click_to_call` | Any `tel:` click on any page (site-wide `ConversionClickTracker` in the root layout) |
+| `click_to_email` | Any `mailto:` click on any page (same tracker) |
 | `generate_lead` | Accepted landing-page appointment request (Formspree success) |
-| `click_to_call` | A `tel:` click on the wisdom-teeth landing page |
+| `jarvis_booking_start` | First click or tab into the Jarvis scheduler frame on `/schedule`, once per visit |
+| `Schedule Phone Click` | The office `tel:` link beside/below Jarvis (also fires `click_to_call`) |
+| `Schedule Email Click` | The office `mailto:` link beside/below Jarvis (also fires `click_to_email`) |
+
+Conversions: `click_to_call`, `click_to_email` and `generate_lead` are the
+events to mark as GA4 Key Events (an account setting, not code). The two
+`Schedule ... Click` events are placement detail for `/schedule` and should not
+also be Key Events, or `/schedule` contact clicks count twice.
+
+`jarvis_booking_start` is a funnel step, not a booking. Jarvis runs in a
+cross-origin iframe, so the site cannot see a completed appointment; take the
+weekly count of online bookings from Jarvis itself. Do not mark
+`jarvis_booking_start` as a Key Event unless the report clearly labels it as
+"started online booking".
 
 Accepted landing-page leads also dispatch `sdm:openai-lead`, which the existing
 sandboxed `/measurement/openai.html` iframe turns into OpenAI `lead_created`.

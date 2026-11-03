@@ -14,6 +14,7 @@ import {
   serviceJsonLdTypes,
   servicePageBySlug,
   servicePages,
+  serviceSearchCopy,
   type ServicePage,
 } from "@/data/service-pages";
 import { siteUrl } from "@/lib/site-url";
@@ -34,14 +35,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!service) return {};
 
+  const { title, description } = serviceSearchCopy(service);
+
   return {
-    title: { absolute: service.title },
-    description: service.description,
+    title: { absolute: title },
+    description,
     alternates: { canonical: `/${service.slug}` },
     openGraph: {
       images: openGraphImages,
-      title: service.title,
-      description: service.description,
+      title,
+      description,
       type: "website",
       locale: "en_US",
       url: `/${service.slug}`,
@@ -50,8 +53,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     twitter: {
       images: twitterImages,
       card: "summary_large_image",
-      title: service.title,
-      description: service.description,
+      title,
+      description,
     },
   };
 }

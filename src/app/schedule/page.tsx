@@ -12,6 +12,7 @@ import {
   Phone,
 } from "lucide-react";
 import { Header } from "@/components/Header";
+import { JarvisBookingTracker } from "@/components/JarvisBookingTracker";
 import { ScheduleOfficeContacts } from "@/components/ScheduleOfficeContacts";
 import { ScheduleRouteStart } from "@/components/ScheduleRouteStart";
 import { Footer } from "@/components/sections/Footer";
@@ -50,6 +51,7 @@ export default function SchedulePage() {
     <>
       <JsonLd data={pageGraph("/schedule", "Book a dental appointment", [], "ContactPage")} />
       <ScheduleRouteStart />
+      <JarvisBookingTracker />
       <Header />
       <main id="main" className="flex-1">
         <section className="night-band relative overflow-hidden pb-16 pt-28 sm:pb-20 sm:pt-32 lg:pb-24 lg:pt-36">
@@ -74,6 +76,7 @@ export default function SchedulePage() {
                 <iframe
                   src={JARVIS_SCHEDULE_EMBED_SRC}
                   title="Book an appointment at Sacramento Dental Medicine"
+                  data-jarvis-scheduler=""
                   loading="lazy"
                   className="block w-full min-h-[70rem] border-0 md:min-h-[600px]"
                 />

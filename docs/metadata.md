@@ -34,6 +34,25 @@ The Reviews values are a snapshot checked August 24, 2026. Before changing the
 rating, total, distribution, written-review count, or analysis date, verify the
 live Google Business Profile and update `socialProof` plus its tests together.
 
+### Service-page search listings
+
+Service pages use `title` for the on-page H1 and `description` for the
+`/our-services` directory card. When the search result should read differently,
+set `searchTitle` and `searchDescription` in `src/data/service-pages.ts`; the
+route sends them as the `<title>`, meta description, Open Graph and X copy.
+November 3, 2026 listings (each answers timing, cost, or fit using only repo
+facts; no prices, guarantees, or offers):
+
+| Route | Search title |
+| --- | --- |
+| `/dental-emergencies` | `Emergency Dentist Sacramento \| Same-Day When Possible` |
+| `/invisalign` | `Invisalign in Sacramento & Antelope \| Is It Right for You?` |
+| `/dental-crowns` | `Dental Crowns Sacramento & Antelope \| Cracked Tooth Repair` |
+| `/sedation-dentistry` | `Sedation Dentistry Sacramento \| Care for Anxious Patients` |
+
+Keep titles at 60 characters or fewer and descriptions at 155 or fewer;
+`src/lib/seo.test.ts` checks both.
+
 ## Favicon and app icons
 
 The generator always starts from `public/images/logo-mark.png`; it must not read

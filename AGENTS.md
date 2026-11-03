@@ -58,6 +58,19 @@ as the only online booking. Directly beside/below it, show the office phone
 (`contact.phoneHref`) and the verified front-desk email (`contact.emailHref`).
 Do not add a second request form. Phone and email clicks fire allowlisted
 custom events (`Schedule Phone Click`, `Schedule Email Click`) with no PII.
+Site-wide, every `tel:` and `mailto:` click also fires `click_to_call` /
+`click_to_email` from `ConversionClickTracker` in the root layout (mount it
+nowhere else, or clicks double count). The Jarvis iframe carries
+`data-jarvis-scheduler`; `JarvisBookingTracker` fires `jarvis_booking_start`
+the first time focus enters it. Completed bookings are only visible in Jarvis.
+
+## Redirects
+
+Legacy hosts, legacy paths, and trailing slashes live in
+`src/lib/redirects.ts`, served by `next.config.ts`. Every old URL must reach its
+final canonical URL in one 308; `src/lib/redirects.test.ts` enforces it. When a
+page or legacy path is added, add it there, never as a redirect to another
+redirect.
 
 ## Seasonal layer (October)
 

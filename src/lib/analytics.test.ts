@@ -2,7 +2,9 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import {
   CLICK_TO_CALL,
+  CLICK_TO_EMAIL,
   GENERATE_LEAD,
+  JARVIS_BOOKING_START,
   SCHEDULE_EMAIL_CLICK,
   SCHEDULE_PHONE_CLICK,
   isAllowedCustomAnalyticsEvent,
@@ -77,6 +79,8 @@ describe("custom schedule contact events", () => {
     assert.equal(isAllowedCustomAnalyticsEvent(SCHEDULE_EMAIL_CLICK), true);
     assert.equal(isAllowedCustomAnalyticsEvent(GENERATE_LEAD), true);
     assert.equal(isAllowedCustomAnalyticsEvent(CLICK_TO_CALL), true);
+    assert.equal(isAllowedCustomAnalyticsEvent(CLICK_TO_EMAIL), true);
+    assert.equal(isAllowedCustomAnalyticsEvent(JARVIS_BOOKING_START), true);
     assert.equal(isAllowedCustomAnalyticsEvent("Lead Submit"), false);
   });
 

@@ -4,6 +4,13 @@ export type ServicePage = {
   navLabel: string;
   eyebrow: string;
   description: string;
+  /**
+   * How the page appears in search results and link previews, when it should
+   * differ from the on-page H1 (`title`) and directory card copy
+   * (`description`). Use only facts already in `src/data/site.ts` or this file.
+   */
+  searchTitle?: string;
+  searchDescription?: string;
   intro: string;
   benefits: string[];
   steps: { title: string; body: string }[];
@@ -66,6 +73,9 @@ export const servicePages: ServicePage[] = [
   {
     slug: "dental-crowns",
     title: "Dental Crowns in Sacramento & Antelope, CA",
+    searchTitle: "Dental Crowns Sacramento & Antelope | Cracked Tooth Repair",
+    searchDescription:
+      "Cracked or worn tooth? Get a crown exam in Antelope and an estimate based on your tooth and insurance. Book online or call (916) 727-6453.",
     navLabel: "Dental crowns",
     eyebrow: "Restorative dentistry",
     description:
@@ -112,6 +122,9 @@ export const servicePages: ServicePage[] = [
   {
     slug: "sedation-dentistry",
     title: "Sedation Dentistry for Nervous Patients in Sacramento",
+    searchTitle: "Sedation Dentistry Sacramento | Care for Anxious Patients",
+    searchDescription:
+      "Nervous about the dentist? Dr. Michael Narodovich offers gentle, judgment-free care in Antelope. Call (916) 727-6453 to ask about sedation options.",
     navLabel: "Comfort & sedation",
     eyebrow: "Anxious-patient care",
     description:
@@ -202,6 +215,9 @@ export const servicePages: ServicePage[] = [
   {
     slug: "invisalign",
     title: "Invisalign Clear Aligners in Sacramento & Antelope",
+    searchTitle: "Invisalign in Sacramento & Antelope | Is It Right for You?",
+    searchDescription:
+      "Find out if Invisalign clear aligners fit your teeth and bite at an evaluation in Antelope. Get a cost estimate based on your plan and dental benefits.",
     navLabel: "Invisalign",
     eyebrow: "Clear aligners",
     description:
@@ -400,6 +416,9 @@ export const servicePages: ServicePage[] = [
   {
     slug: "dental-emergencies",
     title: "Emergency Dentist in Sacramento & Antelope, CA",
+    searchTitle: "Emergency Dentist Sacramento | Same-Day When Possible",
+    searchDescription:
+      "Tooth pain, swelling or a broken tooth? Call (916) 727-6453 for a same-day visit when possible. Open weekdays, until 7 PM Wed and Thu, in Antelope.",
     navLabel: "Dental emergencies",
     eyebrow: "Urgent dental care",
     description:
@@ -630,3 +649,11 @@ export const highlightedServiceSlugs = [
 export const servicePageBySlug = new Map(
   servicePages.map((service) => [service.slug, service]),
 );
+
+/** The title and description a service page sends to search and social. */
+export function serviceSearchCopy(service: ServicePage) {
+  return {
+    title: service.searchTitle ?? service.title,
+    description: service.searchDescription ?? service.description,
+  };
+}

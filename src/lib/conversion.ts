@@ -3,6 +3,7 @@ import {
   CLICK_TO_EMAIL,
   GENERATE_LEAD,
   JARVIS_BOOKING_START,
+  SCHEDULER_LINK_CLICK,
 } from "./analytics.ts";
 import { OPENAI_LEAD_EVENT, UUID_V4 } from "./openai-measurement.ts";
 import { trackAllowedCustomEvent } from "./track-event.ts";
@@ -116,4 +117,20 @@ export function createJarvisBookingStartRecorder(deps: TrackDeps = {}) {
     recorded = true;
     return trackAllowedCustomEvent(JARVIS_BOOKING_START, deps);
   };
+}
+
+/** Counts an on-site scheduler link click without sending its URL or query. */
+export function recordSchedulerLinkClick(href: string | null | undefined) {
+  if (!href || typeof window === "undefined") return false;
+  try {
+    const target = new URL(href, window.location.href);
+    if (
+      target.origin !== window.location.origin ||
+      target.pathname.replace(/\/+$/, "") !== "/schedule" ||
+      window.location.pathname.replace(/\/+$/, "") === "/schedule"
+    ) return false;
+  } catch {
+    return false;
+  }
+  return trackAllowedCustomEvent(SCHEDULER_LINK_CLICK);
 }

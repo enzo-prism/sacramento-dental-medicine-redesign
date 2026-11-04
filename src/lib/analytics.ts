@@ -7,6 +7,7 @@ export const SCHEDULE_EMAIL_CLICK = "Schedule Email Click";
 export const GENERATE_LEAD = "generate_lead";
 export const CLICK_TO_CALL = "click_to_call";
 export const CLICK_TO_EMAIL = "click_to_email";
+export const SCHEDULER_LINK_CLICK = "scheduler_link_click";
 /** First interaction with the Jarvis scheduler frame. Not a completed booking. */
 export const JARVIS_BOOKING_START = "jarvis_booking_start";
 
@@ -17,6 +18,7 @@ export const CUSTOM_ANALYTICS_EVENTS = [
   CLICK_TO_CALL,
   CLICK_TO_EMAIL,
   JARVIS_BOOKING_START,
+  SCHEDULER_LINK_CLICK,
 ] as const;
 
 export type CustomAnalyticsEvent = (typeof CUSTOM_ANALYTICS_EVENTS)[number];

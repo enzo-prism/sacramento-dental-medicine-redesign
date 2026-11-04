@@ -79,6 +79,7 @@ Allowlisted custom events (no parameters):
 | `click_to_call` | Any `tel:` click on any page (site-wide `ConversionClickTracker` in the root layout) |
 | `click_to_email` | Any `mailto:` click on any page (same tracker) |
 | `generate_lead` | Accepted landing-page appointment request (Formspree success) |
+| `scheduler_link_click` | Click to the on-site schedule page from another page |
 | `jarvis_booking_start` | First click or tab into the Jarvis scheduler frame on `/schedule`, once per visit |
 | `Schedule Phone Click` | The office `tel:` link beside/below Jarvis (also fires `click_to_call`) |
 | `Schedule Email Click` | The office `mailto:` link beside/below Jarvis (also fires `click_to_email`) |

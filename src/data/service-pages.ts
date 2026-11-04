@@ -264,6 +264,9 @@ export const servicePages: ServicePage[] = [
   {
     slug: "tooth-extractions",
     title: "Tooth Extractions in Sacramento & Antelope, CA",
+    searchTitle: "Tooth Extraction & Oral Surgery Evaluation | Sacramento",
+    searchDescription:
+      "Painful or damaged tooth? Get an extraction evaluation in Antelope. Learn whether the tooth can be saved, what removal involves, and how recovery is planned.",
     navLabel: "Tooth extractions",
     eyebrow: "Oral surgery",
     description:
@@ -302,7 +305,7 @@ export const servicePages: ServicePage[] = [
           "Call the office at (916) 727-6453. The team can provide immediate guidance and ask about the earliest available visit.",
       },
     ],
-    relatedSlugs: ["wisdom-teeth", "dental-implants", "platelet-rich-fibrin"],
+    relatedSlugs: ["dental-emergencies", "sedation-dentistry", "wisdom-teeth", "dental-implants", "platelet-rich-fibrin"],
   },
   {
     slug: "dental-implants",
@@ -370,6 +373,8 @@ export const servicePages: ServicePage[] = [
   {
     slug: "gum-disease-treatment",
     title: "Gum Disease Treatment in Sacramento & Antelope",
+    searchDescription:
+      "Bleeding gums or questions about deep cleaning? Get a gum health evaluation in Antelope and find out whether scaling and root planing may be appropriate.",
     navLabel: "Gum disease treatment",
     eyebrow: "Periodontal care",
     description:

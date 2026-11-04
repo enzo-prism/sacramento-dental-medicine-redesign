@@ -173,7 +173,7 @@ describe("recordContactClick", () => {
     const layout = read("src/app/layout.tsx");
     const tracker = read("src/components/ConversionClickTracker.tsx");
     assert.equal(layout.match(/<ConversionClickTracker \/>/g)?.length, 1);
-    assert.match(tracker, /a\[href\^='tel:'\], a\[href\^='mailto:'\]/);
+    assert.match(tracker, /a\[href\]/);
     assert.match(tracker, /recordContactClick/);
     // Page-level mounts would double count.
     for (const path of [

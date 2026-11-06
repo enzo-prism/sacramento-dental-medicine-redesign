@@ -17,6 +17,7 @@ export function DoctorProfile({ doctor }: { doctor: Doctor }) {
     honorificSuffix: doctor.title, jobTitle: doctor.focus === "Endodontics" ? "Endodontist" : "Family and cosmetic dentist",
     description: doctor.description, image: `${siteUrl}${doctor.image}`, url,
     worksFor: { "@id": practiceId },
+    ...(doctor.licenseRecords ? { hasCredential: doctor.licenseRecords.map((record) => ({ "@type": "EducationalOccupationalCredential", name: record.name, credentialCategory: record.category, identifier: record.identifier, url: record.url, recognizedBy: { "@type": "Organization", name: "Dental Board of California", url: "https://www.dbc.ca.gov/" } })) } : {}),
     ...(isNarodovich ? { alumniOf: [{ "@type": "CollegeOrUniversity", name: "The Ohio State University" }, { "@type": "CollegeOrUniversity", name: "Temple University" }], sameAs: ["https://waikikidental.com/michael-narodovich-dmd/#person"] } : {}),
   }], "ProfilePage", `${url}#person`);
 
@@ -52,7 +53,7 @@ export function DoctorProfile({ doctor }: { doctor: Doctor }) {
                 {doctor.bio.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
               </div>
               {doctor.education ? <ul className="mt-5 space-y-2 text-sm text-brand-deep">{doctor.education.map((item) => <li key={item}>{item}</li>)}</ul> : null}
-              <p className="mt-5 text-sm leading-7 text-ink-soft">Check current professional license information using the <a className="underline" href="https://search.dca.ca.gov/">California Department of Consumer Affairs license search</a>. Ask the office about the clinician and qualifications for your planned treatment.</p>
+              {!doctor.licenseRecords ? <p className="mt-5 text-sm leading-7 text-ink-soft">Check current professional license information using the <a className="underline" href="https://search.dca.ca.gov/">California Department of Consumer Affairs license search</a>. Ask the office about the clinician and qualifications for your planned treatment.</p> : null}
               <p className="mt-5 text-sm font-semibold text-brand-deep">{doctor.highlights}</p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <Link href={contact.bookingHref} className="btn btn-primary h-12 px-5 text-base">
@@ -64,6 +65,11 @@ export function DoctorProfile({ doctor }: { doctor: Doctor }) {
                   Call {contact.phoneDisplay}
                 </a>
               </div>
+              {doctor.licenseRecords ? <section aria-label="Verified licensing records" className="mt-6 border-t border-line pt-5">
+                <h2 className="font-display text-xl font-semibold text-ink">Licensing you can verify.</h2>
+                <ul className="mt-3 grid gap-2 text-sm leading-7 text-brand-deep">{doctor.licenseRecords.map((record) => <li key={record.identifier}><a className="underline underline-offset-4" href={record.url}>{record.name}</a></li>)}</ul>
+                <p className="mt-3 text-sm leading-7 text-ink-soft">The Dental Board of California records showed current-active status when checked November 6, 2026. Check the official records for current details. A permit or certificate does not by itself confirm that a particular service is offered at this office; ask the team about your planned care.</p>
+              </section> : null}
             </div>
           </div>
         </section>

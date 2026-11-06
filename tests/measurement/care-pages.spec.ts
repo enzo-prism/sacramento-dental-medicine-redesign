@@ -10,6 +10,9 @@ for (const width of [390, 1280]) {
     const schemas = await page.locator('script[type="application/ld+json"]').allTextContents();
     expect(schemas.some(text => text.includes('"@type":"ProfilePage"') && text.includes('"@type":"Person"'))).toBe(true);
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+    await page.goto("/meet-dr-narodovich");
+    await expect(page.getByRole("region", { name: "Verified licensing records" }).getByRole("link", { name: "California dentist license #57101", exact: true })).toHaveAttribute("href", "https://search.dca.ca.gov/profile/440/4401/57101/DDS");
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
     await page.goto("/dental-emergencies");
     await expect(page.getByRole("heading", { name: "Call first for the earliest available visit." })).toBeVisible();
     await expect(page.getByRole("link", { name: /Call.*727-6453/ }).first()).toHaveAttribute("href", "tel:+19167276453");

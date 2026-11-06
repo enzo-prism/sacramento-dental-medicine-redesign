@@ -301,6 +301,7 @@ export type Doctor = {
   href: string;
   bio: string[];
   education?: string[];
+  licenseRecords?: { name: string; identifier: string; category: string; url: string }[];
 };
 
 export const doctors: Doctor[] = [
@@ -313,6 +314,26 @@ export const doctors: Doctor[] = [
       "Patients call him Dr. Mike. He's who people ask for after years away from the chair: modern technique, steady hands, and zero judgment about how long it's been.",
     highlights: "Gentle by default · Anxious-patient care",
     href: "/meet-dr-narodovich",
+    licenseRecords: [
+    {
+        "name": "California dentist license #57101",
+        "identifier": "57101",
+        "category": "Professional license",
+        "url": "https://search.dca.ca.gov/profile/440/4401/57101/DDS"
+    },
+    {
+        "name": "Moderate Sedation Permit #44",
+        "identifier": "44",
+        "category": "Permit",
+        "url": "https://search.dca.ca.gov/profile/440/4417/44/MS"
+    },
+    {
+        "name": "Adult Oral Conscious Sedation Certificate #1628",
+        "identifier": "1628",
+        "category": "Certificate",
+        "url": "https://search.dca.ca.gov/profile/440/4406/1628/OCS"
+    }
+],
     education: ["The Ohio State University, Bachelor of Science", "Temple University, Doctor of Dental Medicine"],
     bio: [
       "Dr. Michael Narodovich grew up in Cleveland, Ohio, earned his Bachelor of Science at The Ohio State University, and completed his dental training at Temple University in Philadelphia before making Northern California home.",

@@ -28,7 +28,7 @@ different social cards so each shared link describes its destination.
 | --- | --- | --- | --- |
 | `/` | `Antelope, CA Dentist \| Sacramento Dental Medicine` | Gentle family, cosmetic, restorative, and emergency care; new-patient and same-day context | Patient-friendly positioning, core care categories, location, and phone |
 | `/reviews` | `Sacramento Dental Medicine Reviews \| 4.8 on Google` | The verified review corpus and the themes a visitor can explore | 4.8 rating, 632 reviews, five-star share, and analysis date |
-| `/schedule` | `Schedule a Dentist Appointment \| Sacramento Dental Medicine` | A fast appointment request using a phone number or email | The three-step request flow, new-patient welcome, and practice phone |
+| `/schedule` | `Schedule a Dentist Appointment \| Sacramento Dental Medicine` | The embedded Jarvis scheduler with office contact alternatives | Online scheduling, new-patient welcome, and practice phone |
 
 The Reviews values are a snapshot checked August 24, 2026. Before changing the
 rating, total, distribution, written-review count, or analysis date, verify the
@@ -158,3 +158,7 @@ the doctor, and self-serving AggregateRating is omitted. The sitemap now include
 
 Run `npm run seo:check -- <production-build-url>` to check actual rendered HTML,
 links, visible FAQ parity, metadata, robots, and unknown-page status.
+
+## November 6 clinician profiles
+
+Both `/meet-dr-narodovich` and `/meet-dr-sheppard` have route-specific metadata and a shared `DoctorProfile` renderer. Biography/image/link facts live in `src/data/site.ts`; ProfilePage/Person entities connect each clinician to the practice. The new specialist route is indexable and listed in the sitemap. Both clinician routes remain privacy-grouped as `/team` in analytics.

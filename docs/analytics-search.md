@@ -1,6 +1,6 @@
 # Analytics and search operations
 
-GA4 last verified: September 6, 2026; other account sections: September 1, 2026
+GA4 and Search Console last verified: November 6, 2026
 
 This document separates code readiness from account-side enablement. A package,
 resource ID, DNS token, or successful build is not proof that traffic is being
@@ -84,8 +84,7 @@ Allowlisted custom events (no parameters):
 | `Schedule Phone Click` | The office `tel:` link beside/below Jarvis (also fires `click_to_call`) |
 | `Schedule Email Click` | The office `mailto:` link beside/below Jarvis (also fires `click_to_email`) |
 
-Conversions: `click_to_call`, `click_to_email` and `generate_lead` are the
-events to mark as GA4 Key Events (an account setting, not code). The two
+On November 6, `click_to_call`, `click_to_email` and `generate_lead` were created and read back as GA4 Key Events, with ONCE_PER_EVENT counting and no assigned revenue values. The two
 `Schedule ... Click` events are placement detail for `/schedule` and should not
 also be Key Events, or `/schedule` contact clicks count twice.
 
@@ -146,9 +145,7 @@ screens with **Content group** or **Page title**, to inspect new traffic. Allow
 normal report processing time after release. September 6 marks a reporting
 break: older views used a single title and mostly the homepage path.
 
-The signed-in Chrome account can view/edit this property. CLI OAuth/delegated
-API access was unavailable during this audit; that is separate from working
-browser access and production tag collection. Do not infer API permissions from
+The signed-in Chrome account can view/edit this property. Native API read/write access was verified on November 6, 2026; this supersedes the September API-access limitation. Do not infer API permissions from
 a successful website request.
 
 Validation includes lifecycle/privacy unit tests and real Google tag requests
@@ -161,14 +158,6 @@ References: [Google tag configuration](https://developers.google.com/analytics/d
 
 ## Google Search Console
 
-The domain property `sc-domain:sacramentodentalmedicine.com` exists, and the
-public DNS zone contains Google verification TXT records. The connected
-`enzo@design-prism.com` identity is nevertheless `siteUnverifiedUser`; sitemap
-and URL Inspection API calls return 403. Preserve the existing TXT records.
+On November 6, 2026, the authenticated native Google API identity `enzo@design-prism.com` was verified as Owner of `sc-domain:sacramentodentalmedicine.com`. This supersedes the September `siteUnverifiedUser`/403 observation. Preserve existing verification records. URL Inspection reports `/dental-emergencies` indexed with the intended canonical; a successful inspection does not request indexing.
 
-An owner must verify this Google identity (or grant it Owner/Full access) before
-submitting `https://sacramentodentalmedicine.com/sitemap.xml`. After access is
-confirmed, submit the sitemap, inspect the canonical homepage, `/reviews/`, and
-`/schedule/`, and record the live results. The public code already provides a
-production canonical, indexable `robots.txt`, and sitemap while preview deploys
-remain noindex.
+Canonical sitemap: `https://sacramentodentalmedicine.com/sitemap.xml`. Submit and read it back following deployment. Monitor clicks, impressions, query intent and canonical selection after recrawling. Keep treatment page analytics grouped for privacy. Contact clicks are intent, accepted requests are leads, and a scheduler start is not a confirmed appointment.

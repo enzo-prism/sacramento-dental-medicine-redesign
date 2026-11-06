@@ -152,6 +152,8 @@ export const servicePages: ServicePage[] = [
       },
     ],
     faqs: [
+      { question: "What should I discuss before choosing sedation?", answer: "Bring a current medication list and tell the dentist about allergies, medical conditions, previous anesthesia experiences, and the dental work you are considering. Ask who will provide and monitor your care, which approach is available in Antelope, and what preparation and recovery arrangements apply to you." },
+      { question: "How is the cost of comfort or sedation care estimated?", answer: "Ask the office which services are included in your treatment estimate and whether any comfort or sedation service is separate. The dentist must assess your health and planned procedure before confirming an option or a fee." },
       { question: "Which sedation options can I request?", answer: "Call the office to ask which options are currently available. A dentist must review your medical history and planned treatment before confirming whether sedation is appropriate. Do not assume a particular medication or sedation method is offered." },
       { question: "Is local numbing the same as sedation?", answer: "Local anesthesia numbs the area being treated. Sedation is a separate approach to managing awareness or anxiety. Tell the dentist about your concerns so they can explain the available comfort choices and any preparation instructions." },
       {
@@ -165,6 +167,8 @@ export const servicePages: ServicePage[] = [
           "You are not alone. The first goal is to understand what is happening now and build a manageable plan without judgment.",
       },
     ],
+    sources: [{ label: "ADA: Anesthesia and sedation", url: "https://www.mouthhealthy.org/all-topics-a-z/anesthesia-and-sedation" }],
+    nearbyLinks: [{ href: "/meet-dr-narodovich", label: "Meet Dr. Narodovich" }],
     relatedSlugs: ["dental-crowns", "tooth-extractions"],
   },
   {
@@ -451,7 +455,7 @@ export const servicePages: ServicePage[] = [
       },
     ],
     faqs: [
-      { question: "Should I use the online form for urgent dental pain?", answer: "Call (916) 727-6453 first for urgent dental pain or an injury. The online form is an appointment request reviewed during office hours, so it should not be used when you need immediate guidance." },
+      { question: "Should I use the online scheduler for urgent dental pain?", answer: "Call (916) 727-6453 first for urgent dental pain or an injury. Do not wait for an online request to be reviewed when you need immediate guidance." },
       { question: "Are you open evenings or weekends for emergencies?", answer: "The office is open until 7 PM on Wednesday and Thursday and is closed Saturday and Sunday. Call to check the earliest available visit; the practice does not advertise 24-hour emergency coverage." },
       {
         question: "What should I do for a dental emergency?",
@@ -464,6 +468,7 @@ export const servicePages: ServicePage[] = [
           "The practice offers same-day emergency visits when possible. Calling first is the fastest way to ask about current availability.",
       },
     ],
+    sources: [{ label: "ADA: Dental emergencies", url: "https://www.mouthhealthy.org/all-topics-a-z/dental-emergencies" }],
     relatedSlugs: ["tooth-extractions", "root-canal-therapy", "wisdom-teeth"],
   },
   {
@@ -493,6 +498,7 @@ export const servicePages: ServicePage[] = [
       "body": "A follow-up filling or crown protects the treated tooth. The dentist explains the restoration and follow-up your tooth needs."
     }
   ],
+  "nearbyLinks": [{ "href": "/meet-dr-sheppard", "label": "Meet Dr. Sheppard" }],
   "faqs": [
     {
       "question": "Does a toothache always mean I need a root canal?",

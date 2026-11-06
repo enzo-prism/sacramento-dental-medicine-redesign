@@ -6,7 +6,7 @@ import { ArrowRight, Check, Phone } from "lucide-react";
 import { Header } from "@/components/Header";
 import { MobileCTA } from "@/components/MobileCTA";
 import { Footer } from "@/components/sections/Footer";
-import { contact } from "@/data/site";
+import { contact, hours } from "@/data/site";
 import { FaqAnswer } from "@/components/FaqAnswer";
 import { OfficeEmail } from "@/components/OfficeEmail";
 import {
@@ -145,6 +145,25 @@ export default async function ServiceRoute({ params }: Props) {
           </div>
         </section>
 
+        {service.slug === "dental-emergencies" && (
+          <section className="section bg-wash" aria-labelledby="urgent-access-title">
+            <div className="container-x grid gap-10 lg:grid-cols-2">
+              <div>
+                <h2 id="urgent-access-title" className="font-display text-3xl font-semibold text-ink">Call first for the earliest available visit.</h2>
+                <p className="mt-5 leading-8 text-ink-soft">The office is at {contact.addressLine1}, {contact.addressLine2}. Same-day care is offered when possible; calling lets the team check current availability and explain the next step.</p>
+                <p className="mt-4 leading-8 text-ink-soft">The practice is not a 24-hour clinic. If the office is closed, do not wait for an online request to be reviewed when you need urgent help. For trouble breathing, uncontrolled bleeding, or a life-threatening injury, call 911.</p>
+                <p className="mt-4 leading-8 text-ink-soft">Ask about the examination cost and what it includes. Treatment choices and a treatment estimate follow the dentist&apos;s assessment.</p>
+                <a className="btn btn-primary mt-6" href={contact.phoneHref}>Call {contact.phoneDisplay}</a>
+              </div>
+              <div>
+                <h2 className="font-display text-2xl font-semibold text-ink">Antelope office hours</h2>
+                <dl className="mt-5 space-y-3 text-sm text-ink-soft">{hours.map(({ day, time }) => <div key={day} className="flex justify-between gap-5"><dt>{day}</dt><dd>{time}</dd></div>)}</dl>
+                <p className="mt-4 text-sm leading-7 text-ink-soft">All hours are Pacific time. An online request does not guarantee a same-day appointment.</p>
+                <a className="btn-text mt-5 inline-flex" href={contact.mapsHref}>Directions to the Elverta Road office</a>
+              </div>
+            </div>
+          </section>
+        )}
         {service.slug === "our-services" && (
           <section className="section bg-wash" aria-labelledby="care-directory-title">
             <div className="container-x">

@@ -42,11 +42,9 @@ export function Doctors() {
                 <p className="mt-5 text-sm font-medium text-brand-ink">
                   {doctor.highlights}
                 </p>
-                {doctor.name === "Dr. Michael Narodovich" ? (
-                  <Link href="/meet-dr-narodovich" className="mt-4 inline-flex text-sm font-semibold text-brand-deep hover:underline">
-                    Meet Dr. Narodovich
-                  </Link>
-                ) : null}
+                <Link href={doctor.href} className="mt-4 inline-flex text-sm font-semibold text-brand-deep hover:underline">
+                  {doctor.name === "Dr. Michael Narodovich" ? "Meet Dr. Narodovich" : "Meet Dr. Sheppard"}
+                </Link>
               </div>
             </article>
           ))}

@@ -59,7 +59,7 @@ describe("Jarvis schedule embed", () => {
       "src/components/sections/NewPatients.tsx",
       "src/app/reviews/page.tsx",
       "src/app/new-patients/page.tsx",
-      "src/app/meet-dr-narodovich/page.tsx",
+      "src/components/DoctorProfile.tsx",
       "src/app/[service]/page.tsx",
     ];
     for (const path of ctaFiles) {

@@ -29,7 +29,7 @@ export function DoctorProfile({ doctor }: { doctor: Doctor }) {
         <section className="relative overflow-hidden pb-16 pt-32 sm:pb-20 lg:pb-24 lg:pt-40">
           <div aria-hidden="true" className="absolute -right-36 top-16 size-[30rem] rounded-full bg-brand-tint/65 blur-3xl" />
           <div className="container-x relative grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:items-center lg:gap-16">
-            <div className="portrait-mat relative aspect-[3/4] w-full max-w-[360px] ring-1 ring-line">
+            <div className="portrait-mat relative aspect-[3/4] w-full max-w-[360px] ring-1 ring-line lg:mt-24 lg:self-start">
               <Image
                 src={doctor.image}
                 alt={`${doctor.name}, ${doctor.title}`}

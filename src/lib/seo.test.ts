@@ -217,10 +217,10 @@ describe("search content integrity", () => {
     assert.deepEqual(Object.fromEntries(stamped), {
       "dental-implants": "2026-10-27",
       "wisdom-teeth": "2026-10-27",
-      "dental-emergencies": "2026-11-03",
+      "dental-emergencies": "2026-11-06",
       "invisalign": "2026-11-03",
       "dental-crowns": "2026-11-03",
-      "sedation-dentistry": "2026-11-03",
+      "sedation-dentistry": "2026-11-06",
     });
     assert.match(sitemap, /serviceLastModified\[slug\] \?\? "2026-09-06"/);
     assert.doesNotMatch(sitemap, /wisdom-teeth-removal-sacramento/);

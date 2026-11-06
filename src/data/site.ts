@@ -298,6 +298,9 @@ export type Doctor = {
   image: string;
   description: string;
   highlights: string;
+  href: string;
+  bio: string[];
+  education?: string[];
 };
 
 export const doctors: Doctor[] = [
@@ -309,6 +312,13 @@ export const doctors: Doctor[] = [
     description:
       "Patients call him Dr. Mike. He's who people ask for after years away from the chair: modern technique, steady hands, and zero judgment about how long it's been.",
     highlights: "Gentle by default · Anxious-patient care",
+    href: "/meet-dr-narodovich",
+    education: ["The Ohio State University, Bachelor of Science", "Temple University, Doctor of Dental Medicine"],
+    bio: [
+      "Dr. Michael Narodovich grew up in Cleveland, Ohio, earned his Bachelor of Science at The Ohio State University, and completed his dental training at Temple University in Philadelphia before making Northern California home.",
+      "At Sacramento Dental Medicine in Antelope, his work includes family and cosmetic dentistry and helping patients return after time away from care. Bring your questions and tell the team about anxiety or a difficult previous experience so your visit can begin with a clear conversation.",
+      "Your examination is the starting point for discussing findings, available treatment, and a plan you understand. Ask which comfort options are available at this office and how they fit your health and the work being considered.",
+    ],
   },
   {
     name: "Dr. Lucas L. Sheppard",
@@ -318,6 +328,11 @@ export const doctors: Doctor[] = [
     description:
       "A root canal specialist and U.S. Air Force veteran, Dr. Sheppard takes on the complex cases. He diagnoses carefully and explains each step, which is how the words \"root canal\" stop being scary.",
     highlights: "Endodontic specialist · U.S. Air Force veteran",
+    href: "/meet-dr-sheppard",
+    bio: [
+      "Dr. Lucas L. Sheppard is an endodontic specialist and U.S. Air Force veteran on the Sacramento Dental Medicine team. His focus is evaluating and treating problems inside the tooth, including complex root canal cases.",
+      "An examination and appropriate imaging help determine the cause of symptoms, whether a tooth can be preserved, and the next step. Ask the team whether your visit should be with Dr. Sheppard and how any final filling or crown will be coordinated.",
+    ],
   },
 ];
 

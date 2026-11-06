@@ -97,3 +97,16 @@ for an expertise or freshness signal.
   [gum disease](https://www.mouthhealthy.org/all-topics-a-z/gum-disease),
   [scaling and root planing](https://www.mouthhealthy.org/all-topics-a-z/scaling-and-root-planing),
   [braces and aligners](https://www.mouthhealthy.org/all-topics-a-z/braces).
+
+
+## November 6, 2026 implementation
+
+Added a dedicated `/meet-dr-sheppard` ProfilePage with the existing specialist biography and authentic portrait, linked from Home and root-canal care and included in the sitemap. Removed its old homepage-fragment redirect. Both clinician pages use the shared `DoctorProfile` server component, profile/person schema and direct DCA verification link. Dr. Narodovich's verified Ohio State/Temple education and identity are consistent with Waikiki, with a sameAs relationship between the person entities. General education does not establish an unverified permit or sedation modality.
+
+Emergency care now presents call-first instructions, real Antelope office hours, availability limits, a medical-emergency direction and estimate expectations. Sedation planning questions distinguish local numbing from sedation and direct patients to confirm the office's available options and clinician qualifications. ADA references and contextual provider links support both pages. No 24-hour availability or unverified medication, sedation method, permit, price, or review outcome was added.
+
+The new clinician route inherits the existing privacy-reduced `/team` analytics group, with a regression assertion. QA covers metadata/schema/FAQ parity and all internal links, plus mobile/desktop clinician and emergency routes. Existing measurement/privacy tests and mocked submissions are preserved. No live patient request was submitted.
+
+Native Google Search Console access was verified as Owner on November 6, superseding the older access note above. October 7–November 3: 119 clicks and 9,685 impressions. URL Inspection reports `/dental-emergencies` indexed with the intended canonical. These are pre-release observations, not evidence of an SEO uplift. See analytics-search.md for account changes.
+
+Remaining externally dependent work: confirm the exact sedation offering and responsible clinicians/qualifications, obtain current approved original media, reconcile the Google Business Profile through an authorized account, and connect completed Jarvis appointments to operational reporting. Validate answer-engine retrieval with dated prompts and cited URLs; no schema or special AI file guarantees citation.

@@ -21,6 +21,7 @@ describe("Google Analytics measurement boundary", () => {
     assert.equal(sanitizeGoogleAnalyticsPath("/wisdom-teeth-removal-sacramento/"), "/campaign");
     assert.equal(sanitizeGoogleAnalyticsPath("/reviews/?email=private#name"), "/reviews");
     assert.equal(sanitizeGoogleAnalyticsPath("/meet-dr-narodovich"), "/team");
+    assert.equal(sanitizeGoogleAnalyticsPath("/meet-dr-sheppard?name=private"), "/team");
     assert.equal(sanitizeGoogleAnalyticsPath("/new-patients"), "/new-patients");
     for (const service of servicePages) {
       assert.equal(sanitizeGoogleAnalyticsPath(`/${service.slug}`), service.slug === "our-services" ? "/our-services" : "/care");

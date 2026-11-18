@@ -80,9 +80,9 @@ describe("search content integrity", () => {
   it("answers timing, cost, and fit in the four November search listings", () => {
     const expected = {
       "dental-emergencies": {
-        title: "Emergency Dentist Sacramento | Same-Day When Possible",
+        title: "Emergency Dentist in Antelope, CA | Weekday & Evening Hours",
         description:
-          "Tooth pain, swelling or a broken tooth? Call (916) 727-6453 for a same-day visit when possible. Open weekdays, until 7 PM Wed and Thu, in Antelope.",
+          "Call (916) 727-6453 for urgent dental care on Elverta Road in Antelope. Open weekdays, until 7 PM Wed and Thu. Same-day visits when available.",
       },
       invisalign: {
         title: "Invisalign in Sacramento & Antelope | Is It Right for You?",
@@ -217,7 +217,7 @@ describe("search content integrity", () => {
     assert.deepEqual(Object.fromEntries(stamped), {
       "dental-implants": "2026-10-27",
       "wisdom-teeth": "2026-10-27",
-      "dental-emergencies": "2026-11-06",
+      "dental-emergencies": "2026-11-18",
       "invisalign": "2026-11-03",
       "dental-crowns": "2026-11-03",
       "sedation-dentistry": "2026-11-06",

@@ -424,16 +424,16 @@ export const servicePages: ServicePage[] = [
   },
   {
     slug: "dental-emergencies",
-    title: "Emergency Dentist in Sacramento & Antelope, CA",
-    searchTitle: "Emergency Dentist Sacramento | Same-Day When Possible",
+    title: "Emergency dentist in Antelope, CA",
+    searchTitle: "Emergency Dentist in Antelope, CA | Weekday & Evening Hours",
     searchDescription:
-      "Tooth pain, swelling or a broken tooth? Call (916) 727-6453 for a same-day visit when possible. Open weekdays, until 7 PM Wed and Thu, in Antelope.",
+      "Call (916) 727-6453 for urgent dental care on Elverta Road in Antelope. Open weekdays, until 7 PM Wed and Thu. Same-day visits when available.",
     navLabel: "Dental emergencies",
     eyebrow: "Urgent dental care",
     description:
       "Call Sacramento Dental Medicine for urgent dental pain, swelling, a broken tooth, or a lost filling or crown in Antelope, CA.",
     intro:
-      "Dental pain and accidents need clear guidance quickly. Call the office first so the team can understand what happened, tell you what to do now, and check the earliest available visit.",
+      "Toothache, swelling or a broken tooth? Call our Elverta Road office before you travel. We see urgent cases on weekdays and offer same-day visits when space is available. Wednesdays and Thursdays we’re open until 7 PM.",
     benefits: [
       "Guidance for severe tooth pain or swelling",
       "Evaluation of chipped or broken teeth",

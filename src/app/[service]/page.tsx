@@ -64,6 +64,7 @@ export default async function ServiceRoute({ params }: Props) {
   const service = servicePageBySlug.get(slug);
   if (!service) notFound();
 
+  const isEmergency = slug === "dental-emergencies";
   const related = service.relatedSlugs
     .map((relatedSlug) => servicePageBySlug.get(relatedSlug))
     .filter((item): item is ServicePage => Boolean(item));
@@ -116,14 +117,23 @@ export default async function ServiceRoute({ params }: Props) {
                 </p>
               ) : null}
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <Link href={service.slug === "dental-emergencies" ? contact.phoneHref : contact.bookingHref} className="btn btn-primary h-12 px-5 text-base">
-                  {service.slug === "dental-emergencies" ? `Call ${contact.phoneDisplay} first` : "Request an appointment"}
-                  <ArrowRight className="size-4" aria-hidden="true" />
-                </Link>
-                <a href={service.slug === "dental-emergencies" ? contact.bookingHref : contact.phoneHref} className="btn btn-outline h-12 px-5 text-base">
-                  <Phone className="size-4" aria-hidden="true" />
-                  {service.slug === "dental-emergencies" ? "Request a non-urgent visit" : `Call ${contact.phoneDisplay}`}
-                </a>
+                {isEmergency ? (
+                  <>
+                    <a href={contact.phoneHref} className="btn btn-ember h-12 px-5 text-base">
+                      <Phone className="size-4" aria-hidden="true" /> Call {contact.phoneDisplay}
+                    </a>
+                    <a href="#office-hours" className="btn btn-outline h-12 px-5 text-base">View office hours</a>
+                  </>
+                ) : (
+                  <>
+                    <Link href={contact.bookingHref} className="btn btn-primary h-12 px-5 text-base">
+                      Request an appointment <ArrowRight className="size-4" aria-hidden="true" />
+                    </Link>
+                    <a href={contact.phoneHref} className="btn btn-outline h-12 px-5 text-base">
+                      <Phone className="size-4" aria-hidden="true" /> Call {contact.phoneDisplay}
+                    </a>
+                  </>
+                )}
               </div>
             </div>
 
@@ -156,7 +166,7 @@ export default async function ServiceRoute({ params }: Props) {
                 <a className="btn btn-primary mt-6" href={contact.phoneHref}>Call {contact.phoneDisplay}</a>
               </div>
               <div>
-                <h2 className="font-display text-2xl font-semibold text-ink">Antelope office hours</h2>
+                <h2 id="office-hours" className="scroll-mt-28 font-display text-2xl font-semibold text-ink">Antelope office hours</h2>
                 <dl className="mt-5 space-y-3 text-sm text-ink-soft">{hours.map(({ day, time }) => <div key={day} className="flex justify-between gap-5"><dt>{day}</dt><dd>{time}</dd></div>)}</dl>
                 <p className="mt-4 text-sm leading-7 text-ink-soft">All hours are Pacific time. An online request does not guarantee a same-day appointment.</p>
                 <a className="btn-text mt-5 inline-flex" href={contact.mapsHref}>Directions to the Elverta Road office</a>
@@ -267,7 +277,7 @@ export default async function ServiceRoute({ params }: Props) {
         </section>
       </main>
       <Footer seasonal={slug !== "dental-emergencies"} />
-      <MobileCTA />
+      <MobileCTA callFirst={isEmergency} />
     </>
   );
 }

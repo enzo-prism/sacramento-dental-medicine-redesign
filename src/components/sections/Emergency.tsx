@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Phone, Siren } from "lucide-react";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { contact, emergency } from "@/data/site";
@@ -23,6 +24,9 @@ export function Emergency() {
                 <p className="mt-3 max-w-xl text-pretty text-sm leading-7 text-ink-soft md:text-base">
                   {emergency.body}
                 </p>
+                <Link href="/dental-emergencies" className="btn-text mt-3">
+                  Emergency visits and Antelope office hours
+                </Link>
               </div>
             </div>
 

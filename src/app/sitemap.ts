@@ -6,7 +6,7 @@ import { siteUrl } from "@/lib/site-url";
 const serviceLastModified: Record<string, string> = {
   "dental-implants": "2026-10-27",
   "wisdom-teeth": "2026-10-27",
-  "dental-emergencies": "2026-11-06",
+  "dental-emergencies": "2026-11-18",
   "invisalign": "2026-11-03",
   "dental-crowns": "2026-11-03",
   "sedation-dentistry": "2026-11-06",
@@ -18,7 +18,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${siteUrl}/new-patients`, lastModified: new Date("2026-09-06"), changeFrequency: "monthly", priority: 0.8 },
     {
       url: siteUrl,
-      lastModified: new Date("2026-09-06"),
+      lastModified: new Date("2026-11-18"),
       changeFrequency: "monthly",
       priority: 1,
     },

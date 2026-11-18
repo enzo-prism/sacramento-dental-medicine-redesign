@@ -8,9 +8,11 @@ import { contact } from "@/data/site";
 export function MobileCTA({
   bookHref = contact.bookingHref,
   bookLabel = "Book online",
+  callFirst = false,
 }: {
   bookHref?: string;
   bookLabel?: string;
+  callFirst?: boolean;
 }) {
   const [hidden, setHidden] = useState(false);
 
@@ -38,13 +40,13 @@ export function MobileCTA({
 
   return (
     <nav aria-label="Quick actions" className="mobile-cta lg:hidden">
-      <a href={contact.phoneHref} className="mobile-cta-secondary">
+      <a href={contact.phoneHref} className={callFirst ? "mobile-cta-primary" : "mobile-cta-secondary"}>
         <Phone className="size-4" />
-        Call
+        {callFirst ? "Call first" : "Call"}
       </a>
-      <Link href={bookHref} className="mobile-cta-primary">
+      <Link href={bookHref} className={callFirst ? "mobile-cta-secondary" : "mobile-cta-primary"}>
         <CalendarDays className="size-4" />
-        {bookLabel}
+        {callFirst ? "Non-urgent visit" : bookLabel}
       </Link>
     </nav>
   );

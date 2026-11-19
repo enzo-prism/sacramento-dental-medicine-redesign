@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import {
   GOOGLE_ANALYTICS_MEASUREMENT_ID,
+  aiReferrerFromReferrer,
   googleAnalyticsPageParameters,
   isGoogleAnalyticsProductionHostname,
   safeGoogleAnalyticsAcquisition,
@@ -33,6 +34,8 @@ describe("Google Analytics measurement boundary", () => {
   it("preserves only known referral hosts, never paths, search terms, or credentials", () => {
     assert.deepEqual(safeGoogleAnalyticsAcquisition("", "https://www.google.com/search?q=private"), {page_referrer:"https://www.google.com/"});
     assert.deepEqual(safeGoogleAnalyticsAcquisition("", "https://chatgpt.com/c/private-chat"), {page_referrer:"https://chatgpt.com/"});
+    assert.deepEqual(safeGoogleAnalyticsAcquisition("", "https://claude.ai/chat/private"), {page_referrer:"https://claude.ai/"});
+    assert.deepEqual(safeGoogleAnalyticsAcquisition("", "https://www.you.com/search?q=private"), {page_referrer:"https://you.com/"});
     assert.deepEqual(safeGoogleAnalyticsAcquisition("", "https://tenant.private.example/patient"), {page_referrer:"", campaign_source:"other-referral", campaign_medium:"referral"});
     for (const referrer of ["", "javascript:alert(1)", "https://user:pass@www.google.com/", "https://sacramentodentalmedicine.com/schedule?email=private"]) assert.deepEqual(safeGoogleAnalyticsAcquisition("", referrer), {page_referrer:""});
   });
@@ -45,6 +48,27 @@ describe("Google Analytics measurement boundary", () => {
     assert.equal(page?.page_location, "https://sacramentodentalmedicine.com/care");
     assert.equal(page?.page_title, "Care information | Sacramento Dental Medicine");
     assert.equal(page?.content_group, "Care information");
+  });
+  it("labels known AI referrer hosts without paths, queries, or credentials", () => {
+    const expected: Record<string, string> = {
+      "https://chatgpt.com/c/private-chat": "chatgpt.com",
+      "https://www.chatgpt.com/": "chatgpt.com",
+      "https://chat.openai.com/chat/private": "chatgpt.com",
+      "https://www.perplexity.ai/search?q=private": "perplexity.ai",
+      "https://perplexity.ai/": "perplexity.ai",
+      "https://gemini.google.com/app": "gemini.google.com",
+      "https://copilot.microsoft.com/chats/private": "copilot.microsoft.com",
+      "https://claude.ai/chat/private": "claude.ai",
+      "https://www.claude.ai/": "claude.ai",
+      "https://you.com/search?q=private": "you.com",
+      "https://www.you.com/": "you.com",
+    };
+    for (const [referrer, label] of Object.entries(expected)) {
+      assert.equal(aiReferrerFromReferrer(referrer), label);
+    }
+    for (const referrer of ["", "https://www.google.com/", "javascript:alert(1)", "https://user:pass@chatgpt.com/", "https://chatgpt.com.evil.com/"]) {
+      assert.equal(aiReferrerFromReferrer(referrer), "");
+    }
   });
 });
 
@@ -116,5 +140,16 @@ describe("Google Analytics lifecycle", () => {
     controller.page("/reviews", "?utm_source=facebook&utm_medium=social", "");
     const sets = calls.filter(([command]) => command === "set");
     for (const [,data] of sets) assert.equal((data as Record<string,unknown>).campaign_source,"google");
+  });
+  it("sends ai_referrer only on the landing page view, never on tag-wide set", () => {
+    const {calls,controller} = harness();
+    controller.page("/", "", "https://claude.ai/chat/private-thread");
+    controller.page("/reviews", "", "https://you.com/search?q=private");
+    const sets = calls.filter(([command]) => command === "set");
+    for (const [,data] of sets) assert.equal("ai_referrer" in (data as object), false);
+    const views = calls.filter(([command,event]) => command === "event" && event === "page_view");
+    assert.equal((views[0][2] as Record<string,unknown>).ai_referrer, "claude.ai");
+    assert.equal("ai_referrer" in (views[1][2] as object), false);
+    assert.ok(!JSON.stringify(calls).includes("private"));
   });
 });

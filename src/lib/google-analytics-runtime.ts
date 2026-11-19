@@ -3,6 +3,7 @@ import {
   GOOGLE_ANALYTICS_MEASUREMENT_ID,
   GOOGLE_ANALYTICS_ORIGIN,
   GOOGLE_ANALYTICS_PRIVACY_CONFIG,
+  aiReferrerFromReferrer,
   googleAnalyticsPageParameters,
   safeGoogleAnalyticsAcquisition,
 } from "./google-analytics.ts";
@@ -29,7 +30,9 @@ export function createGoogleAnalyticsController(env: AnalyticsEnvironment) {
       }
       if (lastObservedPath === pathname) return;
       lastObservedPath = pathname;
+      const isLanding = acquisition === null;
       const incoming = acquisition ?? safeGoogleAnalyticsAcquisition(search, referrer);
+      const aiReferrer = isLanding ? aiReferrerFromReferrer(referrer) : "";
       const page = googleAnalyticsPageParameters(pathname, previousLocation || incoming.page_referrer);
       if (!page) {
         env.setDisabled(true);
@@ -51,7 +54,11 @@ export function createGoogleAnalyticsController(env: AnalyticsEnvironment) {
         env.load();
         initialized = true;
       }
-      env.send("event", "page_view", { ...page, send_to: GOOGLE_ANALYTICS_MEASUREMENT_ID });
+      env.send("event", "page_view", {
+        ...page,
+        send_to: GOOGLE_ANALYTICS_MEASUREMENT_ID,
+        ...(aiReferrer ? { ai_referrer: aiReferrer } : {}),
+      });
       previousLocation = page.page_location;
     },
     event(name: string) {

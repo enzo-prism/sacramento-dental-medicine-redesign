@@ -119,6 +119,15 @@ Raw campaign names, campaign IDs, terms and content stay suppressed. See
 - `utm_source=facebook&utm_medium=paid_social` identifies paid social visits.
 - Recognized Google or AI referral origins can identify incoming organic/referral traffic.
 
+The landing `page_view` also sets a fixed `ai_referrer` event parameter when
+`document.referrer`'s host is one of `chatgpt.com` (including `chat.openai.com`),
+`perplexity.ai`, `gemini.google.com`, `copilot.microsoft.com`, `claude.ai`, or
+`you.com`. The value is the canonical host label only. It is not set on tag-wide
+`set` calls or later route-change hits. Creating a GA4 custom channel group
+named **AI referrals** that matches those sources is an account-side step; the
+website cannot create it.
+
+
 Click-ID-only paid visits cannot reliably be distinguished from organic visits;
 use approved source/medium tags when managing acquisition links. Historical
 Direct traffic cannot be reconstructed, and browser/referrer restrictions still

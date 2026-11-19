@@ -57,6 +57,8 @@ const SOURCE_LABELS: Record<string, string> = {
   chatgpt: "chatgpt.com", "chatgpt.com": "chatgpt.com",
   perplexity: "perplexity.ai", "perplexity.ai": "perplexity.ai",
   gemini: "gemini.google.com", copilot: "copilot.microsoft.com",
+  claude: "claude.ai", "claude.ai": "claude.ai",
+  you: "you.com", "you.com": "you.com",
   newsletter: "newsletter", google_business_profile: "google", gbp: "google", gmb: "google",
 };
 const MEDIUM_LABELS: Record<string, string> = {
@@ -78,10 +80,48 @@ const REFERRER_HOSTS = new Map([
   ["www.youtube.com", "www.youtube.com"], ["tiktok.com", "www.tiktok.com"],
   ["www.tiktok.com", "www.tiktok.com"], ["linkedin.com", "www.linkedin.com"],
   ["www.linkedin.com", "www.linkedin.com"], ["chatgpt.com", "chatgpt.com"],
-  ["chat.openai.com", "chatgpt.com"], ["perplexity.ai", "www.perplexity.ai"],
+  ["www.chatgpt.com", "chatgpt.com"], ["chat.openai.com", "chatgpt.com"],
+  ["perplexity.ai", "www.perplexity.ai"],
   ["www.perplexity.ai", "www.perplexity.ai"], ["gemini.google.com", "gemini.google.com"],
   ["copilot.microsoft.com", "copilot.microsoft.com"],
+  ["claude.ai", "claude.ai"], ["www.claude.ai", "claude.ai"],
+  ["you.com", "you.com"], ["www.you.com", "you.com"],
 ]);
+
+/** Canonical AI referral hosts. Values are host labels only — never paths or queries. */
+const AI_REFERRER_HOSTS = new Map([
+  ["chatgpt.com", "chatgpt.com"],
+  ["www.chatgpt.com", "chatgpt.com"],
+  ["chat.openai.com", "chatgpt.com"],
+  ["perplexity.ai", "perplexity.ai"],
+  ["www.perplexity.ai", "perplexity.ai"],
+  ["gemini.google.com", "gemini.google.com"],
+  ["copilot.microsoft.com", "copilot.microsoft.com"],
+  ["claude.ai", "claude.ai"],
+  ["www.claude.ai", "claude.ai"],
+  ["you.com", "you.com"],
+  ["www.you.com", "you.com"],
+]);
+
+/**
+ * Fixed `ai_referrer` label from `document.referrer`'s host, or "".
+ * Paths, queries, credentials, and unknown hosts are dropped.
+ */
+export function aiReferrerFromReferrer(referrer: string) {
+  try {
+    const url = new URL(referrer);
+    if (
+      !["http:", "https:"].includes(url.protocol) ||
+      url.username ||
+      url.password
+    ) {
+      return "";
+    }
+    return AI_REFERRER_HOSTS.get(url.hostname.toLowerCase()) ?? "";
+  } catch {
+    return "";
+  }
+}
 
 export function safeGoogleAnalyticsAcquisition(search: string, referrer: string) {
   const params = new URLSearchParams(search);

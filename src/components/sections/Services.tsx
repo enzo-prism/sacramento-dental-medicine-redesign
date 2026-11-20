@@ -11,16 +11,22 @@ import {
 
 const serviceLinks: Record<string, { href: string; label: string }[]> = {
   "Preventive care": [
+    { href: "/preventive-care", label: "Exams & cleanings" },
+    { href: "/dental-care-children", label: "Children's dentistry" },
     { href: "/gum-disease-treatment", label: "Gum disease treatment" },
-    { href: "/our-services", label: "All dental services" },
+    { href: "/bruxism", label: "Night guards" },
   ],
   "Cosmetic dentistry": [
+    { href: "/cosmetic", label: "Cosmetic dentistry" },
+    { href: "/teeth-whitening", label: "Teeth whitening" },
+    { href: "/veneers", label: "Porcelain veneers" },
     { href: "/invisalign", label: "Invisalign" },
     { href: "/orthodontics", label: "Orthodontics" },
   ],
   "Restorative dentistry": [
-    { href: "/dental-crowns", label: "Dental crowns" },
+    { href: "/dental-crowns", label: "Crowns & bridges" },
     { href: "/dental-implants", label: "Dental implants" },
+    { href: "/dentures", label: "Dentures" },
     { href: "/root-canal-therapy", label: "Root canal treatment" },
   ],
   "Oral surgery": [

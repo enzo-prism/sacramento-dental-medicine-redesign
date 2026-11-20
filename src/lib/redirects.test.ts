@@ -109,4 +109,19 @@ describe("legacy URL redirects", () => {
     assert.match(privacy, /canonical: "\/privacy-practices\/"/);
     assert.deepEqual([...canonicalSlashPaths], ["/privacy-practices/"]);
   });
+
+  it("serves restored legacy service URLs as pages, not hub redirects", () => {
+    // These were real pages on the practice's previous site. Redirecting them
+    // to /our-services discarded their search history (Nov 20, 2026 audit).
+    const restored = ["/preventive-care", "/dental-care-children", "/cosmetic", "/teeth-whitening", "/veneers", "/bruxism"];
+    const slugs = new Set(servicePages.map(({ slug }) => `/${slug}`));
+    const legacySources = new Set<string>(legacyRedirects.map(({ source }) => source));
+    for (const path of restored) {
+      assert.ok(slugs.has(path), `${path} has no page`);
+      assert.ok(!legacySources.has(path), `${path} still redirects`);
+      assert.equal(match(rules, CANONICAL_HOST, path), null);
+      assert.equal(match(rules, CANONICAL_HOST, `${path}/`), path);
+      assert.equal(match(rules, "www.sacramentodentalmedicine.com", path), `${CANONICAL_ORIGIN}${path}`);
+    }
+  });
 });

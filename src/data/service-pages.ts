@@ -34,11 +34,11 @@ export const servicePages: ServicePage[] = [
     description:
       "Explore preventive, cosmetic, restorative, orthodontic, and oral surgery services at Sacramento Dental Medicine in Antelope, CA.",
     intro:
-      "From preventive visits to root canal treatment, wisdom teeth, and PRF or grafting support, Sacramento Dental Medicine brings a broad range of care into one familiar office. Start with an exam and a clear conversation about what matters to you, then build the treatment plan from there.",
+      "From checkups, cleanings, and children's visits to whitening, veneers, dentures, root canal treatment, wisdom teeth, and PRF or grafting support, Sacramento Dental Medicine brings a broad range of care into one familiar office. Start with an exam and a clear conversation about what matters to you, then build the treatment plan from there.",
     benefits: [
-      "Preventive exams, cleanings, and gum care",
-      "Cosmetic dentistry and clear aligners",
-      "Crowns, implants, and root canal treatment",
+      "Exams, cleanings, children's dentistry, and gum care",
+      "Whitening, veneers, bonding, and clear aligners",
+      "Crowns, bridges, implants, dentures, and root canal treatment",
       "Wisdom teeth, extractions, and PRF or grafting support",
     ],
     steps: [
@@ -56,6 +56,11 @@ export const servicePages: ServicePage[] = [
       },
     ],
     faqs: [
+      {
+        question: "What dental services does Sacramento Dental Medicine offer?",
+        answer:
+          "Preventive exams and cleanings, children's dentistry, gum disease treatment, night guards, teeth whitening, bonding, porcelain veneers, Invisalign and orthodontics, crowns and bridges, dental implants, full and partial dentures, root canal treatment with an endodontic specialist, tooth extractions, wisdom teeth removal, PRF and grafting, sedation planning for anxious patients, and urgent dental care.",
+      },
       { question: "Where is Sacramento Dental Medicine located?", answer: "The office is at 4320 Elverta Rd #3, Antelope, CA 95843. Sacramento Dental Medicine serves patients from Antelope and the greater Sacramento area at this location." },
       {
         question: "Are you accepting new dental patients?",
@@ -68,7 +73,406 @@ export const servicePages: ServicePage[] = [
           "Yes. An exam is the right place to understand what is happening, review options, and decide what you want to do next.",
       },
     ],
-    relatedSlugs: ["root-canal-therapy", "wisdom-teeth", "platelet-rich-fibrin"],
+    relatedSlugs: ["preventive-care", "cosmetic", "dental-emergencies"],
+  },
+  // Restored November 20, 2026. These six URLs were live pages on the
+  // practice's previous site and had been redirecting to this directory.
+  // Practice-specific facts (fluoride and sealants, a first child visit around
+  // age one, an early bite check around age seven, in-office or take-home
+  // whitening, bonding, custom mouthguards) come from those pages as archived
+  // May–July 2026 and from `services` in src/data/site.ts. Clinical
+  // explanations stay general and link ADA patient education.
+  {
+    slug: "preventive-care",
+    title: "Dental Exams & Cleanings in Antelope, CA",
+    searchTitle: "Teeth Cleaning & Dental Exam in Antelope, CA",
+    searchDescription:
+      "Checkups, cleanings, digital X-rays, fluoride and sealants for all ages on Elverta Rd in Antelope. New patients welcome. Call (916) 727-6453.",
+    navLabel: "Exams & cleanings",
+    eyebrow: "Preventive care",
+    description:
+      "Routine exams, professional cleanings, digital X-rays, fluoride, and sealants for patients of all ages at Sacramento Dental Medicine in Antelope.",
+    intro:
+      "Regular checkups and cleanings catch small problems while they are still small. A preventive visit at the Elverta Road office can include a comprehensive exam, a professional cleaning to remove plaque and tartar, digital X-rays when they are needed, an oral cancer screening, and fluoride or sealants when they fit your teeth.",
+    benefits: [
+      "Professional cleaning to remove plaque and tartar",
+      "Exam for cavities, gum disease, and wear",
+      "Digital X-rays only when they are needed",
+      "Oral cancer screening at routine exams",
+    ],
+    steps: [
+      {
+        title: "Catch up on your history",
+        body: "Share any changes in your health, medications, and anything that has bothered you since your last visit.",
+      },
+      {
+        title: "Exam and cleaning",
+        body: "The team cleans your teeth and checks teeth, gums, and soft tissue, adding X-rays only when the dentist needs them.",
+      },
+      {
+        title: "Know what comes next",
+        body: "You hear what was found, what can wait, and when to come back, before you leave the chair.",
+      },
+    ],
+    nearbyLinks: [{ href: "/new-patients", label: "What to bring to your first visit" }],
+    faqs: [
+      {
+        question: "What happens at a dental checkup and cleaning?",
+        answer:
+          "Expect a professional cleaning to remove plaque and tartar, an exam of your teeth and gums, an oral cancer screening, and digital X-rays if the dentist needs them. Before you leave, the dentist explains what was found and what, if anything, needs attention.",
+      },
+      {
+        question: "How often should I get a dental cleaning?",
+        answer:
+          "The dentist recommends a schedule based on your gum health, cavity risk, and history. Many patients come in twice a year; people being treated for gum disease may need visits more often.",
+        links: [{ href: "/gum-disease-treatment", label: "treated for gum disease" }],
+      },
+      {
+        question: "Do you take X-rays at every visit?",
+        answer:
+          "No. X-rays are taken when the dentist needs to see something an exam cannot show, such as decay between teeth or bone levels. The office uses digital X-rays, which use less radiation than traditional film.",
+      },
+      {
+        question: "It has been years since my last cleaning. Is that a problem?",
+        answer:
+          "No. Patients often come back after years away, and many ask for Dr. Narodovich by name. There is no lecture: the first visit is an exam and a conversation about what was found, and the cleaning plan is built from there.",
+        links: [{ href: "/meet-dr-narodovich", label: "Dr. Narodovich" }],
+      },
+      {
+        question: "Do you accept Medi-Cal for cleanings?",
+        answer:
+          "We do not accept Medi-Cal. For other dental plans, call (916) 727-6453 to confirm whether your plan is accepted before your visit.",
+      },
+    ],
+    sources: [
+      { label: "ADA: X-rays", url: "https://www.mouthhealthy.org/all-topics-a-z/x-rays" },
+      { label: "ADA: Fluoride", url: "https://www.mouthhealthy.org/all-topics-a-z/fluoride" },
+      { label: "ADA: Sealants", url: "https://www.mouthhealthy.org/all-topics-a-z/sealants" },
+      { label: "ADA: Oral cancer", url: "https://www.mouthhealthy.org/all-topics-a-z/oral-cancer" },
+    ],
+    relatedSlugs: ["gum-disease-treatment", "dental-care-children", "bruxism"],
+  },
+  {
+    slug: "dental-care-children",
+    title: "Children's Dentistry in Antelope, CA",
+    searchTitle: "Kids Dentist in Antelope, CA | Family Dental Care",
+    searchDescription:
+      "Gentle checkups for kids at a family dental office in Antelope: a first visit around age one, then cleanings and fluoride. Call (916) 727-6453.",
+    navLabel: "Children's dentistry",
+    eyebrow: "Family dentistry",
+    description:
+      "Gentle, family-friendly dental visits for children at Sacramento Dental Medicine in Antelope, from a first visit around age one through the teen years.",
+    intro:
+      "Kids are seen in the same Antelope office as the rest of the family. The practice encourages a first visit around age one: a relaxed, no-pressure appointment where Dr. Narodovich looks over your child's teeth and talks with you about habits at home. Later visits add cleanings, fluoride, and X-rays when they are needed.",
+    benefits: [
+      "A no-pressure first visit around age one",
+      "Cleanings, fluoride, and X-rays when needed",
+      "Brushing and flossing coaching for kids and parents",
+      "An early bite check around age seven",
+    ],
+    steps: [
+      {
+        title: "Meet the team",
+        body: "The first visit is short and friendly: a gentle look at your child's teeth and a conversation with you about habits, feeding, and brushing.",
+      },
+      {
+        title: "Clean and protect",
+        body: "As your child grows, visits add cleanings and fluoride, with X-rays only when the dentist needs them.",
+      },
+      {
+        title: "Watch the bite develop",
+        body: "Around age seven, the dentist checks how teeth and jaws are developing and flags anything worth watching early.",
+      },
+    ],
+    faqs: [
+      {
+        question: "When should my child first see the dentist?",
+        answer:
+          "Sacramento Dental Medicine encourages a first visit around your child's first birthday. It is a no-pressure, meet-and-greet appointment: Dr. Narodovich does a gentle visual exam, counts the baby teeth, and talks with you about keeping them healthy.",
+      },
+      {
+        question: "Can my whole family see the same dentist?",
+        answer:
+          "Yes. The practice welcomes patients of all ages, so parents and children can be seen at the same office on Elverta Road in Antelope.",
+      },
+      {
+        question: "When should my child's bite be checked for braces?",
+        answer:
+          "Around age seven, the dentist does an early orthodontic check of how the bite and jaws are developing. Some problems, including effects of thumb sucking or tongue thrusting, are easier to guide while a child is still growing. Not every child needs early treatment.",
+        links: [{ href: "/orthodontics", label: "early orthodontic check" }],
+      },
+      {
+        question: "What if my child is nervous about the dentist?",
+        answer:
+          "Tell the team when you book. Visits for young children start slowly, with simple explanations and no surprises, so the first experiences at the dentist are positive ones.",
+      },
+      {
+        question: "What should I do if my child chips or knocks out a tooth?",
+        answer:
+          "Treat it as a dental emergency and call (916) 727-6453 right away for guidance. For a head injury, uncontrolled bleeding, or trouble breathing, call 911.",
+        links: [{ href: "/dental-emergencies", label: "dental emergency" }],
+      },
+    ],
+    sources: [
+      { label: "ADA: Baby teeth", url: "https://www.mouthhealthy.org/all-topics-a-z/baby-teeth" },
+      { label: "ADA: Fluoride", url: "https://www.mouthhealthy.org/all-topics-a-z/fluoride" },
+      { label: "ADA: Sealants", url: "https://www.mouthhealthy.org/all-topics-a-z/sealants" },
+    ],
+    relatedSlugs: ["preventive-care", "orthodontics", "dental-emergencies"],
+  },
+  {
+    slug: "cosmetic",
+    title: "Cosmetic Dentistry in Antelope & Sacramento, CA",
+    searchTitle: "Cosmetic Dentist in Antelope, CA | Whitening & Veneers",
+    searchDescription:
+      "Whitening, bonding, porcelain veneers and Invisalign with Dr. Michael Narodovich in Antelope, planned around your face. Call (916) 727-6453.",
+    navLabel: "Cosmetic dentistry",
+    eyebrow: "Cosmetic dentistry",
+    description:
+      "Professional whitening, tooth-colored bonding, porcelain veneers, and Invisalign at Sacramento Dental Medicine in Antelope, serving greater Sacramento.",
+    intro:
+      "Cosmetic dentistry changes how your smile looks: its color, shape, spacing, or alignment. Dr. Michael Narodovich's work includes family and cosmetic dentistry, and options at the Antelope office include professional whitening, tooth-colored bonding, porcelain veneers, and Invisalign clear aligners, planned around your face rather than a template.",
+    benefits: [
+      "Professional whitening, in the office or at home",
+      "Tooth-colored bonding for chips and small gaps",
+      "Porcelain veneers for shape, size, and color",
+      "Invisalign clear aligners for crowding and spacing",
+    ],
+    steps: [
+      {
+        title: "Say what you would change",
+        body: "Start with what bothers you about your smile, photos you like, and how much change you want.",
+      },
+      {
+        title: "Check health first",
+        body: "An exam makes sure cavities, gum problems, or grinding are handled before cosmetic work, so results last.",
+      },
+      {
+        title: "Compare the options",
+        body: "The dentist explains which approaches fit, from the most conservative up, with what each involves and costs.",
+      },
+    ],
+    nearbyLinks: [{ href: "/meet-dr-narodovich", label: "Meet Dr. Narodovich" }],
+    faqs: [
+      {
+        question: "Which cosmetic treatment is right for me?",
+        answer:
+          "It depends on what you want to change. Whitening addresses color, bonding repairs small chips and gaps, veneers change shape, size, and color, and Invisalign moves teeth. An exam and a conversation about your goals narrow the choice.",
+      },
+      {
+        question: "What is dental bonding?",
+        answer:
+          "Bonding applies tooth-colored resin to the surface of a tooth to repair chips, cracks, or small gaps. It usually changes less of the natural tooth than a veneer or crown.",
+      },
+      {
+        question: "Does dental insurance cover cosmetic dentistry?",
+        answer:
+          "Treatment done only to change appearance is often not covered. Call the front desk at (916) 727-6453 to check your plan and ask about the payment options currently available.",
+      },
+      {
+        question: "Can I have cosmetic work if I have cavities or gum disease?",
+        answer:
+          "Those are usually treated first. A checkup and cleaning come before cosmetic work, because healthy teeth and gums give it a stable foundation and help results last.",
+        links: [{ href: "/preventive-care", label: "checkup and cleaning" }],
+      },
+    ],
+    sources: [
+      { label: "ADA: Teeth whitening", url: "https://www.mouthhealthy.org/all-topics-a-z/teeth-whitening" },
+      { label: "ADA: Veneers", url: "https://www.mouthhealthy.org/all-topics-a-z/veneers" },
+    ],
+    relatedSlugs: ["teeth-whitening", "veneers", "invisalign"],
+  },
+  {
+    slug: "teeth-whitening",
+    title: "Teeth Whitening in Antelope & Sacramento, CA",
+    searchTitle: "Professional Teeth Whitening in Antelope, CA",
+    searchDescription:
+      "In-office or take-home teeth whitening, planned after an exam at Sacramento Dental Medicine in Antelope. Ask what fits your stains: (916) 727-6453.",
+    navLabel: "Teeth whitening",
+    eyebrow: "Cosmetic dentistry",
+    description:
+      "Professional in-office or take-home teeth whitening at Sacramento Dental Medicine in Antelope, planned after an exam of your teeth and existing work.",
+    intro:
+      "Professional whitening can lift many stains from coffee, tea, wine, and time. Sacramento Dental Medicine offers whitening in the office or with take-home kits, planned after an exam so the dentist can check for cavities, gum problems, or crowns and fillings that whitening will not change.",
+    benefits: [
+      "In-office or take-home options",
+      "An exam first, so whitening suits your teeth",
+      "Guidance if your teeth are sensitive",
+      "A plan for crowns, fillings, and veneers that will not lighten",
+    ],
+    steps: [
+      {
+        title: "Find the cause",
+        body: "The dentist looks at why teeth are discolored. Surface stains respond well; some deeper discoloration needs a different approach.",
+      },
+      {
+        title: "Choose a method",
+        body: "Decide between whitening in the office or at home with take-home kits, based on your timeline and sensitivity.",
+      },
+      {
+        title: "Keep the result",
+        body: "Get advice on staining foods and drinks, home care, and when a touch-up makes sense.",
+      },
+    ],
+    faqs: [
+      {
+        question: "Is professional whitening better than store-bought kits?",
+        answer:
+          "Professional whitening is supervised by a dentist, who first checks that your teeth and gums are healthy and that the discoloration is the kind whitening can treat. Results vary from person to person either way.",
+      },
+      {
+        question: "Will whitening change the color of my crowns or fillings?",
+        answer:
+          "No. Whitening works on natural tooth enamel, so crowns, tooth-colored fillings, and veneers keep their current shade. The dentist can plan around them, or discuss replacing visible work afterward to match.",
+        links: [{ href: "/veneers", label: "veneers" }],
+      },
+      {
+        question: "Does teeth whitening cause sensitivity?",
+        answer:
+          "Some people notice temporary sensitivity during or after whitening. Tell the dentist if your teeth are already sensitive so the approach can be adjusted.",
+      },
+      {
+        question: "How long do whitening results last?",
+        answer:
+          "It varies. Coffee, tea, red wine, and tobacco bring stains back sooner. Good home care and occasional touch-ups help results last longer.",
+      },
+      {
+        question: "How much does teeth whitening cost?",
+        answer:
+          "It depends on whether you whiten in the office or at home. Whitening is usually considered cosmetic, so call (916) 727-6453 for current pricing and to check your plan.",
+      },
+    ],
+    sources: [{ label: "ADA: Teeth whitening", url: "https://www.mouthhealthy.org/all-topics-a-z/teeth-whitening" }],
+    relatedSlugs: ["cosmetic", "veneers", "invisalign"],
+  },
+  {
+    slug: "veneers",
+    title: "Porcelain Veneers in Antelope & Sacramento, CA",
+    searchTitle: "Porcelain Veneers in Antelope & Sacramento | Smile Design",
+    searchDescription:
+      "Custom porcelain veneers planned around your face and bite by Dr. Michael Narodovich in Antelope. Compare veneers, bonding and whitening first.",
+    navLabel: "Porcelain veneers",
+    eyebrow: "Cosmetic dentistry",
+    description:
+      "Custom porcelain veneers to change the shape, size, or color of front teeth at Sacramento Dental Medicine in Antelope, serving greater Sacramento.",
+    intro:
+      "Veneers are thin, custom-made porcelain shells bonded to the front of teeth to change their color, shape, or size. Dr. Narodovich plans veneers around your face, bite, and goals, and will also tell you when whitening, bonding, or aligners could reach a similar result with less change to your natural teeth.",
+    benefits: [
+      "Change the shape, size, or color of front teeth",
+      "Cover chips, wear, and stains whitening cannot lift",
+      "Planned around your face and bite",
+      "A frank comparison with more conservative options",
+    ],
+    steps: [
+      {
+        title: "Plan the smile",
+        body: "Discuss what you want to change, check your bite and gums, and review whether veneers are the right tool.",
+      },
+      {
+        title: "Prepare the teeth",
+        body: "A thin layer of enamel is usually reshaped so the veneers sit naturally, and impressions or scans go to the lab.",
+      },
+      {
+        title: "Bond and check the bite",
+        body: "The finished veneers are bonded in place and your bite is checked so they feel and function like your own teeth.",
+      },
+    ],
+    nearbyLinks: [{ href: "/meet-dr-narodovich", label: "Meet Dr. Narodovich" }],
+    faqs: [
+      {
+        question: "Are porcelain veneers permanent?",
+        answer:
+          "Placing porcelain veneers usually removes a thin layer of enamel, so the change is generally not reversible. Veneers themselves can wear or chip over time and may eventually need replacement.",
+      },
+      {
+        question: "Who is a good candidate for veneers?",
+        answer:
+          "Adults with healthy teeth and gums who want to change the shape, size, or color of front teeth. Active decay, gum disease, or heavy grinding should usually be addressed first.",
+        links: [{ href: "/bruxism", label: "heavy grinding" }],
+      },
+      {
+        question: "What are the alternatives to veneers?",
+        answer:
+          "Whitening for color, tooth-colored bonding for small chips and gaps, Invisalign for crowding or spacing, and crowns for teeth that need more strength. The dentist will explain which options fit your teeth.",
+        links: [
+          { href: "/teeth-whitening", label: "Whitening" },
+          { href: "/invisalign", label: "Invisalign" },
+        ],
+      },
+      {
+        question: "How much do porcelain veneers cost?",
+        answer:
+          "The estimate depends on how many teeth are involved and any treatment needed first. Veneers are usually considered cosmetic; ask the front desk about payment options after your consultation.",
+      },
+    ],
+    sources: [{ label: "ADA: Veneers", url: "https://www.mouthhealthy.org/all-topics-a-z/veneers" }],
+    relatedSlugs: ["cosmetic", "teeth-whitening", "dental-crowns"],
+  },
+  {
+    slug: "bruxism",
+    title: "Teeth Grinding & Night Guards in Antelope, CA",
+    searchTitle: "Teeth Grinding (Bruxism) & Night Guards | Antelope, CA",
+    searchDescription:
+      "Sore jaw or worn teeth when you wake up? Get checked for grinding and fitted for a custom night guard in Antelope. Call (916) 727-6453.",
+    navLabel: "Teeth grinding & night guards",
+    eyebrow: "Preventive care",
+    description:
+      "Evaluation for teeth grinding and clenching (bruxism) and custom-fitted night guards at Sacramento Dental Medicine in Antelope, CA.",
+    intro:
+      "Waking up with a sore jaw, a headache, or teeth that feel more sensitive can be signs of grinding or clenching during sleep, called bruxism. The dentist checks for wear, cracks, and jaw strain and can fit a custom night guard to protect your teeth while you sleep.",
+    benefits: [
+      "Check for wear, cracks, and jaw strain",
+      "Custom-fitted night guards",
+      "Protect crowns, veneers, and natural teeth",
+      "Practical advice on common triggers",
+    ],
+    steps: [
+      {
+        title: "Look for signs",
+        body: "The exam checks for flattened or chipped teeth, sensitivity, and tenderness in the jaw muscles.",
+      },
+      {
+        title: "Fit a guard",
+        body: "If a night guard makes sense, it is made from an impression or scan of your teeth so it fits closely and stays in place.",
+      },
+      {
+        title: "Follow up",
+        body: "The guard and your teeth are checked at regular visits, and damaged teeth are repaired if needed.",
+      },
+    ],
+    faqs: [
+      {
+        question: "What are the signs that I grind my teeth at night?",
+        answer:
+          "Common signs include a sore jaw or headache on waking, teeth that look flat or chipped, new sensitivity, or a partner hearing grinding at night. Many people do not know they grind until a dentist sees the wear.",
+      },
+      {
+        question: "Is a custom night guard better than a store-bought one?",
+        answer:
+          "A custom night guard is made from your own teeth, so it usually fits more closely and comfortably than a boil-and-bite guard. The dentist will recommend what suits your bite.",
+      },
+      {
+        question: "What causes teeth grinding?",
+        answer:
+          "Stress, anxiety, sleep problems, and the way teeth fit together are commonly linked to grinding. Cutting back on caffeine and alcohol and keeping a calm bedtime routine can help alongside a guard.",
+      },
+      {
+        question: "Can grinding damage my teeth?",
+        answer:
+          "Yes. Over time it can wear teeth down, crack them, or damage fillings and crowns. A tooth that is badly worn or cracked may need a crown to protect it.",
+        links: [{ href: "/dental-crowns", label: "need a crown" }],
+      },
+      {
+        question: "Does dental insurance cover night guards?",
+        answer:
+          "Some plans do. Call (916) 727-6453 to check your coverage and the current cost before your visit.",
+      },
+    ],
+    sources: [
+      { label: "ADA: Teeth grinding", url: "https://www.mouthhealthy.org/all-topics-a-z/teeth-grinding" },
+      { label: "ADA: Mouthguards", url: "https://www.mouthhealthy.org/all-topics-a-z/mouthguards" },
+    ],
+    relatedSlugs: ["dental-crowns", "preventive-care", "veneers"],
   },
   {
     slug: "dental-crowns",
@@ -103,6 +507,15 @@ export const servicePages: ServicePage[] = [
       },
     ],
     faqs: [
+      {
+        question: "Do you offer dental bridges?",
+        answer:
+          "Yes. A bridge replaces one or more missing teeth with a false tooth held by crowns on the neighboring teeth. The dentist will compare a bridge with an implant or a partial denture for your situation.",
+        links: [
+          { href: "/dental-implants", label: "an implant" },
+          { href: "/dentures", label: "a partial denture" },
+        ],
+      },
       { question: "How is a crown different from an implant?", answer: "A crown restores the visible part of a damaged tooth. An implant replaces a missing tooth root and can support a crown. The exam determines whether your existing tooth can be restored or whether replacement should be considered." },
       { question: "How much does a dental crown cost?", answer: "The estimate depends on the tooth, the restoration, any additional treatment, and your insurance benefits. Ask the front desk about the exam cost and request a treatment estimate after the dentist evaluates the tooth." },
       {
@@ -116,7 +529,7 @@ export const servicePages: ServicePage[] = [
           "Often, yes. Whether the tooth can be restored depends on how much healthy structure remains and the condition of the root and surrounding bone.",
       },
     ],
-    sources: [{"label": "ADA: Crowns", "url": "https://www.mouthhealthy.org/all-topics-a-z/crowns"}],
+    sources: [{"label": "ADA: Crowns", "url": "https://www.mouthhealthy.org/all-topics-a-z/crowns"}, { label: "ADA: Bridges", url: "https://www.mouthhealthy.org/all-topics-a-z/bridges" }],
     relatedSlugs: ["dental-implants", "tooth-extractions"],
   },
   {
@@ -373,6 +786,73 @@ export const servicePages: ServicePage[] = [
       { href: "/wisdom-teeth", label: "Wisdom teeth" },
       { href: "/meet-dr-narodovich", label: "Meet Dr. Narodovich" },
     ],
+  },
+  {
+    slug: "dentures",
+    title: "Full & Partial Dentures in Antelope & Sacramento",
+    searchTitle: "Dentures in Antelope & Sacramento | Full & Partial",
+    searchDescription:
+      "Full and partial dentures to replace missing teeth at Sacramento Dental Medicine in Antelope, with implants or bridges compared. Call (916) 727-6453.",
+    navLabel: "Dentures",
+    eyebrow: "Restorative dentistry",
+    description:
+      "Full and partial dentures to replace missing teeth at Sacramento Dental Medicine in Antelope, with implant and bridge options explained at your exam.",
+    intro:
+      "Dentures replace missing teeth with a removable appliance: a full denture when all the teeth in an arch are missing, or a partial when some natural teeth remain. The team evaluates your gums, remaining teeth, and bone, and explains whether implants or a bridge could be an option for you too.",
+    benefits: [
+      "Full dentures for a complete arch",
+      "Partial dentures that work with remaining teeth",
+      "Implant and bridge options explained",
+      "Fit checks and adjustments as your mouth changes",
+    ],
+    steps: [
+      {
+        title: "Evaluate your mouth",
+        body: "An exam and appropriate imaging show the health of your gums, remaining teeth, and bone.",
+      },
+      {
+        title: "Choose the approach",
+        body: "Compare a full or partial denture with implant or bridge options, including what each involves and costs.",
+      },
+      {
+        title: "Fit and adjust",
+        body: "Your denture is fitted, then adjusted at follow-up visits as you get used to eating and speaking with it.",
+      },
+    ],
+    faqs: [
+      {
+        question: "What is the difference between full and partial dentures?",
+        answer:
+          "A full denture replaces all the teeth in the upper or lower jaw. A partial denture replaces some missing teeth and attaches to the natural teeth that remain.",
+      },
+      {
+        question: "Can implants help hold a denture in place?",
+        answer:
+          "In some cases. Whether dental implants are an option depends on your bone, health, and goals. The exam and 3D imaging help the dentist explain what is possible for you.",
+        links: [{ href: "/dental-implants", label: "dental implants" }],
+      },
+      {
+        question: "How long does it take to get used to new dentures?",
+        answer:
+          "Most people need some time to adjust to eating and speaking with new dentures, and sore spots are common at first. Follow-up visits let the dentist adjust the fit.",
+      },
+      {
+        question: "Do I still need dental checkups with dentures?",
+        answer:
+          "Yes. Regular exams check the fit of the denture, the health of your gums and any remaining teeth, and include an oral cancer screening.",
+        links: [{ href: "/preventive-care", label: "Regular exams" }],
+      },
+      {
+        question: "How much do dentures cost?",
+        answer:
+          "The estimate depends on the type of denture, any extractions or other treatment needed first, and your insurance benefits. Ask for a treatment estimate after the dentist evaluates your mouth.",
+      },
+    ],
+    sources: [
+      { label: "ADA: Dentures", url: "https://www.mouthhealthy.org/all-topics-a-z/dentures" },
+      { label: "ADA: Bridges", url: "https://www.mouthhealthy.org/all-topics-a-z/bridges" },
+    ],
+    relatedSlugs: ["dental-implants", "tooth-extractions", "dental-crowns"],
   },
   {
     slug: "gum-disease-treatment",

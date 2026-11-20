@@ -112,3 +112,42 @@ Native Google Search Console access was verified as Owner on November 6, superse
 Remaining externally dependent work: confirm the exact sedation offering and responsible clinicians/qualifications, obtain current approved original media, reconcile the Google Business Profile through an authorized account, and connect completed Jarvis appointments to operational reporting. Validate answer-engine retrieval with dated prompts and cited URLs; no schema or special AI file guarantees citation.
 
 Official DCA records were verified directly November 6: Dr. Narodovich holds current-active dentist license 57101, Moderate Sedation Permit 44 (Roseville practice location), and Adult Oral Conscious Sedation Certificate 1628 (Antelope practice location), all expiring September 30, 2028. Both the visible profile and Person.hasCredential link the official records using `doctors[].licenseRecords`. This supersedes the prior license/permit-evidence gap. A credential alone does not establish the exact treatment option offered at an office or who administers/monitors a particular visit; those questions remain for the team. No private address-of-record details were copied.
+
+## November 20, 2026 audit and implementation
+
+Baseline: production crawl of `https://sacramentodentalmedicine.com` at main `f036a7c`
+passed every technical check in `scripts/check-seo.py` (18 indexable pages, unique
+metadata, canonicals, social images, linked schema, FAQ parity, robots, 404, Googlebot
+parity). The remaining gap was coverage, not hygiene.
+
+| Priority | Verified finding | Implementation |
+| --- | --- | --- |
+| High | Six URLs that were real pages on the practice's previous site (`/preventive-care`, `/dental-care-children`, `/cosmetic`, `/teeth-whitening`, `/veneers`, `/bruxism`) 308 to the generic `/our-services` hub. A redirect to a broad hub is usually treated as a soft 404, so those URLs' search history was being discarded, and the site had no page answering searches for cleanings, kids' dentistry, whitening, veneers, or night guards, all of which the practice lists in `services`. | Restored each URL as a full service page on the shared template (steps, FAQs, sources, related care, Service + FAQPage + breadcrumb schema). Removed their redirects; trailing-slash variants now 308 to the page. A regression test keeps them from silently reverting to hub redirects. |
+| High | "Full & partial dentures" is a listed service with no page. | Added `/dentures`, with implant and bridge alternatives linked. |
+| Medium | Crowns & bridges is one listed service, but "bridge" appears nowhere on the crowns page (the old `/services/crowns-bridges` URL redirects there). | Added a bridges answer, linked to implants and partial dentures. |
+| Medium | Homepage service groups linked only to 10 treatment pages. | Each group now links every relevant page (16 linked from Home). |
+| Medium | The practice entity had no coordinates and no link to the services it offers. | Added `geo` (the Google Business Profile pin, from `socialProof.moreReviewsUrl`) and a `hasOfferCatalog` referencing every service page's `#service` entity. |
+| Medium | Answer engines are frequently asked for hours and location; neither was a visible FAQ. | Added both to the home FAQ; the hours answer is generated from `hours`, so it cannot drift from the schema. |
+
+**Sources for practice-specific facts.** Fluoride and sealants, a first child visit around
+age one, an early orthodontic check around age seven, in-office or take-home whitening,
+bonding, and custom mouthguards come from the practice's own previous pages as archived
+by the Wayback Machine (May–July 2026), plus `services` in `src/data/site.ts`. Clinical
+explanations stay general, link ADA MouthHealthy topics (each URL checked to return 200),
+and defer recommendations to the exam. No prices, insurance networks, financing brands,
+technologies, or outcomes were added. The office-amenity details on the old children's
+page (TVs, prizes) were left out because they may have changed.
+
+**Analytics.** The seven new routes join the privacy-reduced `/care` treatment group in
+`src/lib/google-analytics.ts`, matching every other treatment page.
+
+**Validation.** ESLint, 101 unit tests, production build, and the rendered crawl
+(`npm run seo:check -- http://localhost:3100 audit/seo/local-crawl.json`): PASS on
+25 indexable pages and 26 internal destinations. Restored pages and the homepage service
+section were checked in a browser at 375 px with no horizontal overflow.
+
+**After deploy.** Re-run the crawl against production, then in Search Console submit the
+sitemap and inspect the seven restored URLs. Expect them to be recrawled over days to
+weeks; compare their impressions and queries against the same window before release.
+Search Console query data was not read for this audit, so it does not show which
+restored page will gain the most.

@@ -572,6 +572,17 @@ export const faqs: { q: string; a: string }[] = [
     a: "Yes. If you're in pain or have had a dental accident, call (916) 727-6453 right away. We'll tell you what to do immediately and do everything possible to see you the same day.",
   },
   {
+    q: "What are your office hours?",
+    a: `${hours
+      .filter(({ time }) => time !== "Closed")
+      .map(({ day, time }) => `${day} ${time}`)
+      .join("; ")}. Closed Saturday and Sunday. Holiday hours can differ, so call (916) 727-6453 to confirm.`,
+  },
+  {
+    q: "Where is the office, and which areas do you serve?",
+    a: `The office is at ${contact.addressLine1}, ${contact.addressLine2}, on Elverta Road. Patients come from ${contact.serviceArea.slice(0, -1).join(", ")}, and ${contact.serviceArea.at(-1)}.`,
+  },
+  {
     q: "Do you accept Medi-Cal?",
     a: mediCalNotice,
   },
@@ -608,6 +619,9 @@ export const structuredData = {
   image: `${productionDomain}/images/office-exterior.webp`,
   logo: `${productionDomain}${imagery.logo}`,
   hasMap: contact.mapsHref,
+  // Pin coordinates of the practice's Google Business Profile listing
+  // (socialProof.moreReviewsUrl), not a geocoded estimate.
+  geo: { "@type": "GeoCoordinates", latitude: 38.7122668, longitude: -121.3634404 },
   name: contact.practiceName,
   telephone: "+1-916-727-6453",
   email: contact.email,

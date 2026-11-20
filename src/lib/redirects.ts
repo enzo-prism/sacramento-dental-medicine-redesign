@@ -36,6 +36,13 @@ export const trailingSlashRoutes = [
   "dental-implants",
   "gum-disease-treatment",
   "dental-emergencies",
+  "preventive-care",
+  "dental-care-children",
+  "cosmetic",
+  "teeth-whitening",
+  "veneers",
+  "bruxism",
+  "dentures",
 ] as const;
 
 /**
@@ -50,9 +57,7 @@ export const legacyRedirects = [
   { source: "/services/crowns-bridges", destination: "/dental-crowns" },
   { source: "/about-us", destination: "/#doctors" },
   { source: "/appointments", destination: "/schedule" },
-  { source: "/bruxism", destination: servicesDestination },
   { source: "/contact-us", destination: "/schedule" },
-  { source: "/cosmetic", destination: servicesDestination },
   { source: "/deep-cleanings", destination: "/gum-disease-treatment" },
   { source: "/dental-blog", destination: servicesDestination },
   { source: "/dental-blog/archive-202508", destination: servicesDestination },
@@ -79,7 +84,6 @@ export const legacyRedirects = [
       "/dental-blog/2758141-no-fear-no-anxiety-dentistry-in-antelope-ca-comfortable-care-for-the-whole-family",
     destination: "/sedation-dentistry",
   },
-  { source: "/dental-care-children", destination: servicesDestination },
   { source: "/oral-surgery", destination: "/tooth-extractions" },
   { source: "/our-dental-team", destination: "/#doctors" },
   { source: "/our-office", destination: "/schedule" },
@@ -88,12 +92,9 @@ export const legacyRedirects = [
   { source: "/wisdom-teeth-removal", destination: "/wisdom-teeth" },
   { source: "/prf", destination: "/platelet-rich-fibrin" },
   { source: "/grafting", destination: "/platelet-rich-fibrin" },
-  { source: "/preventive-care", destination: servicesDestination },
   { source: "/restorations", destination: "/dental-crowns" },
   { source: "/sedation-dentistry-guide", destination: "/sedation-dentistry" },
   { source: "/technology", destination: "/#technology" },
-  { source: "/teeth-whitening", destination: servicesDestination },
-  { source: "/veneers", destination: servicesDestination },
 ] as const;
 
 /** Redirects on the canonical host. Every destination is a final URL. */

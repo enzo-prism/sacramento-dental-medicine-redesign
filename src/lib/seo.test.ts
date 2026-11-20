@@ -219,8 +219,16 @@ describe("search content integrity", () => {
       "wisdom-teeth": "2026-10-27",
       "dental-emergencies": "2026-11-18",
       "invisalign": "2026-11-03",
-      "dental-crowns": "2026-11-03",
+      "dental-crowns": "2026-11-20",
       "sedation-dentistry": "2026-11-06",
+      "our-services": "2026-11-20",
+      "preventive-care": "2026-11-20",
+      "dental-care-children": "2026-11-20",
+      "cosmetic": "2026-11-20",
+      "teeth-whitening": "2026-11-20",
+      "veneers": "2026-11-20",
+      "bruxism": "2026-11-20",
+      "dentures": "2026-11-20",
     });
     assert.match(sitemap, /serviceLastModified\[slug\] \?\? "2026-09-06"/);
     assert.doesNotMatch(sitemap, /wisdom-teeth-removal-sacramento/);

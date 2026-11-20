@@ -1,4 +1,5 @@
 import { contact, structuredData } from "@/data/site";
+import { servicePages } from "@/data/service-pages";
 import { siteUrl } from "@/lib/site-url";
 
 export const practiceId = structuredData["@id"];
@@ -8,7 +9,22 @@ const websiteId = `${siteUrl}/#website`;
 export const practiceGraph = {
   "@context": "https://schema.org",
   "@graph": [
-    structuredData,
+    {
+      ...structuredData,
+      // Ties the practice to every reviewed treatment page's Service entity.
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        "@id": `${siteUrl}/our-services#catalog`,
+        name: "Dental services",
+        url: `${siteUrl}/our-services`,
+        itemListElement: servicePages
+          .filter(({ slug }) => slug !== "our-services")
+          .map(({ slug, navLabel }) => ({
+            "@type": "Offer",
+            itemOffered: { "@type": "Service", "@id": `${siteUrl}/${slug}#service`, name: navLabel },
+          })),
+      },
+    },
     {
       "@type": "WebSite", "@id": websiteId, url: siteUrl,
       name: contact.practiceName, inLanguage: "en-US",

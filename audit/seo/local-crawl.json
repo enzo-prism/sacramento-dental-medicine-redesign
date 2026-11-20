@@ -2,10 +2,23 @@
   "base": "http://localhost:3100",
   "pages": [
     {
+      "path": "/meet-dr-sheppard",
+      "status": 200,
+      "title": "Dr. Lucas L. Sheppard, DMD | Antelope Root Canal Care",
+      "descriptionLength": 152,
+      "schemaTypes": [
+        "Dentist",
+        "WebSite",
+        "ProfilePage",
+        "BreadcrumbList",
+        "Person"
+      ]
+    },
+    {
       "path": "/new-patients",
       "status": 200,
       "title": "New Patients in Antelope | Sacramento Dental Medicine",
-      "descriptionLength": 150,
+      "descriptionLength": 132,
       "schemaTypes": [
         "Dentist",
         "WebSite",
@@ -41,7 +54,7 @@
       "path": "/schedule",
       "status": 200,
       "title": "Schedule a Dentist Appointment | Sacramento Dental Medicine",
-      "descriptionLength": 145,
+      "descriptionLength": 93,
       "schemaTypes": [
         "Dentist",
         "WebSite",
@@ -77,10 +90,94 @@
       ]
     },
     {
+      "path": "/preventive-care",
+      "status": 200,
+      "title": "Teeth Cleaning & Dental Exam in Antelope, CA",
+      "descriptionLength": 141,
+      "schemaTypes": [
+        "Dentist",
+        "WebSite",
+        "WebPage",
+        "BreadcrumbList",
+        "Service",
+        "FAQPage"
+      ]
+    },
+    {
+      "path": "/dental-care-children",
+      "status": 200,
+      "title": "Kids Dentist in Antelope, CA | Family Dental Care",
+      "descriptionLength": 143,
+      "schemaTypes": [
+        "Dentist",
+        "WebSite",
+        "WebPage",
+        "BreadcrumbList",
+        "Service",
+        "FAQPage"
+      ]
+    },
+    {
+      "path": "/cosmetic",
+      "status": 200,
+      "title": "Cosmetic Dentist in Antelope, CA | Whitening & Veneers",
+      "descriptionLength": 140,
+      "schemaTypes": [
+        "Dentist",
+        "WebSite",
+        "WebPage",
+        "BreadcrumbList",
+        "Service",
+        "FAQPage"
+      ]
+    },
+    {
+      "path": "/teeth-whitening",
+      "status": 200,
+      "title": "Professional Teeth Whitening in Antelope, CA",
+      "descriptionLength": 147,
+      "schemaTypes": [
+        "Dentist",
+        "WebSite",
+        "WebPage",
+        "BreadcrumbList",
+        "Service",
+        "FAQPage"
+      ]
+    },
+    {
+      "path": "/veneers",
+      "status": 200,
+      "title": "Porcelain Veneers in Antelope & Sacramento | Smile Design",
+      "descriptionLength": 143,
+      "schemaTypes": [
+        "Dentist",
+        "WebSite",
+        "WebPage",
+        "BreadcrumbList",
+        "Service",
+        "FAQPage"
+      ]
+    },
+    {
+      "path": "/bruxism",
+      "status": 200,
+      "title": "Teeth Grinding (Bruxism) & Night Guards | Antelope, CA",
+      "descriptionLength": 135,
+      "schemaTypes": [
+        "Dentist",
+        "WebSite",
+        "WebPage",
+        "BreadcrumbList",
+        "Service",
+        "FAQPage"
+      ]
+    },
+    {
       "path": "/dental-crowns",
       "status": 200,
-      "title": "Dental Crowns in Sacramento & Antelope, CA",
-      "descriptionLength": 129,
+      "title": "Dental Crowns Sacramento & Antelope | Cracked Tooth Repair",
+      "descriptionLength": 138,
       "schemaTypes": [
         "Dentist",
         "WebSite",
@@ -93,8 +190,8 @@
     {
       "path": "/sedation-dentistry",
       "status": 200,
-      "title": "Sedation Dentistry for Nervous Patients in Sacramento",
-      "descriptionLength": 129,
+      "title": "Sedation Dentistry Sacramento | Care for Anxious Patients",
+      "descriptionLength": 147,
       "schemaTypes": [
         "Dentist",
         "WebSite",
@@ -121,8 +218,8 @@
     {
       "path": "/invisalign",
       "status": 200,
-      "title": "Invisalign Clear Aligners in Sacramento & Antelope",
-      "descriptionLength": 123,
+      "title": "Invisalign in Sacramento & Antelope | Is It Right for You?",
+      "descriptionLength": 151,
       "schemaTypes": [
         "Dentist",
         "WebSite",
@@ -135,8 +232,8 @@
     {
       "path": "/tooth-extractions",
       "status": 200,
-      "title": "Tooth Extractions in Sacramento & Antelope, CA",
-      "descriptionLength": 112,
+      "title": "Tooth Extraction & Oral Surgery Evaluation | Sacramento",
+      "descriptionLength": 157,
       "schemaTypes": [
         "Dentist",
         "WebSite",
@@ -150,7 +247,21 @@
       "path": "/dental-implants",
       "status": 200,
       "title": "Dental Implants in Sacramento & Antelope, CA",
-      "descriptionLength": 128,
+      "descriptionLength": 149,
+      "schemaTypes": [
+        "Dentist",
+        "WebSite",
+        "WebPage",
+        "BreadcrumbList",
+        "Service",
+        "FAQPage"
+      ]
+    },
+    {
+      "path": "/dentures",
+      "status": 200,
+      "title": "Dentures in Antelope & Sacramento | Full & Partial",
+      "descriptionLength": 149,
       "schemaTypes": [
         "Dentist",
         "WebSite",
@@ -164,7 +275,7 @@
       "path": "/gum-disease-treatment",
       "status": 200,
       "title": "Gum Disease Treatment in Sacramento & Antelope",
-      "descriptionLength": 128,
+      "descriptionLength": 153,
       "schemaTypes": [
         "Dentist",
         "WebSite",
@@ -177,8 +288,8 @@
     {
       "path": "/dental-emergencies",
       "status": 200,
-      "title": "Emergency Dentist in Sacramento & Antelope, CA",
-      "descriptionLength": 125,
+      "title": "Emergency Dentist in Antelope, CA | Weekday & Evening Hours",
+      "descriptionLength": 142,
       "schemaTypes": [
         "Dentist",
         "WebSite",
@@ -201,8 +312,36 @@
         "Service",
         "FAQPage"
       ]
+    },
+    {
+      "path": "/wisdom-teeth",
+      "status": 200,
+      "title": "Wisdom Teeth Removal in Antelope & Sacramento, CA",
+      "descriptionLength": 152,
+      "schemaTypes": [
+        "Dentist",
+        "WebSite",
+        "WebPage",
+        "BreadcrumbList",
+        "Service",
+        "FAQPage"
+      ]
+    },
+    {
+      "path": "/platelet-rich-fibrin",
+      "status": 200,
+      "title": "PRF & Grafting in Antelope & Sacramento, CA",
+      "descriptionLength": 140,
+      "schemaTypes": [
+        "Dentist",
+        "WebSite",
+        "WebPage",
+        "BreadcrumbList",
+        "Service",
+        "FAQPage"
+      ]
     }
   ],
-  "internalDestinations": 16,
+  "internalDestinations": 26,
   "checks": "metadata, canonical, social metadata, H1, image alts, JSON-LD, visible FAQ parity, reachability, links, fragments, robots, 404, privacy noindex, Googlebot parity"
 }

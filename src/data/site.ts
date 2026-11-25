@@ -24,7 +24,7 @@ export const seo = {
   title: "Antelope, CA Dentist | Sacramento Dental Medicine",
   description:
     "Unhurried family, cosmetic, restorative, and urgent dental care on Elverta Rd in Antelope, CA. Open until 7 PM Wed & Thu. Call (916) 727-6453.",
-  ogTitle: "Dentistry in Antelope you won't put off.",
+  ogTitle: "Calm, honest dentistry right here in Antelope.",
   ogDescription:
     "Unhurried family, cosmetic, restorative, and emergency dental care in Antelope, CA. Accepting new patients of all ages.",
   ogImageAlt:

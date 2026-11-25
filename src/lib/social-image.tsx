@@ -116,8 +116,8 @@ export function createHomeSocialImage() {
               letterSpacing: "-0.055em",
             }}
           >
-            <span>Dental care in Antelope</span>
-            <span style={{ color: colors.brandDeep }}>you won&apos;t dread.</span>
+            <span>Calm, honest dentistry</span>
+            <span style={{ color: colors.brandDeep }}>right here in Antelope.</span>
           </div>
           <div
             style={{

@@ -14,13 +14,13 @@ export function ScheduleCTA() {
           className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center"
         >
           <div>
-            <p className="eyebrow text-[#d5e1f4]">Ready when you are</p>
+            <p className="eyebrow text-[#d5e1f4]">Ready to schedule?</p>
             <h2 className="mt-5 max-w-2xl font-display text-balance text-[clamp(2rem,4.2vw,3.1rem)] font-semibold leading-[1.06] tracking-[-0.02em] text-white">
-              Pick a visit time that fits your week.
+              Book your Antelope dental appointment online.
             </h2>
             <p className="mt-4 max-w-2xl text-pretty text-base leading-7 text-white/70 md:text-lg md:leading-8">
-              Book online anytime—including Wednesday and Thursday evenings until
-              7 PM—or call our Elverta Road desk directly.
+              Schedule online anytime at our Elverta Road office—open until
+              7 PM Wednesdays and Thursdays—or call our front desk directly.
             </p>
           </div>
 

@@ -24,10 +24,10 @@ const JARVIS_SCHEDULE_EMBED_SRC =
 
 export const metadata: Metadata = {
   title: {
-    absolute: "Book a Dentist Appointment | Sacramento Dental Medicine",
+    absolute: "Book a Dentist in Antelope & Sacramento | Schedule Online",
   },
   description:
-    "Schedule your dental visit online at our Elverta Rd office in Antelope—open until 7 PM Wed & Thu—or call (916) 727-6453.",
+    "Book a dental appointment online at 4320 Elverta Rd #3 in Antelope, serving Sacramento & Roseville. Open until 7 PM Wed & Thu: (916) 727-6453.",
   alternates: { canonical: "/schedule" },
   openGraph: {
     title: "Book Online with Sacramento Dental Medicine",
@@ -62,9 +62,9 @@ export default function SchedulePage() {
               Back to home
             </Link>
 
-            <p className="eyebrow mt-7 text-[#d5e1f4]">Online scheduling</p>
+            <p className="eyebrow mt-7 text-[#d5e1f4]">Online dental scheduling · Antelope, CA</p>
             <h1 className="mt-5 max-w-2xl font-display text-balance text-[clamp(2.45rem,6vw,4.6rem)] font-semibold leading-[0.98] tracking-[-0.05em] text-white">
-              Pick a time that fits your week.
+              Book your Antelope dental visit online.
             </h1>
             <p className="mt-6 max-w-xl text-pretty text-base leading-7 text-white/70 md:text-lg md:leading-8">
               Book directly below—we&apos;re open until 7 PM on Wednesdays and

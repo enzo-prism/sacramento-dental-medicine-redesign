@@ -116,8 +116,8 @@ export function createHomeSocialImage() {
               letterSpacing: "-0.055em",
             }}
           >
-            <span>Calm, honest dentistry</span>
-            <span style={{ color: colors.brandDeep }}>right here in Antelope.</span>
+            <span>Family &amp; Cosmetic Dentist</span>
+            <span style={{ color: colors.brandDeep }}>in Antelope, CA.</span>
           </div>
           <div
             style={{
@@ -128,7 +128,7 @@ export function createHomeSocialImage() {
               lineHeight: 1.35,
             }}
           >
-            Unhurried family, cosmetic, restorative, and emergency dentistry on Elverta Rd.
+            Calm, honest family, cosmetic, implant, root canal &amp; emergency care on Elverta Rd.
           </div>
         </div>
 

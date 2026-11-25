@@ -67,9 +67,9 @@ export default function ReviewsPage() {
           <div aria-hidden="true" className="absolute -right-36 top-16 size-[30rem] rounded-full bg-brand-tint/65 blur-3xl" />
           <div className="container-x relative grid items-end gap-12 lg:grid-cols-[1.08fr_0.92fr] lg:gap-16">
             <div>
-              <p className="eyebrow text-brand-deep">Patient reviews</p>
+              <p className="eyebrow text-brand-deep">Antelope &amp; Sacramento dentist reviews</p>
               <h1 className="mt-5 max-w-3xl font-display text-[clamp(2.4rem,7vw,4.8rem)] font-semibold leading-[0.98] tracking-[-0.055em] text-ink text-balance">
-                {socialProof.totalReviews} reviews. Why neighbors keep coming back.
+                Sacramento Dental Medicine Reviews: {socialProof.totalReviews} Google Ratings.
               </h1>
               <p className="mt-6 max-w-2xl text-pretty text-base leading-7 text-ink-soft md:text-lg md:leading-8">
                 We read every single Google review—the kind words, the small details people noticed, and the tougher feedback too. Here is an honest breakdown of what patients experience in our chairs.

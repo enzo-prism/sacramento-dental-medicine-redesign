@@ -103,7 +103,10 @@ export function DoctorProfile({ doctor }: { doctor: Doctor }) {
               ))}
             </ul>
             <nav aria-label="Care with this clinician" className="lg:col-start-2 flex flex-wrap gap-5 text-sm font-semibold text-brand-deep">
-              <Link className="underline" href={isNarodovich ? "/sedation-dentistry" : "/root-canal-therapy"}>{isNarodovich ? "Care for nervous patients" : "Root canal treatment"}</Link>
+              <Link className="underline" href={isNarodovich ? "/sedation-dentistry" : "/root-canal-therapy"}>{isNarodovich ? "Sedation & anxious-patient care" : "Root canal treatment"}</Link>
+              <Link className="underline" href={isNarodovich ? "/preventive-care" : "/dental-crowns"}>{isNarodovich ? "Exams & cleanings" : "Dental crowns"}</Link>
+              <Link className="underline" href={isNarodovich ? "/cosmetic" : "/dental-emergencies"}>{isNarodovich ? "Cosmetic dentistry" : "Emergency dental care"}</Link>
+              {isNarodovich ? <Link className="underline" href="/dental-implants">Dental implants</Link> : null}
               <Link className="underline" href="/new-patients">Plan your first visit</Link>
             </nav>
           </div>

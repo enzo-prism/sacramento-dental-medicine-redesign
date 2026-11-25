@@ -82,9 +82,9 @@ export function NewPatients() {
           <div className="surface-card p-6 md:p-10">
             <div className="grid gap-10 lg:grid-cols-[0.65fr_1.35fr] lg:gap-16">
               <div className="flex flex-col">
-                <span className="eyebrow accent-brand">Before you book</span>
+                <span className="eyebrow accent-brand">Antelope dentist FAQs</span>
                 <h3 className="mt-5 font-display text-balance text-[clamp(1.6rem,3vw,2.2rem)] font-medium leading-tight text-ink">
-                  Straight answers to common questions.
+                  Hours, insurance, emergencies, and first visits—answered.
                 </h3>
                 <p className="mt-4 max-w-md text-sm leading-7 text-ink-soft">
                   What new patients ask us most—and if you don&apos;t see your

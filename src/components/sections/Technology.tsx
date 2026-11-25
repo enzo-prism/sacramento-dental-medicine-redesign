@@ -8,14 +8,15 @@ export function Technology() {
       <div className="container-x">
         <div className="grid items-end gap-10 lg:grid-cols-[1fr_0.9fr] lg:gap-16">
           <ScrollReveal className="max-w-2xl">
-            <span className="eyebrow accent-brand">Technology &amp; comfort</span>
+            <span className="eyebrow accent-brand">Dental technology &amp; comfort</span>
             <h2 className="mt-5 font-display text-balance text-[clamp(2rem,4.2vw,3.1rem)] font-semibold leading-[1.06] tracking-[-0.02em] text-ink">
-              Better tools mean calmer visits.
+              Modern dental technology for gentler, more accurate visits.
             </h2>
             <p className="mt-5 max-w-xl text-pretty text-base leading-7 text-ink-soft md:text-lg md:leading-8">
-              Nothing in our treatment rooms is there to look impressive on a
-              brochure. Every instrument earns its spot by making care sharper
-              to diagnose, gentler to sit through, and easier to heal from.
+              From CBCT 3D dental imaging and low-radiation digital X-rays to
+              The Wand STA computer-guided numbing and soft tissue laser care,
+              every tool in our Antelope rooms earns its place by making
+              diagnosis sharper and treatment easier to sit through.
             </p>
           </ScrollReveal>
 

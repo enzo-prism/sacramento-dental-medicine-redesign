@@ -34,10 +34,10 @@ export function ReviewProof() {
                 <div>
                   <div className="flex items-center gap-2 text-sm font-semibold text-brand-ink">
                     <BadgeCheck className="size-4" aria-hidden="true" />
-                    What neighbors mention most
+                    Verified Google reviews · Antelope, CA
                   </div>
                   <h2 id="review-proof-title" className="mt-2 font-display text-xl font-semibold text-ink sm:text-2xl">
-                    Warm people. Straight answers. Care families stay with for decades.
+                    4.8-star Antelope dentist trusted by families for decades.
                   </h2>
                   <p className="mt-2 text-sm leading-6 text-ink-soft">
                     {googleReviewThemes.slice(0, 3).map((theme) => theme.title).join(" · ")}

@@ -8,18 +8,19 @@ export function Intro() {
       <div className="container-x grid gap-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-20">
         <div>
           <ScrollReveal>
-            <span className="eyebrow accent-brand">Why patients stay</span>
+            <span className="eyebrow accent-brand">Why patients choose us</span>
             <h2 className="mt-6 max-w-xl font-display text-balance text-[clamp(2.1rem,4.4vw,3.3rem)] font-semibold leading-[1.05] tracking-[-0.02em] text-ink">
-              Built for people{" "}
+              A calm, judgment-free{" "}
               <span className="text-brand-deep">
-                who&apos;ve been putting the dentist off.
+                Antelope dental office built around your pace.
               </span>
             </h2>
             <p className="mt-6 max-w-xl text-pretty text-base leading-7 text-ink-soft md:text-lg md:leading-8">
-              We run our Elverta Road office the way we&apos;d want to be
-              treated ourselves: unhurried appointments, gentle hands, and zero
-              pressure. You&apos;ll always see what we see on screen and know
-              what comes next before we ever start treatment.
+              Whether it&apos;s been six months or six years since your last
+              dental checkup, we run our Elverta Road clinic on unhurried
+              appointments, gentle hands, and straight answers. You&apos;ll
+              always see your X-rays on screen and review written options before
+              any treatment begins.
             </p>
           </ScrollReveal>
 

@@ -22,24 +22,26 @@ export function Hero() {
           <SeasonalGreeting />
           <p className="flex items-center gap-2 text-sm font-medium text-ink-faint">
             <MapPin className="size-4 shrink-0 text-brand-deep" aria-hidden="true" />
-            Sacramento Dental Medicine · Antelope, CA
+            Sacramento Dental Medicine · {contact.addressLine1}, Antelope, CA
           </p>
 
           <h1 className="mt-5 font-display text-[clamp(1.85rem,8vw,3.4rem)] font-semibold leading-[1.02] tracking-[-0.03em] text-ink text-balance lg:text-[clamp(2.6rem,4.4vw,3.6rem)]">
-            Calm, honest dentistry{" "}
+            Family &amp; Cosmetic Dentist{" "}
             <span className="block text-brand-deep">
-              right here in{" "}
+              in{" "}
               <span className="relative inline-block">
-                Antelope.
+                Antelope,
                 <SeasonalUnderline />
-              </span>
+              </span>{" "}
+              CA.
             </span>
           </h1>
 
           <p className="mt-6 max-w-xl text-pretty text-base leading-7 text-ink-soft md:text-lg md:leading-8">
-            {contact.tagline}. We explain every step in plain language, move at
-            your pace, and welcome patients back without a word of judgment—even
-            if it&apos;s been years.
+            Calm, honest preventive, cosmetic, dental implant, root canal, and
+            emergency dental care under one roof—serving Antelope, Sacramento,
+            Roseville, Citrus Heights, North Highlands, and Folsom. Open until
+            7 PM Wednesdays and Thursdays.
           </p>
 
           <div

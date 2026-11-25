@@ -21,14 +21,14 @@ export const productionDomain = "https://sacramentodentalmedicine.com";
 export const formspreeEndpoint = "https://formspree.io/f/xvkpdvyz";
 
 export const seo = {
-  title: "Antelope, CA Dentist | Sacramento Dental Medicine",
+  title: "Antelope & Sacramento Dentist | Sacramento Dental Medicine",
   description:
-    "Unhurried family, cosmetic, restorative, and urgent dental care on Elverta Rd in Antelope, CA. Open until 7 PM Wed & Thu. Call (916) 727-6453.",
-  ogTitle: "Calm, honest dentistry right here in Antelope.",
+    "Family, cosmetic, implant, root canal & emergency dentist in Antelope, CA, serving Sacramento & Roseville. Open until 7 PM Wed & Thu: (916) 727-6453.",
+  ogTitle: "Family & Cosmetic Dentist in Antelope, CA | Sacramento Dental Medicine",
   ogDescription:
-    "Unhurried family, cosmetic, restorative, and emergency dental care in Antelope, CA. Accepting new patients of all ages.",
+    "Calm, honest family, cosmetic, implant, root canal, and emergency dental care at 4320 Elverta Rd #3 in Antelope, serving Greater Sacramento.",
   ogImageAlt:
-    "Sacramento Dental Medicine in Antelope, California: Unhurried family, cosmetic, restorative, and emergency dentistry.",
+    "Sacramento Dental Medicine: Family, cosmetic, restorative, and emergency dentist in Antelope, California.",
 };
 
 // Contact + conversion targets ----------------------------------------------
@@ -136,9 +136,9 @@ export const navItems = [
 
 // Emergency pathway (high-intent, time-sensitive) ----------------------------
 export const emergency = {
-  eyebrow: "Dental emergency?",
-  headline: "Hurting right now? Call us first.",
-  body: "A throbbing toothache, sudden swelling, a cracked tooth, or a crown that just came loose—call our Elverta Road desk first. We'll walk you through what to do right away and get you in the same day whenever space opens up.",
+  eyebrow: "Emergency dentist · Antelope, CA",
+  headline: "Need an emergency dentist in Antelope? Call us first.",
+  body: "Dealing with a severe toothache, swelling, a chipped or broken tooth, or a crown that just came loose? Call our Elverta Road dental office first. We're open weekdays—including until 7 PM Wednesdays and Thursdays—and fit in same-day emergency visits whenever space allows.",
 };
 
 // Social proof — verified directly against the practice's Google Business
@@ -529,10 +529,10 @@ export const officeHours: Record<number, { open: number; close: number } | null>
 export const mediCalNotice = "We do not accept Medi-Cal.";
 
 export const newPatient = {
-  eyebrow: "New patients",
-  title: "Your first visit, minus the guesswork.",
+  eyebrow: "New dental patients",
+  title: "New dental patients welcome in Antelope & Greater Sacramento.",
   intro:
-    "Here is everything you need to know before you walk in—coverage, what to bring, and how we run a first appointment.",
+    "Here is everything to know before your first appointment at 4320 Elverta Rd #3—dental insurance checks, payment questions, what to bring, and how we run a first exam.",
   billing: [
     {
       title: "Check your dental plan first",
@@ -560,35 +560,39 @@ export const newPatient = {
 // FAQ ------------------------------------------------------------------------
 export const faqs: { q: string; a: string }[] = [
   {
-    q: "Are you accepting new patients?",
-    a: "Yes—we're welcoming new patients of all ages from Antelope and across Greater Sacramento. You can book directly online or call (916) 727-6453 and we'll find a time that fits your week.",
+    q: "Are you accepting new dental patients in Antelope and Sacramento?",
+    a: "Yes—Sacramento Dental Medicine welcomes new patients of all ages from Antelope, Sacramento, Roseville, Citrus Heights, North Highlands, and Folsom. Book directly online or call (916) 727-6453 to choose a convenient time.",
   },
   {
-    q: "What happens at a first visit?",
-    a: "We start by listening. You'll get a thorough exam of your teeth and gums, digital X-rays only where needed, an oral cancer screening, and usually a gentle cleaning. Before you leave, we review everything on screen and talk through next steps without pressure.",
+    q: "What happens at a first dental exam and cleaning?",
+    a: "We start by listening to your goals and any concerns. Plan on a comprehensive exam of your teeth and gums, low-radiation digital X-rays only where needed, an oral cancer screening, and usually a gentle cleaning. Before you leave, we show you what we found and walk through next steps without pressure.",
   },
   {
-    q: "Can you see me for a dental emergency?",
-    a: "Yes. If you're dealing with tooth pain, swelling, or a broken tooth, call (916) 727-6453 right away. We'll tell you what to do in the meantime and work to see you the same day whenever space allows.",
+    q: "Do you offer same-day emergency dentist visits in Antelope?",
+    a: "Yes, whenever schedule space allows. If you have sudden tooth pain, swelling, a broken tooth, or a lost crown, call (916) 727-6453 first so we can guide you right away and check for our earliest weekday opening.",
   },
   {
-    q: "What are your office hours?",
+    q: "What are your Antelope dental office hours—are you open evenings?",
     a: `${hours
       .filter(({ time }) => time !== "Closed")
       .map(({ day, time }) => `${day} ${time}`)
-      .join("; ")}. Closed Saturday and Sunday. Holiday hours may vary, so call (916) 727-6453 before making the trip.`,
+      .join("; ")}. Closed Saturday and Sunday. Evening appointments run until 7 PM on Wednesdays and Thursdays; holiday hours may vary, so call (916) 727-6453 to confirm.`,
   },
   {
-    q: "Where is your office, and which areas do you serve?",
-    a: `Find us at ${contact.addressLine1}, ${contact.addressLine2}, right on Elverta Road. Patients visit us from ${contact.serviceArea.slice(0, -1).join(", ")}, and ${contact.serviceArea.at(-1)}.`,
+    q: "Where is Sacramento Dental Medicine located, and which cities do you serve?",
+    a: `Our single office is located at ${contact.addressLine1}, ${contact.addressLine2}, right on Elverta Road. Patients regularly visit us from ${contact.serviceArea.slice(0, -1).join(", ")}, and ${contact.serviceArea.at(-1)}.`,
+  },
+  {
+    q: "Do you have a root canal specialist or comfort options for anxious patients?",
+    a: "Yes. Endodontic specialist Dr. Lucas L. Sheppard, DMD treats complex root canal cases right here in our Antelope office. For anxious patients, we slow the pace, offer The Wand STA computer-guided local numbing, and review your health history to discuss which sedation options are available and appropriate.",
   },
   {
     q: "Do you accept Medi-Cal?",
     a: mediCalNotice,
   },
   {
-    q: "How do insurance and payment options work?",
-    a: "Because dental plans and payment options vary, the fastest way to get an accurate answer is a quick call to (916) 727-6453. Our front desk will check your plan, explain what to expect for an exam, and go over current payment options.",
+    q: "How do dental insurance and payment options work?",
+    a: "Because dental plans and payment options vary, the quickest way to get a dependable answer is a brief call to (916) 727-6453. Our front desk will confirm whether your plan is accepted, share what an initial exam costs, and explain current payment options.",
   },
 ];
 

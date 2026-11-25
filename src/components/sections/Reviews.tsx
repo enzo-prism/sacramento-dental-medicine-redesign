@@ -12,9 +12,9 @@ export function Reviews() {
     <section id="reviews" className="section relative bg-canvas">
       <div className="container-x">
         <SectionLabel
-          eyebrow="Patient reviews"
-          title="Hear it straight from our patients."
-          intro={`A ${socialProof.rating}-star rating across ${socialProof.totalReviews} Google reviews—built over decades of families trusting us with their care.`}
+          eyebrow="Sacramento & Antelope dentist reviews"
+          title="What Antelope and Sacramento patients say about us."
+          intro={`A ${socialProof.rating}-star rating across ${socialProof.totalReviews} Google reviews—earned over decades of families trusting Sacramento Dental Medicine with their care.`}
         />
 
         <div className="mt-12 grid gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:gap-12">

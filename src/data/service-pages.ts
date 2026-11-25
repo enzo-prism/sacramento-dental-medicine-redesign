@@ -92,10 +92,10 @@ export const servicePages: ServicePage[] = [
   // explanations stay general and link ADA patient education.
   {
     slug: "preventive-care",
-    title: "Dental Exams & Cleanings in Antelope, CA",
-    searchTitle: "Teeth Cleaning & Dental Exam in Antelope, CA",
+    title: "Dental Exams & Teeth Cleanings in Antelope & Sacramento",
+    searchTitle: "Teeth Cleaning & Dental Exam | Antelope & Sacramento",
     searchDescription:
-      "Thorough checkups, gentle cleanings, digital X-rays, fluoride, and sealants on Elverta Rd in Antelope. New patients welcome: (916) 727-6453.",
+      "Thorough dental exams, gentle cleanings, digital X-rays, fluoride, and sealants in Antelope, serving Sacramento. Call (916) 727-6453 to book.",
     navLabel: "Exams & cleanings",
     eyebrow: "Preventive care",
     description:
@@ -162,10 +162,10 @@ export const servicePages: ServicePage[] = [
   },
   {
     slug: "dental-care-children",
-    title: "Children's Dentistry in Antelope, CA",
-    searchTitle: "Kids Dentist in Antelope, CA | Family Dental Care",
+    title: "Kids & Family Dentist in Antelope & Sacramento, CA",
+    searchTitle: "Kids & Family Dentist | Antelope & Sacramento, CA",
     searchDescription:
-      "Patient, friendly kids' dentistry on Elverta Rd in Antelope, from a first checkup around age one through the teen years. Call (916) 727-6453.",
+      "Friendly children's dentistry in Antelope, serving Sacramento & Roseville. First visits around age one, cleanings & fluoride: (916) 727-6453.",
     navLabel: "Children's dentistry",
     eyebrow: "Family dentistry",
     description:
@@ -231,9 +231,9 @@ export const servicePages: ServicePage[] = [
   {
     slug: "cosmetic",
     title: "Cosmetic Dentistry in Antelope & Sacramento, CA",
-    searchTitle: "Cosmetic Dentist in Antelope, CA | Whitening & Veneers",
+    searchTitle: "Cosmetic Dentist Antelope & Sacramento | Veneers & More",
     searchDescription:
-      "Natural-looking teeth whitening, bonding, porcelain veneers, and Invisalign with Dr. Narodovich in Antelope. Book online or call (916) 727-6453.",
+      "Natural-looking teeth whitening, bonding, porcelain veneers, and Invisalign in Antelope, serving Sacramento & Roseville. Call (916) 727-6453.",
     navLabel: "Cosmetic dentistry",
     eyebrow: "Cosmetic dentistry",
     description:
@@ -293,9 +293,9 @@ export const servicePages: ServicePage[] = [
   {
     slug: "teeth-whitening",
     title: "Teeth Whitening in Antelope & Sacramento, CA",
-    searchTitle: "Professional Teeth Whitening in Antelope, CA",
+    searchTitle: "Professional Teeth Whitening | Antelope & Sacramento",
     searchDescription:
-      "Dentist-supervised in-office or take-home teeth whitening in Antelope, planned around sensitivity and existing crowns. Call (916) 727-6453.",
+      "Dentist-supervised in-office and take-home teeth whitening in Antelope, serving Sacramento, tailored for sensitive teeth. Call (916) 727-6453.",
     navLabel: "Teeth whitening",
     eyebrow: "Cosmetic dentistry",
     description:
@@ -418,10 +418,10 @@ export const servicePages: ServicePage[] = [
   },
   {
     slug: "bruxism",
-    title: "Teeth Grinding & Night Guards in Antelope, CA",
-    searchTitle: "Teeth Grinding (Bruxism) & Night Guards | Antelope, CA",
+    title: "Teeth Grinding & Custom Night Guards in Antelope, CA",
+    searchTitle: "Teeth Grinding & Night Guards | Antelope & Sacramento",
     searchDescription:
-      "Waking up with a sore jaw, headaches, or worn teeth? Get checked for bruxism and fitted for a custom night guard in Antelope: (916) 727-6453.",
+      "Sore jaw, morning headaches, or worn teeth? Get checked for bruxism and fitted for a custom night guard in Antelope, serving Sacramento.",
     navLabel: "Teeth grinding & night guards",
     eyebrow: "Preventive care",
     description:
@@ -553,11 +553,11 @@ export const servicePages: ServicePage[] = [
   },
   {
     slug: "sedation-dentistry",
-    title: "Dental Care for Nervous Patients in Antelope",
+    title: "Sedation Dentistry for Nervous Patients in Antelope, CA",
     bookingLabel: "Book a comfort consultation",
-    searchTitle: "Dentist for Nervous Patients in Antelope | Sedation FAQs",
+    searchTitle: "Sedation Dentistry Antelope & Sacramento | Calm Care",
     searchDescription:
-      "Anxious about the dentist? Our Antelope team slows the pace, uses The Wand numbing, and walks through sedation options. Call (916) 727-6453.",
+      "Anxious about the dentist? Our Antelope office serves Sacramento with an unhurried pace, The Wand STA numbing, and sedation planning: (916) 727-6453.",
     navLabel: "Comfort & sedation",
     eyebrow: "Anxious-patient care",
     description:
@@ -668,6 +668,17 @@ export const servicePages: ServicePage[] = [
         answer:
           "No. While clear aligners handle many crowding and spacing cases well, more complex jaw or bite corrections sometimes do better with another orthodontic approach. We'll give you an honest recommendation after examining your bite.",
       },
+      {
+        question: "At what age should a child have an orthodontic check?",
+        answer:
+          "We recommend an early bite check around age seven as part of our children's dentistry visits. Watching jaw and tooth growth early helps us spot habits or crowding while they are simpler to guide.",
+        links: [{ href: "/dental-care-children", label: "children's dentistry" }],
+      },
+      {
+        question: "How much does orthodontic treatment or Invisalign cost?",
+        answer:
+          "Cost depends on your specific bite, expected treatment length, and any orthodontic benefits in your dental plan. We provide a written estimate after examining your alignment and bite.",
+      },
     ],
     sources: [{ label: "ADA: Braces and aligners", url: "https://www.mouthhealthy.org/all-topics-a-z/braces" }],
     relatedSlugs: ["invisalign", "dental-crowns"],
@@ -732,9 +743,9 @@ export const servicePages: ServicePage[] = [
   {
     slug: "tooth-extractions",
     title: "Tooth Extractions in Antelope & Sacramento, CA",
-    searchTitle: "Tooth Extraction & Oral Surgery Exam | Antelope, CA",
+    searchTitle: "Tooth Extraction Antelope & Sacramento | Oral Surgery",
     searchDescription:
-      "Dealing with a painful or damaged tooth? Get an honest extraction exam in Antelope. Learn if it can be saved, what removal involves, and recovery.",
+      "Painful, cracked, or infected tooth? Get an honest extraction exam in Antelope, serving Sacramento. Learn if it can be saved: (916) 727-6453.",
     navLabel: "Tooth extractions",
     eyebrow: "Oral surgery",
     description:
@@ -772,12 +783,28 @@ export const servicePages: ServicePage[] = [
         answer:
           "Call us right away at (916) 727-6453. Our team can advise you on immediate steps and check for the earliest available visit.",
       },
+      {
+        question: "How long does recovery take after a tooth extraction?",
+        answer:
+          "Healing depends on which tooth was removed and how complex the root structure was. Before your visit, we walk through swelling, soft foods, home care, and whether PRF & grafting could help support the site.",
+        links: [{ href: "/platelet-rich-fibrin", label: "PRF & grafting" }],
+      },
+      {
+        question: "Can I replace a missing tooth after an extraction?",
+        answer:
+          "Yes. Depending on your bite and bone health, we can plan ahead for dental implants or dentures and bridges so you know your full timeline before the tooth is removed.",
+        links: [
+          { href: "/dental-implants", label: "dental implants" },
+          { href: "/dentures", label: "dentures" },
+        ],
+      },
     ],
     relatedSlugs: ["dental-emergencies", "sedation-dentistry", "wisdom-teeth", "dental-implants", "platelet-rich-fibrin"],
   },
   {
     slug: "dental-implants",
     title: "Dental Implants in Sacramento & Antelope, CA",
+    searchTitle: "Dental Implants Sacramento & Antelope | 3D-Guided Care",
     navLabel: "Dental implants",
     eyebrow: "Tooth replacement",
     description:
@@ -915,11 +942,11 @@ export const servicePages: ServicePage[] = [
   },
   {
     slug: "gum-disease-treatment",
-    title: "Gum Disease Treatment & Deep Cleaning in Antelope",
+    title: "Gum Disease Treatment & Deep Cleaning in Antelope & Sacramento",
     bookingLabel: "Book a gum evaluation",
-    searchTitle: "Gum Disease Treatment & Deep Cleaning | Antelope, CA",
+    searchTitle: "Gum Disease & Deep Cleaning | Sacramento & Antelope",
     searchDescription:
-      "Bleeding, tender, or receding gums? Get a gum exam in Antelope to see whether deep cleaning (scaling & root planing) is right for you.",
+      "Bleeding, tender, or receding gums? Get a gum exam and deep cleaning (scaling & root planing) in Antelope, serving Sacramento: (916) 727-6453.",
     navLabel: "Gum disease treatment",
     eyebrow: "Periodontal care",
     description:
@@ -967,6 +994,12 @@ export const servicePages: ServicePage[] = [
         answer:
           "Yes. Left unchecked, advanced periodontal disease erodes the gum tissue and bone holding teeth in place. Catching and treating it earlier gives us far more ways to keep your natural teeth stable.",
       },
+      {
+        question: "Does a deep dental cleaning hurt?",
+        answer:
+          "We focus on keeping your gums thoroughly comfortable during scaling and root planing, including gentle local numbing with The Wand STA when needed. Tell us if you feel anxious so we can discuss sedation dentistry and comfort choices beforehand.",
+        links: [{ href: "/sedation-dentistry", label: "sedation dentistry" }],
+      },
     ],
     sources: [
       { label: "ADA: Gum disease", url: "https://www.mouthhealthy.org/all-topics-a-z/gum-disease" },
@@ -976,10 +1009,10 @@ export const servicePages: ServicePage[] = [
   },
   {
     slug: "dental-emergencies",
-    title: "Emergency Dentist in Antelope, CA",
-    searchTitle: "Emergency Dentist in Antelope, CA | Weekday & Evening Hours",
+    title: "Emergency Dentist in Antelope & Sacramento, CA",
+    searchTitle: "Emergency Dentist Antelope & Sacramento | Open Until 7 PM",
     searchDescription:
-      "Call (916) 727-6453 for urgent dental care on Elverta Rd in Antelope. Open weekdays, until 7 PM Wed & Thu. Same-day visits when available.",
+      "Toothache, swelling, or broken tooth? Call (916) 727-6453 for urgent care in Antelope, serving Sacramento. Open until 7 PM Wed & Thu.",
     navLabel: "Dental emergencies",
     eyebrow: "Urgent dental care",
     description:
@@ -1027,16 +1060,22 @@ export const servicePages: ServicePage[] = [
         answer:
           "We offer same-day emergency visits when possible. Calling (916) 727-6453 first lets our team look at today's schedule and work to get you in as quickly as we can.",
       },
+      {
+        question: "What should I do if I crack a tooth or lose a crown?",
+        answer:
+          "Rinse gently with warm water, keep any intact crown or tooth fragment in a clean container, avoid chewing on that side, and call (916) 727-6453 right away. At your exam, we'll check whether re-cementing or dental crowns can protect the tooth.",
+        links: [{ href: "/dental-crowns", label: "dental crowns" }],
+      },
     ],
     sources: [{ label: "ADA: Dental emergencies", url: "https://www.mouthhealthy.org/all-topics-a-z/dental-emergencies" }],
     relatedSlugs: ["tooth-extractions", "root-canal-therapy", "wisdom-teeth"],
   },
   {
     slug: "root-canal-therapy",
-    title: "Root Canal Treatment in Antelope & Sacramento, CA",
-    searchTitle: "Root Canal Specialist in Antelope | Dr. Lucas Sheppard",
+    title: "Root Canal Treatment & Endodontist in Antelope & Sacramento",
+    searchTitle: "Root Canal Specialist & Endodontist | Antelope & Sacramento",
     searchDescription:
-      "Deep tooth pain? Our in-house endodontic specialist Dr. Lucas Sheppard treats complex root canals right in Antelope. Call (916) 727-6453.",
+      "Deep tooth pain? In-house endodontic specialist Dr. Lucas Sheppard treats complex root canals in Antelope, serving Sacramento: (916) 727-6453.",
     navLabel: "Root canal treatment",
     eyebrow: "Endodontic care",
     description:
@@ -1084,6 +1123,12 @@ export const servicePages: ServicePage[] = [
         question: "What should I do if my tooth is throbbing right now?",
         answer:
           "Call (916) 727-6453 so we can check our earliest availability. We fit in same-day visits when possible—don't wait on an online inquiry if pain or swelling is escalating.",
+      },
+      {
+        question: "Does a root canal hurt?",
+        answer:
+          "Modern root canal treatment is designed to relieve deep tooth pain, not cause it. We verify that the tooth is thoroughly numb before starting, use gentle local delivery, and can review sedation dentistry options if you feel anxious.",
+        links: [{ href: "/sedation-dentistry", label: "sedation dentistry" }],
       },
     ],
     relatedSlugs: ["dental-crowns", "dental-emergencies", "tooth-extractions"],
@@ -1163,9 +1208,9 @@ export const servicePages: ServicePage[] = [
   {
     slug: "platelet-rich-fibrin",
     title: "PRF & Bone Grafting in Antelope & Sacramento, CA",
-    searchTitle: "PRF & Bone Grafting in Antelope, CA | Oral Surgery",
+    searchTitle: "PRF & Bone Grafting | Antelope & Sacramento Oral Surgery",
     searchDescription:
-      "Ask about platelet-rich fibrin (PRF) and bone grafting to support extraction or implant sites at our Antelope office. Call (916) 727-6453.",
+      "Platelet-rich fibrin (PRF) and bone grafting to support tooth extraction or dental implant sites in Antelope, serving Sacramento: (916) 727-6453.",
     navLabel: "PRF & grafting",
     eyebrow: "Oral surgery",
     description:

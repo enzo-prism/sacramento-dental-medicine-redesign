@@ -48,10 +48,10 @@ export function Services() {
     <section id="services" className="section bg-wash">
       <div className="container-x">
         <SectionLabel
-          eyebrow="Full-scope care"
+          eyebrow="Dental services in Antelope & Sacramento"
           accent="brand"
-          title="From a toddler's first checkup to complex restorations."
-          intro="Preventive, cosmetic, restorative, endodontic, and oral surgery care under one Antelope roof—delivered by a team that knows your history and respects your pace."
+          title="Complete family, cosmetic, restorative, and surgical dental care."
+          intro="Routine exams and kids' cleanings, gum disease therapy, teeth whitening, veneers, Invisalign, dental implants, crowns, dentures, in-house root canals, and wisdom teeth removal—all in one Antelope office."
         />
 
         <div className="mt-8 flex flex-wrap gap-x-5 gap-y-2">

@@ -9,9 +9,9 @@ export function Doctors() {
     <section id="doctors" className="section bg-wash">
       <div className="container-x">
         <SectionLabel
-          eyebrow="Meet the doctors"
-          title="Two steady doctors who actually know your name."
-          intro="No corporate conveyor belt or rotating cast of strangers—just Dr. Mike and our in-house root canal specialist, Dr. Sheppard, both happy to take the time to answer every question."
+          eyebrow="Meet your Antelope dentists"
+          title="Dr. Michael Narodovich and endodontist Dr. Lucas Sheppard."
+          intro="No corporate conveyor belt or rotating cast of strangers—just two familiar doctors under one roof in Antelope, combining family and cosmetic dentistry with in-house specialist root canal care."
         />
 
         <div className="mt-12 flex flex-col gap-8 md:gap-10">

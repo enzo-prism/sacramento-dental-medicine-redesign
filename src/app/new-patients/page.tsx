@@ -9,9 +9,9 @@ import { contact, hours, mediCalNotice, newPatient } from "@/data/site";
 import { OfficeEmail } from "@/components/OfficeEmail";
 import { pageGraph } from "@/lib/structured-data";
 
-const title = "New Patients in Antelope | Sacramento Dental Medicine";
+const title = "New Dental Patients in Antelope & Sacramento | First Visit";
 const description =
-  "What to expect at your first dental visit on Elverta Rd in Antelope: what to bring, insurance and payment answers, hours, and online booking.";
+  "New dental patients welcome at 4320 Elverta Rd #3 in Antelope, serving Sacramento & Roseville. What to bring, insurance checks, hours & booking.";
 export const metadata: Metadata = {
   title: { absolute: title },
   description,
@@ -46,9 +46,9 @@ export default function NewPatientsPage() {
               <span aria-hidden="true"> / </span>
               <span aria-current="page">New patients</span>
             </nav>
-            <p className="eyebrow mt-8 text-brand-deep">New to our office?</p>
+            <p className="eyebrow mt-8 text-brand-deep">New dental patients</p>
             <h1 className="mt-5 font-display text-4xl font-semibold tracking-tight text-ink sm:text-6xl">
-              Your first visit in Antelope, minus the guesswork.
+              New Patients at Our Antelope Dental Office.
             </h1>
             <p className="mt-6 max-w-3xl text-lg leading-8 text-ink-soft">
               We welcome new patients of all ages at {contact.addressLine1}, {contact.addressLine2}. Here is what to bring along, how to verify your dental plan, and exactly what happens once you sit down with us.

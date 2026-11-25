@@ -139,7 +139,7 @@ export default async function ServiceRoute({ params }: Props) {
 
             <aside className="rounded-[24px] border border-line bg-white p-6 shadow-[0_30px_80px_-55px_rgba(13,27,46,0.55)] sm:p-8">
               <h2 className="font-display text-2xl font-semibold tracking-[-0.03em] text-ink">
-                How we can help
+                How {service.navLabel.toLowerCase()} helps
               </h2>
               <ul className="mt-6 grid gap-4">
                 {service.benefits.map((benefit) => (
@@ -206,7 +206,7 @@ export default async function ServiceRoute({ params }: Props) {
           <div className="container-x">
             <p className="eyebrow text-brand-deep">Step by step</p>
             <h2 id="process-title" className="mt-4 max-w-2xl font-display text-3xl font-semibold tracking-[-0.04em] text-ink sm:text-4xl">
-              What your visit looks like.
+              What to expect for {service.navLabel.toLowerCase()} in Antelope.
             </h2>
             <ol className="mt-10 grid gap-px overflow-hidden rounded-[24px] border border-line bg-line md:grid-cols-3">
               {service.steps.map((step, index) => (
@@ -227,7 +227,7 @@ export default async function ServiceRoute({ params }: Props) {
             <div>
               <p className="eyebrow text-brand-deep">Common questions</p>
               <h2 id="faq-title" className="mt-4 font-display text-3xl font-semibold tracking-[-0.04em] text-ink sm:text-4xl">
-                Questions worth asking before you book.
+                {service.navLabel} FAQs
               </h2>
             </div>
             <div className="divide-y divide-line border-y border-line">
@@ -244,14 +244,19 @@ export default async function ServiceRoute({ params }: Props) {
         <section className="section bg-white" aria-labelledby="visit-details-title">
           <div className="container-x grid gap-8 md:grid-cols-2">
             <div>
-              <h2 id="visit-details-title" className="font-display text-2xl font-semibold text-ink">Visit us on Elverta Road</h2>
-              <p className="mt-4 text-sm leading-7 text-ink-soft">We&apos;re located at {contact.addressLine1}, {contact.addressLine2}, open weekdays including until 7 PM on Wednesdays and Thursdays. Call {contact.phoneDisplay} or email <a className="underline underline-offset-4" href={contact.emailHref}><OfficeEmail /></a> to check your dental plan, ask about exam fees, or find a convenient opening.</p>
+              <h2 id="visit-details-title" className="font-display text-2xl font-semibold text-ink">Visit our Antelope dental office</h2>
+              <p className="mt-4 text-sm leading-7 text-ink-soft">Sacramento Dental Medicine is at {contact.addressLine1}, {contact.addressLine2}, serving patients from {contact.serviceArea.slice(0, -1).join(", ")}, and {contact.serviceArea.at(-1)}. Open weekdays, until 7 PM Wed &amp; Thu. Call {contact.phoneDisplay} or email <a className="underline underline-offset-4" href={contact.emailHref}><OfficeEmail /></a> to check your dental plan or schedule.</p>
               <div className="mt-5 flex flex-wrap gap-5"><a href={contact.mapsHref} className="btn-text">Get directions</a><a href={contact.emailHref} className="btn-text">Email our desk</a><Link href="/new-patients" className="btn-text">New-patient guide</Link></div>
             </div>
             <div>
-              <h2 className="font-display text-2xl font-semibold text-ink">Doctors who take their time</h2>
-              <p className="mt-4 text-sm leading-7 text-ink-soft">Get to know Dr. Michael Narodovich before you walk through the door. Every treatment recommendation starts with an exam and a straightforward talk about what fits your goals.</p>
-              <Link href="/meet-dr-narodovich" className="btn-text mt-5">Meet Dr. Narodovich</Link>
+              <h2 className="font-display text-2xl font-semibold text-ink">Meet your Antelope dental team</h2>
+              <p className="mt-4 text-sm leading-7 text-ink-soft">Get to know Dr. Michael Narodovich and our in-house endodontist Dr. Lucas L. Sheppard before you arrive. Every treatment plan starts with an exam and a straightforward walkthrough of your options.</p>
+              <div className="mt-5 flex flex-wrap gap-5">
+                <Link href="/meet-dr-narodovich" className="btn-text">Meet Dr. Narodovich</Link>
+                {(service.slug === "root-canal-therapy" || service.slug === "dental-emergencies" || service.slug === "our-services") ? (
+                  <Link href="/meet-dr-sheppard" className="btn-text">Meet Dr. Sheppard</Link>
+                ) : null}
+              </div>
               {service.sources?.length ? <p className="mt-5 text-sm leading-7 text-ink-soft">Clinical background: {service.sources.map((source, index) => <span key={source.url}>{index > 0 ? "; " : ""}<a className="underline underline-offset-4" href={source.url}>{source.label}</a></span>)}. General patient education; your personal plan always follows an exam.</p> : null}
             </div>
           </div>

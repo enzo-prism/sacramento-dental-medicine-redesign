@@ -35,7 +35,7 @@ export default function NewPatientsPage() {
       </section>
       <section className="section bg-wash" aria-labelledby="first-visit-title">
         <div className="container-x grid gap-10 md:grid-cols-2">
-          <div><h2 id="first-visit-title" className="font-display text-3xl font-semibold text-ink">What happens at my first appointment?</h2><p className="mt-5 leading-8 text-ink-soft">{newPatient.firstVisit}</p><p className="mt-4 leading-8 text-ink-soft">Let the team know if you are nervous or have been away from dental care. The first step is a conversation about your concerns and a plan you understand.</p><Link href="/meet-dr-narodovich" className="btn-text mt-5">Meet Dr. Michael Narodovich</Link></div>
+          <div><h2 id="first-visit-title" className="font-display text-3xl font-semibold text-ink">What happens at my first appointment?</h2><p className="mt-5 leading-8 text-ink-soft">{newPatient.firstVisit}</p><p className="mt-4 leading-8 text-ink-soft">Let the team know if you are nervous or have been away from dental care. Read about <Link className="underline" href="/sedation-dentistry">comfort options for nervous patients</Link> before your first visit.</p><Link href="/meet-dr-narodovich" className="btn-text mt-5">Meet Dr. Michael Narodovich</Link></div>
           <div className="surface-card p-7"><h2 className="font-display text-2xl font-semibold text-ink">What should I bring?</h2><ul className="mt-5 list-disc space-y-3 pl-5 text-ink-soft">{newPatient.bring.map((item) => <li key={item}>{item}</li>)}</ul></div>
         </div>
       </section>

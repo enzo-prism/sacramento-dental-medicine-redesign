@@ -6,10 +6,11 @@ import { siteUrl } from "@/lib/site-url";
 const serviceLastModified: Record<string, string> = {
   "dental-implants": "2026-10-27",
   "wisdom-teeth": "2026-10-27",
-  "dental-emergencies": "2026-11-18",
+  "dental-emergencies": "2026-11-24",
+  "gum-disease-treatment": "2026-11-24",
   "invisalign": "2026-11-03",
   "dental-crowns": "2026-11-20",
-  "sedation-dentistry": "2026-11-06",
+  "sedation-dentistry": "2026-11-24",
   "our-services": "2026-11-20",
   "preventive-care": "2026-11-20",
   "dental-care-children": "2026-11-20",
@@ -23,10 +24,10 @@ const serviceLastModified: Record<string, string> = {
 export default function sitemap(): MetadataRoute.Sitemap {
   const coreRoutes: MetadataRoute.Sitemap = [
     { url: `${siteUrl}/meet-dr-sheppard`, lastModified: new Date("2026-11-06"), changeFrequency: "monthly", priority: 0.8 },
-    { url: `${siteUrl}/new-patients`, lastModified: new Date("2026-09-06"), changeFrequency: "monthly", priority: 0.8 },
+    { url: `${siteUrl}/new-patients`, lastModified: new Date("2026-11-24"), changeFrequency: "monthly", priority: 0.8 },
     {
       url: siteUrl,
-      lastModified: new Date("2026-11-18"),
+      lastModified: new Date("2026-11-24"),
       changeFrequency: "monthly",
       priority: 1,
     },

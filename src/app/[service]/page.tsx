@@ -127,7 +127,7 @@ export default async function ServiceRoute({ params }: Props) {
                 ) : (
                   <>
                     <Link href={contact.bookingHref} className="btn btn-primary h-12 px-5 text-base">
-                      Request an appointment <ArrowRight className="size-4" aria-hidden="true" />
+                      {service.bookingLabel ?? "Request an appointment"} <ArrowRight className="size-4" aria-hidden="true" />
                     </Link>
                     <a href={contact.phoneHref} className="btn btn-outline h-12 px-5 text-base">
                       <Phone className="size-4" aria-hidden="true" /> Call {contact.phoneDisplay}
@@ -166,9 +166,9 @@ export default async function ServiceRoute({ params }: Props) {
                 <a className="btn btn-primary mt-6" href={contact.phoneHref}>Call {contact.phoneDisplay}</a>
               </div>
               <div>
-                <h2 id="office-hours" className="scroll-mt-28 font-display text-2xl font-semibold text-ink">Antelope office hours</h2>
+                <h2 id="office-hours" className="scroll-mt-28 font-display text-2xl font-semibold text-ink">Regular Antelope office hours</h2>
                 <dl className="mt-5 space-y-3 text-sm text-ink-soft">{hours.map(({ day, time }) => <div key={day} className="flex justify-between gap-5"><dt>{day}</dt><dd>{time}</dd></div>)}</dl>
-                <p className="mt-4 text-sm leading-7 text-ink-soft">All hours are Pacific time. An online request does not guarantee a same-day appointment.</p>
+                <p className="mt-4 text-sm leading-7 text-ink-soft">Hours are Pacific time. For a holiday visit, call to confirm the office is open before traveling. An online request does not guarantee a same-day appointment.</p>
                 <a className="btn-text mt-5 inline-flex" href={contact.mapsHref}>Directions to the Elverta Road office</a>
               </div>
             </div>
@@ -271,7 +271,7 @@ export default async function ServiceRoute({ params }: Props) {
               </div>
             </div>
             <Link href={contact.bookingHref} className="btn btn-primary h-12 px-5">
-              Request a visit
+              {service.bookingLabel ?? "Request a visit"}
             </Link>
           </div>
         </section>

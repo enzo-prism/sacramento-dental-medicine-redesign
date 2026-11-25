@@ -95,9 +95,9 @@ describe("search content integrity", () => {
           "Cracked or worn tooth? Get a crown exam in Antelope and an estimate based on your tooth and insurance. Book online or call (916) 727-6453.",
       },
       "sedation-dentistry": {
-        title: "Sedation Dentistry Sacramento | Care for Anxious Patients",
+        title: "Dentist for Nervous Patients in Antelope | Sedation FAQs",
         description:
-          "Nervous about the dentist? Dr. Michael Narodovich offers gentle, judgment-free care in Antelope. Call (916) 727-6453 to ask about sedation options.",
+          "Nervous about a dental visit? Ask our Antelope team about a gentler pace, local numbing and sedation options for your procedure. Call (916) 727-6453.",
       },
     };
     for (const [slug, listing] of Object.entries(expected)) {
@@ -217,10 +217,11 @@ describe("search content integrity", () => {
     assert.deepEqual(Object.fromEntries(stamped), {
       "dental-implants": "2026-10-27",
       "wisdom-teeth": "2026-10-27",
-      "dental-emergencies": "2026-11-18",
+      "dental-emergencies": "2026-11-24",
+      "gum-disease-treatment": "2026-11-24",
       "invisalign": "2026-11-03",
       "dental-crowns": "2026-11-20",
-      "sedation-dentistry": "2026-11-06",
+      "sedation-dentistry": "2026-11-24",
       "our-services": "2026-11-20",
       "preventive-care": "2026-11-20",
       "dental-care-children": "2026-11-20",

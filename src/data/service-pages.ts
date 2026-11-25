@@ -11,6 +11,7 @@ export type ServicePage = {
    */
   searchTitle?: string;
   searchDescription?: string;
+  bookingLabel?: string;
   intro: string;
   benefits: string[];
   steps: { title: string; body: string }[];
@@ -534,16 +535,17 @@ export const servicePages: ServicePage[] = [
   },
   {
     slug: "sedation-dentistry",
-    title: "Sedation Dentistry for Nervous Patients in Sacramento",
-    searchTitle: "Sedation Dentistry Sacramento | Care for Anxious Patients",
+    title: "Dental Care for Nervous Patients in Antelope",
+    bookingLabel: "Request a comfort consultation",
+    searchTitle: "Dentist for Nervous Patients in Antelope | Sedation FAQs",
     searchDescription:
-      "Nervous about the dentist? Dr. Michael Narodovich offers gentle, judgment-free care in Antelope. Call (916) 727-6453 to ask about sedation options.",
+      "Nervous about a dental visit? Ask our Antelope team about a gentler pace, local numbing and sedation options for your procedure. Call (916) 727-6453.",
     navLabel: "Comfort & sedation",
     eyebrow: "Anxious-patient care",
     description:
       "Explore comfort-focused and sedation dentistry options for nervous dental patients at Sacramento Dental Medicine in Antelope, CA.",
     intro:
-      "Dental anxiety is common and never something to be embarrassed about. Tell the team what has made past visits difficult, and they will slow the pace, explain each step, and discuss which comfort options may be appropriate for your health and treatment needs.",
+      "Tell us what made your last visit difficult. Our Antelope team can slow the pace, explain each step and use computer-guided local numbing when appropriate. If you want sedation, ask which options are available for your procedure, who would provide them and whether you would need a referral.",
     benefits: [
       "A judgment-free conversation about dental anxiety",
       "Clear explanations before treatment begins",
@@ -567,7 +569,7 @@ export const servicePages: ServicePage[] = [
     faqs: [
       { question: "What should I discuss before choosing sedation?", answer: "Bring a current medication list and tell the dentist about allergies, medical conditions, previous anesthesia experiences, and the dental work you are considering. Ask who will provide and monitor your care, which approach is available in Antelope, and what preparation and recovery arrangements apply to you." },
       { question: "How is the cost of comfort or sedation care estimated?", answer: "Ask the office which services are included in your treatment estimate and whether any comfort or sedation service is separate. The dentist must assess your health and planned procedure before confirming an option or a fee." },
-      { question: "Which sedation options can I request?", answer: "Call the office to ask which options are currently available. A dentist must review your medical history and planned treatment before confirming whether sedation is appropriate. Do not assume a particular medication or sedation method is offered." },
+      { question: "Which sedation options can I request?", answer: "Call the office to ask which options are currently available. A dentist must review your medical history and planned treatment before confirming whether sedation is appropriate. You can ask about the consultation fee and request a written estimate before booking treatment." },
       { question: "Is local numbing the same as sedation?", answer: "Local anesthesia numbs the area being treated. Sedation is a separate approach to managing awareness or anxiety. Tell the dentist about your concerns so they can explain the available comfort choices and any preparation instructions." },
       {
         question: "Can I ask about sedation before scheduling treatment?",
@@ -856,7 +858,8 @@ export const servicePages: ServicePage[] = [
   },
   {
     slug: "gum-disease-treatment",
-    title: "Gum Disease Treatment in Sacramento & Antelope",
+    title: "Gum Disease Treatment & Deep Cleaning in Antelope, CA",
+    bookingLabel: "Request a gum evaluation",
     searchDescription:
       "Bleeding gums or questions about deep cleaning? Get a gum health evaluation in Antelope and find out whether scaling and root planing may be appropriate.",
     navLabel: "Gum disease treatment",
@@ -864,7 +867,7 @@ export const servicePages: ServicePage[] = [
     description:
       "Get an evaluation and personalized gum disease treatment at Sacramento Dental Medicine in Antelope, serving the Sacramento area.",
     intro:
-      "Bleeding, tenderness, persistent bad breath, or gum recession can be signs that the tissues supporting your teeth need attention. The team evaluates gum health and recommends care based on what they find rather than a one-size plan.",
+      "Bleeding or receding gums? At our Antelope office, the dentist checks your gums and measures the pockets around your teeth. If those findings point to gum disease, a deep cleaning (scaling and root planing) may help remove buildup below the gumline.",
     benefits: [
       "Measure and monitor gum health",
       "Address inflammation and infection risk",
@@ -878,7 +881,7 @@ export const servicePages: ServicePage[] = [
       },
       {
         title: "Explain the findings",
-        body: "You will understand what the measurements mean and whether routine or more advanced gum care is recommended.",
+        body: "Ask the dentist to show you the measurements and explain which areas need care. Before deciding on treatment, ask for a written estimate and whether a visit to a gum specialist would help.",
       },
       {
         title: "Maintain the result",
@@ -900,7 +903,7 @@ export const servicePages: ServicePage[] = [
       },
     ],
     sources: [{"label": "ADA: Gum disease", "url": "https://www.mouthhealthy.org/all-topics-a-z/gum-disease"}, {"label": "ADA: Scaling and root planing", "url": "https://www.mouthhealthy.org/all-topics-a-z/scaling-and-root-planing"}],
-    relatedSlugs: ["our-services", "dental-crowns"],
+    relatedSlugs: ["preventive-care", "dental-crowns"],
   },
   {
     slug: "dental-emergencies",

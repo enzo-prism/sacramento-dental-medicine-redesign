@@ -151,3 +151,17 @@ sitemap and inspect the seven restored URLs. Expect them to be recrawled over da
 weeks; compare their impressions and queries against the same window before release.
 Search Console query data was not read for this audit, so it does not show which
 restored page will gain the most.
+
+## November 24, 2026 — Antelope organic search and booking paths
+
+Final Google Web Search data for November 1–22 recorded 82 clicks and 10,914 impressions. October 1–22 recorded 83 clicks and 7,432 impressions. Search Console property totals use daily rows. Individual query and page counts use their respective reports.
+
+- Gum care had an actionable local query. “Sacramento gum disease treatment” generated 179 impressions, zero clicks and an average position of 7.36. The existing page now names deep cleaning in its heading and title, explains the exam and estimate, links to preventive care, and directs visitors to the existing scheduler for a gum evaluation.
+- The comfort page recorded 644 impressions and zero clicks. The new search listing and opening emphasize nervous patients in Antelope, a gentler pace and computer-guided local numbing. The new-patient guide links directly to the page. Both booking buttons open the existing scheduler. Specific sedation modalities, administering clinicians, referral arrangements and fees still require current office confirmation.
+- The emergency page recorded four clicks from 3,293 impressions. One exact 24-hour query accounted for 1,018 impressions. The November 18 search title and call-first route remain the comparison baseline. The hours panel identifies the regular schedule and asks holiday visitors to call before traveling. Publish special dates and after-hours routing across the website, Business Profile and greeting when the office confirms them.
+- The homepage heading now includes Antelope. The Nov 24 managed Google Business Profile website field pointed to the legacy HTTP www address. The preferred HTTPS root was submitted and Google initially displayed the edit as pending review.
+- The pre-release crawl found 25 available sitemap pages and Google inspection showed 21 indexed. Google acknowledged individual priority crawl requests for cosmetic dentistry, whitening, night guards and dentures. Check selected canonical, last crawl, and first impressions for each on December 1–8. An accepted request does not establish indexing.
+
+Use December 2 for the early emergency-page review. Compare November 19–December 16 with October 21–November 17 in the existing practice dashboard. For the November 24 gum, comfort and home edits, compare November 25–December 22 with October 28–November 24, flagging Thanksgiving and the earlier releases. Use non-branded service queries in Search Console. Report answered urgent calls, accepted Jarvis bookings and attended visits using office records; attribute an organic outcome only when the source is verified.
+
+[Search Console](https://search.google.com/search-console/performance/search-analytics?resource_id=sc-domain%3Asacramentodentalmedicine.com) · [Practice dashboard](https://rda-dashboard-ten.vercel.app/website/sacramento-dental-medicine)

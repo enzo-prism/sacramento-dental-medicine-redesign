@@ -87,10 +87,10 @@ export function ReviewsExplorer() {
       <div className="mt-10 flex flex-col items-start justify-between gap-5 rounded-[20px] bg-wash p-6 sm:flex-row sm:items-center sm:p-7">
         <div>
           <p className="font-display text-xl font-semibold text-ink">
-            Want every word, in the original context?
+            Want to read every full review in context?
           </p>
           <p className="mt-1.5 max-w-2xl text-sm leading-6 text-ink-soft">
-            These are short excerpts. Google keeps the complete, continuously updated archive in its original context.
+            We only show short highlights here. Google hosts the complete, live archive—including the newest reviews posted since our snapshot.
           </p>
         </div>
         <a

@@ -23,19 +23,19 @@ export const formspreeEndpoint = "https://formspree.io/f/xvkpdvyz";
 export const seo = {
   title: "Antelope, CA Dentist | Sacramento Dental Medicine",
   description:
-    "Gentle family, cosmetic, restorative and emergency dentistry in Antelope, CA. New patients welcome; same-day emergency visits when possible.",
-  ogTitle: "A dentist visit you won't dread.",
+    "Unhurried family, cosmetic, restorative, and urgent dental care on Elverta Rd in Antelope, CA. Open until 7 PM Wed & Thu. Call (916) 727-6453.",
+  ogTitle: "Dentistry in Antelope you won't put off.",
   ogDescription:
-    "Gentle family, cosmetic and emergency care in Antelope, CA. New patients welcome.",
+    "Unhurried family, cosmetic, restorative, and emergency dental care in Antelope, CA. Accepting new patients of all ages.",
   ogImageAlt:
-    "Sacramento Dental Medicine in Antelope, California: A dentist visit you won't dread.",
+    "Sacramento Dental Medicine in Antelope, California: Unhurried family, cosmetic, restorative, and emergency dentistry.",
 };
 
 // Contact + conversion targets ----------------------------------------------
 export const contact = {
   practiceName: "Sacramento Dental Medicine",
   shortName: "Sacramento Dental",
-  tagline: "Modern family, cosmetic & restorative dentistry in Antelope, CA",
+  tagline: "Family, cosmetic, restorative, and endodontic dentistry in Antelope, CA",
   phoneDisplay: "(916) 727-6453",
   phoneHref: "tel:+19167276453",
   // Confirmed 2026-09-23 RDA+Enzo client sync. Do not invent extra mailboxes.
@@ -77,49 +77,49 @@ export type OfficePhoto = {
 export const officePhotos: OfficePhoto[] = [
   {
     src: "/images/office-exterior.webp",
-    alt: "Sacramento Dental Medicine storefront at 4320 Elverta Rd in Antelope",
+    alt: "Sacramento Dental Medicine exterior storefront at 4320 Elverta Rd #3 in Antelope",
     width: 1536,
     height: 1152,
   },
   {
     src: "/images/office-waiting.webp",
-    alt: "Waiting area with a tufted sofa, artwork, and marble-look tile at the Elverta Road office",
+    alt: "Bright reception lounge with a tufted sofa, framed artwork, and marble-look tile on Elverta Road",
     width: 1536,
     height: 1152,
   },
   {
     src: "/images/office-lounge.webp",
-    alt: "Lounge seating, abstract wall art, and a snake plant in the office waiting room",
+    alt: "Waiting room seating corner with abstract wall art and a potted snake plant at the Antelope office",
     width: 1152,
     height: 1536,
   },
   {
     src: "/images/office-reception.webp",
-    alt: "Front reception desk and granite counter at Sacramento Dental Medicine",
+    alt: "Front check-in desk and polished granite counter at Sacramento Dental Medicine",
     width: 1536,
     height: 1152,
   },
   {
     src: "/images/office-hallway.webp",
-    alt: "Office hallway with framed certificates looking into a treatment room",
+    alt: "Clean interior hallway lined with framed diplomas leading toward a treatment room",
     width: 1152,
     height: 1536,
   },
   {
     src: "/images/office-treatment.webp",
-    alt: "Treatment room with a dental chair, exam light, and cabinetry",
+    alt: "Private dental treatment room equipped with a cushioned chair, overhead light, and cabinetry",
     width: 1152,
     height: 1536,
   },
   {
     src: "/images/office-operatory.webp",
-    alt: "Treatment bay with a dental chair, sink station, and ceiling monitor",
+    alt: "Treatment bay featuring a dental chair, handwashing station, and overhead ceiling monitor",
     width: 1152,
     height: 1536,
   },
   {
     src: "/images/office-scanner.webp",
-    alt: "Intraoral scanner and air purifier in a treatment room at the Elverta Road office",
+    alt: "Digital intraoral scanner and room air purifier inside a treatment room on Elverta Road",
     width: 1152,
     height: 1536,
   },
@@ -137,8 +137,8 @@ export const navItems = [
 // Emergency pathway (high-intent, time-sensitive) ----------------------------
 export const emergency = {
   eyebrow: "Dental emergency?",
-  headline: "In pain right now? Call us first.",
-  body: "A chipped or knocked-out tooth, swelling, a lost filling or crown, pain that kept you up last night. Call now and we'll do everything we can to see you today.",
+  headline: "Hurting right now? Call us first.",
+  body: "A throbbing toothache, sudden swelling, a cracked tooth, or a crown that just came loose—call our Elverta Road desk first. We'll walk you through what to do right away and get you in the same day whenever space opens up.",
 };
 
 // Social proof — verified directly against the practice's Google Business
@@ -167,18 +167,18 @@ export const socialProof = {
 export const quickFacts: { icon: LucideIcon; label: string; value: string }[] = [
   {
     icon: CalendarClock,
-    label: "Booking",
-    value: "Accepting new patients of all ages",
+    label: "New patients",
+    value: "Welcoming kids, adults, and families",
   },
   {
     icon: HeartPulse,
-    label: "Emergencies",
-    value: "Same-day visits when possible. Call first.",
+    label: "Urgent care",
+    value: "Same-day emergency visits when space allows",
   },
   {
     icon: Sparkles,
-    label: "Extended hours",
-    value: "Open until 7 PM Wednesday & Thursday",
+    label: "Evening hours",
+    value: "Open until 7 PM Wednesdays & Thursdays",
   },
 ];
 
@@ -197,12 +197,12 @@ export const services: Service[] = [
     index: "01",
     title: "Preventive care",
     blurb:
-      "Exams, cleanings, and gum care that catch small problems while they're still small.",
+      "Thorough checkups, gentle cleanings, and gum care designed to catch tiny issues long before they hurt or get expensive.",
     details: [
-      "Comprehensive exams & cleanings",
+      "Exams & professional cleanings",
       "Periodontal (gum) therapy",
       "Children's dentistry",
-      "Bruxism & night guards",
+      "Teeth grinding & night guards",
     ],
     icon: ShieldCheck,
     accent: "brand",
@@ -211,12 +211,12 @@ export const services: Service[] = [
     index: "02",
     title: "Cosmetic dentistry",
     blurb:
-      "Whitening, veneers, and Invisalign planned around your face, not a one-size template.",
+      "Whitening, bonding, porcelain veneers, and Invisalign shaped to fit your face and bite—never an artificial cookie-cutter smile.",
     details: [
-      "Professional whitening",
-      "Porcelain veneers",
+      "In-office & take-home whitening",
+      "Porcelain veneers & bonding",
       "Invisalign clear aligners",
-      "Smile design & planning",
+      "Personalized smile planning",
     ],
     icon: Sparkles,
     accent: "slate",
@@ -225,12 +225,12 @@ export const services: Service[] = [
     index: "03",
     title: "Restorative dentistry",
     blurb:
-      "Crowns, implants, dentures, and root canals built to last and to feel like your own teeth.",
+      "Crowns, bridges, implants, dentures, and in-house root canal care built to restore real chewing strength and look completely natural.",
     details: [
       "Crowns & bridges",
       "Dental implants",
       "Full & partial dentures",
-      "Root canal therapy",
+      "Specialist root canal therapy",
     ],
     icon: SmilePlus,
     accent: "ink",
@@ -239,12 +239,12 @@ export const services: Service[] = [
     index: "04",
     title: "Oral surgery",
     blurb:
-      "Extractions and wisdom teeth handled gently in-house. PRF or grafting may be used to support a site when the dentist recommends it.",
+      "Extractions and wisdom teeth handled calmly under our own roof, with PRF or bone grafting when extra support helps the site.",
     details: [
       "Tooth extractions",
       "Wisdom teeth removal",
-      "PRF & grafting",
-      "Specialist coordination",
+      "PRF & bone grafting",
+      "Specialist coordination when needed",
     ],
     icon: Stethoscope,
     accent: "brand",
@@ -260,32 +260,32 @@ export const technology: {
   {
     icon: Boxes,
     title: "CBCT 3D imaging",
-    body: "A full 3D view of teeth, roots, and bone, so implants and surgery are planned on the whole picture.",
+    body: "Maps teeth, roots, nerves, and bone in three dimensions so implants, root canals, and surgery are planned with precision before we begin.",
   },
   {
     icon: Syringe,
     title: "The Wand STA",
-    body: "Computer-controlled numbing that trades the dreaded syringe for a slow, precise, barely-there flow.",
+    body: "Computer-guided local anesthesia that delivers numbing steadily and gently, replacing the sharp pressure of a traditional syringe.",
   },
   {
     icon: Waves,
     title: "Soft tissue laser",
-    body: "Treats gum tissue with less bleeding, less soreness, and faster healing than traditional tools.",
+    body: "Lets us treat gum tissue with greater accuracy, minimal bleeding, and an easier recovery than conventional instruments.",
   },
   {
     icon: Microscope,
     title: "Digital X-rays",
-    body: "Sharper images at a fraction of the radiation, on screen in seconds.",
+    body: "Crisp, high-detail images appear chairside in seconds using a fraction of the radiation of old film X-rays—so you can see exactly what we see.",
   },
   {
     icon: Activity,
     title: "Oral cancer screening",
-    body: "Part of every routine exam, because with oral cancer, early is everything.",
+    body: "A quick, painless visual and tissue check woven into routine exams, because catching changes early makes all the difference.",
   },
   {
     icon: Droplets,
     title: "Modern sterilization",
-    body: "Distilled-water lines and strict protocols in every treatment room, every day.",
+    body: "Distilled-water lines and hospital-grade sterilization protocols followed in every operatory, before every single patient.",
   },
 ];
 
@@ -311,8 +311,8 @@ export const doctors: Doctor[] = [
     focus: "Family & cosmetic dentistry",
     image: imagery.narodovich,
     description:
-      "Patients call him Dr. Mike. He's who people ask for after years away from the chair: modern technique, steady hands, and zero judgment about how long it's been.",
-    highlights: "Gentle by default · Anxious-patient care",
+      "Most patients know him simply as Dr. Mike. People ask for him by name—especially when it's been years since their last cleaning—because he pairs a calm, careful hand with straight answers and zero lectures.",
+    highlights: "Known as Dr. Mike · Anxious-patient friendly",
     href: "/meet-dr-narodovich",
     licenseRecords: [
     {
@@ -336,9 +336,9 @@ export const doctors: Doctor[] = [
 ],
     education: ["The Ohio State University, Bachelor of Science", "Temple University, Doctor of Dental Medicine"],
     bio: [
-      "Dr. Michael Narodovich grew up in Cleveland, Ohio, earned his Bachelor of Science at The Ohio State University, and completed his dental training at Temple University in Philadelphia before making Northern California home.",
-      "At Sacramento Dental Medicine in Antelope, his work includes family and cosmetic dentistry and helping patients return after time away from care. Bring your questions and tell the team about anxiety or a difficult previous experience so your visit can begin with a clear conversation.",
-      "Your examination is the starting point for discussing findings, available treatment, and a plan you understand. Ask which comfort options are available at this office and how they fit your health and the work being considered.",
+      "Dr. Michael Narodovich grew up in Cleveland, Ohio, earned his Bachelor of Science at The Ohio State University, and completed his Doctor of Dental Medicine degree at Temple University in Philadelphia before putting down roots in Northern California.",
+      "Here on Elverta Road, Dr. Mike cares for whole families—from a toddler's first look-around to cosmetic smile planning and long-overdue checkups. If dental visits have ever left you tense, brushed off, or embarrassed about how much time has passed, tell us upfront. We start with a real conversation, not a lecture.",
+      "Every plan begins with an honest exam: we show you what we find, separate what needs attention now from what can wait, and walk through comfort choices—including computer-guided local numbing and any sedation options appropriate for your health history and procedure—before you commit to a thing.",
     ],
   },
   {
@@ -347,12 +347,12 @@ export const doctors: Doctor[] = [
     focus: "Endodontics",
     image: imagery.sheppard,
     description:
-      "A root canal specialist and U.S. Air Force veteran, Dr. Sheppard takes on the complex cases. He diagnoses carefully and explains each step, which is how the words \"root canal\" stop being scary.",
+      "An endodontic specialist and U.S. Air Force veteran, Dr. Sheppard focuses on saving compromised teeth and handling complex root canal cases. His thorough diagnosis and step-by-step explanations take the fear out of root canal care.",
     highlights: "Endodontic specialist · U.S. Air Force veteran",
     href: "/meet-dr-sheppard",
     bio: [
-      "Dr. Lucas L. Sheppard is an endodontic specialist and U.S. Air Force veteran on the Sacramento Dental Medicine team. His focus is evaluating and treating problems inside the tooth, including complex root canal cases.",
-      "An examination and appropriate imaging help determine the cause of symptoms, whether a tooth can be preserved, and the next step. Ask the team whether your visit should be with Dr. Sheppard and how any final filling or crown will be coordinated.",
+      "Dr. Lucas L. Sheppard is our in-house endodontic specialist and a U.S. Air Force veteran. While many neighborhood offices automatically send complex toothaches across town to an unfamiliar clinic, having Dr. Sheppard right here in Antelope means you can stay with a team that already knows you.",
+      "Dr. Sheppard focuses on diagnosing the true source of deep tooth pain, treating infections inside the root canals, and preserving natural teeth whenever they can be predictably saved. After examining your tooth and reviewing imaging, he walks you through what's happening, whether saving the tooth makes sense, and how we'll coordinate any follow-up filling or crown.",
     ],
   },
 ];
@@ -395,9 +395,9 @@ export type GoogleReviewTheme = {
 
 export const googleReviewAnalysis = {
   summary:
-    "Across the full corpus, patients most often praise a kind team, a clean office, Dr. Mike, long-term and family care, comfort for anxious patients, and clear explanations.",
+    "Reading all 428 written reviews side by side, six themes show up again and again: a genuinely warm team, a spotless office, Dr. Mike's calm bedside manner, multi-decade family loyalty, real relief for nervous patients, and upfront explanations without pressure.",
   lowerRatedNote:
-    "The smaller set of lower-rated reviews most often mentions communication friction, cost or insurance frustration, scheduling issues, or procedure discomfort.",
+    "In the smaller group of critical reviews, the recurring complaints involve front-desk communication gaps, insurance or cost surprises, scheduling hiccups, or discomfort during a procedure. We share that openly because knowing what patients flag keeps us accountable.",
 };
 
 // Theme counts are overlapping text matches across the 428 written Google
@@ -406,32 +406,32 @@ export const googleReviewThemes: GoogleReviewTheme[] = [
   {
     title: "Friendly, kind care",
     count: 228,
-    body: "Patients repeatedly describe a warm welcome, patient assistants, and a team that remembers them.",
+    body: "Patients talk most about feeling welcomed like a neighbor—from front-desk greetings to assistants and hygienists who actually remember them.",
   },
   {
     title: "A clean, organized office",
     count: 140,
-    body: "Cleanliness and organization are among the most common practical details patients mention.",
+    body: "A spotless, well-run clinic is one of the first practical details patients notice the moment they walk in on Elverta Road.",
   },
   {
     title: "Dr. Mike",
     count: 100,
-    body: "Reviews frequently call out Dr. Michael Narodovich for being thorough, gentle, and easy to talk to.",
+    body: "Over a hundred written reviews name Dr. Michael Narodovich directly for being thorough, gentle, unhurried, and easy to talk to.",
   },
   {
     title: "Long-term and family care",
     count: 89,
-    body: "Many patients mention years with the practice, bringing family, or continuing to drive back after moving.",
+    body: "Patients describe bringing their kids, staying for 10 or 20+ years, and even making the drive back to Antelope after moving away.",
   },
   {
     title: "Comfort for anxious patients",
     count: 75,
-    body: "People who describe dental anxiety often say the team helped them feel safe, relaxed, and never judged.",
+    body: "People who once avoided dental chairs write that our pace and kindness made visits feel manageable—without a hint of judgment.",
   },
   {
     title: "Clear explanations",
     count: 64,
-    body: "Patients value having X-rays, options, costs, and next steps explained before treatment begins.",
+    body: "Patients appreciate seeing their X-rays, hearing real options, and knowing expected costs before anyone picks up an instrument.",
   },
 ];
 
@@ -530,65 +530,65 @@ export const mediCalNotice = "We do not accept Medi-Cal.";
 
 export const newPatient = {
   eyebrow: "New patients",
-  title: "Your first visit, without the unknowns.",
+  title: "Your first visit, minus the guesswork.",
   intro:
-    "Here's how coverage works, what to bring, and what actually happens in the chair.",
+    "Here is everything you need to know before you walk in—coverage, what to bring, and how we run a first appointment.",
   billing: [
     {
-      title: "Confirm your coverage",
-      body: `${mediCalNotice} For other dental plans, call the front desk to confirm whether your plan is accepted before your visit.`,
+      title: "Check your dental plan first",
+      body: `${mediCalNotice} Have another dental plan? Give our front desk a quick call before your appointment and we'll confirm whether we work with your plan.`,
     },
     {
-      title: "Ask about payment options",
-      body: "Paying without insurance? Call, and the front desk will walk you through your options.",
+      title: "Visiting without insurance",
+      body: "No dental plan? No problem. Call us before you book and our front desk will walk you through current payment options and what an initial visit costs.",
     },
     {
-      title: "New patients welcome",
-      body: "Now accepting new patients of all ages, from Antelope and across Greater Sacramento.",
+      title: "All ages welcome",
+      body: "We're accepting new patients—kids, adults, and seniors—from Antelope, Roseville, Citrus Heights, North Highlands, Sacramento, and Folsom.",
     },
   ],
   bring: [
-    "Photo ID",
-    "Dental insurance card (if you have one)",
-    "A list of current medications",
-    "Your questions, and what you'd change about your smile",
+    "A photo ID",
+    "Your dental insurance card (if you carry one)",
+    "A list of any current medications or allergies",
+    "Your questions—and anything you've been hoping to fix or improve",
   ],
   firstVisit:
-    "Expect a comprehensive exam, digital X-rays if you need them, an unhurried conversation about your goals, and usually a gentle cleaning. You'll leave knowing exactly what we found and what we'd recommend next.",
+    "Plan on a comprehensive exam, digital X-rays only if needed, an unhurried talk about your goals, and typically a gentle cleaning. You'll walk out knowing exactly what we found, what needs attention now, and what can wait.",
 };
 
 // FAQ ------------------------------------------------------------------------
 export const faqs: { q: string; a: string }[] = [
   {
     q: "Are you accepting new patients?",
-    a: "Yes. Sacramento Dental Medicine is welcoming new patients of all ages across Antelope and Greater Sacramento. Request a visit online or call the office, and we'll find a first appointment that fits your schedule.",
+    a: "Yes—we're welcoming new patients of all ages from Antelope and across Greater Sacramento. You can book directly online or call (916) 727-6453 and we'll find a time that fits your week.",
   },
   {
-    q: "What should I expect at my first visit?",
-    a: "Plan on a comprehensive exam, digital X-rays if needed, and a real conversation about your goals, usually followed by a gentle cleaning. Before you leave, we'll walk you through what we found and what we recommend.",
+    q: "What happens at a first visit?",
+    a: "We start by listening. You'll get a thorough exam of your teeth and gums, digital X-rays only where needed, an oral cancer screening, and usually a gentle cleaning. Before you leave, we review everything on screen and talk through next steps without pressure.",
   },
   {
-    q: "Do you handle dental emergencies?",
-    a: "Yes. If you're in pain or have had a dental accident, call (916) 727-6453 right away. We'll tell you what to do immediately and do everything possible to see you the same day.",
+    q: "Can you see me for a dental emergency?",
+    a: "Yes. If you're dealing with tooth pain, swelling, or a broken tooth, call (916) 727-6453 right away. We'll tell you what to do in the meantime and work to see you the same day whenever space allows.",
   },
   {
     q: "What are your office hours?",
     a: `${hours
       .filter(({ time }) => time !== "Closed")
       .map(({ day, time }) => `${day} ${time}`)
-      .join("; ")}. Closed Saturday and Sunday. Holiday hours can differ, so call (916) 727-6453 to confirm.`,
+      .join("; ")}. Closed Saturday and Sunday. Holiday hours may vary, so call (916) 727-6453 before making the trip.`,
   },
   {
-    q: "Where is the office, and which areas do you serve?",
-    a: `The office is at ${contact.addressLine1}, ${contact.addressLine2}, on Elverta Road. Patients come from ${contact.serviceArea.slice(0, -1).join(", ")}, and ${contact.serviceArea.at(-1)}.`,
+    q: "Where is your office, and which areas do you serve?",
+    a: `Find us at ${contact.addressLine1}, ${contact.addressLine2}, right on Elverta Road. Patients visit us from ${contact.serviceArea.slice(0, -1).join(", ")}, and ${contact.serviceArea.at(-1)}.`,
   },
   {
     q: "Do you accept Medi-Cal?",
     a: mediCalNotice,
   },
   {
-    q: "Do you offer financing or payment plans?",
-    a: "Coverage and payment options change, so the most reliable answer comes from a quick call to the front desk. We'll confirm whether your plan is accepted and explain the payment options currently available.",
+    q: "How do insurance and payment options work?",
+    a: "Because dental plans and payment options vary, the fastest way to get an accurate answer is a quick call to (916) 727-6453. Our front desk will check your plan, explain what to expect for an exam, and go over current payment options.",
   },
 ];
 
@@ -596,16 +596,16 @@ export const faqs: { q: string; a: string }[] = [
 export const philosophy = {
   points: [
     {
-      title: "Straight answers first",
-      body: "No upsell, no scare tactics. An honest read on your teeth, and a plan you understand before you commit to anything.",
+      title: "Honest answers, zero pressure",
+      body: "We show you what's on the screen, tell you what truly needs care now versus what can wait, and never push work you don't understand or want.",
     },
     {
-      title: "Comfort, by design",
-      body: "Computer-guided anesthesia, an unhurried pace, and a team that treats dental nerves as normal, because they are.",
+      title: "Built for nervous visits",
+      body: "Computer-guided numbing with The Wand, a calm pace, and a team that treats dental anxiety as completely normal—even if it's been years since your last visit.",
     },
     {
-      title: "Diagnosed, not guessed",
-      body: "CBCT 3D imaging and digital X-rays show the full picture before we recommend anything.",
+      title: "See first, treat second",
+      body: "CBCT 3D scans and digital X-rays let us diagnose from the full picture rather than guesswork, so your treatment plan holds up.",
     },
   ],
 };

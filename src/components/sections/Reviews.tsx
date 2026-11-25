@@ -13,8 +13,8 @@ export function Reviews() {
       <div className="container-x">
         <SectionLabel
           eyebrow="Patient reviews"
-          title="Take their word for it."
-          intro={`A ${socialProof.rating}-star Google rating across ${socialProof.totalReviews} reviews, grounded in hundreds of specific patient experiences.`}
+          title="Hear it straight from our patients."
+          intro={`A ${socialProof.rating}-star rating across ${socialProof.totalReviews} Google reviews—built over decades of families trusting us with their care.`}
         />
 
         <div className="mt-12 grid gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:gap-12">

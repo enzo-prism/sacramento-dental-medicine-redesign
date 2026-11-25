@@ -87,7 +87,7 @@ export default function WisdomTeethRemovalSacramentoPage() {
                 {wisdomTeethLanding.intro}
               </p>
               <p className="mt-4 text-sm leading-7 text-ink-soft">
-                More about{" "}
+                Explore more about{" "}
                 {wisdomTeethLanding.relatedLinks.map((link, index) => (
                   <span key={link.href}>
                     {index > 0 ? " and " : ""}
@@ -96,7 +96,7 @@ export default function WisdomTeethRemovalSacramentoPage() {
                     </Link>
                   </span>
                 ))}{" "}
-                at this office.
+                at our Elverta Road office.
               </p>
               <p className="mt-4 text-sm font-medium text-ink">
                 {socialProof.rating} stars from {socialProof.totalReviews} Google reviews
@@ -130,12 +130,12 @@ export default function WisdomTeethRemovalSacramentoPage() {
         <section className="section bg-wash" aria-labelledby="symptoms-title">
           <div className="container-x grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
             <div>
-              <p className="eyebrow text-brand-deep">When to get checked</p>
+              <p className="eyebrow text-brand-deep">Signs it&apos;s time for a check</p>
               <h2
                 id="symptoms-title"
                 className="mt-4 font-display text-3xl font-semibold tracking-[-0.04em] text-ink sm:text-4xl"
               >
-                Symptoms that are worth an exam.
+                Symptoms worth getting checked early.
               </h2>
               <p className="mt-5 text-sm leading-7 text-ink-soft md:text-base">
                 {wisdomTeethLanding.whenToCall}
@@ -156,12 +156,12 @@ export default function WisdomTeethRemovalSacramentoPage() {
 
         <section className="section bg-white" aria-labelledby="process-title">
           <div className="container-x">
-            <p className="eyebrow text-brand-deep">A clear path forward</p>
+            <p className="eyebrow text-brand-deep">Step by step</p>
             <h2
               id="process-title"
               className="mt-4 max-w-2xl font-display text-3xl font-semibold tracking-[-0.04em] text-ink sm:text-4xl"
             >
-              What the visit and procedure look like.
+              What your exam and visit look like.
             </h2>
             <ol className="mt-10 grid gap-px overflow-hidden rounded-[24px] border border-line bg-line md:grid-cols-3">
               {wisdomTeethLanding.steps.map((step, index) => (
@@ -204,17 +204,17 @@ export default function WisdomTeethRemovalSacramentoPage() {
         <section className="section bg-canvas" aria-labelledby="area-title">
           <div className="container-x grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
             <div>
-              <p className="eyebrow text-brand-deep">Service area</p>
+              <p className="eyebrow text-brand-deep">Communities we serve</p>
               <h2
                 id="area-title"
                 className="mt-4 font-display text-3xl font-semibold tracking-[-0.04em] text-ink sm:text-4xl"
               >
-                Sacramento-area wisdom teeth care, based in Antelope.
+                Sacramento-area wisdom teeth care, right on Elverta Road.
               </h2>
               <p className="mt-5 text-sm leading-7 text-ink-soft md:text-base">
-                Patients come to {wisdomTeethLanding.officeLine} from across
-                the north Sacramento area. Call first if you are unsure whether
-                a visit from your city is a good fit.
+                Patients drive to {wisdomTeethLanding.officeLine} from across
+                Antelope and north Sacramento. Not sure whether the drive makes
+                sense for your case? Give our desk a quick call first.
               </p>
               <ul className="mt-6 flex flex-wrap gap-2">
                 {contact.serviceArea.map((city) => (
@@ -279,18 +279,18 @@ export default function WisdomTeethRemovalSacramentoPage() {
                 id="faq-title"
                 className="mt-4 font-display text-3xl font-semibold tracking-[-0.04em] text-ink sm:text-4xl"
               >
-                Answers before you schedule.
+                Questions worth asking before you book.
               </h2>
               {wisdomTeethLanding.source ? (
                 <p className="mt-5 text-sm leading-7 text-ink-soft">
-                  Patient education:{" "}
+                  Clinical background:{" "}
                   <a
                     className="underline underline-offset-4"
                     href={wisdomTeethLanding.source.url}
                   >
                     {wisdomTeethLanding.source.label}
                   </a>
-                  . General information; your treatment recommendations follow an exam.
+                  . General patient education; your personal plan always follows an exam.
                 </p>
               ) : null}
             </div>
@@ -316,8 +316,8 @@ export default function WisdomTeethRemovalSacramentoPage() {
             <div>
               <p className="text-sm font-semibold text-[#d5e1f4]">Ready to get checked?</p>
               <p className="mt-3 max-w-xl text-pretty text-lg leading-7 text-white/75">
-                Call the Antelope office or request a wisdom teeth evaluation.
-                We will confirm a time during office hours.
+                Call our Antelope front desk or send a quick visit request—we&apos;ll
+                follow up during weekday office hours to lock in a time.
               </p>
             </div>
             <div className="flex flex-col gap-3 sm:flex-row">

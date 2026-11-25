@@ -10,8 +10,8 @@ export function Doctors() {
       <div className="container-x">
         <SectionLabel
           eyebrow="Meet the doctors"
-          title="Two doctors who will actually know you."
-          intro="No rotating cast of strangers — the same two doctors, and both would rather explain too much than too little."
+          title="Two steady doctors who actually know your name."
+          intro="No corporate conveyor belt or rotating cast of strangers—just Dr. Mike and our in-house root canal specialist, Dr. Sheppard, both happy to take the time to answer every question."
         />
 
         <div className="mt-12 flex flex-col gap-8 md:gap-10">
@@ -52,11 +52,11 @@ export function Doctors() {
 
         <ScrollReveal variant="fade" className="mt-10">
           <p className="max-w-md text-sm leading-6 text-ink-soft">
-            Not sure who to book with? Call{" "}
+            Not sure who you should see first? Call{" "}
             <a href={contact.phoneHref} className="font-semibold text-brand-ink">
               {contact.phoneDisplay}
             </a>{" "}
-            and the front desk will match you with the right doctor.
+            and our front desk will schedule you with the right doctor.
           </p>
         </ScrollReveal>
       </div>

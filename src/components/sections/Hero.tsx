@@ -26,7 +26,7 @@ export function Hero() {
           </p>
 
           <h1 className="mt-5 font-display text-[clamp(1.85rem,8vw,3.4rem)] font-semibold leading-[1.02] tracking-[-0.03em] text-ink text-balance lg:text-[clamp(2.6rem,4.4vw,3.6rem)]">
-            A dentist visit in Antelope{" "}
+            Dental care in Antelope{" "}
             <span className="block text-brand-deep">
               you won&apos;t{" "}
               <span className="relative inline-block">
@@ -37,9 +37,9 @@ export function Hero() {
           </h1>
 
           <p className="mt-6 max-w-xl text-pretty text-base leading-7 text-ink-soft md:text-lg md:leading-8">
-            {contact.tagline}. The team works gently, explains everything in
-            plain English, and takes special care of people who haven&apos;t
-            seen a dentist in years.
+            {contact.tagline}. We explain every step in plain language, move at
+            your pace, and welcome patients back without a word of judgment—even
+            if it&apos;s been years.
           </p>
 
           <div

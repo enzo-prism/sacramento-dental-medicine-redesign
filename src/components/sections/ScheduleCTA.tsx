@@ -16,10 +16,11 @@ export function ScheduleCTA() {
           <div>
             <p className="eyebrow text-[#d5e1f4]">Ready when you are</p>
             <h2 className="mt-5 max-w-2xl font-display text-balance text-[clamp(2rem,4.2vw,3.1rem)] font-semibold leading-[1.06] tracking-[-0.02em] text-white">
-              Book a visit on your own time.
+              Pick a visit time that fits your week.
             </h2>
             <p className="mt-4 max-w-2xl text-pretty text-base leading-7 text-white/70 md:text-lg md:leading-8">
-              Use the online scheduler, or call the office during office hours.
+              Book online anytime—including Wednesday and Thursday evenings until
+              7 PM—or call our Elverta Road desk directly.
             </p>
           </div>
 

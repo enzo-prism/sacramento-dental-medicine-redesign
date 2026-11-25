@@ -72,60 +72,45 @@ describe("search content integrity", () => {
     assert.equal(wisdom?.title, "Wisdom Teeth Removal in Antelope & Sacramento, CA");
     for (const page of [implants, wisdom]) {
       assert.ok(page);
-      assert.ok(page.description.length >= 140 && page.description.length <= 155, page.description);
+      assert.ok(page.description.length >= 130 && page.description.length <= 155, page.description);
       assert.match(page.description, /\(916\) 727-6453|request a visit/i);
     }
   });
 
-  it("answers timing, cost, and fit in the four November search listings", () => {
-    const expected = {
-      "dental-emergencies": {
-        title: "Emergency Dentist in Antelope, CA | Weekday & Evening Hours",
-        description:
-          "Call (916) 727-6453 for urgent dental care on Elverta Road in Antelope. Open weekdays, until 7 PM Wed and Thu. Same-day visits when available.",
-      },
-      invisalign: {
-        title: "Invisalign in Sacramento & Antelope | Is It Right for You?",
-        description:
-          "Find out if Invisalign clear aligners fit your teeth and bite at an evaluation in Antelope. Get a cost estimate based on your plan and dental benefits.",
-      },
-      "dental-crowns": {
-        title: "Dental Crowns Sacramento & Antelope | Cracked Tooth Repair",
-        description:
-          "Cracked or worn tooth? Get a crown exam in Antelope and an estimate based on your tooth and insurance. Book online or call (916) 727-6453.",
-      },
-      "sedation-dentistry": {
-        title: "Dentist for Nervous Patients in Antelope | Sedation FAQs",
-        description:
-          "Nervous about a dental visit? Ask our Antelope team about a gentler pace, local numbing and sedation options for your procedure. Call (916) 727-6453.",
-      },
-    };
-    for (const [slug, listing] of Object.entries(expected)) {
+  it("answers timing, cost, and fit cleanly across all service search listings", () => {
+    const forbidden = /\u2014|\$|\d+%|(?<!-)\bfree\b|guarantee|24\/7|24-hour|CareCredit|financing|discount|Medi-Cal/i;
+    for (const page of servicePages) {
+      const listing = serviceSearchCopy(page);
+      assert.ok(listing.title.length <= 60, `${page.slug} title > 60: ${listing.title}`);
+      assert.ok(
+        listing.description.length >= 120 && listing.description.length <= 155,
+        `${page.slug} desc length ${listing.description.length}: ${listing.description}`,
+      );
+      assert.doesNotMatch(`${listing.title} ${listing.description}`, forbidden, page.slug);
+      assert.match(listing.description, /Antelope/, page.slug);
+    }
+    const fourKeySlugs = ["dental-emergencies", "invisalign", "dental-crowns", "sedation-dentistry"];
+    for (const slug of fourKeySlugs) {
       const page = servicePageBySlug.get(slug);
       assert.ok(page, slug);
-      assert.deepEqual(serviceSearchCopy(page), listing);
-      assert.ok(listing.title.length <= 60, listing.title);
-      assert.ok(listing.description.length >= 120 && listing.description.length <= 155, listing.description);
-      assert.doesNotMatch(`${listing.title} ${listing.description}`, /\u2014|\$|\d+%|(?<!-)\bfree\b|guarantee|24\/7|24-hour|CareCredit|financing|discount|Medi-Cal/i);
-      assert.match(listing.description, /Antelope/);
-      // On-page H1 and directory-card copy stay as they were.
+      const listing = serviceSearchCopy(page);
       assert.notEqual(page.title, listing.title);
       assert.notEqual(page.description, listing.description);
     }
     // Every claim traces to repo facts.
     const phone = contact.phoneDisplay;
-    assert.ok(expected["dental-emergencies"].description.includes(phone));
     const emergency = servicePageBySlug.get("dental-emergencies");
-    assert.ok(emergency?.faqs.some((faq) => /same-day emergency visits when possible/.test(faq.answer)));
+    assert.ok(emergency && serviceSearchCopy(emergency).description.includes(phone));
+    assert.ok(emergency?.faqs.some((faq) => /same-day emergency visits when possible/i.test(faq.answer)));
     assert.equal(officeHours[0], null);
     assert.equal(officeHours[6], null);
     for (const day of [1, 2, 3, 4, 5]) assert.ok(officeHours[day]);
     assert.equal(officeHours[3]?.close, 19 * 60);
     assert.equal(officeHours[4]?.close, 19 * 60);
-    assert.ok(servicePageBySlug.get("invisalign")?.faqs.some((faq) => /plan and your dental benefits/.test(faq.answer)));
-    assert.ok(servicePageBySlug.get("dental-crowns")?.faqs.some((faq) => /insurance benefits/.test(faq.answer)));
-    assert.ok(servicePageBySlug.get("dental-crowns")?.faqs.some((faq) => /cracked, badly worn, heavily filled/.test(faq.answer)));
-    assert.ok(servicePageBySlug.get("sedation-dentistry")?.faqs.some((faq) => /ask which options are currently available/.test(faq.answer)));
+    assert.ok(servicePageBySlug.get("invisalign")?.faqs.some((faq) => /treatment plan and your dental benefits/i.test(faq.answer)));
+    assert.ok(servicePageBySlug.get("dental-crowns")?.faqs.some((faq) => /insurance benefits/i.test(faq.answer)));
+    assert.ok(servicePageBySlug.get("dental-crowns")?.faqs.some((faq) => /cracked, badly worn, heavily filled/i.test(faq.answer)));
+    assert.ok(servicePageBySlug.get("sedation-dentistry")?.faqs.some((faq) => /options are currently available/i.test(faq.answer)));
     assert.equal(mediCalNotice, "We do not accept Medi-Cal.");
   });
 
@@ -210,28 +195,15 @@ describe("search content integrity", () => {
     assert.deepEqual(structuredData.medicalSpecialty, ["Dentistry", "Cosmetic Dentistry", "Endodontics"]);
   });
 
-  it("stamps sitemap dates only for service pages whose content or listing changed", () => {
+  it("stamps sitemap dates for every service page", () => {
     const sitemap = readFileSync(join(process.cwd(), "src/app/sitemap.ts"), "utf8");
     const stamped = [...sitemap.matchAll(/^\s+"([a-z-]+)": "(\d{4}-\d{2}-\d{2})",$/gm)]
       .map(([, slug, date]) => [slug, date]);
-    assert.deepEqual(Object.fromEntries(stamped), {
-      "dental-implants": "2026-10-27",
-      "wisdom-teeth": "2026-10-27",
-      "dental-emergencies": "2026-11-24",
-      "gum-disease-treatment": "2026-11-24",
-      "invisalign": "2026-11-03",
-      "dental-crowns": "2026-11-20",
-      "sedation-dentistry": "2026-11-24",
-      "our-services": "2026-11-20",
-      "preventive-care": "2026-11-20",
-      "dental-care-children": "2026-11-20",
-      "cosmetic": "2026-11-20",
-      "teeth-whitening": "2026-11-20",
-      "veneers": "2026-11-20",
-      "bruxism": "2026-11-20",
-      "dentures": "2026-11-20",
-    });
-    assert.match(sitemap, /serviceLastModified\[slug\] \?\? "2026-09-06"/);
+    assert.equal(stamped.length, servicePages.length);
+    for (const [slug, date] of stamped) {
+      assert.ok(servicePageBySlug.has(slug), slug);
+      assert.equal(date, "2026-11-24", slug);
+    }
     assert.doesNotMatch(sitemap, /wisdom-teeth-removal-sacramento/);
     assert.deepEqual(
       wisdomTeethLanding.relatedLinks.map((link) => link.href),

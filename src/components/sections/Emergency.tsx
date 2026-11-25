@@ -25,7 +25,7 @@ export function Emergency() {
                   {emergency.body}
                 </p>
                 <Link href="/dental-emergencies" className="btn-text mt-3">
-                  Emergency visits and Antelope office hours
+                  See urgent-care guidance and Antelope hours
                 </Link>
               </div>
             </div>

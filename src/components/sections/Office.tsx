@@ -12,14 +12,14 @@ export function Office() {
     <section id="office" className="section bg-canvas" aria-label="The office">
       <div className="container-x">
         <SectionLabel
-          eyebrow="The office"
+          eyebrow="Inside our clinic"
           title={
             <>
-              This is the office{" "}
+              Step inside our office{" "}
               <span className="text-brand-deep">on Elverta Road.</span>
             </>
           }
-          intro={`Reception, waiting, and treatment rooms at ${contact.addressLine1} in Antelope.`}
+          intro={`Real photos of our storefront, waiting room, and treatment bays at ${contact.addressLine1} in Antelope—so nothing feels unfamiliar on your first visit.`}
         />
 
         <div className="mt-12 grid gap-3 md:grid-cols-2 md:gap-4">

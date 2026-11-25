@@ -116,11 +116,12 @@ export function AppointmentRequestForm() {
   return (
     <div className="surface-card p-6 sm:p-8" data-mobile-cta-stop>
       <h2 className="font-display text-2xl font-semibold tracking-[-0.03em] text-ink">
-        Request a wisdom teeth visit
+        Request a wisdom teeth exam
       </h2>
       <p className="mt-2 text-sm leading-6 text-ink-soft">
-        Your name, plus a phone number or an email — we only need one. This is a
-        request, not a confirmed appointment.
+        Share your name plus either a phone number or an email—one is plenty.
+        This sends a request, not a confirmed appointment; our front desk will
+        reach out during office hours.
       </p>
 
       <form

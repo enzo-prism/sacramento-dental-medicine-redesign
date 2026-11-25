@@ -34,17 +34,17 @@ export function ReviewProof() {
                 <div>
                   <div className="flex items-center gap-2 text-sm font-semibold text-brand-ink">
                     <BadgeCheck className="size-4" aria-hidden="true" />
-                    What patients mention most
+                    What neighbors mention most
                   </div>
                   <h2 id="review-proof-title" className="mt-2 font-display text-xl font-semibold text-ink sm:text-2xl">
-                    Kind people. Clear answers. Care that earns trust.
+                    Warm people. Straight answers. Care families stay with for decades.
                   </h2>
                   <p className="mt-2 text-sm leading-6 text-ink-soft">
                     {googleReviewThemes.slice(0, 3).map((theme) => theme.title).join(" · ")}
                   </p>
                 </div>
                 <Link href={socialProof.reviewsUrl} className="btn-text shrink-0 self-start lg:self-auto">
-                  Explore patient reviews
+                  Read the full review breakdown
                   <ArrowRight className="size-4" aria-hidden="true" />
                 </Link>
               </div>

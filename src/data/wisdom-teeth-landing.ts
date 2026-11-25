@@ -21,23 +21,23 @@ export const wisdomTeethLanding = {
   h1: "Wisdom teeth removal in Sacramento",
   eyebrow: "Oral surgery in Antelope",
   description:
-    "Get a wisdom teeth evaluation or removal at Sacramento Dental Medicine in Antelope, serving Sacramento, Roseville, Citrus Heights, North Highlands, and nearby communities.",
+    "In-house wisdom teeth exams and gentle removal on Elverta Rd in Antelope, serving Sacramento, Roseville, Citrus Heights, and North Highlands.",
   intro:
-    "Wisdom teeth can stay quiet for years or start to crowd, inflame, or decay. Sacramento Dental Medicine evaluates them in-house at 4320 Elverta Rd #3, Antelope, CA 95843 and handles removal when that is the healthier next step. An exam and imaging show whether the teeth should be watched, treated, or removed, and whether a specialist should be involved.",
+    "Wisdom teeth can sit quietly for years—or start aching, crowding, trapping food, or swelling your back gums. At our office at 4320 Elverta Rd #3, Antelope, CA 95843, we evaluate wisdom teeth with digital or 3D imaging and handle removal in-house whenever taking them out is the healthier step, coordinating with a specialist if a complex impaction calls for it.",
   symptoms: [
-    "Pain or tenderness at the back of the mouth",
-    "Swelling, redness, or a tooth that is only partly through the gum",
-    "Crowding, pressure, or a tooth that is hard to keep clean",
-    "Decay or repeated irritation around an erupting wisdom tooth",
+    "Aching, throbbing, or tenderness behind your back molars",
+    "Swollen, red gums around a tooth that only came partway through",
+    "Pressure, crowding, or back teeth that are nearly impossible to brush clean",
+    "Cavities or recurring gum flare-ups around an erupting wisdom tooth",
   ],
   whenToCall:
-    "If a wisdom tooth hurts now, call (916) 727-6453. The team can describe the next step and ask about the earliest available evaluation. Same-day visits are offered when possible, not guaranteed.",
+    "Hurting right now? Call (916) 727-6453 first. Our front desk will talk through your symptoms and check for our soonest opening. We offer same-day urgent visits whenever space allows, though same-day openings aren't guaranteed.",
   benefits: wisdomTeeth.benefits,
   steps: wisdomTeeth.steps,
   comfort:
-    "Local numbing is part of extraction care. The practice also uses computer-controlled numbing (The Wand). Tell the team about anxiety or comfort concerns so they can explain the options that may be appropriate for your health and the procedure. A dentist must review your medical history before confirming whether sedation is appropriate — do not assume a particular medication or method is offered.",
+    "Thorough local numbing is always part of extraction care, and we use computer-guided delivery (The Wand STA) to keep numbing gentle. Tell us if you feel anxious—we review your health history and planned procedure first so we can confirm which comfort or sedation options are safe and available here.",
   coverage:
-    "Call the front desk with your plan information to confirm whether your dental plan is accepted and to ask about current payment options. Estimates depend on the exam and the care you need. This page does not list insurance plans, financing products, or prices.",
+    "Call the front desk with your dental plan details so we can confirm whether your plan is accepted and walk through current payment options. Because every wisdom-tooth case is different, we provide a written estimate after your exam and imaging.",
   officeLine: `${contact.addressLine1}, ${contact.addressLine2}`,
   relatedLinks: [
     { href: "/wisdom-teeth", label: "Wisdom teeth" },
@@ -45,41 +45,41 @@ export const wisdomTeethLanding = {
   ],
   faqs: [
     {
-      question: "Do all wisdom teeth need to be removed?",
+      question: "Do all wisdom teeth have to come out?",
       answer:
-        "No. Some wisdom teeth stay healthy and have enough space. Others crowd, partially erupt, or become difficult to clean. An exam and imaging determine whether removal is recommended.",
+        "No. Healthy wisdom teeth that come in straight with enough room to stay clean can often be left alone and monitored. An exam and imaging show whether watching or removing them is the safer call.",
     },
     {
-      question: "Can wisdom teeth be removed at this office?",
+      question: "Can my wisdom teeth be removed right at your office?",
       answer:
-        "Yes. Sacramento Dental Medicine lists wisdom teeth removal among its in-house oral surgery services. Complex cases may be coordinated with a specialist when that is the safer plan.",
+        "Yes—we handle wisdom teeth evaluations and removals right here in Antelope. If imaging shows a particularly complex impaction, we coordinate with a specialist when that is the safer path.",
     },
     {
-      question: "What should I do if a wisdom tooth hurts now?",
+      question: "What should I do if a wisdom tooth hurts right now?",
       answer:
-        "Call (916) 727-6453 to describe the pain or swelling and ask about the earliest available evaluation. Same-day visits are offered when possible. An online request is reviewed during office hours and does not confirm a visit. See Dental emergencies for urgent pain or swelling.",
+        "Call (916) 727-6453 to describe your pain or swelling and ask about our soonest opening. Same-day visits are offered when space allows; an online request is reviewed during office hours and does not confirm a visit. See Dental emergencies for urgent hours and guidance.",
       links: [{ href: "/dental-emergencies", label: "Dental emergencies" }],
     },
     {
       question: "Will I be numb for wisdom teeth removal?",
       answer:
-        "Local numbing is part of extraction care. Tell the team about anxiety or comfort concerns so they can explain the options that may be appropriate for your health and the procedure. Learn more about sedation dentistry options.",
+        "Yes—thorough local numbing is always part of extraction care, with computer-guided delivery available via The Wand STA. Let us know about anxiety so we can review your health history and talk through available sedation dentistry options.",
       links: [{ href: "/sedation-dentistry", label: "sedation dentistry" }],
     },
     {
-      question: "Do you see patients from Sacramento, Roseville, and nearby cities?",
+      question: "Do you treat patients from Sacramento, Roseville, and nearby cities?",
       answer:
-        "The office is in Antelope. The practice lists Antelope, Sacramento, Roseville, Citrus Heights, North Highlands, and Folsom among the communities it serves. Patients from nearby cities, including Rio Linda, can call to ask about a visit.",
+        "Yes. Our office is on Elverta Road in Antelope, and patients regularly visit us from Antelope, Sacramento, Roseville, Citrus Heights, North Highlands, and Folsom—as well as nearby communities like Rio Linda.",
     },
     {
       question: "How do I request a wisdom teeth evaluation?",
       answer:
-        "Call (916) 727-6453, use the request form on this page, or book online on the schedule page. The request is not a confirmed appointment until the office reaches you during office hours.",
+        "Call (916) 727-6453, send the quick request form on this page, or book online through our schedule page. Requests submitted on this page are confirmed by our front desk during weekday office hours.",
     },
     {
       question: "What is recovery like after wisdom teeth removal?",
       answer:
-        "If removal is recommended, the team explains what to expect, comfort options, and how to care for the area afterward.",
+        "Recovery depends on how many teeth are removed and how deeply they sit. Before treatment day, we walk you through swelling, food, comfort planning, and how to care for the area afterward.",
     },
   ] satisfies LandingFaq[],
   source: wisdomTeeth.sources?.[0],

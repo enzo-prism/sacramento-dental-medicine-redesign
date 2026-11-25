@@ -24,15 +24,15 @@ const JARVIS_SCHEDULE_EMBED_SRC =
 
 export const metadata: Metadata = {
   title: {
-    absolute: "Schedule a Dentist Appointment | Sacramento Dental Medicine",
+    absolute: "Book a Dentist Appointment | Sacramento Dental Medicine",
   },
   description:
-    "Book an appointment with Sacramento Dental Medicine in Antelope, or call or email the office.",
+    "Schedule your dental visit online at our Elverta Rd office in Antelope—open until 7 PM Wed & Thu—or call (916) 727-6453.",
   alternates: { canonical: "/schedule" },
   openGraph: {
-    title: "Schedule with Sacramento Dental Medicine",
+    title: "Book Online with Sacramento Dental Medicine",
     description:
-      "Book a dental visit online, or reach the Antelope office by phone or email.",
+      "Pick a dental appointment online in Antelope, CA, or reach our Elverta Road front desk by phone or email.",
     type: "website",
     locale: "en_US",
     url: "/schedule",
@@ -40,9 +40,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Schedule with Sacramento Dental Medicine",
+    title: "Book Online with Sacramento Dental Medicine",
     description:
-      "Book a dental visit online, or reach the Antelope office by phone or email.",
+      "Pick a dental appointment online in Antelope, CA, or reach our Elverta Road front desk by phone or email.",
   },
 };
 
@@ -59,16 +59,17 @@ export default function SchedulePage() {
           <div className="container-x relative">
             <Link href="/" className="btn-text-light">
               <ArrowLeft className="size-4" aria-hidden="true" />
-              Back to the website
+              Back to home
             </Link>
 
-            <p className="eyebrow mt-7 text-[#d5e1f4]">Book an appointment</p>
+            <p className="eyebrow mt-7 text-[#d5e1f4]">Online scheduling</p>
             <h1 className="mt-5 max-w-2xl font-display text-balance text-[clamp(2.45rem,6vw,4.6rem)] font-semibold leading-[0.98] tracking-[-0.05em] text-white">
-              Let&apos;s find a visit that works.
+              Pick a time that fits your week.
             </h1>
             <p className="mt-6 max-w-xl text-pretty text-base leading-7 text-white/70 md:text-lg md:leading-8">
-              Use the scheduler below, or call or email the office during office
-              hours.
+              Book directly below—we&apos;re open until 7 PM on Wednesdays and
+              Thursdays—or call or email our front desk if you&apos;d rather talk
+              with a person.
             </p>
 
             <div className="mt-10 grid gap-5 lg:grid-cols-[minmax(0,1fr)_20rem] lg:items-start">
@@ -86,11 +87,12 @@ export default function SchedulePage() {
 
             <div className="mt-5 rounded-[20px] border border-ember/35 bg-ember/10 p-5">
               <p className="font-display text-lg font-medium text-white">
-                In pain or dealing with a dental emergency?
+                In pain right now or dealing with a dental emergency?
               </p>
               <p className="mt-2 text-sm leading-6 text-white/68">
-                Calling is the fastest way to reach the team and ask about
-                the earliest available visit.
+                Skip the online calendar and call us first. Speaking with our
+                front desk is the quickest way to get advice and check for a
+                same-day opening.
               </p>
               <a href={contact.phoneHref} className="btn btn-ember mt-4 h-11 px-4">
                 <Phone className="size-4" aria-hidden="true" />
@@ -138,8 +140,9 @@ export default function SchedulePage() {
                     <OfficeEmail />
                   </a>
                   <p className="mt-3 max-w-md text-sm leading-6 text-white/65">
-                    Convenient to Antelope, Sacramento, Roseville, North Highlands,
-                    and Citrus Heights.
+                    Right on Elverta Road—an easy drive from Antelope,
+                    Roseville, Citrus Heights, North Highlands, Sacramento, and
+                    Folsom.
                   </p>
                   <a href={contact.mapsHref} className="btn-text-light mt-4">
                     <Navigation className="size-4" aria-hidden="true" />

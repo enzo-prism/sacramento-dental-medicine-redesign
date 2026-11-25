@@ -26,8 +26,8 @@ export function Footer({ seasonal = true }: { seasonal?: boolean }) {
               />
             </Link>
             <p className="mt-6 max-w-xs text-sm leading-7 text-white/70">
-              {contact.tagline}. The same doctors, the same careful pace,
-              every visit.
+              {contact.tagline}. Familiar faces, honest plans, and an unhurried
+              pace at every visit.
             </p>
             <div className="mt-6 flex flex-col gap-2.5 sm:flex-row">
               <Link href={contact.bookingHref} className="btn btn-primary">

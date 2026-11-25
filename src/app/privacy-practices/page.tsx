@@ -32,10 +32,10 @@ export default function PrivacyPracticesPage() {
                 Notice of Privacy Practices
               </h1>
               <p className="mt-6 max-w-2xl text-base leading-8 text-ink-soft">
-                This notice explains how medical information may be used and
-                disclosed, and how patients can access that information. The
-                PDF below preserves the notice published by the practice
-                before this website transition.
+                This notice outlines how your health information may be used and
+                shared, along with your rights to review and access your dental
+                records. Open or download Sacramento Dental Medicine&apos;s
+                complete Notice of Privacy Practices below.
               </p>
               <a
                 href="/privacy-practices.pdf"

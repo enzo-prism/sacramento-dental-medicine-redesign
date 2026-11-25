@@ -20,11 +20,11 @@ export function ScheduleOfficeContacts() {
       aria-label="Call or email the office"
     >
       <p className="font-display text-xl font-medium text-ink">
-        Prefer to reach the office directly?
+        Rather talk with our front desk?
       </p>
       <p className="text-sm leading-6 text-ink-soft">
-        Call or email during office hours. The front desk can help you book or
-        ask about the earliest available visit.
+        Call or email us during weekday hours. We&apos;re happy to check your
+        dental plan, answer questions, or find the soonest opening.
       </p>
       <a
         href={contact.phoneHref}

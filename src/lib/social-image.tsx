@@ -116,7 +116,7 @@ export function createHomeSocialImage() {
               letterSpacing: "-0.055em",
             }}
           >
-            <span>A dentist visit</span>
+            <span>Dental care in Antelope</span>
             <span style={{ color: colors.brandDeep }}>you won&apos;t dread.</span>
           </div>
           <div
@@ -128,7 +128,7 @@ export function createHomeSocialImage() {
               lineHeight: 1.35,
             }}
           >
-            Gentle family, cosmetic and emergency dentistry in Antelope, CA.
+            Unhurried family, cosmetic, restorative, and emergency dentistry on Elverta Rd.
           </div>
         </div>
 
@@ -201,7 +201,7 @@ export function createHomeSocialImage() {
         <div style={{ display: "flex", flexDirection: "column", gap: 15 }}>
           <div style={{ width: 86, height: 3, display: "flex", background: colors.brand }} />
           <div style={{ display: "flex", color: "#d5e1f4", fontSize: 18 }}>
-            Request a visit online
+            Book online anytime
           </div>
         </div>
       </div>
@@ -242,8 +242,8 @@ export function createScheduleSocialImage() {
               letterSpacing: "-0.055em",
             }}
           >
-            <span>Let&apos;s find a visit</span>
-            <span style={{ color: colors.brandDeep }}>that works.</span>
+            <span>Pick a time</span>
+            <span style={{ color: colors.brandDeep }}>that fits your week.</span>
           </div>
           <div
             style={{
@@ -254,7 +254,7 @@ export function createScheduleSocialImage() {
               lineHeight: 1.35,
             }}
           >
-            Book online, or call the Antelope office.
+            Schedule online, or call our Elverta Road front desk directly.
           </div>
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
@@ -297,10 +297,10 @@ export function createScheduleSocialImage() {
             textTransform: "uppercase",
           }}
         >
-          Three simple steps
+          Easy ways to book
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 30 }}>
-          {["Choose your care", "Pick a time", "Tell us how to reach you"].map(
+          {["Book online anytime", "Open until 7 PM Wed & Thu", "Call or email our desk"].map(
             (label, index) => (
               <div key={label} style={{ display: "flex", alignItems: "center", gap: 17 }}>
                 <div
@@ -326,7 +326,7 @@ export function createScheduleSocialImage() {
           )}
         </div>
         <div style={{ display: "flex", color: "#d5e1f4", fontSize: 17 }}>
-          Phone or email · You only need one
+          4320 Elverta Rd #3 · Antelope, CA
         </div>
       </div>
     </div>,
@@ -376,8 +376,8 @@ export function createReviewsSocialImage({
               letterSpacing: "-0.052em",
             }}
           >
-            <span>{totalReviews} patient perspectives.</span>
-            <span style={{ color: colors.brandDeep }}>One clear pattern.</span>
+            <span>{totalReviews} Google reviews.</span>
+            <span style={{ color: colors.brandDeep }}>Why neighbors stay.</span>
           </div>
           <div
             style={{
@@ -387,7 +387,7 @@ export function createReviewsSocialImage({
               lineHeight: 1.35,
             }}
           >
-            Kind people. Clear answers. Care that earns trust.
+            Warm people. Straight answers. Decades of family trust.
           </div>
         </div>
         <div style={{ display: "flex", color: "#5b6b80", fontSize: 16 }}>

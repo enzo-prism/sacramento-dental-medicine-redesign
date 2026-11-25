@@ -21,12 +21,12 @@ export default function NotFound() {
             <SeasonalNotFoundArt />
             <p className="eyebrow text-brand-deep">Error 404</p>
             <h1 className="mx-auto mt-4 max-w-2xl font-display text-balance text-4xl font-semibold tracking-[-0.04em] text-ink sm:text-5xl">
-              We couldn&apos;t find that page.
+              That page isn&apos;t here anymore.
             </h1>
             <p className="mx-auto mt-5 max-w-xl text-pretty text-base leading-7 text-ink-soft">
-              The link may be old or mistyped. Head back to the home page,
-              or call the front desk and we&apos;ll help you find what you
-              need.
+              The link may have moved or been mistyped. Head back to our home
+              page—or call our Elverta Road desk and we&apos;ll point you in the
+              right direction.
             </p>
             <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
               <Link href="/" className="btn btn-primary h-12 px-5 text-base">

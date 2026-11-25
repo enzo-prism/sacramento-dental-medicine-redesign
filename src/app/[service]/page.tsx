@@ -127,7 +127,7 @@ export default async function ServiceRoute({ params }: Props) {
                 ) : (
                   <>
                     <Link href={contact.bookingHref} className="btn btn-primary h-12 px-5 text-base">
-                      {service.bookingLabel ?? "Request an appointment"} <ArrowRight className="size-4" aria-hidden="true" />
+                      {service.bookingLabel ?? "Book online"} <ArrowRight className="size-4" aria-hidden="true" />
                     </Link>
                     <a href={contact.phoneHref} className="btn btn-outline h-12 px-5 text-base">
                       <Phone className="size-4" aria-hidden="true" /> Call {contact.phoneDisplay}
@@ -139,7 +139,7 @@ export default async function ServiceRoute({ params }: Props) {
 
             <aside className="rounded-[24px] border border-line bg-white p-6 shadow-[0_30px_80px_-55px_rgba(13,27,46,0.55)] sm:p-8">
               <h2 className="font-display text-2xl font-semibold tracking-[-0.03em] text-ink">
-                What this care can help with
+                How we can help
               </h2>
               <ul className="mt-6 grid gap-4">
                 {service.benefits.map((benefit) => (
@@ -160,16 +160,16 @@ export default async function ServiceRoute({ params }: Props) {
             <div className="container-x grid gap-10 lg:grid-cols-2">
               <div>
                 <h2 id="urgent-access-title" className="font-display text-3xl font-semibold text-ink">Call first for the earliest available visit.</h2>
-                <p className="mt-5 leading-8 text-ink-soft">The office is at {contact.addressLine1}, {contact.addressLine2}. Same-day care is offered when possible; calling lets the team check current availability and explain the next step.</p>
-                <p className="mt-4 leading-8 text-ink-soft">The practice is not a 24-hour clinic. If the office is closed, do not wait for an online request to be reviewed when you need urgent help. For trouble breathing, uncontrolled bleeding, or a life-threatening injury, call 911.</p>
-                <p className="mt-4 leading-8 text-ink-soft">Ask about the examination cost and what it includes. Treatment choices and a treatment estimate follow the dentist&apos;s assessment.</p>
+                <p className="mt-5 leading-8 text-ink-soft">Find us at {contact.addressLine1}, {contact.addressLine2}. We fit in same-day emergency visits whenever space allows—calling our desk first is the quickest way to hear what to do right away and check today&apos;s openings.</p>
+                <p className="mt-4 leading-8 text-ink-soft">We aren&apos;t a 24-hour clinic, so if pain strikes after hours, don&apos;t wait on an online message when you need urgent help. For trouble breathing or swallowing, uncontrolled bleeding, or a serious facial or head injury, call 911 immediately.</p>
+                <p className="mt-4 leading-8 text-ink-soft">Our front desk can share what an urgent exam costs and includes. Any treatment choices and a written estimate follow the dentist&apos;s exam.</p>
                 <a className="btn btn-primary mt-6" href={contact.phoneHref}>Call {contact.phoneDisplay}</a>
               </div>
               <div>
-                <h2 id="office-hours" className="scroll-mt-28 font-display text-2xl font-semibold text-ink">Regular Antelope office hours</h2>
+                <h2 id="office-hours" className="scroll-mt-28 font-display text-2xl font-semibold text-ink">Antelope office hours</h2>
                 <dl className="mt-5 space-y-3 text-sm text-ink-soft">{hours.map(({ day, time }) => <div key={day} className="flex justify-between gap-5"><dt>{day}</dt><dd>{time}</dd></div>)}</dl>
-                <p className="mt-4 text-sm leading-7 text-ink-soft">Hours are Pacific time. For a holiday visit, call to confirm the office is open before traveling. An online request does not guarantee a same-day appointment.</p>
-                <a className="btn-text mt-5 inline-flex" href={contact.mapsHref}>Directions to the Elverta Road office</a>
+                <p className="mt-4 text-sm leading-7 text-ink-soft">All times are Pacific. On holidays, call first to confirm we&apos;re open before heading over. Online scheduling does not guarantee a same-day urgent slot.</p>
+                <a className="btn-text mt-5 inline-flex" href={contact.mapsHref}>Directions to our Elverta Road office</a>
               </div>
             </div>
           </section>
@@ -204,9 +204,9 @@ export default async function ServiceRoute({ params }: Props) {
 
         <section className="section bg-white" aria-labelledby="process-title">
           <div className="container-x">
-            <p className="eyebrow text-brand-deep">A clear path forward</p>
+            <p className="eyebrow text-brand-deep">Step by step</p>
             <h2 id="process-title" className="mt-4 max-w-2xl font-display text-3xl font-semibold tracking-[-0.04em] text-ink sm:text-4xl">
-              What to expect from the first visit.
+              What your visit looks like.
             </h2>
             <ol className="mt-10 grid gap-px overflow-hidden rounded-[24px] border border-line bg-line md:grid-cols-3">
               {service.steps.map((step, index) => (
@@ -227,7 +227,7 @@ export default async function ServiceRoute({ params }: Props) {
             <div>
               <p className="eyebrow text-brand-deep">Common questions</p>
               <h2 id="faq-title" className="mt-4 font-display text-3xl font-semibold tracking-[-0.04em] text-ink sm:text-4xl">
-                Answers before you schedule.
+                Questions worth asking before you book.
               </h2>
             </div>
             <div className="divide-y divide-line border-y border-line">
@@ -244,15 +244,15 @@ export default async function ServiceRoute({ params }: Props) {
         <section className="section bg-white" aria-labelledby="visit-details-title">
           <div className="container-x grid gap-8 md:grid-cols-2">
             <div>
-              <h2 id="visit-details-title" className="font-display text-2xl font-semibold text-ink">Plan your visit in Antelope</h2>
-              <p className="mt-4 text-sm leading-7 text-ink-soft">Sacramento Dental Medicine is at {contact.addressLine1}, {contact.addressLine2}. Call {contact.phoneDisplay} or email <a className="underline underline-offset-4" href={contact.emailHref}><OfficeEmail /></a> to ask about availability, your dental plan, and treatment estimates.</p>
-              <div className="mt-5 flex flex-wrap gap-5"><a href={contact.mapsHref} className="btn-text">Get directions</a><a href={contact.emailHref} className="btn-text">Email the office</a><Link href="/new-patients" className="btn-text">New-patient guide</Link></div>
+              <h2 id="visit-details-title" className="font-display text-2xl font-semibold text-ink">Visit us on Elverta Road</h2>
+              <p className="mt-4 text-sm leading-7 text-ink-soft">We&apos;re located at {contact.addressLine1}, {contact.addressLine2}, open weekdays including until 7 PM on Wednesdays and Thursdays. Call {contact.phoneDisplay} or email <a className="underline underline-offset-4" href={contact.emailHref}><OfficeEmail /></a> to check your dental plan, ask about exam fees, or find a convenient opening.</p>
+              <div className="mt-5 flex flex-wrap gap-5"><a href={contact.mapsHref} className="btn-text">Get directions</a><a href={contact.emailHref} className="btn-text">Email our desk</a><Link href="/new-patients" className="btn-text">New-patient guide</Link></div>
             </div>
             <div>
-              <h2 className="font-display text-2xl font-semibold text-ink">Get to know your dental team</h2>
-              <p className="mt-4 text-sm leading-7 text-ink-soft">Meet Dr. Michael Narodovich and learn about the practice before requesting an appointment. Your dentist will explain which treatment fits your exam findings and goals.</p>
+              <h2 className="font-display text-2xl font-semibold text-ink">Doctors who take their time</h2>
+              <p className="mt-4 text-sm leading-7 text-ink-soft">Get to know Dr. Michael Narodovich before you walk through the door. Every treatment recommendation starts with an exam and a straightforward talk about what fits your goals.</p>
               <Link href="/meet-dr-narodovich" className="btn-text mt-5">Meet Dr. Narodovich</Link>
-              {service.sources?.length ? <p className="mt-5 text-sm leading-7 text-ink-soft">Patient education: {service.sources.map((source, index) => <span key={source.url}>{index > 0 ? "; " : ""}<a className="underline underline-offset-4" href={source.url}>{source.label}</a></span>)}. General information; your treatment recommendations follow an exam.</p> : null}
+              {service.sources?.length ? <p className="mt-5 text-sm leading-7 text-ink-soft">Clinical background: {service.sources.map((source, index) => <span key={source.url}>{index > 0 ? "; " : ""}<a className="underline underline-offset-4" href={source.url}>{source.label}</a></span>)}. General patient education; your personal plan always follows an exam.</p> : null}
             </div>
           </div>
         </section>
@@ -271,7 +271,7 @@ export default async function ServiceRoute({ params }: Props) {
               </div>
             </div>
             <Link href={contact.bookingHref} className="btn btn-primary h-12 px-5">
-              {service.bookingLabel ?? "Request a visit"}
+              {service.bookingLabel ?? "Book online"}
             </Link>
           </div>
         </section>

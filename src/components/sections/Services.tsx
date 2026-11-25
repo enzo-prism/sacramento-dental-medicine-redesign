@@ -50,8 +50,8 @@ export function Services() {
         <SectionLabel
           eyebrow="Full-scope care"
           accent="brand"
-          title="From first cleanings to full restorations."
-          intro="Preventive, cosmetic, restorative, and surgical care in one place, from a team that knows your history, your goals, and exactly how you feel about dental chairs."
+          title="From a toddler's first checkup to complex restorations."
+          intro="Preventive, cosmetic, restorative, endodontic, and oral surgery care under one Antelope roof—delivered by a team that knows your history and respects your pace."
         />
 
         <div className="mt-8 flex flex-wrap gap-x-5 gap-y-2">

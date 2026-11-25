@@ -29,12 +29,12 @@ export const metadata: Metadata = {
   title: {
     absolute: `${contact.practiceName} Reviews | ${socialProof.rating} on Google`,
   },
-  description: `Read what ${socialProof.totalReviews} patients say about Sacramento Dental Medicine in Antelope, including comfort, clear explanations, Dr. Mike, and long-term care.`,
+  description: `Read what ${socialProof.totalReviews} Google reviewers say about Sacramento Dental Medicine in Antelope: Dr. Mike, calm comfort, and 20-year family care.`,
   alternates: { canonical: "/reviews" },
   openGraph: {
-    title: `${socialProof.totalReviews} Patient Reviews. One Clear Pattern.`,
+    title: `${socialProof.totalReviews} Google Reviews. Why Antelope Families Stay.`,
     description:
-      `See the patterns across ${socialProof.totalReviews} Google reviews, including comfort, kindness, clear explanations, and long-term care.`,
+      `An honest look at ${socialProof.totalReviews} Google reviews (${socialProof.rating} stars): what patients praise most, plus the criticism we take seriously.`,
     type: "website",
     locale: "en_US",
     url: "/reviews",
@@ -42,9 +42,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `${socialProof.totalReviews} Patient Reviews. One Clear Pattern.`,
+    title: `${socialProof.totalReviews} Google Reviews. Why Antelope Families Stay.`,
     description:
-      `See the patterns across ${socialProof.totalReviews} Google reviews, including comfort, kindness, clear explanations, and long-term care.`,
+      `An honest look at ${socialProof.totalReviews} Google reviews (${socialProof.rating} stars): what patients praise most, plus the criticism we take seriously.`,
   },
 };
 
@@ -69,21 +69,21 @@ export default function ReviewsPage() {
             <div>
               <p className="eyebrow text-brand-deep">Patient reviews</p>
               <h1 className="mt-5 max-w-3xl font-display text-[clamp(2.4rem,7vw,4.8rem)] font-semibold leading-[0.98] tracking-[-0.055em] text-ink text-balance">
-                {socialProof.totalReviews} patient perspectives. One clear pattern.
+                {socialProof.totalReviews} reviews. Why neighbors keep coming back.
               </h1>
               <p className="mt-6 max-w-2xl text-pretty text-base leading-7 text-ink-soft md:text-lg md:leading-8">
-                We read every Google review: the praise, the practical details, and the criticism. Here is the clearest picture of what patients consistently say.
+                We read every single Google review—the kind words, the small details people noticed, and the tougher feedback too. Here is an honest breakdown of what patients experience in our chairs.
               </p>
               <div
                 data-mobile-cta-stop
                 className="mt-8 flex flex-col gap-3 sm:flex-row"
               >
                 <Link href="#review-stories" className="btn btn-primary h-12 px-5 text-base">
-                  Explore their stories
+                  Read patient quotes
                   <ArrowRight className="size-4" aria-hidden="true" />
                 </Link>
                 <a href={socialProof.moreReviewsUrl} target="_blank" rel="noopener noreferrer" className="btn btn-outline h-12 px-5 text-base">
-                  Open Google reviews
+                  View live on Google
                   <ArrowUpRight className="size-4" aria-hidden="true" />
                 </a>
               </div>
@@ -132,12 +132,12 @@ export default function ReviewsPage() {
         <section className="section bg-white" aria-labelledby="themes-title">
           <div className="container-x">
             <div className="max-w-3xl">
-              <p className="eyebrow text-brand-deep">Across the full review set</p>
+              <p className="eyebrow text-brand-deep">Across all {socialProof.totalReviews} ratings</p>
               <h2 id="themes-title" className="mt-4 font-display text-3xl font-semibold tracking-[-0.04em] text-ink sm:text-4xl">
-                The themes patients return to.
+                What patients bring up most often.
               </h2>
               <p className="mt-4 text-base leading-7 text-ink-soft">
-                We analyzed all {socialProof.totalReviews} ratings and all {socialProof.writtenReviews} written reviews. Mention counts overlap because one review can praise more than one part of the experience.
+                We reviewed all {socialProof.totalReviews} star ratings and all {socialProof.writtenReviews} written comments. Counts overlap because one patient often mentions both Dr. Mike and the front desk—or comfort and a spotless office—in the same note.
               </p>
               <p className="mt-4 max-w-3xl text-sm leading-6 text-ink-faint">
                 {googleReviewAnalysis.summary}
@@ -164,7 +164,7 @@ export default function ReviewsPage() {
             </div>
 
             <div className="mt-6 rounded-[24px] border border-line bg-wash px-5 py-5 sm:px-6">
-              <p className="text-sm font-semibold text-ink">We read the harder feedback too.</p>
+              <p className="text-sm font-semibold text-ink">And we don&apos;t hide the critical reviews.</p>
               <p className="mt-2 max-w-3xl text-sm leading-6 text-ink-soft">
                 {googleReviewAnalysis.lowerRatedNote}
               </p>
@@ -177,10 +177,10 @@ export default function ReviewsPage() {
             <div className="max-w-3xl">
               <p className="eyebrow text-brand-deep">In their own words</p>
               <h2 id="stories-title" className="mt-4 font-display text-3xl font-semibold tracking-[-0.04em] text-ink sm:text-4xl">
-                Find the experience that matters to you.
+                Filter by what matters most to you.
               </h2>
               <p className="mt-4 text-base leading-7 text-ink-soft">
-                Filter a representative set of short excerpts. Names and relative timing are shown as they appeared publicly on Google when checked {socialProof.checkedDate}.
+                Browse brief verbatim excerpts from public Google reviews, with names and relative dates shown exactly as posted when we checked on {socialProof.checkedDate}.
               </p>
             </div>
             <div className="mt-10">
@@ -192,12 +192,12 @@ export default function ReviewsPage() {
         <section data-mobile-cta-stop className="bg-night text-white">
           <div className="container-x grid gap-8 py-14 sm:py-16 lg:grid-cols-[1fr_auto] lg:items-center">
             <div>
-              <p className="text-sm font-semibold text-[#d5e1f4]">Ready when you are</p>
+              <p className="text-sm font-semibold text-[#d5e1f4]">Ready to meet us?</p>
               <h2 className="mt-3 max-w-2xl font-display text-3xl font-semibold tracking-[-0.04em] sm:text-4xl">
-                Come see what patients are talking about.
+                Experience the Elverta Road office for yourself.
               </h2>
               <p className="mt-3 max-w-xl text-sm leading-6 text-white/70">
-                Request a visit online, then the front desk will reach out to confirm the day and time.
+                Book an appointment directly online anytime, or call our front desk during weekday hours.
               </p>
             </div>
             <div className="flex flex-col gap-3 sm:flex-row">

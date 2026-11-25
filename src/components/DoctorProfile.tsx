@@ -53,11 +53,11 @@ export function DoctorProfile({ doctor }: { doctor: Doctor }) {
                 {doctor.bio.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
               </div>
               {doctor.education ? <ul className="mt-5 space-y-2 text-sm text-brand-deep">{doctor.education.map((item) => <li key={item}>{item}</li>)}</ul> : null}
-              {!doctor.licenseRecords ? <p className="mt-5 text-sm leading-7 text-ink-soft">Check current professional license information using the <a className="underline" href="https://search.dca.ca.gov/">California Department of Consumer Affairs license search</a>. Ask the office about the clinician and qualifications for your planned treatment.</p> : null}
+              {!doctor.licenseRecords ? <p className="mt-5 text-sm leading-7 text-ink-soft">You can verify current California dental licenses anytime through the <a className="underline" href="https://search.dca.ca.gov/">California Department of Consumer Affairs license lookup</a>, or call our front desk with questions about your doctor and planned care.</p> : null}
               <p className="mt-5 text-sm font-semibold text-brand-deep">{doctor.highlights}</p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <Link href={contact.bookingHref} className="btn btn-primary h-12 px-5 text-base">
-                  Request an appointment
+                  Book online
                   <ArrowRight className="size-4" aria-hidden="true" />
                 </Link>
                 <a href={contact.phoneHref} className="btn btn-outline h-12 px-5 text-base">
@@ -66,9 +66,9 @@ export function DoctorProfile({ doctor }: { doctor: Doctor }) {
                 </a>
               </div>
               {doctor.licenseRecords ? <section aria-label="Verified licensing records" className="mt-6 border-t border-line pt-5">
-                <h2 className="font-display text-xl font-semibold text-ink">Licensing you can verify.</h2>
+                <h2 className="font-display text-xl font-semibold text-ink">California licensing records</h2>
                 <ul className="mt-3 grid gap-2 text-sm leading-7 text-brand-deep">{doctor.licenseRecords.map((record) => <li key={record.identifier}><a className="underline underline-offset-4" href={record.url}>{record.name}</a></li>)}</ul>
-                <p className="mt-3 text-sm leading-7 text-ink-soft">The Dental Board of California records showed current-active status when checked November 6, 2026. Check the official records for current details. A permit or certificate does not by itself confirm that a particular service is offered at this office; ask the team about your planned care.</p>
+                <p className="mt-3 text-sm leading-7 text-ink-soft">Each Dental Board of California record above showed current-active status when verified on November 6, 2026; check the official state links for live updates. Because a permit alone doesn&apos;t confirm which options apply to a specific visit, ask our team about your planned care.</p>
               </section> : null}
             </div>
           </div>
@@ -77,18 +77,23 @@ export function DoctorProfile({ doctor }: { doctor: Doctor }) {
         <section className="section bg-white" aria-labelledby="care-title">
           <div className="container-x grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
             <div>
-              <p className="eyebrow text-brand-deep">A calmer dental relationship</p>
+              <p className="eyebrow text-brand-deep">In the chair</p>
               <h2 id="care-title" className="mt-4 font-display text-3xl font-semibold tracking-[-0.04em] text-ink sm:text-4xl">
-                Care that starts with listening.
+                Good dentistry starts with listening.
               </h2>
             </div>
             <ul className="grid gap-4">
               {(isNarodovich ? [
-                "Modern family and cosmetic dentistry",
-                "Comfort-focused care for nervous patients",
-                "Clear explanations before treatment begins",
-                "A judgment-free return after time away from the dentist",
-              ] : ["Endodontic consultation and root canal evaluation", "An explanation of findings and treatment choices", "Planning for complex root canal cases", "Coordination of follow-up restoration"]).map((item) => (
+                "Family, preventive, and cosmetic care tailored to your goals",
+                "Unhurried appointments built around anxious or sensitive patients",
+                "Plain-language walkthroughs of X-rays, options, and estimates first",
+                "Zero guilt if it's been years since your last dental checkup",
+              ] : [
+                "In-house endodontic exams and root canal diagnosis",
+                "Step-by-step explanations of what's causing your tooth pain",
+                "Focused care for complex root canal cases under one roof",
+                "Smooth coordination for your follow-up filling or protective crown",
+              ]).map((item) => (
                 <li key={item} className="flex gap-3 border-b border-line pb-4 text-ink-soft last:border-0">
                   <span className="mt-0.5 grid size-6 shrink-0 place-items-center rounded-full bg-brand-tint text-brand-deep">
                     <Check className="size-3.5" aria-hidden="true" />

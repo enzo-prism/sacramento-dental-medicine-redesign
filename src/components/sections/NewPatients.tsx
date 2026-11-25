@@ -52,7 +52,7 @@ export function NewPatients() {
               <ArrowUpRight className="size-4 shrink-0" aria-hidden="true" />
             </a>
             <Link href="/new-patients" className="btn-text mt-2 flex min-h-11 gap-2">
-              <span>First-visit, insurance and payment questions</span>
+              <span>Read the full new-patient guide</span>
               <ArrowUpRight className="size-4 shrink-0" aria-hidden="true" />
             </Link>
           </div>
@@ -60,7 +60,7 @@ export function NewPatients() {
           <div className="surface-wash flex flex-col p-6 md:p-7">
             <span className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.18em] text-brand-ink">
               <ClipboardList className="size-4" aria-hidden />
-              Bring to your first visit
+              What to bring along
             </span>
             <ul className="mt-5 grid gap-3">
               {newPatient.bring.map((item) => (
@@ -82,13 +82,13 @@ export function NewPatients() {
           <div className="surface-card p-6 md:p-10">
             <div className="grid gap-10 lg:grid-cols-[0.65fr_1.35fr] lg:gap-16">
               <div className="flex flex-col">
-                <span className="eyebrow accent-brand">Good to know</span>
+                <span className="eyebrow accent-brand">Before you book</span>
                 <h3 className="mt-5 font-display text-balance text-[clamp(1.6rem,3vw,2.2rem)] font-medium leading-tight text-ink">
-                  Common questions, answered.
+                  Straight answers to common questions.
                 </h3>
                 <p className="mt-4 max-w-md text-sm leading-7 text-ink-soft">
-                  The things new patients actually ask. For anything else, call
-                  the front desk.
+                  What new patients ask us most—and if you don&apos;t see your
+                  question here, our front desk is one quick call away.
                 </p>
                 <div className="mt-8 flex flex-col items-start gap-2 lg:mt-auto lg:pt-8">
                   <a href={contact.phoneHref} className="btn-text">

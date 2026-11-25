@@ -3,8 +3,9 @@ import { DoctorProfile } from "@/components/DoctorProfile";
 import { doctors } from "@/data/site";
 import { openGraphImages, twitterImages } from "@/lib/social-metadata";
 
-const title = "Dr. Lucas L. Sheppard, DMD | Antelope Root Canal Care";
-const description = "Meet Dr. Lucas L. Sheppard, endodontic specialist and U.S. Air Force veteran at Sacramento Dental Medicine in Antelope. Ask about root canal evaluation.";
+const title = "Dr. Lucas L. Sheppard, DMD | Antelope Endodontist";
+const description =
+  "Meet Dr. Lucas L. Sheppard, our in-house endodontic specialist and U.S. Air Force veteran in Antelope—focused on saving teeth and complex root canals.";
 export const metadata: Metadata = {
   title: { absolute: title }, description,
   alternates: { canonical: "/meet-dr-sheppard" },

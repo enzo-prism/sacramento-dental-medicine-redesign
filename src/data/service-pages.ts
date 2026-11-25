@@ -29,49 +29,56 @@ export const serviceJsonLdTypes: Record<string, string> = {
 export const servicePages: ServicePage[] = [
   {
     slug: "our-services",
-    title: "Dental Services in Sacramento & Antelope, CA",
+    title: "Dental Services in Antelope & Sacramento, CA",
+    searchTitle: "Dental Services in Antelope & Sacramento | All Care",
+    searchDescription:
+      "Preventive checkups, cosmetic dentistry, implants, root canals, and oral surgery under one roof in Antelope. Book online or call (916) 727-6453.",
     navLabel: "Dental services",
     eyebrow: "Complete dental care",
     description:
-      "Explore preventive, cosmetic, restorative, orthodontic, and oral surgery services at Sacramento Dental Medicine in Antelope, CA.",
+      "Preventive, cosmetic, restorative, orthodontic, endodontic, and oral surgery care under one roof on Elverta Rd in Antelope.",
     intro:
-      "From checkups, cleanings, and children's visits to whitening, veneers, dentures, root canal treatment, wisdom teeth, and PRF or grafting support, Sacramento Dental Medicine brings a broad range of care into one familiar office. Start with an exam and a clear conversation about what matters to you, then build the treatment plan from there.",
+      "Whether you need a routine cleaning, a child's first checkup, cosmetic veneers, a crown, a specialist root canal, or wisdom teeth removed, we bring full-scope care into one neighborhood office on Elverta Road. Every visit starts with a straightforward exam and an honest conversation—never a sales pitch.",
     benefits: [
-      "Exams, cleanings, children's dentistry, and gum care",
-      "Whitening, veneers, bonding, and clear aligners",
-      "Crowns, bridges, implants, dentures, and root canal treatment",
-      "Wisdom teeth, extractions, and PRF or grafting support",
+      "Routine exams, cleanings, kids' checkups, and gum therapy",
+      "Teeth whitening, bonding, porcelain veneers, and Invisalign",
+      "Crowns, bridges, implants, dentures, and in-house root canals",
+      "Extractions, wisdom teeth removal, and PRF or bone grafting",
     ],
     steps: [
       {
-        title: "Start with your priorities",
-        body: "Tell the team what brought you in, what has been difficult before, and what you want to change.",
+        title: "Tell us what matters most",
+        body: "Start by sharing what brought you in, what you want to change, and any past visits that made you nervous.",
       },
       {
-        title: "See the complete picture",
-        body: "An exam and appropriate imaging help the dentist identify urgent needs and longer-term opportunities.",
+        title: "See the whole picture",
+        body: "We examine your teeth and gums, take digital X-rays or 3D imaging when needed, and show you what's happening on screen.",
       },
       {
-        title: "Choose the next step",
-        body: "You receive a clear explanation and can sequence care around health, comfort, and your schedule.",
+        title: "Move at your own pace",
+        body: "We separate urgent fixes from optional work so you can plan treatment around your health, comfort, and schedule.",
       },
     ],
     faqs: [
       {
-        question: "What dental services does Sacramento Dental Medicine offer?",
+        question: "What dental services do you provide at the Antelope office?",
         answer:
-          "Preventive exams and cleanings, children's dentistry, gum disease treatment, night guards, teeth whitening, bonding, porcelain veneers, Invisalign and orthodontics, crowns and bridges, dental implants, full and partial dentures, root canal treatment with an endodontic specialist, tooth extractions, wisdom teeth removal, PRF and grafting, sedation planning for anxious patients, and urgent dental care.",
-      },
-      { question: "Where is Sacramento Dental Medicine located?", answer: "The office is at 4320 Elverta Rd #3, Antelope, CA 95843. Sacramento Dental Medicine serves patients from Antelope and the greater Sacramento area at this location." },
-      {
-        question: "Are you accepting new dental patients?",
-        answer:
-          "Yes. Sacramento Dental Medicine welcomes new patients of all ages from Antelope and the greater Sacramento area.",
+          "We provide exams and cleanings, children's dentistry, gum disease treatment, custom night guards, teeth whitening, bonding, porcelain veneers, Invisalign and orthodontics, crowns and bridges, dental implants, full and partial dentures, root canal therapy with our in-house endodontist Dr. Sheppard, tooth extractions, wisdom teeth removal, PRF and bone grafting, anxious-patient comfort planning, and urgent dental care.",
       },
       {
-        question: "Can I start with an exam before deciding on treatment?",
+        question: "Where is Sacramento Dental Medicine located?",
         answer:
-          "Yes. An exam is the right place to understand what is happening, review options, and decide what you want to do next.",
+          "Our only office is at 4320 Elverta Rd #3, Antelope, CA 95843. Patients visit us from Antelope, Sacramento, Roseville, Citrus Heights, North Highlands, and Folsom.",
+      },
+      {
+        question: "Are you accepting new patients?",
+        answer:
+          "Yes. We welcome new patients of all ages—from a baby's first checkup around age one to adults returning after years away from the dentist.",
+      },
+      {
+        question: "Can I book an exam first before deciding on treatment?",
+        answer:
+          "Always. An exam is where we gather facts, answer your questions, and give you a written estimate so you can decide what makes sense on your own timeline.",
       },
     ],
     relatedSlugs: ["preventive-care", "cosmetic", "dental-emergencies"],
@@ -88,61 +95,61 @@ export const servicePages: ServicePage[] = [
     title: "Dental Exams & Cleanings in Antelope, CA",
     searchTitle: "Teeth Cleaning & Dental Exam in Antelope, CA",
     searchDescription:
-      "Checkups, cleanings, digital X-rays, fluoride and sealants for all ages on Elverta Rd in Antelope. New patients welcome. Call (916) 727-6453.",
+      "Thorough checkups, gentle cleanings, digital X-rays, fluoride, and sealants on Elverta Rd in Antelope. New patients welcome: (916) 727-6453.",
     navLabel: "Exams & cleanings",
     eyebrow: "Preventive care",
     description:
-      "Routine exams, professional cleanings, digital X-rays, fluoride, and sealants for patients of all ages at Sacramento Dental Medicine in Antelope.",
+      "Thorough exams, gentle cleanings, digital X-rays, oral cancer screenings, fluoride, and sealants for all ages in Antelope.",
     intro:
-      "Regular checkups and cleanings catch small problems while they are still small. A preventive visit at the Elverta Road office can include a comprehensive exam, a professional cleaning to remove plaque and tartar, digital X-rays when they are needed, an oral cancer screening, and fluoride or sealants when they fit your teeth.",
+      "The easiest dental problem to fix is the one we catch early. A preventive visit at our Elverta Road office combines a thorough exam, a gentle cleaning to clear away plaque and tartar, an oral cancer screening, digital X-rays only when needed, and fluoride or sealants when they make sense for your teeth.",
     benefits: [
-      "Professional cleaning to remove plaque and tartar",
-      "Exam for cavities, gum disease, and wear",
-      "Digital X-rays only when they are needed",
-      "Oral cancer screening at routine exams",
+      "Gentle removal of plaque and hardened tartar buildup",
+      "Early detection of cavities, gum inflammation, and wear",
+      "Low-radiation digital X-rays taken only when clinically useful",
+      "Routine oral cancer screening included at checkups",
     ],
     steps: [
       {
-        title: "Catch up on your history",
-        body: "Share any changes in your health, medications, and anything that has bothered you since your last visit.",
+        title: "Catch up on your health",
+        body: "We review changes in your health, medications, sensitive spots, and anything you'd like us to look at closely.",
       },
       {
-        title: "Exam and cleaning",
-        body: "The team cleans your teeth and checks teeth, gums, and soft tissue, adding X-rays only when the dentist needs them.",
+        title: "Clean and check every surface",
+        body: "We gently clean your teeth, check gums and soft tissue, and take digital X-rays only when we need to see beneath the surface.",
       },
       {
-        title: "Know what comes next",
-        body: "You hear what was found, what can wait, and when to come back, before you leave the chair.",
+        title: "Leave knowing where things stand",
+        body: "Before you step out of the chair, we show you what we found, share practical home tips, and recommend the right recall schedule.",
       },
     ],
     nearbyLinks: [{ href: "/new-patients", label: "What to bring to your first visit" }],
     faqs: [
       {
-        question: "What happens at a dental checkup and cleaning?",
+        question: "What happens during a dental checkup and cleaning?",
         answer:
-          "Expect a professional cleaning to remove plaque and tartar, an exam of your teeth and gums, an oral cancer screening, and digital X-rays if the dentist needs them. Before you leave, the dentist explains what was found and what, if anything, needs attention.",
+          "We gently remove plaque and tartar, polish your teeth, check your teeth and gums for early decay or wear, perform an oral cancer screening, and take digital X-rays if needed. Afterward, we review our findings with you in plain language.",
       },
       {
-        question: "How often should I get a dental cleaning?",
+        question: "How often should I schedule a dental cleaning?",
         answer:
-          "The dentist recommends a schedule based on your gum health, cavity risk, and history. Many patients come in twice a year; people being treated for gum disease may need visits more often.",
+          "Most healthy adults and kids do well coming in every six months, though we tailor the schedule to your gum health and cavity risk. Patients being treated for gum disease often benefit from more frequent maintenance visits.",
         links: [{ href: "/gum-disease-treatment", label: "treated for gum disease" }],
       },
       {
-        question: "Do you take X-rays at every visit?",
+        question: "Do you take X-rays at every single checkup?",
         answer:
-          "No. X-rays are taken when the dentist needs to see something an exam cannot show, such as decay between teeth or bone levels. The office uses digital X-rays, which use less radiation than traditional film.",
+          "No. We only take X-rays when we need to check areas an exam alone cannot see, like decay between teeth or bone levels around roots. Our digital sensors use a fraction of the radiation of traditional film.",
       },
       {
-        question: "It has been years since my last cleaning. Is that a problem?",
+        question: "It has been years since my last cleaning. Will I get lectured?",
         answer:
-          "No. Patients often come back after years away, and many ask for Dr. Narodovich by name. There is no lecture: the first visit is an exam and a conversation about what was found, and the cleaning plan is built from there.",
+          "Never. People come back to us after years away all the time, and many ask specifically for Dr. Narodovich by name. We focus on where your teeth are today and build a realistic plan forward—no guilt, no scolding.",
         links: [{ href: "/meet-dr-narodovich", label: "Dr. Narodovich" }],
       },
       {
         question: "Do you accept Medi-Cal for cleanings?",
         answer:
-          "We do not accept Medi-Cal. For other dental plans, call (916) 727-6453 to confirm whether your plan is accepted before your visit.",
+          "We do not accept Medi-Cal. If you have another dental plan, call (916) 727-6453 and our front desk will confirm whether it is accepted before your visit.",
       },
     ],
     sources: [
@@ -158,59 +165,59 @@ export const servicePages: ServicePage[] = [
     title: "Children's Dentistry in Antelope, CA",
     searchTitle: "Kids Dentist in Antelope, CA | Family Dental Care",
     searchDescription:
-      "Gentle checkups for kids at a family dental office in Antelope: a first visit around age one, then cleanings and fluoride. Call (916) 727-6453.",
+      "Patient, friendly kids' dentistry on Elverta Rd in Antelope, from a first checkup around age one through the teen years. Call (916) 727-6453.",
     navLabel: "Children's dentistry",
     eyebrow: "Family dentistry",
     description:
-      "Gentle, family-friendly dental visits for children at Sacramento Dental Medicine in Antelope, from a first visit around age one through the teen years.",
+      "Patient, friendly dental checkups for children and teens at our Antelope family office, starting with a relaxed first visit around age one.",
     intro:
-      "Kids are seen in the same Antelope office as the rest of the family. The practice encourages a first visit around age one: a relaxed, no-pressure appointment where Dr. Narodovich looks over your child's teeth and talks with you about habits at home. Later visits add cleanings, fluoride, and X-rays when they are needed.",
+      "Kids are welcome in the very same Antelope office as parents and grandparents. We encourage a relaxed, no-pressure first visit around age one so Dr. Narodovich can count baby teeth, answer your questions about home habits, and help your child grow up seeing the dentist as a friendly place. As kids grow, visits add gentle cleanings, fluoride, sealants, and X-rays only when needed.",
     benefits: [
-      "A no-pressure first visit around age one",
-      "Cleanings, fluoride, and X-rays when needed",
-      "Brushing and flossing coaching for kids and parents",
-      "An early bite check around age seven",
+      "A relaxed, no-pressure first visit around age one",
+      "Gentle cleanings, fluoride, and protective sealants as kids grow",
+      "Practical brushing and flossing coaching for kids and parents",
+      "Early bite and jaw growth check around age seven",
     ],
     steps: [
       {
-        title: "Meet the team",
-        body: "The first visit is short and friendly: a gentle look at your child's teeth and a conversation with you about habits, feeding, and brushing.",
+        title: "Make the first hello easy",
+        body: "Early visits stay short and upbeat—a gentle visual check of baby teeth plus time to talk with you about feeding, habits, and brushing.",
       },
       {
-        title: "Clean and protect",
-        body: "As your child grows, visits add cleanings and fluoride, with X-rays only when the dentist needs them.",
+        title: "Protect growing smiles",
+        body: "As your child gets older, we introduce gentle cleanings, fluoride, and sealants, adding digital X-rays only when clinically helpful.",
       },
       {
-        title: "Watch the bite develop",
-        body: "Around age seven, the dentist checks how teeth and jaws are developing and flags anything worth watching early.",
+        title: "Keep an eye on bite growth",
+        body: "Around age seven, we check how permanent teeth and jaws are coming in so anything worth guiding early is spotted in time.",
       },
     ],
     faqs: [
       {
-        question: "When should my child first see the dentist?",
+        question: "When should my child have their first dental visit?",
         answer:
-          "Sacramento Dental Medicine encourages a first visit around your child's first birthday. It is a no-pressure, meet-and-greet appointment: Dr. Narodovich does a gentle visual exam, counts the baby teeth, and talks with you about keeping them healthy.",
+          "We encourage bringing your child in around their first birthday. That first visit is a gentle meet-and-greet: Dr. Narodovich counts baby teeth, checks early development, and shares practical tips for keeping young teeth healthy at home.",
       },
       {
-        question: "Can my whole family see the same dentist?",
+        question: "Can my whole family come to the same office?",
         answer:
-          "Yes. The practice welcomes patients of all ages, so parents and children can be seen at the same office on Elverta Road in Antelope.",
+          "Yes. We treat patients of all ages right here on Elverta Road, so kids, teens, parents, and grandparents can all see the same familiar team.",
       },
       {
         question: "When should my child's bite be checked for braces?",
         answer:
-          "Around age seven, the dentist does an early orthodontic check of how the bite and jaws are developing. Some problems, including effects of thumb sucking or tongue thrusting, are easier to guide while a child is still growing. Not every child needs early treatment.",
+          "Around age seven, we perform an early orthodontic check to see how teeth and jaws are developing. Habits like thumb sucking or tongue thrusting are often simpler to address while a child is still growing, though not every child needs early treatment.",
         links: [{ href: "/orthodontics", label: "early orthodontic check" }],
       },
       {
-        question: "What if my child is nervous about the dentist?",
+        question: "What if my child is shy or nervous at the dentist?",
         answer:
-          "Tell the team when you book. Visits for young children start slowly, with simple explanations and no surprises, so the first experiences at the dentist are positive ones.",
+          "Give us a heads-up when you book. We move slowly, explain everything in kid-friendly words, and never rush or surprise a nervous child so early visits build lasting confidence.",
       },
       {
         question: "What should I do if my child chips or knocks out a tooth?",
         answer:
-          "Treat it as a dental emergency and call (916) 727-6453 right away for guidance. For a head injury, uncontrolled bleeding, or trouble breathing, call 911.",
+          "Treat it as a dental emergency and call (916) 727-6453 right away so we can tell you what to do next and check availability. If there is a head injury, uncontrolled bleeding, or trouble breathing, call 911 immediately.",
         links: [{ href: "/dental-emergencies", label: "dental emergency" }],
       },
     ],
@@ -226,54 +233,54 @@ export const servicePages: ServicePage[] = [
     title: "Cosmetic Dentistry in Antelope & Sacramento, CA",
     searchTitle: "Cosmetic Dentist in Antelope, CA | Whitening & Veneers",
     searchDescription:
-      "Whitening, bonding, porcelain veneers and Invisalign with Dr. Michael Narodovich in Antelope, planned around your face. Call (916) 727-6453.",
+      "Natural-looking teeth whitening, bonding, porcelain veneers, and Invisalign with Dr. Narodovich in Antelope. Book online or call (916) 727-6453.",
     navLabel: "Cosmetic dentistry",
     eyebrow: "Cosmetic dentistry",
     description:
-      "Professional whitening, tooth-colored bonding, porcelain veneers, and Invisalign at Sacramento Dental Medicine in Antelope, serving greater Sacramento.",
+      "Professional whitening, tooth-colored bonding, porcelain veneers, and Invisalign tailored to your face and bite in Antelope.",
     intro:
-      "Cosmetic dentistry changes how your smile looks: its color, shape, spacing, or alignment. Dr. Michael Narodovich's work includes family and cosmetic dentistry, and options at the Antelope office include professional whitening, tooth-colored bonding, porcelain veneers, and Invisalign clear aligners, planned around your face rather than a template.",
+      "Great cosmetic dentistry never looks overdone—it simply looks like your healthiest, most confident smile. Dr. Michael Narodovich plans whitening, tooth-colored bonding, porcelain veneers, and Invisalign around your natural facial features and bite, starting with the most conservative option that delivers the change you actually want.",
     benefits: [
-      "Professional whitening, in the office or at home",
-      "Tooth-colored bonding for chips and small gaps",
-      "Porcelain veneers for shape, size, and color",
-      "Invisalign clear aligners for crowding and spacing",
+      "In-office or take-home professional teeth whitening",
+      "Tooth-colored bonding to smooth chips and small gaps",
+      "Custom porcelain veneers for shape, proportion, and shade",
+      "Invisalign clear aligners to straighten crowding or spacing",
     ],
     steps: [
       {
-        title: "Say what you would change",
-        body: "Start with what bothers you about your smile, photos you like, and how much change you want.",
+        title: "Talk through what you want to change",
+        body: "Tell us what catches your eye in photos, how subtle or noticeable a change you want, and any timeline you're working toward.",
       },
       {
-        title: "Check health first",
-        body: "An exam makes sure cavities, gum problems, or grinding are handled before cosmetic work, so results last.",
+        title: "Check the foundation first",
+        body: "We check teeth, gums, and bite wear so any cavities, gum inflammation, or grinding are addressed before cosmetic work begins.",
       },
       {
-        title: "Compare the options",
-        body: "The dentist explains which approaches fit, from the most conservative up, with what each involves and costs.",
+        title: "Weigh conservative options",
+        body: "We walk through which treatments fit best—from simplest to most comprehensive—along with expected steps and a written estimate.",
       },
     ],
     nearbyLinks: [{ href: "/meet-dr-narodovich", label: "Meet Dr. Narodovich" }],
     faqs: [
       {
-        question: "Which cosmetic treatment is right for me?",
+        question: "How do I know which cosmetic treatment fits my smile?",
         answer:
-          "It depends on what you want to change. Whitening addresses color, bonding repairs small chips and gaps, veneers change shape, size, and color, and Invisalign moves teeth. An exam and a conversation about your goals narrow the choice.",
+          "It comes down to what you want to change. Whitening brightens natural enamel, bonding fixes small chips or gaps, veneers reshape size and color together, and Invisalign moves teeth into better alignment. We'll help you compare them after an exam.",
       },
       {
         question: "What is dental bonding?",
         answer:
-          "Bonding applies tooth-colored resin to the surface of a tooth to repair chips, cracks, or small gaps. It usually changes less of the natural tooth than a veneer or crown.",
+          "Bonding uses carefully shade-matched composite resin sculpted directly onto a tooth to repair chips, worn edges, or small spaces. It preserves more natural tooth structure than a veneer or crown.",
       },
       {
         question: "Does dental insurance cover cosmetic dentistry?",
         answer:
-          "Treatment done only to change appearance is often not covered. Call the front desk at (916) 727-6453 to check your plan and ask about the payment options currently available.",
+          "Most dental plans do not cover purely cosmetic procedures. Call our front desk at (916) 727-6453 to verify your benefits and ask about current payment options.",
       },
       {
-        question: "Can I have cosmetic work if I have cavities or gum disease?",
+        question: "Should I get a cleaning or fix cavities before cosmetic work?",
         answer:
-          "Those are usually treated first. A checkup and cleaning come before cosmetic work, because healthy teeth and gums give it a stable foundation and help results last.",
+          "Yes—we almost always start with a checkup and cleaning and treat any active decay or gum issues first. Healthy teeth and gums help cosmetic work look better and last far longer.",
         links: [{ href: "/preventive-care", label: "checkup and cleaning" }],
       },
     ],
@@ -288,59 +295,59 @@ export const servicePages: ServicePage[] = [
     title: "Teeth Whitening in Antelope & Sacramento, CA",
     searchTitle: "Professional Teeth Whitening in Antelope, CA",
     searchDescription:
-      "In-office or take-home teeth whitening, planned after an exam at Sacramento Dental Medicine in Antelope. Ask what fits your stains: (916) 727-6453.",
+      "Dentist-supervised in-office or take-home teeth whitening in Antelope, planned around sensitivity and existing crowns. Call (916) 727-6453.",
     navLabel: "Teeth whitening",
     eyebrow: "Cosmetic dentistry",
     description:
-      "Professional in-office or take-home teeth whitening at Sacramento Dental Medicine in Antelope, planned after an exam of your teeth and existing work.",
+      "Dentist-supervised in-office or take-home teeth whitening in Antelope, checked first for tooth health, sensitivity, and existing restorations.",
     intro:
-      "Professional whitening can lift many stains from coffee, tea, wine, and time. Sacramento Dental Medicine offers whitening in the office or with take-home kits, planned after an exam so the dentist can check for cavities, gum problems, or crowns and fillings that whitening will not change.",
+      "Coffee, tea, red wine, and everyday life gradually dull natural enamel. We offer both in-office whitening and take-home kits, always starting with an exam so we can protect sensitive teeth, check for cavities or gum irritation, and plan around any crowns or fillings that won't lighten.",
     benefits: [
-      "In-office or take-home options",
-      "An exam first, so whitening suits your teeth",
-      "Guidance if your teeth are sensitive",
-      "A plan for crowns, fillings, and veneers that will not lighten",
+      "Choose in-office brightening or take-home whitening kits",
+      "Exam first to confirm whitening is safe and effective for your stains",
+      "Thoughtful adjustments if your teeth run sensitive",
+      "Smart planning around existing crowns, fillings, or veneers",
     ],
     steps: [
       {
-        title: "Find the cause",
-        body: "The dentist looks at why teeth are discolored. Surface stains respond well; some deeper discoloration needs a different approach.",
+        title: "Identify the stain type",
+        body: "We look at what's causing discoloration—surface stains respond well to whitening, while deeper shade changes or old fillings need a tailored plan.",
       },
       {
-        title: "Choose a method",
-        body: "Decide between whitening in the office or at home with take-home kits, based on your timeline and sensitivity.",
+        title: "Pick the right format",
+        body: "Choose between in-office whitening or take-home kits depending on your schedule, sensitivity, and how quickly you want results.",
       },
       {
-        title: "Keep the result",
-        body: "Get advice on staining foods and drinks, home care, and when a touch-up makes sense.",
+        title: "Keep your shade bright",
+        body: "We share practical advice on staining foods, daily care, and when an occasional touch-up makes sense.",
       },
     ],
     faqs: [
       {
-        question: "Is professional whitening better than store-bought kits?",
+        question: "Why choose dentist-supervised whitening over store strips?",
         answer:
-          "Professional whitening is supervised by a dentist, who first checks that your teeth and gums are healthy and that the discoloration is the kind whitening can treat. Results vary from person to person either way.",
+          "Before brightening, we make sure your teeth and gums are healthy and confirm your discoloration is the kind whitening can actually lift. You also get guidance for sensitivity and uneven shades, though exact results always vary from person to person.",
       },
       {
-        question: "Will whitening change the color of my crowns or fillings?",
+        question: "Will whitening lighten my crowns, fillings, or veneers?",
         answer:
-          "No. Whitening works on natural tooth enamel, so crowns, tooth-colored fillings, and veneers keep their current shade. The dentist can plan around them, or discuss replacing visible work afterward to match.",
+          "No—whitening only changes natural enamel, so crowns, tooth-colored fillings, and veneers stay their original shade. We plan around visible work ahead of time or talk through matching options afterward.",
         links: [{ href: "/veneers", label: "veneers" }],
       },
       {
-        question: "Does teeth whitening cause sensitivity?",
+        question: "Does professional whitening make teeth sensitive?",
         answer:
-          "Some people notice temporary sensitivity during or after whitening. Tell the dentist if your teeth are already sensitive so the approach can be adjusted.",
+          "Temporary sensitivity can happen during or right after whitening. Let us know if cold drinks already bother your teeth so we can adjust the pace and method.",
       },
       {
-        question: "How long do whitening results last?",
+        question: "How long do teeth whitening results last?",
         answer:
-          "It varies. Coffee, tea, red wine, and tobacco bring stains back sooner. Good home care and occasional touch-ups help results last longer.",
+          "It varies with everyday habits. Coffee, tea, red wine, and tobacco bring stains back faster, while steady brushing, regular cleanings, and occasional touch-ups help keep teeth brighter longer.",
       },
       {
         question: "How much does teeth whitening cost?",
         answer:
-          "It depends on whether you whiten in the office or at home. Whitening is usually considered cosmetic, so call (916) 727-6453 for current pricing and to check your plan.",
+          "Cost depends on whether you choose in-office whitening or a take-home kit. Because whitening is usually considered cosmetic, call (916) 727-6453 for current pricing and plan questions.",
       },
     ],
     sources: [{ label: "ADA: Teeth whitening", url: "https://www.mouthhealthy.org/all-topics-a-z/teeth-whitening" }],
@@ -351,50 +358,50 @@ export const servicePages: ServicePage[] = [
     title: "Porcelain Veneers in Antelope & Sacramento, CA",
     searchTitle: "Porcelain Veneers in Antelope & Sacramento | Smile Design",
     searchDescription:
-      "Custom porcelain veneers planned around your face and bite by Dr. Michael Narodovich in Antelope. Compare veneers, bonding and whitening first.",
+      "Custom porcelain veneers designed around your face and bite by Dr. Narodovich in Antelope. Compare veneers, bonding, and whitening first.",
     navLabel: "Porcelain veneers",
     eyebrow: "Cosmetic dentistry",
     description:
-      "Custom porcelain veneers to change the shape, size, or color of front teeth at Sacramento Dental Medicine in Antelope, serving greater Sacramento.",
+      "Custom porcelain veneers shaped around your natural features and bite by Dr. Narodovich in Antelope, with conservative options compared honestly.",
     intro:
-      "Veneers are thin, custom-made porcelain shells bonded to the front of teeth to change their color, shape, or size. Dr. Narodovich plans veneers around your face, bite, and goals, and will also tell you when whitening, bonding, or aligners could reach a similar result with less change to your natural teeth.",
+      "Porcelain veneers are thin, custom-crafted shells bonded to the front of teeth to refine their shape, length, spacing, or shade. Dr. Narodovich designs veneers around your face and bite—and he'll tell you straight if whitening, bonding, or clear aligners can get you there with less change to your natural enamel.",
     benefits: [
-      "Change the shape, size, or color of front teeth",
-      "Cover chips, wear, and stains whitening cannot lift",
-      "Planned around your face and bite",
-      "A frank comparison with more conservative options",
+      "Refine the shape, length, spacing, and shade of front teeth",
+      "Mask chips, worn edges, and deep stains whitening cannot lift",
+      "Proportioned to your face and bite—never bulky or unnatural",
+      "Honest side-by-side comparison with more conservative options",
     ],
     steps: [
       {
-        title: "Plan the smile",
-        body: "Discuss what you want to change, check your bite and gums, and review whether veneers are the right tool.",
+        title: "Design around your face",
+        body: "We talk through your goals, check your gums and bite forces, and confirm whether veneers are truly the best tool for the job.",
       },
       {
-        title: "Prepare the teeth",
-        body: "A thin layer of enamel is usually reshaped so the veneers sit naturally, and impressions or scans go to the lab.",
+        title: "Prepare and capture detail",
+        body: "A thin layer of enamel is typically shaped so veneers sit flush and natural, then precise impressions or digital scans go to the lab.",
       },
       {
-        title: "Bond and check the bite",
-        body: "The finished veneers are bonded in place and your bite is checked so they feel and function like your own teeth.",
+        title: "Bond and fine-tune your bite",
+        body: "Once your custom porcelain veneers return, we check shade and fit carefully, bond them securely, and balance your bite.",
       },
     ],
     nearbyLinks: [{ href: "/meet-dr-narodovich", label: "Meet Dr. Narodovich" }],
     faqs: [
       {
-        question: "Are porcelain veneers permanent?",
+        question: "Are porcelain veneers reversible?",
         answer:
-          "Placing porcelain veneers usually removes a thin layer of enamel, so the change is generally not reversible. Veneers themselves can wear or chip over time and may eventually need replacement.",
+          "Usually no. Placing porcelain veneers typically involves removing a thin layer of enamel so they sit naturally, making the commitment permanent. Veneers can also wear or chip over time and may eventually need replacement.",
       },
       {
-        question: "Who is a good candidate for veneers?",
+        question: "Who is a good candidate for porcelain veneers?",
         answer:
-          "Adults with healthy teeth and gums who want to change the shape, size, or color of front teeth. Active decay, gum disease, or heavy grinding should usually be addressed first.",
+          "Adults with healthy teeth and gums who want to improve the shape, size, or shade of front teeth. Active cavities, gum disease, or heavy grinding should generally be managed first so veneers stay protected.",
         links: [{ href: "/bruxism", label: "heavy grinding" }],
       },
       {
         question: "What are the alternatives to veneers?",
         answer:
-          "Whitening for color, tooth-colored bonding for small chips and gaps, Invisalign for crowding or spacing, and crowns for teeth that need more strength. The dentist will explain which options fit your teeth.",
+          "Depending on your goals, Whitening can brighten shade alone, bonding repairs minor chips and gaps, Invisalign aligns crowded or spaced teeth, and crowns reinforce heavily damaged teeth. We'll walk through which approach makes the most sense for you.",
         links: [
           { href: "/teeth-whitening", label: "Whitening" },
           { href: "/invisalign", label: "Invisalign" },
@@ -403,7 +410,7 @@ export const servicePages: ServicePage[] = [
       {
         question: "How much do porcelain veneers cost?",
         answer:
-          "The estimate depends on how many teeth are involved and any treatment needed first. Veneers are usually considered cosmetic; ask the front desk about payment options after your consultation.",
+          "Your estimate depends on how many teeth are involved and whether any foundational care is needed first. Because veneers are typically cosmetic, ask our front desk about current payment options after your consultation.",
       },
     ],
     sources: [{ label: "ADA: Veneers", url: "https://www.mouthhealthy.org/all-topics-a-z/veneers" }],
@@ -414,59 +421,59 @@ export const servicePages: ServicePage[] = [
     title: "Teeth Grinding & Night Guards in Antelope, CA",
     searchTitle: "Teeth Grinding (Bruxism) & Night Guards | Antelope, CA",
     searchDescription:
-      "Sore jaw or worn teeth when you wake up? Get checked for grinding and fitted for a custom night guard in Antelope. Call (916) 727-6453.",
+      "Waking up with a sore jaw, headaches, or worn teeth? Get checked for bruxism and fitted for a custom night guard in Antelope: (916) 727-6453.",
     navLabel: "Teeth grinding & night guards",
     eyebrow: "Preventive care",
     description:
-      "Evaluation for teeth grinding and clenching (bruxism) and custom-fitted night guards at Sacramento Dental Medicine in Antelope, CA.",
+      "Bruxism exams and custom-fitted night guards in Antelope to protect enamel, crowns, veneers, and tired jaw muscles while you sleep.",
     intro:
-      "Waking up with a sore jaw, a headache, or teeth that feel more sensitive can be signs of grinding or clenching during sleep, called bruxism. The dentist checks for wear, cracks, and jaw strain and can fit a custom night guard to protect your teeth while you sleep.",
+      "Waking up with a tight jaw, dull morning headaches, or newly sensitive teeth often points to nighttime grinding or clenching—known as bruxism. We examine your teeth and jaw muscles for hidden wear or hairline cracks and can make a custom-fitted night guard to cushion your bite while you sleep.",
     benefits: [
-      "Check for wear, cracks, and jaw strain",
-      "Custom-fitted night guards",
-      "Protect crowns, veneers, and natural teeth",
-      "Practical advice on common triggers",
+      "Pinpoint hidden enamel wear, hairline cracks, and jaw strain",
+      "Custom-fitted night guards made specifically for your bite",
+      "Shield natural teeth, crowns, fillings, and porcelain veneers",
+      "Practical guidance on everyday triggers that worsen clenching",
     ],
     steps: [
       {
-        title: "Look for signs",
-        body: "The exam checks for flattened or chipped teeth, sensitivity, and tenderness in the jaw muscles.",
+        title: "Spot the wear pattern",
+        body: "We check for flattened biting edges, chipped enamel, sensitivity, and tenderness along your jaw muscles.",
       },
       {
-        title: "Fit a guard",
-        body: "If a night guard makes sense, it is made from an impression or scan of your teeth so it fits closely and stays in place.",
+        title: "Fit a custom guard",
+        body: "If a night guard makes sense, we take an accurate scan or impression so your guard sits comfortably and stays put overnight.",
       },
       {
-        title: "Follow up",
-        body: "The guard and your teeth are checked at regular visits, and damaged teeth are repaired if needed.",
+        title: "Protect your bite long term",
+        body: "We check your guard and enamel at routine visits and repair any already-cracked or worn teeth if needed.",
       },
     ],
     faqs: [
       {
-        question: "What are the signs that I grind my teeth at night?",
+        question: "How can I tell if I grind my teeth in my sleep?",
         answer:
-          "Common signs include a sore jaw or headache on waking, teeth that look flat or chipped, new sensitivity, or a partner hearing grinding at night. Many people do not know they grind until a dentist sees the wear.",
+          "Tell-tale clues include morning jaw soreness, tension headaches, teeth that look flat or chipped at the edges, sudden sensitivity, or a partner hearing grinding overnight. Many people only find out when we spot the wear during an exam.",
       },
       {
-        question: "Is a custom night guard better than a store-bought one?",
+        question: "Why get a custom night guard instead of a store-bought one?",
         answer:
-          "A custom night guard is made from your own teeth, so it usually fits more closely and comfortably than a boil-and-bite guard. The dentist will recommend what suits your bite.",
+          "A custom guard is molded directly to your teeth, so it fits snugly, breathes easier, and stays comfortable all night—unlike bulky boil-and-bite trays. We'll recommend the style that best protects your bite.",
       },
       {
-        question: "What causes teeth grinding?",
+        question: "What causes nighttime teeth grinding?",
         answer:
-          "Stress, anxiety, sleep problems, and the way teeth fit together are commonly linked to grinding. Cutting back on caffeine and alcohol and keeping a calm bedtime routine can help alongside a guard.",
+          "Stress, anxiety, sleep disruptions, and how upper and lower teeth meet all play a role. Alongside wearing a guard, cutting back on evening caffeine or alcohol and winding down before bed can ease clenching.",
       },
       {
-        question: "Can grinding damage my teeth?",
+        question: "Can grinding really crack or ruin my teeth?",
         answer:
-          "Yes. Over time it can wear teeth down, crack them, or damage fillings and crowns. A tooth that is badly worn or cracked may need a crown to protect it.",
+          "Yes. Night after night of heavy clenching wears down enamel, fractures fillings, and can split teeth. When a tooth is badly worn or cracked, it may eventually need a crown to hold it together.",
         links: [{ href: "/dental-crowns", label: "need a crown" }],
       },
       {
-        question: "Does dental insurance cover night guards?",
+        question: "Does dental insurance cover a custom night guard?",
         answer:
-          "Some plans do. Call (916) 727-6453 to check your coverage and the current cost before your visit.",
+          "Some dental plans include partial coverage for night guards. Call (916) 727-6453 and our front desk will check your plan and share current exam and guard costs.",
       },
     ],
     sources: [
@@ -477,109 +484,136 @@ export const servicePages: ServicePage[] = [
   },
   {
     slug: "dental-crowns",
-    title: "Dental Crowns in Sacramento & Antelope, CA",
+    title: "Dental Crowns & Bridges in Antelope & Sacramento",
     searchTitle: "Dental Crowns Sacramento & Antelope | Cracked Tooth Repair",
     searchDescription:
-      "Cracked or worn tooth? Get a crown exam in Antelope and an estimate based on your tooth and insurance. Book online or call (916) 727-6453.",
+      "Cracked, broken, or worn tooth? Book a crown exam on Elverta Rd in Antelope for an honest plan and estimate. Call (916) 727-6453.",
     navLabel: "Dental crowns",
     eyebrow: "Restorative dentistry",
     description:
-      "Repair a damaged tooth with a custom dental crown at Sacramento Dental Medicine in Antelope, serving the greater Sacramento area.",
+      "Custom dental crowns and bridges in Antelope to reinforce cracked or weakened teeth and restore natural chewing strength.",
     intro:
-      "A crown protects and rebuilds a tooth that has been weakened by a fracture, decay, a large filling, or root canal treatment. The team will examine the tooth, explain the options, and plan a restoration that supports comfortable everyday chewing.",
+      "When a tooth is cracked, heavily filled, worn down, or finished with a root canal, a filling alone often can't protect it. A custom crown covers and reinforces the tooth so you can chew normally again—and we also craft dental bridges to span missing teeth when that's the right fit.",
     benefits: [
-      "Protect a cracked or weakened tooth",
-      "Restore comfortable chewing and function",
-      "Rebuild shape after significant damage",
-      "Create a natural-looking result",
+      "Reinforce cracked, fractured, or heavily filled teeth",
+      "Restore natural chewing strength without wincing",
+      "Protect a tooth after root canal therapy",
+      "Shade-matched to blend in with neighboring teeth",
     ],
     steps: [
       {
-        title: "Examine the tooth",
-        body: "The visit starts with an exam and any imaging needed to understand the tooth, root, and surrounding bone.",
+        title: "Check tooth and root health",
+        body: "We examine the tooth and take digital X-rays or 3D imaging if needed to make sure the root and bone can support a crown.",
       },
       {
-        title: "Review the plan",
-        body: "You will see what the team found and hear the treatment choices before deciding how to proceed.",
+        title: "Walk through your options",
+        body: "We show you what we found, explain whether a filling, crown, or replacement makes the most sense, and provide a written estimate.",
       },
       {
-        title: "Restore the tooth",
-        body: "The tooth is prepared and restored with a crown designed for strength, fit, and a natural appearance.",
+        title: "Fit a lasting restoration",
+        body: "We shape the tooth gently, capture precise measurements, and place a custom crown checked carefully for comfort and bite.",
       },
     ],
     faqs: [
       {
-        question: "Do you offer dental bridges?",
+        question: "Do you offer dental bridges too?",
         answer:
-          "Yes. A bridge replaces one or more missing teeth with a false tooth held by crowns on the neighboring teeth. The dentist will compare a bridge with an implant or a partial denture for your situation.",
+          "Yes. A bridge fills the space of one or more missing teeth using a replacement tooth anchored to crowns on neighboring teeth. At your exam, we'll compare a bridge alongside an implant or a partial denture so you can weigh the pros and cons.",
         links: [
           { href: "/dental-implants", label: "an implant" },
           { href: "/dentures", label: "a partial denture" },
         ],
       },
-      { question: "How is a crown different from an implant?", answer: "A crown restores the visible part of a damaged tooth. An implant replaces a missing tooth root and can support a crown. The exam determines whether your existing tooth can be restored or whether replacement should be considered." },
-      { question: "How much does a dental crown cost?", answer: "The estimate depends on the tooth, the restoration, any additional treatment, and your insurance benefits. Ask the front desk about the exam cost and request a treatment estimate after the dentist evaluates the tooth." },
       {
-        question: "How do I know if I need a dental crown?",
+        question: "How is a dental crown different from a dental implant?",
         answer:
-          "A crown may be recommended when a tooth is cracked, badly worn, heavily filled, or too damaged for a filling alone. An exam is the only way to know which treatment fits the tooth.",
+          "A crown caps and protects the visible part of a natural tooth you still have. An implant replaces a missing tooth root and then holds a crown on top. Your exam shows whether we can save your natural tooth or should look at replacement.",
       },
       {
-        question: "Can a crown help a broken tooth?",
+        question: "How much does a dental crown cost?",
         answer:
-          "Often, yes. Whether the tooth can be restored depends on how much healthy structure remains and the condition of the root and surrounding bone.",
+          "Your cost depends on the tooth, the restoration material, any underlying treatment needed, and your insurance benefits. Call our front desk about exam fees and we'll prepare a written treatment estimate after checking the tooth.",
+      },
+      {
+        question: "How do I know if my tooth needs a crown?",
+        answer:
+          "We often recommend a crown when a tooth is cracked, badly worn, heavily filled, or too weakened for a standard filling to hold. Seeing the tooth and an X-ray is the only sure way to know.",
+      },
+      {
+        question: "Can a crown save a broken tooth?",
+        answer:
+          "Often, yes. Saving a broken tooth depends on how much solid structure remains above the gumline and whether the root and surrounding bone are healthy.",
       },
     ],
-    sources: [{"label": "ADA: Crowns", "url": "https://www.mouthhealthy.org/all-topics-a-z/crowns"}, { label: "ADA: Bridges", url: "https://www.mouthhealthy.org/all-topics-a-z/bridges" }],
+    sources: [
+      { label: "ADA: Crowns", url: "https://www.mouthhealthy.org/all-topics-a-z/crowns" },
+      { label: "ADA: Bridges", url: "https://www.mouthhealthy.org/all-topics-a-z/bridges" },
+    ],
     relatedSlugs: ["dental-implants", "tooth-extractions"],
   },
   {
     slug: "sedation-dentistry",
     title: "Dental Care for Nervous Patients in Antelope",
-    bookingLabel: "Request a comfort consultation",
+    bookingLabel: "Book a comfort consultation",
     searchTitle: "Dentist for Nervous Patients in Antelope | Sedation FAQs",
     searchDescription:
-      "Nervous about a dental visit? Ask our Antelope team about a gentler pace, local numbing and sedation options for your procedure. Call (916) 727-6453.",
+      "Anxious about the dentist? Our Antelope team slows the pace, uses The Wand numbing, and walks through sedation options. Call (916) 727-6453.",
     navLabel: "Comfort & sedation",
     eyebrow: "Anxious-patient care",
     description:
-      "Explore comfort-focused and sedation dentistry options for nervous dental patients at Sacramento Dental Medicine in Antelope, CA.",
+      "Calm, unhurried dentistry for anxious patients on Elverta Rd in Antelope—with computer-guided numbing and honest sedation planning.",
     intro:
-      "Tell us what made your last visit difficult. Our Antelope team can slow the pace, explain each step and use computer-guided local numbing when appropriate. If you want sedation, ask which options are available for your procedure, who would provide them and whether you would need a referral.",
+      "If past dental visits left you gripping the armrests—or avoiding the chair altogether—tell us what made them tough. Here in Antelope, we slow the pace, explain every step before we begin, and use The Wand STA for gentle, computer-guided local numbing. If you're interested in sedation, we'll review your medical history and walk you through what's available and safe for your procedure.",
     benefits: [
-      "A judgment-free conversation about dental anxiety",
-      "Clear explanations before treatment begins",
-      "An unhurried, comfort-focused approach",
-      "Options reviewed around your health and procedure",
+      "Zero lectures—even if it's been years since your last visit",
+      "Every step explained before anything happens",
+      "The Wand STA computer-guided local numbing for gentler anesthesia",
+      "Sedation choices reviewed carefully around your health and procedure",
     ],
     steps: [
       {
-        title: "Share what worries you",
-        body: "Let the team know about fear, sensitivity, a strong gag reflex, or a difficult previous experience.",
+        title: "Tell us what makes you uneasy",
+        body: "Whether it's needles, sensitivity, a strong gag reflex, or a rough past appointment, sharing it upfront lets us tailor the entire visit.",
       },
       {
-        title: "Build a comfort plan",
-        body: "The dentist reviews your health, treatment needs, and available comfort options with you.",
+        title: "Map out a comfort plan",
+        body: "We review your health history, medications, and planned care so we can confirm which numbing or sedation options fit safely.",
       },
       {
-        title: "Move at a clear pace",
-        body: "You know what is happening next, and the team checks in throughout the visit.",
+        title: "Stay in control the whole time",
+        body: "We check in often, pause whenever you raise a hand, and never push faster than you're comfortable going.",
       },
     ],
     faqs: [
-      { question: "What should I discuss before choosing sedation?", answer: "Bring a current medication list and tell the dentist about allergies, medical conditions, previous anesthesia experiences, and the dental work you are considering. Ask who will provide and monitor your care, which approach is available in Antelope, and what preparation and recovery arrangements apply to you." },
-      { question: "How is the cost of comfort or sedation care estimated?", answer: "Ask the office which services are included in your treatment estimate and whether any comfort or sedation service is separate. The dentist must assess your health and planned procedure before confirming an option or a fee." },
-      { question: "Which sedation options can I request?", answer: "Call the office to ask which options are currently available. A dentist must review your medical history and planned treatment before confirming whether sedation is appropriate. You can ask about the consultation fee and request a written estimate before booking treatment." },
-      { question: "Is local numbing the same as sedation?", answer: "Local anesthesia numbs the area being treated. Sedation is a separate approach to managing awareness or anxiety. Tell the dentist about your concerns so they can explain the available comfort choices and any preparation instructions." },
       {
-        question: "Can I ask about sedation before scheduling treatment?",
+        question: "What should I bring or share before considering sedation?",
         answer:
-          "Yes. Start by telling the team that dental anxiety is part of your concern. A dentist must review your health and treatment needs before recommending an option.",
+          "Bring an up-to-date list of medications and tell us about allergies, medical conditions, past reactions to anesthesia, and the dental work you're considering. We'll confirm which options are available here in Antelope, who oversees your care, and any prep or ride-home requirements.",
       },
       {
-        question: "What if I have avoided the dentist for years?",
+        question: "How is the cost of comfort or sedation care estimated?",
         answer:
-          "You are not alone. The first goal is to understand what is happening now and build a manageable plan without judgment.",
+          "Ask our front desk which comfort measures are included and whether any sedation service carries a separate fee. Because safety comes first, the dentist reviews your health history and treatment plan before confirming an option and written estimate.",
+      },
+      {
+        question: "Which sedation options can I ask about?",
+        answer:
+          "Call (916) 727-6453 to ask which options are currently available for your visit. A dentist reviews your health history and procedure before confirming whether sedation is right for you, and we're happy to explain consultation fees and give you a written estimate upfront.",
+      },
+      {
+        question: "Is local numbing the same thing as sedation?",
+        answer:
+          "No—local anesthesia numbs the specific tooth and area being treated (we use computer-guided delivery with The Wand STA to make it gentler), while sedation helps ease anxiety or awareness. We'll explain both so you know what to expect.",
+      },
+      {
+        question: "Can we talk about comfort options before booking treatment?",
+        answer:
+          "Absolutely. Let us know when you book that anxiety is part of your visit. Starting with a calm exam and conversation—with no treatment that day unless you want it—is a great first step.",
+      },
+      {
+        question: "What if I haven't seen a dentist in years?",
+        answer:
+          "You're in good company—many of our favorite patients came to us after years away. We focus only on helping you feel comfortable today and taking things one manageable step at a time.",
       },
     ],
     sources: [{ label: "ADA: Anesthesia and sedation", url: "https://www.mouthhealthy.org/all-topics-a-z/anesthesia-and-sedation" }],
@@ -588,140 +622,155 @@ export const servicePages: ServicePage[] = [
   },
   {
     slug: "orthodontics",
-    title: "Orthodontics & Clear Aligners in Sacramento, CA",
+    title: "Orthodontics & Clear Aligners in Antelope, CA",
+    searchTitle: "Orthodontics & Clear Aligners in Antelope & Sacramento",
+    searchDescription:
+      "Bite and alignment exams, kids' early checks around age seven, and Invisalign clear aligners in Antelope. Book online or call (916) 727-6453.",
     navLabel: "Orthodontics",
     eyebrow: "Straighter smiles",
     description:
-      "Explore orthodontic treatment and Invisalign clear aligners at Sacramento Dental Medicine in Antelope, serving Sacramento-area patients.",
+      "Bite and alignment evaluations, early kids' orthodontic checks, and Invisalign clear aligner planning at our Antelope office.",
     intro:
-      "Orthodontic treatment can improve alignment, bite, cleaning access, and confidence. The practice offers Invisalign clear aligner planning and will explain whether aligners fit your goals or whether another approach should be considered.",
+      "Straighter teeth aren't just about how your smile looks in photos—better alignment makes brushing and flossing easier and helps your bite wear evenly over decades. We evaluate alignment and bite for teens and adults, offer Invisalign clear aligners, and let you know honestly when another orthodontic approach is the smarter choice.",
     benefits: [
-      "Evaluate tooth alignment and bite",
-      "Review clear aligner treatment",
-      "Plan around your daily routine and goals",
-      "Understand alternatives before committing",
+      "Thorough evaluation of crowding, spacing, and bite balance",
+      "Invisalign clear aligner planning right in Antelope",
+      "Early bite checks for growing children around age seven",
+      "Straight talk on alternatives if aligners aren't the right fit",
     ],
     steps: [
       {
-        title: "Evaluate your bite",
-        body: "The dentist looks at alignment, spacing, crowding, and how your upper and lower teeth meet.",
+        title: "Check alignment and bite",
+        body: "We look closely at crowding, gaps, enamel wear, and how your upper and lower teeth meet when you chew.",
       },
       {
-        title: "Compare approaches",
-        body: "You will learn whether clear aligners fit the case and what alternatives may be more appropriate.",
+        title: "Compare the right paths",
+        body: "We'll tell you honestly whether clear aligners can achieve your goals or if another orthodontic option would serve you better.",
       },
       {
-        title: "Plan the sequence",
-        body: "If you move forward, the team maps the treatment and the follow-up visits needed to monitor progress.",
+        title: "Map out each milestone",
+        body: "If you decide to move forward, we outline the wear schedule, expected check-ins, and retention plan before you start.",
       },
     ],
     faqs: [
-      { question: "How are orthodontics and Invisalign related?", answer: "Orthodontics is the broader area of care for tooth alignment and bite. Invisalign is one clear aligner treatment option. This practice offers Invisalign evaluations; the dentist will explain whether aligners or another approach fits your needs." },
       {
-        question: "Do you offer Invisalign in the Sacramento area?",
+        question: "How are orthodontics and Invisalign related?",
         answer:
-          "Yes. Sacramento Dental Medicine lists Invisalign clear aligners among its cosmetic treatment options. An evaluation determines whether aligners fit your needs.",
+          "Orthodontics covers all treatments that move teeth and align your bite, and Invisalign is one clear-aligner method within it. We provide Invisalign evaluations here and tell you frankly if aligners or another orthodontic approach fits your bite best.",
       },
       {
-        question: "Are clear aligners right for every orthodontic case?",
+        question: "Do you offer Invisalign in Antelope and Greater Sacramento?",
         answer:
-          "No. Some alignment and bite concerns need a different type of treatment. The dentist can explain the most appropriate next step after an evaluation.",
+          "Yes—we offer Invisalign clear aligners right at our Elverta Road office. An exam and bite check confirm whether clear aligners are a good match for your teeth.",
+      },
+      {
+        question: "Are clear aligners right for every bite issue?",
+        answer:
+          "No. While clear aligners handle many crowding and spacing cases well, more complex jaw or bite corrections sometimes do better with another orthodontic approach. We'll give you an honest recommendation after examining your bite.",
       },
     ],
-    sources: [{"label": "ADA: Braces and aligners", "url": "https://www.mouthhealthy.org/all-topics-a-z/braces"}],
+    sources: [{ label: "ADA: Braces and aligners", url: "https://www.mouthhealthy.org/all-topics-a-z/braces" }],
     relatedSlugs: ["invisalign", "dental-crowns"],
   },
   {
     slug: "invisalign",
-    title: "Invisalign Clear Aligners in Sacramento & Antelope",
+    title: "Invisalign Clear Aligners in Antelope & Sacramento",
     searchTitle: "Invisalign in Sacramento & Antelope | Is It Right for You?",
     searchDescription:
-      "Find out if Invisalign clear aligners fit your teeth and bite at an evaluation in Antelope. Get a cost estimate based on your plan and dental benefits.",
+      "Find out if Invisalign clear aligners fit your teeth and bite at an Antelope exam, with a written estimate based on your plan and benefits.",
     navLabel: "Invisalign",
     eyebrow: "Clear aligners",
     description:
-      "Ask about Invisalign clear aligners at Sacramento Dental Medicine in Antelope, serving patients across the Sacramento area.",
+      "Discreet, removable Invisalign clear aligners planned around your teeth, bite, and daily routine at our Antelope office.",
     intro:
-      "Invisalign uses a planned series of removable clear aligners to move teeth over time. An evaluation shows whether your alignment and bite are a good fit and gives you a clearer picture of the treatment sequence.",
+      "Invisalign straightens teeth using a custom series of clear, removable trays—no metal brackets, and easy to slip out for meals and brushing. At your evaluation in Antelope, we check your teeth, gums, and bite so you know right away whether aligners fit your goals and what the commitment looks like.",
     benefits: [
-      "Clear, removable aligners",
-      "Take aligners out for meals and brushing",
-      "Treatment planned around your smile and bite",
-      "Regular progress checks with the dental team",
+      "Low-profile, clear trays that blend into everyday life",
+      "Removable for meals, brushing, and normal flossing",
+      "Planned around both smile aesthetics and healthy bite function",
+      "Regular progress checks with a team you already know",
     ],
     steps: [
       {
-        title: "Start with an evaluation",
-        body: "The dentist reviews your teeth, bite, goals, and oral health to see whether clear aligners are appropriate.",
+        title: "Confirm candidacy",
+        body: "We examine your teeth, gums, and bite to verify that clear aligners can safely and predictably move your teeth.",
       },
       {
-        title: "Review the plan",
-        body: "You will understand the proposed tooth movement, expected responsibilities, and follow-up schedule before starting.",
+        title: "Preview the plan",
+        body: "Before you commit, we review expected tooth movement, daily wear habits, check-in timing, and a written cost estimate.",
       },
       {
-        title: "Track progress",
-        body: "You change aligners as directed and return for checks so the team can monitor movement and fit.",
+        title: "Stay on track together",
+        body: "You advance through aligner sets as directed and stop in for quick checks so we can confirm everything tracks smoothly.",
       },
     ],
     faqs: [
-      { question: "How long does Invisalign treatment take?", answer: "Treatment length depends on the planned tooth movement, your bite, and how consistently you follow the wear instructions. An evaluation is needed before the dentist can discuss a timeline for your case." },
-      { question: "How much does Invisalign cost?", answer: "Cost depends on the treatment plan and your dental benefits. Ask for an estimate after your alignment and bite evaluation, and confirm any orthodontic coverage with the front desk and your insurer." },
       {
-        question: "Can I remove Invisalign aligners?",
+        question: "How long does Invisalign treatment take?",
         answer:
-          "Yes. Clear aligners are removable for meals, brushing, and flossing, but they need to be worn as directed for treatment to progress.",
+          "Timeline depends on how much movement your teeth need, how your bite fits, and how consistently you wear your trays each day. After examining your bite, we'll give you a realistic estimate for your specific case.",
       },
       {
-        question: "How do I know if I am an Invisalign candidate?",
+        question: "How much does Invisalign cost?",
         answer:
-          "A dental and bite evaluation is needed. The dentist will consider your alignment, oral health, and treatment goals before recommending clear aligners.",
+          "Cost depends on your treatment plan and your dental benefits. After your alignment and bite evaluation, we provide a written estimate and help you check any orthodontic benefits with your insurer.",
+      },
+      {
+        question: "Can I take Invisalign aligners out to eat and brush?",
+        answer:
+          "Yes—you take them out for meals, hot or staining drinks, brushing, and flossing. For teeth to stay on schedule, they just need to go right back in and be worn consistently as directed.",
+      },
+      {
+        question: "How do I know if I am a good candidate for Invisalign?",
+        answer:
+          "A quick dental and bite exam gives you a real answer. We check gum health, existing dental work, crowding, and bite mechanics before recommending clear aligners.",
       },
     ],
-    sources: [{"label": "ADA: Braces and aligners", "url": "https://www.mouthhealthy.org/all-topics-a-z/braces"}],
+    sources: [{ label: "ADA: Braces and aligners", url: "https://www.mouthhealthy.org/all-topics-a-z/braces" }],
     relatedSlugs: ["orthodontics", "dental-crowns"],
   },
   {
     slug: "tooth-extractions",
-    title: "Tooth Extractions in Sacramento & Antelope, CA",
-    searchTitle: "Tooth Extraction & Oral Surgery Evaluation | Sacramento",
+    title: "Tooth Extractions in Antelope & Sacramento, CA",
+    searchTitle: "Tooth Extraction & Oral Surgery Exam | Antelope, CA",
     searchDescription:
-      "Painful or damaged tooth? Get an extraction evaluation in Antelope. Learn whether the tooth can be saved, what removal involves, and how recovery is planned.",
+      "Dealing with a painful or damaged tooth? Get an honest extraction exam in Antelope. Learn if it can be saved, what removal involves, and recovery.",
     navLabel: "Tooth extractions",
     eyebrow: "Oral surgery",
     description:
-      "Get an evaluation for a painful, damaged, or non-restorable tooth at Sacramento Dental Medicine in Antelope, CA.",
+      "Calm, gentle tooth extraction evaluations and in-house removals in Antelope—always checking first whether your tooth can be saved.",
     intro:
-      "When a tooth cannot be predictably restored, extraction may be the healthiest next step. The team will first evaluate the tooth, explain whether it can be saved, and review what to expect if removal is recommended.",
+      "Our first instinct is always to save a natural tooth when we can. When deep decay, a severe fracture, or infection makes saving a tooth unrealistic, removing it cleanly protects the rest of your mouth. We'll show you what's going on, keep you thoroughly numb, and talk through replacement choices before you decide.",
     benefits: [
-      "Evaluate pain, damage, and infection risk",
-      "Understand whether the tooth can be saved",
-      "Plan a gentle, clear extraction visit",
-      "Discuss replacement options when appropriate",
+      "Honest assessment of whether the tooth can still be saved",
+      "Thorough local numbing with The Wand STA and a calm pace",
+      "In-house extraction with specialist coordination for complex cases",
+      "Clear recovery guidance and replacement planning when needed",
     ],
     steps: [
       {
-        title: "Diagnose the problem",
-        body: "An exam and any necessary imaging help the dentist understand the tooth, roots, and nearby structures.",
+        title: "Diagnose the source of trouble",
+        body: "We examine the tooth and take digital X-rays or 3D imaging to see the roots, surrounding bone, and nearby nerves.",
       },
       {
-        title: "Review your choices",
-        body: "The dentist explains whether restoration is reasonable or removal is the safer path.",
+        title: "Weigh saving versus removing",
+        body: "We explain honestly whether a crown or root canal makes sense, or whether removal is the healthier, more predictable option.",
       },
       {
-        title: "Plan recovery",
-        body: "You receive instructions for caring for the area and learn whether tooth replacement should be considered.",
+        title: "Plan comfort and next steps",
+        body: "If removal is needed, we review numbing, recovery care, whether PRF or grafting helps, and any replacement options.",
       },
     ],
     faqs: [
       {
-        question: "Does every painful tooth need to be extracted?",
+        question: "Does a painful tooth always have to be pulled?",
         answer:
-          "No. Pain can come from several causes, and some teeth can be restored. An exam and imaging help determine the right treatment.",
+          "Not at all. Toothaches come from many causes—some need only a filling, a crown, or root canal therapy to save the tooth. An exam and X-ray show what's truly possible.",
       },
       {
-        question: "What should I do for severe tooth pain now?",
+        question: "What should I do if I have severe tooth pain right now?",
         answer:
-          "Call the office at (916) 727-6453. The team can provide immediate guidance and ask about the earliest available visit.",
+          "Call us right away at (916) 727-6453. Our team can advise you on immediate steps and check for the earliest available visit.",
       },
     ],
     relatedSlugs: ["dental-emergencies", "sedation-dentistry", "wisdom-teeth", "dental-implants", "platelet-rich-fibrin"],
@@ -732,56 +781,64 @@ export const servicePages: ServicePage[] = [
     navLabel: "Dental implants",
     eyebrow: "Tooth replacement",
     description:
-      "Explore dental implant treatment at Sacramento Dental Medicine in Antelope, serving Sacramento-area patients. Call (916) 727-6453 or request a visit.",
+      "Replace missing teeth from the root up with 3D-planned dental implants in Antelope, serving Greater Sacramento. Call (916) 727-6453 to book.",
     intro:
-      "A dental implant replaces a missing tooth from the root up and can support a natural-looking restoration. The planning visit evaluates your teeth, gums, and bone so the team can explain whether implant treatment fits your needs.",
+      "A dental implant replaces a missing tooth from the root up, anchoring a custom crown or restoration so it feels steady when you bite, chew, and laugh. Using CBCT 3D imaging right in our Antelope office, we check your bone and gum health first and map out every stage before treatment begins.",
     benefits: [
-      "Replace a missing tooth from the root up",
-      "Support comfortable chewing",
-      "Plan around bone and gum health",
-      "Create a stable, natural-looking restoration",
+      "Replace a missing tooth from the root up for lasting stability",
+      "Planned with CBCT 3D imaging for accurate placement",
+      "Protects neighboring healthy teeth without grinding them down",
+      "Custom-matched crown designed to look and feel natural",
     ],
     steps: [
       {
-        title: "Evaluate the site",
-        body: "The team reviews your oral health and uses appropriate imaging to understand the available bone and nearby structures.",
+        title: "Scan and evaluate the site",
+        body: "We examine your gums and remaining teeth and use CBCT 3D imaging to measure bone volume and map nearby anatomy.",
       },
       {
-        title: "Build the plan",
-        body: "You will learn the sequence, timing, and any preparatory care that may be needed before treatment begins.",
+        title: "Lay out the exact sequence",
+        body: "We walk through every step—placement, healing time, any bone support needed, and a written estimate—before anything starts.",
       },
       {
-        title: "Restore the tooth",
-        body: "After the implant is ready, a custom restoration completes the visible and functional part of the tooth.",
+        title: "Complete your new tooth",
+        body: "Once the implant has healed solidly in the bone, we place your custom restoration and fine-tune your bite.",
       },
     ],
     faqs: [
-      { question: "Is getting a dental implant a single appointment?", answer: "Implant treatment involves planning, placement, healing, and the final restoration. Healing and any preparatory treatment affect the timeline. Ask the dentist to explain your sequence before starting; a finished tooth in one visit is not guaranteed." },
-      { question: "What are the alternatives to a dental implant?", answer: "Depending on which teeth are missing and the health of the remaining teeth, a bridge or a removable partial or full denture may be considered. The dentist can compare the options with you at an exam." },
+      {
+        question: "Is getting a dental implant finished in a single visit?",
+        answer:
+          "No—implant care happens in stages: 3D planning, placement, healing time so the implant integrates with bone, and then your final custom crown. Any bone grafting also affects timing, so a finished tooth in one visit is not guaranteed. We outline your exact sequence upfront.",
+      },
+      {
+        question: "What are the alternatives to a dental implant?",
+        answer:
+          "Depending on where the gap is and the health of surrounding teeth, a dental bridge or a removable partial or full denture may also be good options. We compare all of them honestly at your exam.",
+      },
       {
         question: "Am I a candidate for a dental implant?",
         answer:
-          "That depends on your oral health, bone, medical history, and the location of the missing tooth. A planning visit is needed for a reliable answer.",
+          "Candidacy depends on gum health, available bone, overall medical history, and the tooth's position. A 3D-imaging exam gives you a dependable answer.",
       },
       {
-        question: "Can an implant replace one missing tooth?",
+        question: "Can an implant replace just one missing tooth?",
         answer:
-          "Yes. Dental implants can be used to replace a single missing tooth, while other implant-supported options may be considered for several missing teeth.",
+          "Yes. Implants work well for a single missing tooth, and implant-supported restorations can also replace multiple teeth depending on your bite and bone.",
       },
       {
         question: "What if I need bone support for an implant?",
         answer:
-          "The exam and planning visit evaluate bone and gum health. Grafting needs are reviewed case by case, and PRF or grafting may be recommended when extra support could help the site. See PRF & grafting for how that conversation works.",
+          "During your exam and 3D scan, we check whether the bone is thick and tall enough to anchor an implant. If extra support would help the site, we discuss bone grafting or PRF & grafting step by step.",
         links: [{ href: "/platelet-rich-fibrin", label: "PRF & grafting" }],
       },
       {
         question: "Can I be sedated for dental implant treatment?",
         answer:
-          "Tell the team if dental anxiety is part of your concern. A dentist must review your medical history and planned treatment before confirming whether sedation is appropriate. Do not assume a particular medication or method is offered. Read more about sedation dentistry options.",
+          "Let us know upfront if you feel anxious about surgery. Because safety depends on your health history and planned procedure, we review both before confirming whether sedation is appropriate and which options are available here. Read more about sedation dentistry options.",
         links: [{ href: "/sedation-dentistry", label: "sedation dentistry" }],
       },
     ],
-    sources: [{"label": "ADA: Implants", "url": "https://www.mouthhealthy.org/all-topics-a-z/implants"}],
+    sources: [{ label: "ADA: Implants", url: "https://www.mouthhealthy.org/all-topics-a-z/implants" }],
     relatedSlugs: ["tooth-extractions", "platelet-rich-fibrin", "sedation-dentistry", "wisdom-teeth"],
     nearbyLinks: [
       { href: "/sedation-dentistry", label: "Comfort & sedation" },
@@ -794,60 +851,60 @@ export const servicePages: ServicePage[] = [
     title: "Full & Partial Dentures in Antelope & Sacramento",
     searchTitle: "Dentures in Antelope & Sacramento | Full & Partial",
     searchDescription:
-      "Full and partial dentures to replace missing teeth at Sacramento Dental Medicine in Antelope, with implants or bridges compared. Call (916) 727-6453.",
+      "Comfortable full and partial dentures in Antelope, with implant and bridge alternatives compared honestly at your exam. Call (916) 727-6453.",
     navLabel: "Dentures",
     eyebrow: "Restorative dentistry",
     description:
-      "Full and partial dentures to replace missing teeth at Sacramento Dental Medicine in Antelope, with implant and bridge options explained at your exam.",
+      "Well-fitted full and partial dentures in Antelope, with implant and bridge alternatives explained side by side at your exam.",
     intro:
-      "Dentures replace missing teeth with a removable appliance: a full denture when all the teeth in an arch are missing, or a partial when some natural teeth remain. The team evaluates your gums, remaining teeth, and bone, and explains whether implants or a bridge could be an option for you too.",
+      "Dentures restore your ability to eat, speak, and smile comfortably with a removable appliance—a full denture when an entire arch of teeth is missing, or a partial denture when healthy natural teeth remain. We take time to dial in the fit and compare dentures alongside implants or bridges so you can choose with confidence.",
     benefits: [
-      "Full dentures for a complete arch",
-      "Partial dentures that work with remaining teeth",
-      "Implant and bridge options explained",
-      "Fit checks and adjustments as your mouth changes",
+      "Full dentures crafted for a natural look and balanced bite",
+      "Partial dentures designed to work cleanly with remaining teeth",
+      "Honest comparison with dental implants and bridges",
+      "Follow-up fit checks and adjustments as your gums adapt",
     ],
     steps: [
       {
-        title: "Evaluate your mouth",
-        body: "An exam and appropriate imaging show the health of your gums, remaining teeth, and bone.",
+        title: "Evaluate gums, teeth, and bone",
+        body: "We examine your mouth and review imaging to assess gum health, remaining teeth, and jaw support.",
       },
       {
-        title: "Choose the approach",
-        body: "Compare a full or partial denture with implant or bridge options, including what each involves and costs.",
+        title: "Compare every replacement choice",
+        body: "We walk through full dentures, partial dentures, bridges, and implants—including daily wear, timeline, and written estimates.",
       },
       {
-        title: "Fit and adjust",
-        body: "Your denture is fitted, then adjusted at follow-up visits as you get used to eating and speaking with it.",
+        title: "Fit and fine-tune",
+        body: "After fitting your new denture, we schedule follow-up checks to ease any sore spots as you get comfortable eating and speaking.",
       },
     ],
     faqs: [
       {
         question: "What is the difference between full and partial dentures?",
         answer:
-          "A full denture replaces all the teeth in the upper or lower jaw. A partial denture replaces some missing teeth and attaches to the natural teeth that remain.",
+          "A full denture replaces every tooth in the upper or lower arch. A partial denture fills specific gaps and rests securely around the healthy natural teeth you still have.",
       },
       {
-        question: "Can implants help hold a denture in place?",
+        question: "Can dental implants help keep a denture from slipping?",
         answer:
-          "In some cases. Whether dental implants are an option depends on your bone, health, and goals. The exam and 3D imaging help the dentist explain what is possible for you.",
+          "In many cases, yes. Whether dental implants can stabilize a denture depends on your bone volume, health history, and goals—our exam and 3D imaging show what's realistic for you.",
         links: [{ href: "/dental-implants", label: "dental implants" }],
       },
       {
         question: "How long does it take to get used to new dentures?",
         answer:
-          "Most people need some time to adjust to eating and speaking with new dentures, and sore spots are common at first. Follow-up visits let the dentist adjust the fit.",
+          "Expect an adjustment period as your cheeks, tongue, and gums learn the new fit—mild sore spots are common early on. Follow-up adjustment visits make a big difference in everyday comfort.",
       },
       {
-        question: "Do I still need dental checkups with dentures?",
+        question: "Do I still need dental checkups if I wear full dentures?",
         answer:
-          "Yes. Regular exams check the fit of the denture, the health of your gums and any remaining teeth, and include an oral cancer screening.",
+          "Yes. Regular exams let us check denture fit as your jaw naturally changes shape over time, keep gum tissue healthy, and perform routine oral cancer screenings.",
         links: [{ href: "/preventive-care", label: "Regular exams" }],
       },
       {
         question: "How much do dentures cost?",
         answer:
-          "The estimate depends on the type of denture, any extractions or other treatment needed first, and your insurance benefits. Ask for a treatment estimate after the dentist evaluates your mouth.",
+          "Cost depends on whether you need a full or partial denture, any extractions or prep work required first, and your dental benefits. We provide a written estimate after your exam.",
       },
     ],
     sources: [
@@ -858,216 +915,241 @@ export const servicePages: ServicePage[] = [
   },
   {
     slug: "gum-disease-treatment",
-    title: "Gum Disease Treatment & Deep Cleaning in Antelope, CA",
-    bookingLabel: "Request a gum evaluation",
+    title: "Gum Disease Treatment & Deep Cleaning in Antelope",
+    bookingLabel: "Book a gum evaluation",
+    searchTitle: "Gum Disease Treatment & Deep Cleaning | Antelope, CA",
     searchDescription:
-      "Bleeding gums or questions about deep cleaning? Get a gum health evaluation in Antelope and find out whether scaling and root planing may be appropriate.",
+      "Bleeding, tender, or receding gums? Get a gum exam in Antelope to see whether deep cleaning (scaling & root planing) is right for you.",
     navLabel: "Gum disease treatment",
     eyebrow: "Periodontal care",
     description:
-      "Get an evaluation and personalized gum disease treatment at Sacramento Dental Medicine in Antelope, serving the Sacramento area.",
+      "Thorough gum health evaluations, gentle deep cleanings (scaling and root planing), and ongoing periodontal care in Antelope.",
     intro:
-      "Bleeding or receding gums? At our Antelope office, the dentist checks your gums and measures the pockets around your teeth. If those findings point to gum disease, a deep cleaning (scaling and root planing) may help remove buildup below the gumline.",
+      "Gums that bleed when you brush, feel tender, or look like they're pulling back are easy to shrug off—until bone support around your teeth starts to shrink. At our Antelope office, we measure the pockets around each tooth, show you the numbers, and explain whether a deep cleaning (scaling and root planing) can help calm inflammation and protect your teeth.",
     benefits: [
-      "Measure and monitor gum health",
-      "Address inflammation and infection risk",
-      "Protect the structures supporting your teeth",
-      "Build a practical home-care routine",
+      "Accurate pocket measurements to track gum health over time",
+      "Deep cleaning below the gumline to clear stubborn tartar and bacteria",
+      "Soft tissue laser support when clinically helpful",
+      "Realistic home-care habits and maintenance intervals that actually stick",
     ],
     steps: [
       {
-        title: "Evaluate gum health",
-        body: "The team checks the gums, supporting structures, and areas that may need more focused attention.",
+        title: "Measure gum health",
+        body: "We gently measure pocket depths around each tooth, check for bleeding or recession, and review X-rays to see supporting bone.",
       },
       {
-        title: "Explain the findings",
-        body: "Ask the dentist to show you the measurements and explain which areas need care. Before deciding on treatment, ask for a written estimate and whether a visit to a gum specialist would help.",
+        title: "Review numbers and options",
+        body: "We show you exactly which areas need care, give you a written estimate, and tell you honestly if seeing a gum specialist makes sense.",
       },
       {
-        title: "Maintain the result",
-        body: "The plan includes professional follow-up and practical steps to support gum health at home.",
+        title: "Calm gums and keep them healthy",
+        body: "After targeted cleaning below the gumline, we pair practical home steps with tailored follow-up visits to protect your results.",
       },
     ],
     faqs: [
-      { question: "How is a deep cleaning different from a regular cleaning?", answer: "Scaling and root planing is a deeper cleaning below the gumline used to treat gum disease. Gum measurements and an exam help determine whether routine cleaning or more focused periodontal care is appropriate." },
-      { question: "Can gum disease be present without pain?", answer: "Yes. Gum disease is often painless. Bleeding, gum recession, persistent bad breath, or loose teeth can be warning signs, but an exam is needed to assess gum health." },
       {
-        question: "Are bleeding gums normal?",
+        question: "How is a deep cleaning different from a routine cleaning?",
         answer:
-          "Occasional irritation can happen, but recurring bleeding can be a sign of inflammation or gum disease and is worth evaluating.",
+          "A routine cleaning polishes above the gumline to maintain healthy gums. Deep cleaning (scaling and root planing) carefully removes hardened buildup and bacteria from below the gumline when pocket measurements show active gum disease.",
       },
       {
-        question: "Can gum disease affect my teeth?",
+        question: "Can I have gum disease even if nothing hurts?",
         answer:
-          "Yes. Advanced gum disease can damage the tissues and bone that support teeth. Earlier evaluation creates more options for protecting them.",
+          "Yes—early and even moderate gum disease rarely hurts. Bleeding when brushing or flossing, receding gums, persistent bad breath, or teeth feeling slightly loose are common clues, and a gum exam gives you the full picture.",
+      },
+      {
+        question: "Are bleeding gums ever normal?",
+        answer:
+          "Brief irritation from a hard toothbrush can happen once in a while, but gums that bleed regularly are signaling inflammation or gum disease and are worth getting checked early.",
+      },
+      {
+        question: "Can untreated gum disease cause tooth loss?",
+        answer:
+          "Yes. Left unchecked, advanced periodontal disease erodes the gum tissue and bone holding teeth in place. Catching and treating it earlier gives us far more ways to keep your natural teeth stable.",
       },
     ],
-    sources: [{"label": "ADA: Gum disease", "url": "https://www.mouthhealthy.org/all-topics-a-z/gum-disease"}, {"label": "ADA: Scaling and root planing", "url": "https://www.mouthhealthy.org/all-topics-a-z/scaling-and-root-planing"}],
+    sources: [
+      { label: "ADA: Gum disease", url: "https://www.mouthhealthy.org/all-topics-a-z/gum-disease" },
+      { label: "ADA: Scaling and root planing", url: "https://www.mouthhealthy.org/all-topics-a-z/scaling-and-root-planing" },
+    ],
     relatedSlugs: ["preventive-care", "dental-crowns"],
   },
   {
     slug: "dental-emergencies",
-    title: "Emergency dentist in Antelope, CA",
+    title: "Emergency Dentist in Antelope, CA",
     searchTitle: "Emergency Dentist in Antelope, CA | Weekday & Evening Hours",
     searchDescription:
-      "Call (916) 727-6453 for urgent dental care on Elverta Road in Antelope. Open weekdays, until 7 PM Wed and Thu. Same-day visits when available.",
+      "Call (916) 727-6453 for urgent dental care on Elverta Rd in Antelope. Open weekdays, until 7 PM Wed & Thu. Same-day visits when available.",
     navLabel: "Dental emergencies",
     eyebrow: "Urgent dental care",
     description:
-      "Call Sacramento Dental Medicine for urgent dental pain, swelling, a broken tooth, or a lost filling or crown in Antelope, CA.",
+      "Call (916) 727-6453 first for sudden tooth pain, swelling, a broken tooth, or a lost crown or filling at our Elverta Rd office in Antelope.",
     intro:
-      "Toothache, swelling or a broken tooth? Call our Elverta Road office before you travel. We see urgent cases on weekdays and offer same-day visits when space is available. Wednesdays and Thursdays we’re open until 7 PM.",
+      "Severe toothache, facial swelling, a knocked-out or broken tooth, or a crown that just popped off? Call our Elverta Road office before heading over. We treat urgent cases Monday through Friday—including until 7 PM on Wednesdays and Thursdays—and fit in same-day emergency visits whenever space allows.",
     benefits: [
-      "Guidance for severe tooth pain or swelling",
-      "Evaluation of chipped or broken teeth",
-      "Help with lost fillings or crowns",
-      "Same-day visits when availability allows",
+      "Immediate phone guidance for severe pain, swelling, or injury",
+      "Prompt exams for broken, chipped, or knocked-out teeth",
+      "Help re-securing or repairing lost fillings and crowns",
+      "Same-day weekday openings whenever schedule space permits",
     ],
     steps: [
       {
-        title: "Call the office",
-        body: "Describe the pain, swelling, injury, or missing restoration so the team can guide the next step.",
+        title: "Call us first",
+        body: "Tell our front desk what happened and where it hurts so we can advise you right away and check for the soonest opening.",
       },
       {
-        title: "Stabilize the problem",
-        body: "The first goal is to identify the cause, relieve immediate risk, and protect the tooth when possible.",
+        title: "Find the cause and relieve pain",
+        body: "We focus first on diagnosing the source with an exam and X-ray, stabilizing the tooth, and getting you out of acute trouble.",
       },
       {
-        title: "Plan definitive care",
-        body: "Once the problem is diagnosed, the dentist explains the treatment choices and follow-up needed.",
+        title: "Plan the lasting fix",
+        body: "Once things are calm and diagnosed, we explain your long-term repair choices and written estimate before you decide.",
       },
     ],
     faqs: [
-      { question: "Should I use the online scheduler for urgent dental pain?", answer: "Call (916) 727-6453 first for urgent dental pain or an injury. Do not wait for an online request to be reviewed when you need immediate guidance." },
-      { question: "Are you open evenings or weekends for emergencies?", answer: "The office is open until 7 PM on Wednesday and Thursday and is closed Saturday and Sunday. Call to check the earliest available visit; the practice does not advertise 24-hour emergency coverage." },
       {
-        question: "What should I do for a dental emergency?",
+        question: "Should I book online or call for a dental emergency?",
         answer:
-          "Call Sacramento Dental Medicine at (916) 727-6453. For uncontrolled bleeding, trouble breathing, or a life-threatening injury, call 911.",
+          "Call (916) 727-6453 first whenever you have severe pain, swelling, or a tooth injury. Speaking with our desk is always the fastest way to get immediate advice and the earliest opening.",
+      },
+      {
+        question: "Are you open evenings or weekends for dental emergencies?",
+        answer:
+          "We are open until 7 PM on Wednesdays and Thursdays, and closed on Saturdays and Sundays. We are not a 24-hour emergency clinic, so please call during weekday hours to confirm our earliest availability.",
+      },
+      {
+        question: "What counts as a dental emergency versus a 911 medical emergency?",
+        answer:
+          "Call us at (916) 727-6453 for intense toothaches, broken teeth, lost restorations, or localized swelling. If you have trouble breathing or swallowing, uncontrolled bleeding, or a serious facial or head injury, call 911 or go to the nearest ER right away.",
       },
       {
         question: "Can you see dental emergencies the same day?",
         answer:
-          "The practice offers same-day emergency visits when possible. Calling first is the fastest way to ask about current availability.",
+          "We offer same-day emergency visits when possible. Calling (916) 727-6453 first lets our team look at today's schedule and work to get you in as quickly as we can.",
       },
     ],
     sources: [{ label: "ADA: Dental emergencies", url: "https://www.mouthhealthy.org/all-topics-a-z/dental-emergencies" }],
     relatedSlugs: ["tooth-extractions", "root-canal-therapy", "wisdom-teeth"],
   },
   {
-  "slug": "root-canal-therapy",
-  "title": "Root Canal Treatment in Antelope & Sacramento, CA",
-  "navLabel": "Root canal treatment",
-  "eyebrow": "Endodontic care",
-  "description": "Explore root canal care at Sacramento Dental Medicine in Antelope, with endodontic specialist Dr. Lucas L. Sheppard. Call for a tooth-pain evaluation.",
-  "intro": "Root canal treatment removes infected or damaged tissue inside a tooth, cleans and seals the canals, and can help preserve a tooth that would otherwise need removal. Sacramento Dental Medicine lists endodontic specialist Dr. Lucas L. Sheppard on its team for complex root canal care. An exam determines whether the tooth can be saved.",
-  "benefits": [
-    "Evaluate a painful or infected tooth",
-    "Understand whether the natural tooth can be saved",
-    "Discuss specialist care for complex cases",
-    "Plan the final filling or crown after treatment"
-  ],
-  "steps": [
-    {
-      "title": "Diagnose the tooth",
-      "body": "The dentist examines the tooth and uses appropriate imaging to understand the roots and surrounding tissues."
-    },
-    {
-      "title": "Treat the inside of the tooth",
-      "body": "If root canal treatment is recommended, the affected tissue is removed and the canals are cleaned, filled, and sealed. Discuss numbing and comfort concerns before treatment."
-    },
-    {
-      "title": "Complete the restoration",
-      "body": "A follow-up filling or crown protects the treated tooth. The dentist explains the restoration and follow-up your tooth needs."
-    }
-  ],
-  "nearbyLinks": [{ "href": "/meet-dr-sheppard", "label": "Meet Dr. Sheppard" }],
-  "faqs": [
-    {
-      "question": "Does a toothache always mean I need a root canal?",
-      "answer": "No. Tooth pain can have several causes. An exam and appropriate imaging are needed to determine whether a filling, root canal treatment, extraction, or another approach fits the problem."
-    },
-    {
-      "question": "Who provides specialist root canal care at the practice?",
-      "answer": "Dr. Lucas L. Sheppard, DMD, is the endodontic specialist listed on the Sacramento Dental Medicine team. Call the office to ask about an evaluation and current specialist availability."
-    },
-    {
-      "question": "Will I need a crown after a root canal?",
-      "answer": "The tooth needs a final restoration after root canal treatment. A crown or filling may be recommended depending on the tooth and how much healthy structure remains."
-    },
-    {
-      "question": "What should I do if my tooth hurts now?",
-      "answer": "Call (916) 727-6453 to describe the problem and ask for the earliest available evaluation. Same-day visits are offered when possible; an online appointment request does not confirm a visit."
-    }
-  ],
-  "relatedSlugs": [
-    "dental-crowns",
-    "dental-emergencies",
-    "tooth-extractions"
-  ],
-  "sources": [
-    {
-      "label": "ADA: Root canals",
-      "url": "https://www.mouthhealthy.org/all-topics-a-z/root-canals"
-    }
-  ]
-},
+    slug: "root-canal-therapy",
+    title: "Root Canal Treatment in Antelope & Sacramento, CA",
+    searchTitle: "Root Canal Specialist in Antelope | Dr. Lucas Sheppard",
+    searchDescription:
+      "Deep tooth pain? Our in-house endodontic specialist Dr. Lucas Sheppard treats complex root canals right in Antelope. Call (916) 727-6453.",
+    navLabel: "Root canal treatment",
+    eyebrow: "Endodontic care",
+    description:
+      "In-house root canal therapy in Antelope with endodontic specialist Dr. Lucas L. Sheppard, DMD—focused on calm care and saving natural teeth.",
+    intro:
+      "Root canal treatment clears out infected or inflamed tissue inside a tooth, cleans and seals the root canals, and lets you keep a natural tooth that would otherwise need to be pulled. Because endodontic specialist Dr. Lucas L. Sheppard practices right here in our Antelope office, even complex cases stay under one familiar roof.",
+    benefits: [
+      "In-house care from endodontic specialist Dr. Lucas L. Sheppard",
+      "Pinpoint diagnosis to find the real source of deep tooth pain",
+      "Focused on saving your natural tooth whenever predictable",
+      "Seamless coordination of your final protective filling or crown",
+    ],
+    steps: [
+      {
+        title: "Pinpoint the problem",
+        body: "We test the tooth and review digital X-rays or 3D imaging so we know for certain which tooth is hurting and whether it can be saved.",
+      },
+      {
+        title: "Clean and seal the canals gently",
+        body: "Once the area is thoroughly numb, we remove the inflamed tissue inside the tooth, disinfect the canals, and seal them carefully.",
+      },
+      {
+        title: "Protect the tooth for the long run",
+        body: "After treatment, we coordinate the final filling or crown that seals out bacteria and restores full chewing strength.",
+      },
+    ],
+    nearbyLinks: [{ href: "/meet-dr-sheppard", label: "Meet Dr. Sheppard" }],
+    faqs: [
+      {
+        question: "Does a toothache always mean I need a root canal?",
+        answer:
+          "No. Sensitivity or pain can come from a cavity, a loose filling, gum irritation, clenching, or a crack. An exam and imaging show whether a simple filling, root canal therapy, or another fix is actually needed.",
+      },
+      {
+        question: "Who performs specialist root canal care at your office?",
+        answer:
+          "Dr. Lucas L. Sheppard, DMD—an endodontic specialist and U.S. Air Force veteran—is part of our team here in Antelope. Call (916) 727-6453 to ask about an evaluation and his upcoming schedule.",
+      },
+      {
+        question: "Will I need a crown after a root canal?",
+        answer:
+          "Every treated tooth needs a durable final restoration to keep bacteria out and prevent fractures. Depending on which tooth was treated and how much healthy structure remains, we'll recommend either a crown or a filling.",
+      },
+      {
+        question: "What should I do if my tooth is throbbing right now?",
+        answer:
+          "Call (916) 727-6453 so we can check our earliest availability. We fit in same-day visits when possible—don't wait on an online inquiry if pain or swelling is escalating.",
+      },
+    ],
+    relatedSlugs: ["dental-crowns", "dental-emergencies", "tooth-extractions"],
+    sources: [
+      {
+        label: "ADA: Root canals",
+        url: "https://www.mouthhealthy.org/all-topics-a-z/root-canals",
+      },
+    ],
+  },
   {
     slug: "wisdom-teeth",
     title: "Wisdom Teeth Removal in Antelope & Sacramento, CA",
     navLabel: "Wisdom teeth",
     eyebrow: "Oral surgery",
     description:
-      "Get a wisdom teeth evaluation or removal at Sacramento Dental Medicine in Antelope, serving the Sacramento area. Call (916) 727-6453 or request a visit.",
+      "In-house wisdom teeth exams and gentle removal on Elverta Rd in Antelope, serving Greater Sacramento. Call (916) 727-6453 or request a visit.",
     intro:
-      "Wisdom teeth can stay quiet for years or start to crowd, inflame, or decay. Sacramento Dental Medicine evaluates them in-house and handles removal when that is the healthier next step. An exam and imaging show whether the teeth should be watched, treated, or removed, and whether a specialist should be involved.",
+      "Wisdom teeth can sit quietly for years—or suddenly start aching, crowding, trapping food, or swelling the gum behind your back molars. We evaluate wisdom teeth right here in Antelope with digital or 3D imaging and handle removal in-house when taking them out is the healthier path, coordinating with a specialist whenever a complex case calls for it.",
     benefits: [
-      "Evaluate erupting, impacted, or painful wisdom teeth",
-      "Understand whether removal is recommended now",
-      "Plan a clear, in-house extraction visit when appropriate",
-      "Discuss comfort options and after-care before treatment",
+      "Clear exam of aching, crowded, or partially erupted wisdom teeth",
+      "Honest advice on whether to watch them or remove them now",
+      "Gentle in-house removal, with specialist coordination when needed",
+      "Thorough numbing, comfort planning, and clear recovery guidance",
     ],
     steps: [
       {
-        title: "Examine the teeth",
-        body: "The dentist reviews symptoms and uses appropriate imaging to see the wisdom teeth, roots, and nearby structures.",
+        title: "See where the roots sit",
+        body: "We examine your back teeth and use digital or 3D imaging to check tooth angles, root positions, and nearby nerves.",
       },
       {
-        title: "Review the recommendation",
-        body: "You will hear whether watchful waiting, treatment, or removal is the safer path, and whether a specialist should be involved.",
+        title: "Decide whether removal makes sense",
+        body: "We'll tell you honestly whether watchful waiting or removal is safer—and whether your case is best handled here or with a specialist.",
       },
       {
-        title: "Plan the visit and recovery",
-        body: "If removal is recommended, the team explains what to expect, comfort options, and how to care for the area afterward.",
+        title: "Walk through visit and recovery",
+        body: "If removal is recommended, we cover numbing, comfort options, and how to care for the area afterward before treatment day.",
       },
     ],
     faqs: [
       {
-        question: "Do all wisdom teeth need to be removed?",
+        question: "Do all wisdom teeth have to come out?",
         answer:
-          "No. Some wisdom teeth stay healthy and have enough space. Others crowd, partially erupt, or become difficult to clean. An exam and imaging determine whether removal is recommended.",
+          "No. If your wisdom teeth come in straight, have plenty of room, and stay easy to clean, watching them is often fine. We only recommend removal when imaging and your exam show crowding, impaction, decay, or recurring gum inflammation.",
       },
       {
-        question: "Can wisdom teeth be removed at this office?",
+        question: "Can you remove wisdom teeth right at your Antelope office?",
         answer:
-          "Yes. Sacramento Dental Medicine lists wisdom teeth removal among its in-house oral surgery services. Complex cases may be coordinated with a specialist when that is the safer plan.",
+          "Yes—we perform wisdom teeth evaluations and removals in-house on Elverta Road. For unusually complex impactions, we coordinate directly with a trusted specialist when that's the safer choice.",
       },
       {
         question: "What should I do if a wisdom tooth hurts now?",
         answer:
-          "Call (916) 727-6453 to describe the pain or swelling and ask about the earliest available evaluation. Same-day visits are offered when possible. See Dental emergencies for urgent pain or swelling.",
+          "Call (916) 727-6453 to tell us about the pain or swelling so we can check for the soonest evaluation. We see urgent cases the same day when space allows—visit our Dental emergencies page for immediate hours and guidance.",
         links: [{ href: "/dental-emergencies", label: "Dental emergencies" }],
       },
       {
         question: "Will I be numb for wisdom teeth removal?",
         answer:
-          "Local numbing is part of extraction care. Tell the team about anxiety or comfort concerns so they can explain the options that may be appropriate for your health and the procedure. Learn more about sedation dentistry options.",
+          "Yes—thorough local numbing is always part of extraction care, and we use The Wand STA for gentler delivery. Tell us if you're nervous so we can review your health history and discuss which sedation dentistry options are available and appropriate.",
         links: [{ href: "/sedation-dentistry", label: "sedation dentistry" }],
       },
       {
         question: "What is recovery like after wisdom teeth removal?",
         answer:
-          "If removal is recommended, the team explains what to expect, comfort options, and how to care for the area afterward.",
+          "Recovery varies with how many teeth are removed and how deeply they sit. Before treatment day, we walk you through swelling and eating expectations, comfort planning, and how to care for the area afterward.",
       },
     ],
     sources: [
@@ -1080,53 +1162,56 @@ export const servicePages: ServicePage[] = [
   },
   {
     slug: "platelet-rich-fibrin",
-    title: "PRF & Grafting in Antelope & Sacramento, CA",
+    title: "PRF & Bone Grafting in Antelope & Sacramento, CA",
+    searchTitle: "PRF & Bone Grafting in Antelope, CA | Oral Surgery",
+    searchDescription:
+      "Ask about platelet-rich fibrin (PRF) and bone grafting to support extraction or implant sites at our Antelope office. Call (916) 727-6453.",
     navLabel: "PRF & grafting",
     eyebrow: "Oral surgery",
     description:
-      "Ask about platelet rich fibrin (PRF) and grafting support after an extraction or implant plan at Sacramento Dental Medicine in Antelope, CA.",
+      "Platelet-rich fibrin (PRF) and bone grafting options to support healing sites after extractions or ahead of dental implants in Antelope.",
     intro:
-      "Platelet rich fibrin (PRF) is listed among the practice's oral surgery services. It is prepared from a small sample of your own blood and may be placed at a surgical site when the dentist recommends extra support after an extraction or as part of a grafting plan. The exam determines whether PRF, grafting, both, or neither is appropriate. This page does not promise a specific healing time or outcome.",
+      "When we remove a tooth or prepare a site for a future dental implant, protecting the underlying bone matters. We offer platelet-rich fibrin (PRF)—prepared right from a small sample of your own blood—alongside bone grafting when extra structural or biological support fits your case. Your exam shows whether PRF, grafting, both, or neither makes sense.",
     benefits: [
-      "Discuss PRF when planning an extraction or implant site",
-      "Understand whether grafting support is recommended",
-      "Use material prepared from your own blood when PRF is chosen",
-      "Leave with clear after-care instructions",
+      "Prepared naturally from a small sample of your own blood",
+      "Helps support extraction sockets and implant-planning sites",
+      "Evaluated honestly case by case—never added unnecessarily",
+      "Simple day-of explanation and step-by-step recovery care",
     ],
     steps: [
       {
-        title: "Evaluate the site",
-        body: "The dentist examines the tooth or implant site and uses appropriate imaging to understand the bone and surrounding tissues.",
+        title: "Assess bone and surrounding tissue",
+        body: "We examine the tooth or missing-tooth site and use imaging to measure bone thickness and map nearby structures.",
       },
       {
-        title: "Review PRF or grafting",
-        body: "If extra support may help the site, the team explains what PRF or grafting would involve and why it is being considered for your case.",
+        title: "Explain whether support helps",
+        body: "We'll tell you why PRF, bone grafting, both, or neither makes sense for your goals—especially if you're planning an implant.",
       },
       {
-        title: "Plan the visit",
-        body: "You will know what to expect on the day of treatment, including any blood draw for PRF, and how to care for the area afterward.",
+        title: "Know what to expect on visit day",
+        body: "If you choose PRF, we walk through the quick blood draw, placement, written estimate, and simple home care afterward.",
       },
     ],
     faqs: [
       {
-        question: "What is platelet rich fibrin (PRF)?",
+        question: "What is platelet-rich fibrin (PRF)?",
         answer:
-          "PRF is a fibrin material prepared from a small sample of your own blood. Dentists may place it at a surgical site to support the local healing environment. Whether it is used depends on the procedure and the dentist's recommendation.",
+          "PRF is a natural fibrin matrix spun from a small sample of your own blood right before placement. We may place it in an extraction or grafting site to support the local healing environment when clinically appropriate.",
       },
       {
-        question: "Do you offer bone grafting?",
+        question: "Do you offer bone grafting after extractions or for implants?",
         answer:
-          "Grafting needs are evaluated case by case, often after an extraction or when planning an implant. The dentist will explain whether grafting, PRF, both, or neither is recommended for your site.",
+          "Yes—we evaluate grafting needs case by case, most often right after a tooth extraction or when preparing bone for a dental implant. We'll explain whether grafting, PRF, both, or neither is worthwhile for your site.",
       },
       {
         question: "Does PRF guarantee faster healing?",
         answer:
-          "No. PRF may be used to support a healing site, but results vary and no specific healing time or outcome is promised. Ask the dentist what to expect for your procedure.",
+          "No. While PRF is used to support a surgical site naturally, every person heals at their own pace and no specific recovery timeline or outcome can be guaranteed. We'll share realistic expectations for your procedure.",
       },
       {
-        question: "Is PRF right for every extraction?",
+        question: "Does every tooth extraction need PRF or bone grafting?",
         answer:
-          "No. Many extractions do not need PRF or grafting. The recommendation follows an exam of the tooth, bone, and your health history.",
+          "Not at all. Plenty of routine extractions heal well on their own. We only suggest PRF or grafting when your bone, site anatomy, or future tooth-replacement plan would genuinely benefit.",
       },
     ],
     relatedSlugs: ["tooth-extractions", "wisdom-teeth", "dental-implants"],

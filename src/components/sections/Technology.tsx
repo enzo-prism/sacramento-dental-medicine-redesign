@@ -10,12 +10,12 @@ export function Technology() {
           <ScrollReveal className="max-w-2xl">
             <span className="eyebrow accent-brand">Technology &amp; comfort</span>
             <h2 className="mt-5 font-display text-balance text-[clamp(2rem,4.2vw,3.1rem)] font-semibold leading-[1.06] tracking-[-0.02em] text-ink">
-              Modern tools, calmer appointments.
+              Better tools mean calmer visits.
             </h2>
             <p className="mt-5 max-w-xl text-pretty text-base leading-7 text-ink-soft md:text-lg md:leading-8">
-              Nothing in these rooms is for show. Every tool earned its place
-              by making visits measurably better: clearer diagnosis, gentler
-              treatment, fewer surprises.
+              Nothing in our treatment rooms is there to look impressive on a
+              brochure. Every instrument earns its spot by making care sharper
+              to diagnose, gentler to sit through, and easier to heal from.
             </p>
           </ScrollReveal>
 

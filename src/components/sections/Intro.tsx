@@ -8,18 +8,18 @@ export function Intro() {
       <div className="container-x grid gap-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-20">
         <div>
           <ScrollReveal>
-            <span className="eyebrow accent-brand">Why this practice</span>
+            <span className="eyebrow accent-brand">Why patients stay</span>
             <h2 className="mt-6 max-w-xl font-display text-balance text-[clamp(2.1rem,4.4vw,3.3rem)] font-semibold leading-[1.05] tracking-[-0.02em] text-ink">
-              Made for people{" "}
+              Built for people{" "}
               <span className="text-brand-deep">
-                who&apos;ve been putting this off.
+                who&apos;ve been putting the dentist off.
               </span>
             </h2>
             <p className="mt-6 max-w-xl text-pretty text-base leading-7 text-ink-soft md:text-lg md:leading-8">
-              Sacramento Dental Medicine runs on a simple idea: clear answers,
-              gentle hands, and enough time to do things right. You&apos;ll
-              always know what we found and what happens next, before any
-              treatment begins.
+              We run our Elverta Road office the way we&apos;d want to be
+              treated ourselves: unhurried appointments, gentle hands, and zero
+              pressure. You&apos;ll always see what we see on screen and know
+              what comes next before we ever start treatment.
             </p>
           </ScrollReveal>
 
